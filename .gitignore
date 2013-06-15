@@ -1,6 +1,14 @@
+*.idea
+*.iml
+
 *.class
 
 # Package Files #
 *.jar
 *.war
 *.ear
+
+target
+pom.xml.bak
+pom.xml.releaseBackup
+release.properties
