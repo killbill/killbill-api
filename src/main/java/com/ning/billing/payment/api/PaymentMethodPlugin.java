@@ -37,12 +37,6 @@ public interface PaymentMethodPlugin {
     public List<PaymentMethodKVInfo> getProperties();
 
     /**
-     * @param key the key for which to get the value
-     * @return the value associated with the key
-     */
-    public String getValueString(String key);
-
-    /**
      * @return the payment method type name if applicable
      */
     public String getType();
