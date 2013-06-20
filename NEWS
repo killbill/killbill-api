@@ -1,5 +1,6 @@
 0.3.0
     Remove PaymentMethodPlugin#getValueString
+    Update to killbill-oss-parent 0.2.4
 
 0.2.3
     Initial import from https://github.com/killbill/killbill
