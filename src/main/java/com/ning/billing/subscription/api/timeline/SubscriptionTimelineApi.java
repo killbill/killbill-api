@@ -14,25 +14,25 @@
  * under the License.
  */
 
-package com.ning.billing.entitlement.api.timeline;
+package com.ning.billing.subscription.api.timeline;
 
 import java.util.UUID;
 
-import com.ning.billing.entitlement.api.user.SubscriptionBundle;
+import com.ning.billing.subscription.api.user.SubscriptionBundle;
 import com.ning.billing.util.callcontext.CallContext;
 import com.ning.billing.util.callcontext.TenantContext;
 
-public interface EntitlementTimelineApi {
+public interface SubscriptionTimelineApi {
 
     public BundleTimeline getBundleTimeline(SubscriptionBundle bundle, TenantContext context)
-            throws EntitlementRepairException;
+            throws SubscriptionRepairException;
 
     public BundleTimeline getBundleTimeline(UUID accountId, String bundleName, TenantContext context)
-            throws EntitlementRepairException;
+            throws SubscriptionRepairException;
 
     public BundleTimeline getBundleTimeline(UUID bundleId, TenantContext context)
-            throws EntitlementRepairException;
+            throws SubscriptionRepairException;
 
     public BundleTimeline repairBundle(BundleTimeline input, boolean dryRun, CallContext context)
-            throws EntitlementRepairException;
+            throws SubscriptionRepairException;
 }

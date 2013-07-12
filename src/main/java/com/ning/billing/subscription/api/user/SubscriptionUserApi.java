@@ -14,7 +14,7 @@
  * under the License.
  */
 
-package com.ning.billing.entitlement.api.user;
+package com.ning.billing.subscription.api.user;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,15 +25,15 @@ import com.ning.billing.catalog.api.PlanPhaseSpecifier;
 import com.ning.billing.util.callcontext.CallContext;
 import com.ning.billing.util.callcontext.TenantContext;
 
-public interface EntitlementUserApi {
+public interface SubscriptionUserApi {
 
-    public SubscriptionBundle getBundleFromId(UUID id, TenantContext context) throws EntitlementUserApiException;
+    public SubscriptionBundle getBundleFromId(UUID id, TenantContext context) throws SubscriptionUserApiException;
 
-    public Subscription getSubscriptionFromId(UUID id, TenantContext context) throws EntitlementUserApiException;
+    public Subscription getSubscriptionFromId(UUID id, TenantContext context) throws SubscriptionUserApiException;
 
-    public List<SubscriptionBundle> getBundlesForKey(String bundleKey, TenantContext context) throws EntitlementUserApiException;
+    public List<SubscriptionBundle> getBundlesForKey(String bundleKey, TenantContext context) throws SubscriptionUserApiException;
 
-    public SubscriptionBundle getBundleForAccountAndKey(UUID accountId, String bundleKey, TenantContext context) throws EntitlementUserApiException;
+    public SubscriptionBundle getBundleForAccountAndKey(UUID accountId, String bundleKey, TenantContext context) throws SubscriptionUserApiException;
 
     public List<SubscriptionBundle> getBundlesForAccount(UUID accountId, TenantContext context);
 
@@ -41,17 +41,17 @@ public interface EntitlementUserApi {
 
     public List<Subscription> getSubscriptionsForAccountAndKey(UUID accountId, String bundleKey, TenantContext context);
 
-    public Subscription getBaseSubscription(UUID bundleId, TenantContext context) throws EntitlementUserApiException;
+    public Subscription getBaseSubscription(UUID bundleId, TenantContext context) throws SubscriptionUserApiException;
 
     public SubscriptionBundle createBundleForAccount(UUID accountId, String bundleKey, CallContext context)
-            throws EntitlementUserApiException;
+            throws SubscriptionUserApiException;
 
     public Subscription createSubscription(UUID bundleId, PlanPhaseSpecifier spec, DateTime requestedDate, CallContext context)
-            throws EntitlementUserApiException;
+            throws SubscriptionUserApiException;
 
     public List<SubscriptionStatusDryRun> getDryRunChangePlanStatus(UUID subscriptionId, /* @Nullable */ String productName,
                                                                     DateTime requestedDate, TenantContext context)
-            throws EntitlementUserApiException;
+            throws SubscriptionUserApiException;
 
     public DateTime getNextBillingDate(UUID account, TenantContext context);
 }

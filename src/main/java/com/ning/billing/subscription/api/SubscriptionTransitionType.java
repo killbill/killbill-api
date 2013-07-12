@@ -14,14 +14,14 @@
  * under the License.
  */
 
-package com.ning.billing.entitlement.api;
+package com.ning.billing.subscription.api;
 
 /**
  * The {@code SubscriptionTransitionType}
  */
 public enum SubscriptionTransitionType {
     /**
-     * Occurs when a {@code Subscription} got migrated to mark the start of the entitlement
+     * Occurs when a {@code Subscription} got migrated to mark the start of the subscription
      */
     MIGRATE_ENTITLEMENT,
     /**
@@ -33,7 +33,7 @@ public enum SubscriptionTransitionType {
      */
     MIGRATE_BILLING,
     /**
-     * Occurs when a {@code Subscription} got transferred to mark the start of the entitlement
+     * Occurs when a {@code Subscription} got transferred to mark the start of the subscription
      */
     TRANSFER,
     /**

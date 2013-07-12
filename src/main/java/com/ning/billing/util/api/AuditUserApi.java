@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.UUID;
 
 import com.ning.billing.ObjectType;
-import com.ning.billing.entitlement.api.timeline.BundleTimeline;
-import com.ning.billing.entitlement.api.timeline.EntitlementRepairException;
+import com.ning.billing.subscription.api.timeline.BundleTimeline;
+import com.ning.billing.subscription.api.timeline.SubscriptionRepairException;
 import com.ning.billing.invoice.api.Invoice;
 import com.ning.billing.invoice.api.InvoicePayment;
 import com.ning.billing.payment.api.Payment;
@@ -48,7 +48,7 @@ public interface AuditUserApi {
      * @param context    the tenant context
      * @return all audit logs for these refunds
      */
-    public AuditLogsForBundles getAuditLogsForBundle(UUID bundleId, AuditLevel auditLevel, TenantContext context) throws EntitlementRepairException;
+    public AuditLogsForBundles getAuditLogsForBundle(UUID bundleId, AuditLevel auditLevel, TenantContext context) throws SubscriptionRepairException;
 
     /**
      * Fetch all audit logs for bundles.

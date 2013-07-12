@@ -14,7 +14,7 @@
  * under the License.
  */
 
-package com.ning.billing.entitlement.api.timeline;
+package com.ning.billing.subscription.api.timeline;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,13 +22,13 @@ import java.util.UUID;
 import org.joda.time.DateTime;
 
 import com.ning.billing.catalog.api.PlanPhaseSpecifier;
-import com.ning.billing.entitlement.api.SubscriptionTransitionType;
+import com.ning.billing.subscription.api.SubscriptionTransitionType;
 import com.ning.billing.util.entity.Entity;
 
 /**
  * The interface {@code} shows a view of all the events for a particular {@code Subscription}.
  * <p/>
- * It can be used to display information, or it can be used to modify the entitlement stream of events
+ * It can be used to display information, or it can be used to modify the subscription stream of events
  * and 'repair' the stream by versioning the events.
  */
 public interface SubscriptionTimeline extends Entity {

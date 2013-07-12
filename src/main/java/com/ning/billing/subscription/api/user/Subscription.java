@@ -14,7 +14,7 @@
  * under the License.
  */
 
-package com.ning.billing.entitlement.api.user;
+package com.ning.billing.subscription.api.user;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,23 +35,23 @@ import com.ning.billing.util.entity.Entity;
 public interface Subscription extends Entity, Blockable {
 
     public boolean cancel(final DateTime requestedDate, final CallContext context)
-            throws EntitlementUserApiException;
+            throws SubscriptionUserApiException;
 
     public boolean cancelWithPolicy(final DateTime requestedDate, final ActionPolicy policy, final CallContext context)
-            throws EntitlementUserApiException;
+            throws SubscriptionUserApiException;
 
     public boolean uncancel(final CallContext context)
-            throws EntitlementUserApiException;
+            throws SubscriptionUserApiException;
 
     public boolean changePlan(final String productName, final BillingPeriod term, final String priceList, final DateTime requestedDate, final CallContext context)
-            throws EntitlementUserApiException;
+            throws SubscriptionUserApiException;
 
     public boolean changePlanWithPolicy(final String productName, final BillingPeriod term, final String priceList, final DateTime requestedDate,
                                         final ActionPolicy policy, final CallContext context)
-            throws EntitlementUserApiException;
+            throws SubscriptionUserApiException;
 
     public boolean recreate(final PlanPhaseSpecifier spec, final DateTime requestedDate, final CallContext context)
-            throws EntitlementUserApiException;
+            throws SubscriptionUserApiException;
 
     public UUID getBundleId();
 

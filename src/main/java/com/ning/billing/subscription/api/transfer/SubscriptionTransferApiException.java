@@ -14,30 +14,34 @@
  * under the License.
  */
 
-package com.ning.billing.entitlement.api.timeline;
+package com.ning.billing.subscription.api.transfer;
 
 import com.ning.billing.BillingExceptionBase;
 import com.ning.billing.ErrorCode;
 import com.ning.billing.catalog.api.CatalogApiException;
-import com.ning.billing.entitlement.api.user.EntitlementUserApiException;
+import com.ning.billing.subscription.api.timeline.SubscriptionRepairException;
 
-public class EntitlementRepairException extends BillingExceptionBase {
+public class SubscriptionTransferApiException extends BillingExceptionBase {
 
-    private static final long serialVersionUID = 19067233L;
+    private static final long serialVersionUID = 17086131L;
 
-    public EntitlementRepairException(final EntitlementUserApiException e) {
+    public SubscriptionTransferApiException(final CatalogApiException e) {
         super(e, e.getCode(), e.getMessage());
     }
 
-    public EntitlementRepairException(final CatalogApiException e) {
+    public SubscriptionTransferApiException(final SubscriptionRepairException e) {
         super(e, e.getCode(), e.getMessage());
     }
 
-    public EntitlementRepairException(final Throwable e, final ErrorCode code, final Object... args) {
+    public SubscriptionTransferApiException(final Throwable e, final ErrorCode code, final Object... args) {
         super(e, code, args);
     }
 
-    public EntitlementRepairException(final ErrorCode code, final Object... args) {
+    public SubscriptionTransferApiException(final Throwable e, final int code, final String message) {
+        super(e, code, message);
+    }
+
+    public SubscriptionTransferApiException(final ErrorCode code, final Object... args) {
         super(code, args);
     }
 }

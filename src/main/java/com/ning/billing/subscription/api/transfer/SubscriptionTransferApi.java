@@ -14,19 +14,19 @@
  * under the License.
  */
 
-package com.ning.billing.entitlement.api.transfer;
+package com.ning.billing.subscription.api.transfer;
 
 import java.util.UUID;
 
 import org.joda.time.DateTime;
 
-import com.ning.billing.entitlement.api.user.SubscriptionBundle;
+import com.ning.billing.subscription.api.user.SubscriptionBundle;
 import com.ning.billing.util.callcontext.CallContext;
 
 /**
- * The interface {@code EntitlementTransferApi} is used to transfer a bundle from one account to another account.
+ * The interface {@code SubscriptionTransferApi} is used to transfer a bundle from one account to another account.
  */
-public interface EntitlementTransferApi {
+public interface SubscriptionTransferApi {
 
     /**
      * @param sourceAccountId   the unique id for the account on which the bundle will be transferred from
@@ -37,10 +37,10 @@ public interface EntitlementTransferApi {
      * @param cancelImmediately whether cancellation on the sourceAccount occurs immediately
      * @param context           the user context
      * @return the newly created {@code SubscriptionBundle}
-     * @throws EntitlementTransferApiException
+     * @throws SubscriptionTransferApiException
      *          if the system could not transfer the {@code SubscriptionBundle}
      */
     public SubscriptionBundle transferBundle(final UUID sourceAccountId, final UUID destAccountId, final String bundleKey, final DateTime requestedDate,
                                              final boolean transferAddOn, final boolean cancelImmediately, final CallContext context)
-            throws EntitlementTransferApiException;
+            throws SubscriptionTransferApiException;
 }

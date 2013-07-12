@@ -14,30 +14,10 @@
  * under the License.
  */
 
-package com.ning.billing.entitlement.api.user;
+package com.ning.billing.subscription.api.user;
 
-import java.util.UUID;
-
-import com.ning.billing.catalog.api.BillingPeriod;
-import com.ning.billing.catalog.api.PhaseType;
-
-public interface SubscriptionStatusDryRun {
-
-    public UUID getId();
-
-    public String getProductName();
-
-    public BillingPeriod getBillingPeriod();
-
-    public String getPriceList();
-
-    public PhaseType getPhaseType();
-
-    public DryRunChangeReason getReason();
-
-    public enum DryRunChangeReason {
-        AO_INCLUDED_IN_NEW_PLAN,
-        AO_NOT_AVAILABLE_IN_NEW_PLAN,
-        AO_AVAILABLE_IN_NEW_PLAN
-    }
+public enum SubscriptionSourceType {
+    NATIVE,
+    MIGRATED,
+    TRANSFERED;
 }

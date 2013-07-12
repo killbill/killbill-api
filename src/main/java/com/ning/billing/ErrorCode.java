@@ -26,64 +26,64 @@ public enum ErrorCode {
     UNEXPECTED_ERROR(3, "%s"),
     /*
      *
-     * Range 1000 : ENTITLEMENTS
+     * Range 1000 : SUBSCRIPTIONS
      *
      */
     /* Generic through APIs */
-    ENT_INVALID_REQUESTED_FUTURE_DATE(1001, "Requested date %s in the future is not allowed"),
-    ENT_INVALID_REQUESTED_DATE(1001, "Requested date %s is not allowed to be prior to the previous transition %s"),
+    SUB_INVALID_REQUESTED_FUTURE_DATE(1001, "Requested date %s in the future is not allowed"),
+    SUB_INVALID_REQUESTED_DATE(1001, "Requested date %s is not allowed to be prior to the previous transition %s"),
 
     /* Creation */
-    ENT_CREATE_BAD_PHASE(1011, "Can't create plan initial phase %s"),
-    ENT_CREATE_NO_BUNDLE(1012, "Bundle %s does not exist"),
-    ENT_CREATE_NO_BP(1013, "Missing Base Subscription for bundle %s"),
-    ENT_CREATE_BP_EXISTS(1015, "Subscription bundle %s already has a base subscription"),
-    ENT_CREATE_AO_BP_NON_ACTIVE(1017, "Can't create AddOn %s for non active Base Plan"),
-    ENT_CREATE_AO_ALREADY_INCLUDED(1018, "Can't create AddOn %s for BasePlan %s (Already included)"),
-    ENT_CREATE_AO_NOT_AVAILABLE(1019, "Can't create AddOn %s for BasePlan %s (Not available)"),
+    SUB_CREATE_BAD_PHASE(1011, "Can't create plan initial phase %s"),
+    SUB_CREATE_NO_BUNDLE(1012, "Bundle %s does not exist"),
+    SUB_CREATE_NO_BP(1013, "Missing Base Subscription for bundle %s"),
+    SUB_CREATE_BP_EXISTS(1015, "Subscription bundle %s already has a base subscription"),
+    SUB_CREATE_AO_BP_NON_ACTIVE(1017, "Can't create AddOn %s for non active Base Plan"),
+    SUB_CREATE_AO_ALREADY_INCLUDED(1018, "Can't create AddOn %s for BasePlan %s (Already included)"),
+    SUB_CREATE_AO_NOT_AVAILABLE(1019, "Can't create AddOn %s for BasePlan %s (Not available)"),
 
     /* Change plan */
-    ENT_CHANGE_NON_ACTIVE(1021, "Subscription %s is in state %s: Failed to change plan"),
-    ENT_CHANGE_FUTURE_CANCELLED(1022, "Subscription %s is future cancelled: Failed to change plan"),
-    ENT_CHANGE_DRY_RUN_NOT_BP(1022, "Change DryRun API is only available for BP"),
+    SUB_CHANGE_NON_ACTIVE(1021, "Subscription %s is in state %s: Failed to change plan"),
+    SUB_CHANGE_FUTURE_CANCELLED(1022, "Subscription %s is future cancelled: Failed to change plan"),
+    SUB_CHANGE_DRY_RUN_NOT_BP(1022, "Change DryRun API is only available for BP"),
 
     /* Cancellation */
-    ENT_CANCEL_BAD_STATE(1031, "Subscription %s is in state %s: Failed to cancel"),
+    SUB_CANCEL_BAD_STATE(1031, "Subscription %s is in state %s: Failed to cancel"),
     /* Recreation */
-    ENT_RECREATE_BAD_STATE(1041, "Subscription %s is in state %s: Failed to recreate"),
+    SUB_RECREATE_BAD_STATE(1041, "Subscription %s is in state %s: Failed to recreate"),
 
     /* Un-cancellation */
-    ENT_UNCANCEL_BAD_STATE(1070, "Subscription %s was not in a cancelled state: Failed to uncancel plan"),
+    SUB_UNCANCEL_BAD_STATE(1070, "Subscription %s was not in a cancelled state: Failed to uncancel plan"),
 
     /* Fetch */
-    ENT_GET_NO_BUNDLE_FOR_SUBSCRIPTION(1080, "Could not find a bundle for subscription %s"),
-    ENT_GET_INVALID_BUNDLE_ID(1081, "Could not find a bundle matching id %s"),
-    ENT_INVALID_SUBSCRIPTION_ID(1082, "Unknown subscription %s"),
-    ENT_GET_INVALID_BUNDLE_KEY(1083, "Could not find a bundle matching key %s"),
-    ENT_GET_NO_SUCH_BASE_SUBSCRIPTION(1084, "Could not find base subscription for bundle %s"),
+    SUB_GET_NO_BUNDLE_FOR_SUBSCRIPTION(1080, "Could not find a bundle for subscription %s"),
+    SUB_GET_INVALID_BUNDLE_ID(1081, "Could not find a bundle matching id %s"),
+    SUB_INVALID_SUBSCRIPTION_ID(1082, "Unknown subscription %s"),
+    SUB_GET_INVALID_BUNDLE_KEY(1083, "Could not find a bundle matching key %s"),
+    SUB_GET_NO_SUCH_BASE_SUBSCRIPTION(1084, "Could not find base subscription for bundle %s"),
 
     /* Repair */
-    ENT_REPAIR_INVALID_DELETE_SET(1091, "Event %s is not deleted for subscription %s but prior events were"),
-    ENT_REPAIR_NON_EXISTENT_DELETE_EVENT(1092, "Event %s does not exist for subscription %s"),
-    ENT_REPAIR_MISSING_AO_DELETE_EVENT(1093, "Event %s should be in deleted set for subscription %s because BP events got deleted earlier"),
-    ENT_REPAIR_NEW_EVENT_BEFORE_LAST_BP_REMAINING(1094, "New event %s for subscription %s is before last remaining event for BP"),
-    ENT_REPAIR_NEW_EVENT_BEFORE_LAST_AO_REMAINING(1095, "New event %s for subscription %s is before last remaining event"),
-    ENT_REPAIR_UNKNOWN_TYPE(1096, "Unknown new event type %s for subscription %s"),
-    ENT_REPAIR_UNKNOWN_BUNDLE(1097, "Unknown bundle %s"),
-    ENT_REPAIR_UNKNOWN_SUBSCRIPTION(1098, "Unknown subscription %s"),
-    ENT_REPAIR_NO_ACTIVE_SUBSCRIPTIONS(1099, "No active subscriptions on bundle %s"),
-    ENT_REPAIR_VIEW_CHANGED(1100, "View for bundle %s has changed from %s to %s"),
-    ENT_REPAIR_SUB_RECREATE_NOT_EMPTY(1101, "Subscription %s with recreation for bundle %s should specify all existing events to be deleted"),
-    ENT_REPAIR_SUB_EMPTY(1102, "Subscription %s with recreation for bundle %s should specify all existing events to be deleted"),
-    ENT_REPAIR_BP_RECREATE_MISSING_AO(1103, "BP recreation for bundle %s implies repair all subscriptions"),
-    ENT_REPAIR_BP_RECREATE_MISSING_AO_CREATE(1104, "BP recreation for bundle %s implies that all AO should be start also with a CREATE"),
-    ENT_REPAIR_AO_CREATE_BEFORE_BP_START(1105, "Can't recreate AO %s for bundle %s before BP starts"),
+    SUB_REPAIR_INVALID_DELETE_SET(1091, "Event %s is not deleted for subscription %s but prior events were"),
+    SUB_REPAIR_NON_EXISTENT_DELETE_EVENT(1092, "Event %s does not exist for subscription %s"),
+    SUB_REPAIR_MISSING_AO_DELETE_EVENT(1093, "Event %s should be in deleted set for subscription %s because BP events got deleted earlier"),
+    SUB_REPAIR_NEW_EVENT_BEFORE_LAST_BP_REMAINING(1094, "New event %s for subscription %s is before last remaining event for BP"),
+    SUB_REPAIR_NEW_EVENT_BEFORE_LAST_AO_REMAINING(1095, "New event %s for subscription %s is before last remaining event"),
+    SUB_REPAIR_UNKNOWN_TYPE(1096, "Unknown new event type %s for subscription %s"),
+    SUB_REPAIR_UNKNOWN_BUNDLE(1097, "Unknown bundle %s"),
+    SUB_REPAIR_UNKNOWN_SUBSCRIPTION(1098, "Unknown subscription %s"),
+    SUB_REPAIR_NO_ACTIVE_SUBSCRIPTIONS(1099, "No active subscriptions on bundle %s"),
+    SUB_REPAIR_VIEW_CHANGED(1100, "View for bundle %s has changed from %s to %s"),
+    SUB_REPAIR_SUB_RECREATE_NOT_EMPTY(1101, "Subscription %s with recreation for bundle %s should specify all existing events to be deleted"),
+    SUB_REPAIR_SUB_EMPTY(1102, "Subscription %s with recreation for bundle %s should specify all existing events to be deleted"),
+    SUB_REPAIR_BP_RECREATE_MISSING_AO(1103, "BP recreation for bundle %s implies repair all subscriptions"),
+    SUB_REPAIR_BP_RECREATE_MISSING_AO_CREATE(1104, "BP recreation for bundle %s implies that all AO should be start also with a CREATE"),
+    SUB_REPAIR_AO_CREATE_BEFORE_BP_START(1105, "Can't recreate AO %s for bundle %s before BP starts"),
 
-    ENT_BUNDLE_IS_OVERDUE_BLOCKED(1090, "Changes to this bundle are blocked by overdue enforcement (%s :  %s)"),
-    ENT_ACCOUNT_IS_OVERDUE_BLOCKED(1091, "Changes to this account are blocked by overdue enforcement (%s)"),
+    SUB_BUNDLE_IS_OVERDUE_BLOCKED(1090, "Changes to this bundle are blocked by overdue enforcement (%s :  %s)"),
+    SUB_ACCOUNT_IS_OVERDUE_BLOCKED(1091, "Changes to this account are blocked by overdue enforcement (%s)"),
 
     /* Transfer */
-    ENT_TRANSFER_INVALID_EFF_DATE(1106, "Invalid effective date for transfer: %s"),
+    SUB_TRANSFER_INVALID_EFF_DATE(1106, "Invalid effective date for transfer: %s"),
 
     /*
     *
