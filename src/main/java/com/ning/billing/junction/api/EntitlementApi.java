@@ -21,7 +21,7 @@ import java.util.UUID;
 
 import com.ning.billing.util.callcontext.TenantContext;
 
-public interface JunctionApi {
+public interface EntitlementApi {
 
     /**
      * @param overdueableId the uuid of the object potentially in an overduabke state
@@ -30,5 +30,3 @@ public interface JunctionApi {
      */
     public List<BlockingState> getBlockingHistory(UUID overdueableId, TenantContext context);
 }
-
-

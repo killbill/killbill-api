@@ -18,12 +18,12 @@ package com.ning.billing.osgi.api;
 
 import com.ning.billing.account.api.AccountUserApi;
 import com.ning.billing.catalog.api.CatalogUserApi;
+import com.ning.billing.junction.api.EntitlementApi;
 import com.ning.billing.subscription.api.timeline.SubscriptionTimelineApi;
 import com.ning.billing.subscription.api.transfer.SubscriptionTransferApi;
 import com.ning.billing.subscription.api.user.SubscriptionUserApi;
 import com.ning.billing.invoice.api.InvoicePaymentApi;
 import com.ning.billing.invoice.api.InvoiceUserApi;
-import com.ning.billing.junction.api.JunctionApi;
 import com.ning.billing.osgi.api.config.PluginConfigServiceApi;
 import com.ning.billing.overdue.OverdueUserApi;
 import com.ning.billing.payment.api.PaymentApi;
@@ -75,7 +75,7 @@ public interface OSGIKillbill {
 
     public TagUserApi getTagUserApi();
 
-    public JunctionApi getJunctionApi();
+    public EntitlementApi getEntitlementApi();
 
     public RecordIdApi getRecordIdApi();
 
