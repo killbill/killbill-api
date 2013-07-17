@@ -16,7 +16,7 @@
 
 package com.ning.billing.account.api;
 
-import com.ning.billing.junction.api.Blockable;
+import com.ning.billing.entitlement.api.Blockable;
 import com.ning.billing.util.entity.Entity;
 
 /**

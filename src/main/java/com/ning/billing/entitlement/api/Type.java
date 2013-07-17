@@ -14,7 +14,7 @@
  * under the License.
  */
 
-package com.ning.billing.junction.api;
+package com.ning.billing.entitlement.api;
 
 import com.ning.billing.ObjectType;
 import com.ning.billing.account.api.Account;

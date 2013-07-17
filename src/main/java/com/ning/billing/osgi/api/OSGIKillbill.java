@@ -18,7 +18,7 @@ package com.ning.billing.osgi.api;
 
 import com.ning.billing.account.api.AccountUserApi;
 import com.ning.billing.catalog.api.CatalogUserApi;
-import com.ning.billing.junction.api.EntitlementApi;
+import com.ning.billing.entitlement.api.EntitlementApi;
 import com.ning.billing.subscription.api.timeline.SubscriptionTimelineApi;
 import com.ning.billing.subscription.api.transfer.SubscriptionTransferApi;
 import com.ning.billing.subscription.api.user.SubscriptionUserApi;

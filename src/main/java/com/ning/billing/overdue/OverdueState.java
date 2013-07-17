@@ -18,7 +18,7 @@ package com.ning.billing.overdue;
 
 import org.joda.time.Period;
 
-import com.ning.billing.junction.api.Blockable;
+import com.ning.billing.entitlement.api.Blockable;
 
 
 public interface OverdueState<T extends Blockable> {

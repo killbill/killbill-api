@@ -28,7 +28,7 @@ import com.ning.billing.catalog.api.PlanPhase;
 import com.ning.billing.catalog.api.PlanPhaseSpecifier;
 import com.ning.billing.catalog.api.PriceList;
 import com.ning.billing.catalog.api.ProductCategory;
-import com.ning.billing.junction.api.Blockable;
+import com.ning.billing.entitlement.api.Blockable;
 import com.ning.billing.util.callcontext.CallContext;
 import com.ning.billing.util.entity.Entity;
 

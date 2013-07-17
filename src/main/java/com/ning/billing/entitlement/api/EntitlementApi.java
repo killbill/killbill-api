@@ -14,7 +14,7 @@
  * under the License.
  */
 
-package com.ning.billing.junction.api;
+package com.ning.billing.entitlement.api;
 
 import java.util.List;
 import java.util.UUID;
