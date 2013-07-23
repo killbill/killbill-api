@@ -16,12 +16,29 @@
 
 package com.ning.billing.entitlement.api;
 
+import com.ning.billing.catalog.api.PlanPhaseSpecifier;
+import com.ning.billing.util.callcontext.CallContext;
+import com.ning.billing.util.callcontext.TenantContext;
+
 import java.util.List;
 import java.util.UUID;
 
-import com.ning.billing.util.callcontext.TenantContext;
-
 public interface EntitlementApi {
+
+    public Entitlement createBaseEntitlement(UUID accountId, PlanPhaseSpecifier spec, String externalKey, CallContext context)
+            throws EntitlementApiException;
+
+    public Entitlement addEntitlement(UUID baseEntitlementId, PlanPhaseSpecifier spec, CallContext context)
+            throws EntitlementApiException;
+
+    public Entitlement getEntitlementFromId(UUID id, TenantContext context) throws EntitlementApiException;
+
+    public List<Entitlement> getAllEntitlementFromBaseId(UUID baseEntitlementId, TenantContext context) throws EntitlementApiException;
+
+    public List<Entitlement> getAllEntitlementForAccountIdAndExternalKey(UUID accountId, String externalKey, TenantContext context) throws EntitlementApiException;
+
+    public List<Entitlement> getAllEntitlementFromAccountId(UUID accountId, TenantContext context) throws EntitlementApiException;
+
 
     /**
      * @param overdueableId the uuid of the object potentially in an overduabke state
