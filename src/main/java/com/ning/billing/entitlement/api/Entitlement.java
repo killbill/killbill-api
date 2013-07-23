@@ -5,6 +5,8 @@ import com.ning.billing.catalog.api.BillingPeriod;
 import com.ning.billing.util.callcontext.CallContext;
 import org.joda.time.LocalDate;
 
+import java.util.UUID;
+
 public interface Entitlement {
 
 
@@ -12,6 +14,8 @@ public interface Entitlement {
         SOT,
         EOD
     }
+
+    public UUID getId();
 
     // Cancel entitlement at the specified date and let subscription/catalog/rules do the right thing for billing
     public boolean cancelEntitlementWithDate(final LocalDate effectiveDate, final CallContext context)

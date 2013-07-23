@@ -53,8 +53,6 @@ public interface OSGIKillbill {
 
     public SubscriptionTransferApi getSubscriptionTransferApi();
 
-    public SubscriptionUserApi getSubscriptionUserApi();
-
     public InvoicePaymentApi getInvoicePaymentApi();
 
     public InvoiceUserApi getInvoiceUserApi();
