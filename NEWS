@@ -1,3 +1,6 @@
+0.3.3
+    Add all ISO currencies to the catalog
+
 0.3.2
     Upgrade to killbill-oss-parent 0.3.3
     Rename Entitlement -> Susbscription and create new Entitlement API replacing the JunctionApi
