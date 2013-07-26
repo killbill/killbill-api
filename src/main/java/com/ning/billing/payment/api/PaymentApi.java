@@ -209,6 +209,32 @@ public interface PaymentApi {
             throws PaymentApiException;
 
     /**
+     * Find all payment methods matching the search key across all plugins
+     * <p/>
+     * The match will be plugin specific: for instance some plugins will try to match the key
+     * against the last 4 credit cards digits, agreement ids, etc.
+     *
+     * @param searchKey the search key
+     * @param context   the user context
+     * @return the list of payment methods matching this search key for that tenant
+     */
+    public List<PaymentMethod> searchPaymentMethods(String searchKey, TenantContext context);
+
+    /**
+     * Find all payment methods matching the search key in a given plugin
+     * <p/>
+     * The match will be plugin specific: for instance some plugins will try to match the key
+     * against the last 4 credit cards digits, agreement ids, etc.
+     *
+     * @param searchKey  the search key
+     * @param pluginName the payment plugin name
+     * @param context    the user context
+     * @return the list of payment methods matching this search key for that tenant
+     * @throws PaymentApiException
+     */
+    public List<PaymentMethod> searchPaymentMethods(String searchKey, String pluginName, TenantContext context) throws PaymentApiException;
+
+    /**
      * @param account         the account
      * @param paymentMethodId the id of the payment  method
      * @param deleteDefaultPaymentMethodWithAutoPayOff

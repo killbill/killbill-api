@@ -82,6 +82,15 @@ public interface AccountUserApi {
     public Account getAccountById(UUID accountId, TenantContext context) throws AccountApiException;
 
     /**
+     * Find all accounts having their name, email, external_key or company_name matching the search key
+     *
+     * @param searchKey the search key
+     * @param context   the user context
+     * @return the list of accounts matching this search key for that tenant
+     */
+    public List<Account> searchAccounts(String searchKey, TenantContext context);
+
+    /**
      * @param context the user context
      * @return the list of accounts for that tenant
      */
