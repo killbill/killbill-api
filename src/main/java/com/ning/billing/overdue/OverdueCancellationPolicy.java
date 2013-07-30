@@ -16,7 +16,7 @@
 
 package com.ning.billing.overdue;
 
-public enum OverdueCancellationPolicicy {
+public enum OverdueCancellationPolicy {
     END_OF_TERM,
     IMMEDIATE,
     NONE

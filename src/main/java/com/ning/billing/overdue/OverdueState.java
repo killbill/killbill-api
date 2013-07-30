@@ -31,7 +31,7 @@ public interface OverdueState<T extends Blockable> {
 
     public boolean disableEntitlementAndChangesBlocked();
 
-    public OverdueCancellationPolicicy getSubscriptionCancellationPolicy();
+    public OverdueCancellationPolicy getSubscriptionCancellationPolicy();
 
     public boolean blockChanges();
 
