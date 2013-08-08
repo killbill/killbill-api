@@ -19,7 +19,6 @@ package com.ning.billing.entitlement.api;
 import com.ning.billing.BillingExceptionBase;
 import com.ning.billing.ErrorCode;
 import com.ning.billing.account.api.AccountApiException;
-import com.ning.billing.subscription.api.user.SubscriptionUserApiException;
 
 public class SubscriptionApiException extends BillingExceptionBase {
 
@@ -27,9 +26,6 @@ public class SubscriptionApiException extends BillingExceptionBase {
         super(e, e.getCode(), e.getMessage());
     }
 
-    public SubscriptionApiException(final SubscriptionUserApiException e) {
-        super(e, e.getCode(), e.getMessage());
-    }
 
     public SubscriptionApiException(final Throwable e, final ErrorCode code, final Object... args) {
         super(e, code, args);

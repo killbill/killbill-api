@@ -2,6 +2,8 @@ package com.ning.billing.entitlement.api;
 
 import org.joda.time.LocalDate;
 
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -17,7 +19,7 @@ public interface Subscription {
         /* The subscription is currently invoiced */
         ACTIVE,
         /* The subscription is not currently invoiced because its entitlement has been paused or blocked */
-        INACTIVE,
+        BLOCKED,
         /* The subscription is not invoiced */
         CANCELLED
     }
@@ -54,4 +56,15 @@ public interface Subscription {
      */
     public int getBCD();
 
+    /**
+     *
+     * @return the billing state
+     */
+    public BillingState getBillingState();
+
+    /**
+     *
+     * @return for each service, the current state
+     */
+    public Map<String, String> getCurrentStatesForService();
 }

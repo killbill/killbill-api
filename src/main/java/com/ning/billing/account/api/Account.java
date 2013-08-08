@@ -16,7 +16,6 @@
 
 package com.ning.billing.account.api;
 
-import com.ning.billing.entitlement.api.Blockable;
 import com.ning.billing.util.entity.Entity;
 
 /**
@@ -29,7 +28,8 @@ import com.ning.billing.util.entity.Entity;
  * @see com.ning.billing.account.api.AccountData
  */
 
-public interface Account extends AccountData, Entity, Blockable {
+public interface Account extends AccountData, Entity
+{
 
     /**
      * @return the mutable account data

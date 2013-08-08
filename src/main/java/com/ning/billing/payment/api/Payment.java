@@ -16,15 +16,14 @@
 
 package com.ning.billing.payment.api;
 
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.UUID;
-
-import org.joda.time.DateTime;
-
 import com.ning.billing.catalog.api.Currency;
 import com.ning.billing.payment.plugin.api.PaymentInfoPlugin;
 import com.ning.billing.util.entity.Entity;
+import org.joda.time.DateTime;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.UUID;
 
 public interface Payment extends Entity {
 

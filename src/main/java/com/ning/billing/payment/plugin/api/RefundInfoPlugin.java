@@ -16,9 +16,9 @@
 
 package com.ning.billing.payment.plugin.api;
 
-import java.math.BigDecimal;
-
 import org.joda.time.DateTime;
+
+import java.math.BigDecimal;
 
 public interface RefundInfoPlugin {
 

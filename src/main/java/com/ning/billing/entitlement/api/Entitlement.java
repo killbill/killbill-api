@@ -41,8 +41,6 @@ public interface Entitlement {
     public enum EntitlementState {
         /* The entitlement was created in that initial state */
         ACTIVE,
-        /* The user explicitely paused the entitlement */
-        PAUSED,
         /* The system blocked the entitlement */
         BLOCKED,
         /* The user cancelled the entitlement */
@@ -234,12 +232,13 @@ public interface Entitlement {
      * <p/>
      * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
      *
+     * @param serviceName   the service name of who is blocking
      * @param effectiveDate the date at which the entitlement should be paused
      * @param context       the context
      * @return true if the entitlement has been paused
      * @throws EntitlementApiException if the entitlement was not in <tt>ACTIVE</tt> state
      */
-    public boolean pause(final LocalDate effectiveDate, final CallContext context)
+    public boolean block(String serviceName, final LocalDate effectiveDate, final CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -247,11 +246,12 @@ public interface Entitlement {
      * <p/>
      * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
      *
+     * @param serviceName   the service name of who is blocking
      * @param effectiveDate the date at which the entitlement should be resumed
      * @param context       the context
      * @return true if the entitlement has been resumed
      * @throws EntitlementApiException
      */
-    public boolean resume(final LocalDate effectiveDate, final CallContext context)
+    public boolean unblock(String serviceName, final LocalDate effectiveDate, final CallContext context)
             throws EntitlementApiException;
 }

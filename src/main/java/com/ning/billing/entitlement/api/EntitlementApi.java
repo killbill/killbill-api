@@ -67,6 +67,33 @@ public interface EntitlementApi {
     public Entitlement addEntitlement(UUID baseEntitlementId, PlanPhaseSpecifier spec, CallContext context)
             throws EntitlementApiException;
 
+
+    /**
+     * Will block all entitlements associated with the base entitlement. If there are no ADD_ONN this is only the base entitlement.
+     *
+     * @param baseEntitlementId the id of the base entitlement
+     * @param serviceName       the service name of who is blocking
+     * @param effectiveDate     the date at which the operation should occur
+     * @param context           the context
+     *
+     * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
+     */
+    public void block(UUID baseEntitlementId, String serviceName, LocalDate effectiveDate, CallContext context)
+            throws EntitlementApiException;
+
+    /**
+     * Will unblock all entitlements associated with the base entitlement. If there are no ADD_ONN this is only the base entitlement.
+     *
+     * @param baseEntitlementId the id of the base entitlement
+     * @param serviceName       the service name of who is blocking
+     * @param effectiveDate     the date at which the operation should occur
+     * @param context           the context
+     *
+     * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
+     */
+    public void unblock(UUID baseEntitlementId, String serviceName, LocalDate effectiveDate, CallContext context)
+            throws EntitlementApiException;
+
     /**
      *
      * Retrieves an <code>Entitlement</code> using its id.
@@ -87,8 +114,10 @@ public interface EntitlementApi {
      * @param context               the context
      * @return                      a list of entitlements
      *
+     * @throws EntitlementApiException if the entitlement does not exist
      */
-    public List<Entitlement> getAllEntitlementsFromBaseId(UUID baseEntitlementId, TenantContext context);
+    public List<Entitlement> getAllEntitlementsFromBaseId(UUID baseEntitlementId, TenantContext context)
+            throws EntitlementApiException;
 
     /**
      *
@@ -102,7 +131,8 @@ public interface EntitlementApi {
      *
      * @throws EntitlementApiException if the account does not exist
      */
-    public List<Entitlement> getAllEntitlementsForAccountIdAndExternalKey(UUID accountId, String externalKey, TenantContext context) throws EntitlementApiException;
+    public List<Entitlement> getAllEntitlementsForAccountIdAndExternalKey(UUID accountId, String externalKey, TenantContext context)
+            throws EntitlementApiException;
 
     /**
      *
@@ -166,18 +196,4 @@ public interface EntitlementApi {
                                                           final ActionPolicy billingPolicy, final CallContext context)
             throws EntitlementApiException;
 
-
-    /**
-     * Returns an <code>EntitlementBundleTimeline</code> for the set of <code>Entitlement</code> associated with the account and external key.
-     *
-     * @param accountId     the account id
-     * @param externalKey   the external key
-     * @param context       the context
-     *
-     * @return              the timeline
-     *
-     * @throws EntitlementApiException there is not base entitlement for that account and external key
-     */
-    public EntitlementBundleTimeline getEntitlementBundleTimeline(UUID accountId, String externalKey, TenantContext context)
-        throws EntitlementApiException;
 }

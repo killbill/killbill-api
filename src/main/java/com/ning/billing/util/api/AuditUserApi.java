@@ -16,12 +16,7 @@
 
 package com.ning.billing.util.api;
 
-import java.util.List;
-import java.util.UUID;
-
 import com.ning.billing.ObjectType;
-import com.ning.billing.subscription.api.timeline.BundleTimeline;
-import com.ning.billing.subscription.api.timeline.SubscriptionRepairException;
 import com.ning.billing.invoice.api.Invoice;
 import com.ning.billing.invoice.api.InvoicePayment;
 import com.ning.billing.payment.api.Payment;
@@ -34,6 +29,9 @@ import com.ning.billing.util.audit.AuditLogsForInvoices;
 import com.ning.billing.util.audit.AuditLogsForPayments;
 import com.ning.billing.util.audit.AuditLogsForRefunds;
 import com.ning.billing.util.callcontext.TenantContext;
+
+import java.util.List;
+import java.util.UUID;
 
 public interface AuditUserApi {
 
@@ -48,7 +46,7 @@ public interface AuditUserApi {
      * @param context    the tenant context
      * @return all audit logs for these refunds
      */
-    public AuditLogsForBundles getAuditLogsForBundle(UUID bundleId, AuditLevel auditLevel, TenantContext context) throws SubscriptionRepairException;
+    public AuditLogsForBundles getAuditLogsForBundle(UUID bundleId, AuditLevel auditLevel, TenantContext context);
 
     /**
      * Fetch all audit logs for bundles.
@@ -58,7 +56,8 @@ public interface AuditUserApi {
      * @param context    the tenant context
      * @return all audit logs for these refunds
      */
-    public AuditLogsForBundles getAuditLogsForBundles(List<BundleTimeline> bundles, AuditLevel auditLevel, TenantContext context);
+    // STEPH_ENT
+    //public AuditLogsForBundles getAuditLogsForBundles(List<BundleTimeline> bundles, AuditLevel auditLevel, TenantContext context);
 
     /**
      * Fetch all audit logs for invoice payments.

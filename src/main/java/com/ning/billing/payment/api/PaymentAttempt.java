@@ -16,11 +16,10 @@
 
 package com.ning.billing.payment.api;
 
-import java.util.UUID;
-
+import com.ning.billing.util.entity.Entity;
 import org.joda.time.DateTime;
 
-import com.ning.billing.util.entity.Entity;
+import java.util.UUID;
 
 public interface PaymentAttempt extends Entity {
 
