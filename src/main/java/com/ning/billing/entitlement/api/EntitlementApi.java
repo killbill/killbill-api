@@ -16,7 +16,7 @@
 
 package com.ning.billing.entitlement.api;
 
-import com.ning.billing.catalog.api.ActionPolicy;
+import com.ning.billing.catalog.api.BillingActionPolicy;
 import com.ning.billing.catalog.api.PlanPhaseSpecifier;
 import com.ning.billing.util.callcontext.CallContext;
 import com.ning.billing.util.callcontext.TenantContext;
@@ -193,7 +193,7 @@ public interface EntitlementApi {
      *
      */
     public UUID transferEntitlementsOverrideBillingPolicy(final UUID sourceAccountId, final UUID destAccountId, final String externalKey, final LocalDate effectiveDate,
-                                                          final ActionPolicy billingPolicy, final CallContext context)
+                                                          final BillingActionPolicy billingPolicy, final CallContext context)
             throws EntitlementApiException;
 
 }

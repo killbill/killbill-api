@@ -1,6 +1,6 @@
 package com.ning.billing.entitlement.api;
 
-import com.ning.billing.catalog.api.ActionPolicy;
+import com.ning.billing.catalog.api.BillingActionPolicy;
 import com.ning.billing.catalog.api.BillingPeriod;
 import com.ning.billing.catalog.api.Plan;
 import com.ning.billing.catalog.api.PlanPhase;
@@ -10,7 +10,6 @@ import com.ning.billing.catalog.api.ProductCategory;
 import com.ning.billing.util.callcontext.CallContext;
 import org.joda.time.LocalDate;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -60,6 +59,17 @@ public interface Entitlement {
      * @return the unique id of the entitlement
      */
     public UUID getId();
+
+    /**
+     * @return the unique id of the base entitlement
+     */
+    public UUID getBaseEntitlementId();
+
+    /**
+     *
+     * @return the account id
+     */
+    public UUID getAccountId();
 
     /**
      *
@@ -175,7 +185,7 @@ public interface Entitlement {
      * @return true if the entitlement is in the <tt>CANCELLED</tt> state
      * @throws EntitlementApiException if cancellation failed
      */
-    public boolean cancelEntitlementWithDateOverrideBillingPolicy(final LocalDate effectiveDate, final ActionPolicy billingPolicy, final CallContext context)
+    public boolean cancelEntitlementWithDateOverrideBillingPolicy(final LocalDate effectiveDate, final BillingActionPolicy billingPolicy, final CallContext context)
             throws EntitlementApiException;
 
 
@@ -188,7 +198,7 @@ public interface Entitlement {
      * @return true if the entitlement is in the <tt>CANCELLED</tt> state
      * @throws EntitlementApiException if cancellation failed
      */
-    public boolean cancelEntitlementWithPolicyOverrideBillingPolicy(final EntitlementActionPolicy policy, final ActionPolicy billingPolicy, final CallContext context)
+    public boolean cancelEntitlementWithPolicyOverrideBillingPolicy(final EntitlementActionPolicy policy, final BillingActionPolicy billingPolicy, final CallContext context)
             throws EntitlementApiException;
 
 
@@ -223,7 +233,7 @@ public interface Entitlement {
      * @throws EntitlementApiException if change failed
      */
     public boolean changePlanOverrideBillingPolicy(final String productName, final BillingPeriod billingPeriod, final String priceList, final LocalDate effectiveDate,
-                                                   final ActionPolicy billingPolicy, final CallContext context)
+                                                   final BillingActionPolicy billingPolicy, final CallContext context)
             throws EntitlementApiException;
 
 

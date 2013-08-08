@@ -117,13 +117,13 @@ public interface Catalog {
 
     // TODO : should they be private APIs
 
-    public ActionPolicy planChangePolicy(PlanPhaseSpecifier from,
+    public BillingActionPolicy planChangePolicy(PlanPhaseSpecifier from,
                                          PlanSpecifier to, DateTime requestedDate) throws CatalogApiException;
 
     public PlanChangeResult planChange(PlanPhaseSpecifier from,
                                        PlanSpecifier to, DateTime requestedDate) throws CatalogApiException;
 
-    public ActionPolicy planCancelPolicy(PlanPhaseSpecifier planPhase, DateTime requestedDate) throws CatalogApiException;
+    public BillingActionPolicy planCancelPolicy(PlanPhaseSpecifier planPhase, DateTime requestedDate) throws CatalogApiException;
 
     public PlanAlignmentCreate planCreateAlignment(PlanSpecifier specifier, DateTime requestedDate) throws CatalogApiException;
 

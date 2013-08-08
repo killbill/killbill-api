@@ -102,14 +102,14 @@ public interface StaticCatalog {
 
     // TODO private APIs ?
 
-    public ActionPolicy planChangePolicy(PlanPhaseSpecifier from,
+    public BillingActionPolicy planChangePolicy(PlanPhaseSpecifier from,
                                          PlanSpecifier to) throws CatalogApiException;
 
     public PlanChangeResult planChange(PlanPhaseSpecifier from,
                                        PlanSpecifier to) throws CatalogApiException;
 
 
-    public ActionPolicy planCancelPolicy(PlanPhaseSpecifier planPhase) throws CatalogApiException;
+    public BillingActionPolicy planCancelPolicy(PlanPhaseSpecifier planPhase) throws CatalogApiException;
 
     public PlanAlignmentCreate planCreateAlignment(PlanSpecifier specifier) throws CatalogApiException;
 

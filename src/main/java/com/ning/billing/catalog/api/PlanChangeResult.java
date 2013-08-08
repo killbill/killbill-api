@@ -19,10 +19,10 @@ package com.ning.billing.catalog.api;
 public class PlanChangeResult {
 
     private final PriceList newPriceList;
-    private final ActionPolicy policy;
+    private final BillingActionPolicy policy;
     private final PlanAlignmentChange alignment;
 
-    public PlanChangeResult(final PriceList newPriceList, final ActionPolicy policy, final PlanAlignmentChange alignment) {
+    public PlanChangeResult(final PriceList newPriceList, final BillingActionPolicy policy, final PlanAlignmentChange alignment) {
         super();
         this.newPriceList = newPriceList;
         this.policy = policy;
@@ -33,7 +33,7 @@ public class PlanChangeResult {
         return newPriceList;
     }
 
-    public ActionPolicy getPolicy() {
+    public BillingActionPolicy getPolicy() {
         return policy;
     }
 

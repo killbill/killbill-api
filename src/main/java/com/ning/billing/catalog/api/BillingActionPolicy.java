@@ -20,7 +20,7 @@ package com.ning.billing.catalog.api;
  * Specifies how {@code Subscription} cancellation or plan change should operate
  * <p/>
  */
-public enum ActionPolicy {
+public enum BillingActionPolicy {
     /**
      * The cancellation or {@code Plan} change effectiveDate will occur at the end of the current invoiced service
      * period, and that will not trigger any proration and credit.
