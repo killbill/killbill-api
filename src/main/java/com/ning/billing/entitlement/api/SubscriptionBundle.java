@@ -16,25 +16,18 @@
 
 package com.ning.billing.entitlement.api;
 
+import com.ning.billing.util.entity.Entity;
+
 import java.util.List;
-import java.util.UUID;
 
-public interface SubscriptionBundle {
-
-    /**
-     *
-     * @return the unique id for the bundle
-     */
-    UUID getBundleId();
+public interface SubscriptionBundle extends Entity {
 
     /**
-     *
      * @return the list of <code>Subscription</code> in that bundle
      */
     List<Subscription> getSubscriptions();
 
     /**
-     *
      * @return the timeline of event for that bundle
      */
     SubscriptionBundleTimeline getTimeline();

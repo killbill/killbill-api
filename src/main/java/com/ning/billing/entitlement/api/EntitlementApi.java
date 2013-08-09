@@ -171,7 +171,7 @@ public interface EntitlementApi {
             throws EntitlementApiException;
 
     /**
-     * Transfer all the <code>Entitlement</code> For the source account and matching the external key to the destination account.
+     * Transfer all the <code>Entitlement</code> for the source account and matching the external key to the destination account.
      * <p>
      * The date is interpreted by the system to be in the timezone specified at the destination <code>Account</code>.
      * <p>
