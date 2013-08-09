@@ -156,9 +156,9 @@ public interface SubscriptionBundleTimeline {
     public UUID getAccountId();
 
     /**
-     * @return the id of the base entitlement
+     * @return the id of bundle
      */
-    public UUID getBaseEntitlementId();
+    public UUID getBundleId();
 
     /**
      * @return the external key

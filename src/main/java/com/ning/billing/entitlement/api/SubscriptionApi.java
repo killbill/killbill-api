@@ -26,14 +26,14 @@ public interface SubscriptionApi {
      *
      * Retrieves all the <code>Subscription</code> attached to the base entitlement.
      *
-     * @param baseEntitlementId     the id of the base entitlement
+     * @param bundleId              the id of the bundle
      * @param context               the context
      *
      * @return                      a list of subscriptions
      *
      * @throws SubscriptionApiException if the baseEntitlementId does not exist.
      */
-    public List<Subscription> getAllSubscriptionsForBaseEntitlementId(UUID baseEntitlementId, TenantContext context) throws SubscriptionApiException;
+    public SubscriptionBundle getAllSubscriptionsForBundle(UUID bundleId, TenantContext context) throws SubscriptionApiException;
 
     /**
      *

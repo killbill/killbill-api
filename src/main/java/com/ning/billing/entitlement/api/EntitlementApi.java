@@ -57,41 +57,41 @@ public interface EntitlementApi {
      * The new entitlement will be bundled using the externalKey that was specified when creating the
      * base entitlement.
      *
-     * @param baseEntitlementId the id of the base entitlement
+     * @param bundleId          the id of the bundle
      * @param spec              the product specification for that new entitlement
      * @param context           the context
      * @return                  a new entitlement
      *
      * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>
      */
-    public Entitlement addEntitlement(UUID baseEntitlementId, PlanPhaseSpecifier spec, CallContext context)
+    public Entitlement addEntitlement(UUID bundleId, PlanPhaseSpecifier spec, CallContext context)
             throws EntitlementApiException;
 
 
     /**
      * Will block all entitlements associated with the base entitlement. If there are no ADD_ONN this is only the base entitlement.
      *
-     * @param baseEntitlementId the id of the base entitlement
+     * @param bundleId          the id of the bundle
      * @param serviceName       the service name of who is blocking
      * @param effectiveDate     the date at which the operation should occur
      * @param context           the context
      *
      * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
      */
-    public void block(UUID baseEntitlementId, String serviceName, LocalDate effectiveDate, CallContext context)
+    public void block(UUID bundleId, String serviceName, LocalDate effectiveDate, CallContext context)
             throws EntitlementApiException;
 
     /**
      * Will unblock all entitlements associated with the base entitlement. If there are no ADD_ONN this is only the base entitlement.
      *
-     * @param baseEntitlementId the id of the base entitlement
+     * @param bundleId          the id of the bundle
      * @param serviceName       the service name of who is blocking
      * @param effectiveDate     the date at which the operation should occur
      * @param context           the context
      *
      * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
      */
-    public void unblock(UUID baseEntitlementId, String serviceName, LocalDate effectiveDate, CallContext context)
+    public void unblock(UUID bundleId, String serviceName, LocalDate effectiveDate, CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -110,13 +110,13 @@ public interface EntitlementApi {
      *
      * Retrieves all the <code>Entitlement</code> attached to the base entitlement.
      *
-     * @param baseEntitlementId     the id of the base entitlement
+     * @param bundleId              the id of the bundle
      * @param context               the context
      * @return                      a list of entitlements
      *
      * @throws EntitlementApiException if the entitlement does not exist
      */
-    public List<Entitlement> getAllEntitlementsForBaseId(UUID baseEntitlementId, TenantContext context)
+    public List<Entitlement> getAllEntitlementsForBundle(UUID bundleId, TenantContext context)
             throws EntitlementApiException;
 
     /**
