@@ -11,7 +11,7 @@ import java.util.UUID;
 public interface SubscriptionApi {
 
     /**
-     * Retrieves a <code>Subscription</code> from the entitlementId
+     * Retrieves a <code>Subscription</code> For the entitlementId
      *
      * @param entitlementId the id of the entitlement associated with the subscription
      * @param context       the context
@@ -20,7 +20,7 @@ public interface SubscriptionApi {
      *
      * @throws SubscriptionApiException if it odes not exist
      */
-    Subscription getSubscriptionFromEntitlementId(UUID entitlementId, TenantContext context) throws SubscriptionApiException;
+    Subscription getSubscriptionForEntitlementId(UUID entitlementId, TenantContext context) throws SubscriptionApiException;
 
     /**
      *
@@ -33,11 +33,11 @@ public interface SubscriptionApi {
      *
      * @throws SubscriptionApiException if the baseEntitlementId does not exist.
      */
-    public List<Subscription> getAllSubscriptionsFromBaseEntitlementId(UUID baseEntitlementId, TenantContext context) throws SubscriptionApiException;
+    public List<Subscription> getAllSubscriptionsForBaseEntitlementId(UUID baseEntitlementId, TenantContext context) throws SubscriptionApiException;
 
     /**
      *
-     * Retrieves all the <code>Subscription</code> for a given account and matching an external key.
+     * Retrieves all the <code>SubscriptionBundle</code> for a given account and matching an external key.
      *
      * @param accountId     the account id
      * @param externalKey   the external key
@@ -47,11 +47,11 @@ public interface SubscriptionApi {
      *
      * @throws SubscriptionApiException if the account does not exist.
      */
-    public List<Subscription> getAllSubscriptionsForAccountIdAndExternalKey(UUID accountId, String externalKey, TenantContext context) throws SubscriptionApiException;
+    public SubscriptionBundle getSubscriptionBundleForAccountIdAndExternalKey(UUID accountId, String externalKey, TenantContext context) throws SubscriptionApiException;
 
     /**
      *
-     * Retrieves all the <code>Subscription</code> for a given account.
+     * Retrieves all the <code>SubscriptionBundle</code> for a given account.
      *
      * @param accountId     the account id
      * @param context       the context
@@ -60,37 +60,6 @@ public interface SubscriptionApi {
      *
      * @throws SubscriptionApiException if the account does not exist
      */
-    public List<Subscription> getAllSubscriptionsFromAccountId(UUID accountId, TenantContext context) throws SubscriptionApiException;
-
-
-    /**
-     *
-     * Returns a list of  <code>SubscriptionBundleTimeline</code> for the set of <code>Subscription</code> associated with the account
-     *
-     * @param accountId     the account id
-     * @param context       the context
-     *
-     * @return              the timeline
-     *
-     * @throws SubscriptionApiException if the account id or external key don't exist
-     */
-    public List<SubscriptionBundleTimeline> getSubscriptionBundleTimeline(UUID accountId, TenantContext context)
-            throws SubscriptionApiException;
-
-    /**
-     * Returns a <code>SubscriptionBundleTimeline</code> for the set of <code>Subscription</code> associated with the account and external key.
-     *
-     * @param accountId     the account id
-     * @param externalKey   the external key
-     * @param context       the context
-     *
-     * @return              the timeline
-     *
-     * @throws SubscriptionApiException if the account id or external key don't exist
-     */
-    public SubscriptionBundleTimeline getSubscriptionBundleTimeline(UUID accountId, String externalKey, TenantContext context)
-            throws SubscriptionApiException;
-
-
+    public List<SubscriptionBundle> getSubscriptionBundlesForAccountId(UUID accountId, TenantContext context) throws SubscriptionApiException;
 
 }

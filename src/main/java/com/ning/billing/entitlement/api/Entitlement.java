@@ -8,6 +8,7 @@ import com.ning.billing.catalog.api.PriceList;
 import com.ning.billing.catalog.api.Product;
 import com.ning.billing.catalog.api.ProductCategory;
 import com.ning.billing.util.callcontext.CallContext;
+import com.ning.billing.util.entity.Entity;
 import org.joda.time.LocalDate;
 
 import java.util.UUID;
@@ -22,7 +23,7 @@ import java.util.UUID;
  * <p>
  * @see com.ning.billing.entitlement.api.EntitlementApi
  */
-public interface Entitlement {
+public interface Entitlement extends Entity {
 
     /**
      * Used to control the effective date that should be used on Plan change or on cancellation.
@@ -56,15 +57,16 @@ public interface Entitlement {
     }
 
     /**
-     * @return the unique id of the entitlement
-     */
-    public UUID getId();
-
-    /**
      * @return the unique id of the base entitlement
      */
     public UUID getBaseEntitlementId();
 
+
+    /**
+     *
+     * @return the unique Id of the SubscriptionBundle
+     */
+    public UUID getBundleId();
     /**
      *
      * @return the account id
@@ -196,11 +198,23 @@ public interface Entitlement {
      * @param billingPolicy the override billing policy
      * @param context       the context
      * @return true if the entitlement is in the <tt>CANCELLED</tt> state
+     *
      * @throws EntitlementApiException if cancellation failed
      */
     public boolean cancelEntitlementWithPolicyOverrideBillingPolicy(final EntitlementActionPolicy policy, final BillingActionPolicy billingPolicy, final CallContext context)
             throws EntitlementApiException;
 
+
+    /**
+     * Uncancel a previously cancelled <code>Entitlement</code>. This will only work if the effective date of the cancellation is in the future, that is, the cancellation
+     * did not occur yet.
+     *
+     * @param context       the context
+     *
+     * @throws EntitlementApiException if the <code>Entitlement</code> is not in an <tt>ACTIVE</tt> state or if it's cancellation date is not in the future.
+     */
+    public void uncancel(final CallContext context)
+            throws EntitlementApiException;
 
     /**
      * Change <code>Entitlement</code> plan at the specified date.

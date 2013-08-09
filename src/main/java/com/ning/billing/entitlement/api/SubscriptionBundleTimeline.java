@@ -16,6 +16,7 @@
 
 package com.ning.billing.entitlement.api;
 
+import com.ning.billing.ObjectType;
 import com.ning.billing.catalog.api.BillingPeriod;
 import com.ning.billing.catalog.api.Plan;
 import com.ning.billing.catalog.api.PlanPhase;
@@ -29,6 +30,12 @@ import java.util.UUID;
 public interface SubscriptionBundleTimeline {
 
     public interface SubscriptionEvent {
+
+        /**
+         *
+         * @return the unique id for the event
+         */
+        public UUID getId();
 
         /**
          * @return the id of the entitlement
@@ -67,44 +74,80 @@ public interface SubscriptionBundleTimeline {
         public String getServiceStateName();
 
         /**
-         * @return the product after that transition took place
+         * @return the previous product after that transition took place
          */
-        public Product getProduct();
+        public Product getPrevProduct();
 
         /**
-         * @return the plan after that transition took place
+         * @return the previous plan after that transition took place
          */
-        public Plan getPlan();
+        public Plan getPrevPlan();
 
         /**
-         * @return the phase after that transition took place
+         * @return the previous phase after that transition took place
          */
-        public PlanPhase getPhase();
+        public PlanPhase getPrevPhase();
 
         /**
-         * @return the pricelist after that transition took place
+         * @return the previous pricelist after that transition took place
          */
-        public PriceList getPriceList();
+        public PriceList getPrevPriceList();
 
         /**
-         * @return the billing period name after that transition took place
+         * @return the previous billing period name after that transition took place
          */
-        public BillingPeriod getBillingPeriod();
+        public BillingPeriod getPrevBillingPeriod();
+
+        /**
+         * @return the next product after that transition took place
+         */
+        public Product getNextProduct();
+
+        /**
+         * @return the next plan after that transition took place
+         */
+        public Plan getNextPlan();
+
+        /**
+         * @return the next phase after that transition took place
+         */
+        public PlanPhase getNextPhase();
+
+        /**
+         * @return the next pricelist after that transition took place
+         */
+        public PriceList getNextPriceList();
+
+        /**
+         * @return the next billing period name after that transition took place
+         */
+        public BillingPeriod getNextBillingPeriod();
+
     }
 
     public enum SubscriptionEventType {
         /* Initial events */
-        CREATE(),
-        TRANSFER,
-        MIGRATE,
+        CREATE(ObjectType.SUBSCRIPTION_EVENT),
+        TRANSFER(ObjectType.SUBSCRIPTION_EVENT),
+        MIGRATE(ObjectType.SUBSCRIPTION_EVENT),
         /* Phase transition */
-        PHASE,
+        PHASE(ObjectType.SUBSCRIPTION_EVENT),
         /* User generated change plan */
-        CHANGE,
+        CHANGE(ObjectType.SUBSCRIPTION_EVENT),
         /* Transition state change for a given service */
-        SERVICE_STATE_CHANGE,
+        SERVICE_STATE_CHANGE(ObjectType.BLOCKING_STATES),
         /* User generated cancel */
-        CANCEL
+        CANCEL(ObjectType.SUBSCRIPTION_EVENT);
+
+        private ObjectType objectType;
+
+        SubscriptionEventType(ObjectType type) {
+            this.objectType = type;
+        }
+
+        public ObjectType getObjectType() {
+            return objectType;
+        }
     }
 
     /**
@@ -125,5 +168,5 @@ public interface SubscriptionBundleTimeline {
     /**
      * @return the ordered list of transitions that occurred across all the <code>Subscription</code>
      */
-    public List<SubscriptionEvent> getEntitlementEvents();
+    public List<SubscriptionEvent> getSubscriptionEvents();
 }

@@ -104,7 +104,7 @@ public interface EntitlementApi {
      *
      * @throws EntitlementApiException if the entitlement does not exist
      */
-    public Entitlement getEntitlementFromId(UUID id, TenantContext context) throws EntitlementApiException;
+    public Entitlement getEntitlementForId(UUID id, TenantContext context) throws EntitlementApiException;
 
     /**
      *
@@ -116,7 +116,7 @@ public interface EntitlementApi {
      *
      * @throws EntitlementApiException if the entitlement does not exist
      */
-    public List<Entitlement> getAllEntitlementsFromBaseId(UUID baseEntitlementId, TenantContext context)
+    public List<Entitlement> getAllEntitlementsForBaseId(UUID baseEntitlementId, TenantContext context)
             throws EntitlementApiException;
 
     /**
@@ -145,17 +145,17 @@ public interface EntitlementApi {
      *
      * @throws EntitlementApiException if the account does not exist
      */
-    public List<Entitlement> getAllEntitlementsFromAccountId(UUID accountId, TenantContext context) throws EntitlementApiException;
+    public List<Entitlement> getAllEntitlementsForAccountId(UUID accountId, TenantContext context) throws EntitlementApiException;
 
     /**
-     * Transfer all the <code>Enitlement</code> from the source account and matching the external key to the destination account.
+     * Transfer all the <code>Enitlement</code> For the source account and matching the external key to the destination account.
      * <p>
      * The date is interpreted by the system to be in the timezone specified at the destination <code>Account</code>.
      * <p>
      * The <code>Entitlement</code> on the source account will be cancelled at effective date and the <code>Entitlement</code>
      * on the destination account will be created at the effectiveDate.
      *
-     * @param sourceAccountId   the unique id for the account on which the bundle will be transferred from
+     * @param sourceAccountId   the unique id for the account on which the bundle will be transferred For
      * @param destAccountId     the unique id for the account on which the bundle will be transferred to
      * @param externalKey       the externalKey for the bundle
      * @param effectiveDate     the date at which this transfer should occur
@@ -171,7 +171,7 @@ public interface EntitlementApi {
             throws EntitlementApiException;
 
     /**
-     * Transfer all the <code>Entitlement</code> from the source account and matching the external key to the destination account.
+     * Transfer all the <code>Entitlement</code> For the source account and matching the external key to the destination account.
      * <p>
      * The date is interpreted by the system to be in the timezone specified at the destination <code>Account</code>.
      * <p>
@@ -180,7 +180,7 @@ public interface EntitlementApi {
      * the default billing behavior for the cancellation of the subscriptions on the source account.
      *
      *
-     * @param sourceAccountId   the unique id for the account on which the bundle will be transferred from
+     * @param sourceAccountId   the unique id for the account on which the bundle will be transferred For
      * @param destAccountId     the unique id for the account on which the bundle will be transferred to
      * @param externalKey       the externalKey for the bundle
      * @param effectiveDate     the date at which this transfer should occur

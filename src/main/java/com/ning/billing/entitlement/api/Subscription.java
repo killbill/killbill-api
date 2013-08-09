@@ -13,7 +13,7 @@ import java.util.UUID;
  *
  * @see com.ning.billing.entitlement.api.SubscriptionApi
  */
-public interface Subscription {
+public interface Subscription extends Entitlement {
 
     public enum BillingState {
         /* The subscription is currently invoiced */
@@ -23,17 +23,6 @@ public interface Subscription {
         /* The subscription is not invoiced */
         CANCELLED
     }
-
-
-    /**
-     * @return the unique id of the subscription
-     */
-    public UUID getId();
-
-    /**
-     * @return the <code>Entitlement</code> associated with that <code>Subscription</code>
-     */
-    public Entitlement getEntitlement();
 
 
     /**
