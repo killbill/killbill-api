@@ -17,6 +17,7 @@
 package com.ning.billing.util.api;
 
 import com.ning.billing.ObjectType;
+import com.ning.billing.entitlement.api.SubscriptionBundle;
 import com.ning.billing.invoice.api.Invoice;
 import com.ning.billing.invoice.api.InvoicePayment;
 import com.ning.billing.payment.api.Payment;
@@ -38,15 +39,6 @@ public interface AuditUserApi {
 
     public AuditLogsForAccount getAuditLogsForAccount(UUID accountId, AuditLevel auditLevel, TenantContext context);
 
-    /**
-     * Fetch all audit logs for a bundle.
-     *
-     * @param bundleId   the bundle id to lookup
-     * @param auditLevel audit level (verbosity)
-     * @param context    the tenant context
-     * @return all audit logs for these refunds
-     */
-    public AuditLogsForBundles getAuditLogsForBundle(UUID bundleId, AuditLevel auditLevel, TenantContext context);
 
     /**
      * Fetch all audit logs for bundles.
@@ -56,8 +48,7 @@ public interface AuditUserApi {
      * @param context    the tenant context
      * @return all audit logs for these refunds
      */
-    // STEPH_ENT
-    //public AuditLogsForBundles getAuditLogsForBundles(List<BundleTimeline> bundles, AuditLevel auditLevel, TenantContext context);
+    public AuditLogsForBundles getAuditLogsForBundles(List<SubscriptionBundle> bundles, AuditLevel auditLevel, TenantContext context);
 
     /**
      * Fetch all audit logs for invoice payments.
