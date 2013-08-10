@@ -48,9 +48,14 @@ public interface SubscriptionBundleTimeline {
         public LocalDate getEffectiveDate();
 
         /**
+         * @return the date at which the transition was requested
+         */
+        public LocalDate getRequestedDate();
+
+        /**
          * @return the type of transition
          */
-        public SubscriptionEventType getEntitlementEventType();
+        public SubscriptionEventType getSubscriptionEventType();
 
 
         /**
