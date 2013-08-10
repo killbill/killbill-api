@@ -161,7 +161,7 @@ public interface EntitlementApi {
      * @param effectiveDate     the date at which this transfer should occur
      * @param context           the user context
      *
-     * @return                  the id of the newly created base entitlement for the destination account
+     * @return                  the id of the newly created bundle for the destination account
      *
      * @throws EntitlementApiException if the system could not transfer the entitlements
      *

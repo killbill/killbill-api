@@ -19,16 +19,29 @@ package com.ning.billing.entitlement.api;
 import com.ning.billing.util.entity.Entity;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface SubscriptionBundle extends Entity {
 
     /**
+     *
+     * @return the account id
+     */
+    public UUID getAccountId();
+
+    /**
+     *
+     * @return the external key
+     */
+    public String getExternalKey();
+
+    /**
      * @return the list of <code>Subscription</code> in that bundle
      */
-    List<Subscription> getSubscriptions();
+    public List<Subscription> getSubscriptions();
 
     /**
      * @return the timeline of event for that bundle
      */
-    SubscriptionBundleTimeline getTimeline();
+    public SubscriptionBundleTimeline getTimeline();
 }

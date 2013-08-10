@@ -33,7 +33,7 @@ public interface SubscriptionApi {
      *
      * @throws SubscriptionApiException if the baseEntitlementId does not exist.
      */
-    public SubscriptionBundle getAllSubscriptionsForBundle(UUID bundleId, TenantContext context) throws SubscriptionApiException;
+    public SubscriptionBundle getSubscriptionBundle(UUID bundleId, TenantContext context) throws SubscriptionApiException;
 
     /**
      *
