@@ -23,8 +23,14 @@ import java.util.Set;
 import java.util.UUID;
 
 import com.ning.billing.account.api.Account;
+import com.ning.billing.security.RequiresPermissions;
 import com.ning.billing.util.callcontext.CallContext;
 import com.ning.billing.util.callcontext.TenantContext;
+
+import static com.ning.billing.security.Permission.INVOICE_CAN_ADJUST;
+import static com.ning.billing.security.Permission.INVOICE_CAN_ITEM_ADJUST;
+import static com.ning.billing.security.Permission.PAYMENT_CAN_CREATE_EXTERNAL_PAYMENT;
+import static com.ning.billing.security.Permission.PAYMENT_CAN_REFUND;
 
 public interface PaymentApi {
 
@@ -47,6 +53,7 @@ public interface PaymentApi {
      * @return the payment
      * @throws PaymentApiException
      */
+    @RequiresPermissions(PAYMENT_CAN_CREATE_EXTERNAL_PAYMENT)
     public Payment createExternalPayment(Account account, UUID invoiceId, BigDecimal amount, CallContext context)
             throws PaymentApiException;
 
@@ -71,6 +78,7 @@ public interface PaymentApi {
      * @return the created Refund
      * @throws PaymentApiException
      */
+    @RequiresPermissions(PAYMENT_CAN_REFUND)
     public Refund createRefund(Account account, UUID paymentId, BigDecimal refundAmount, CallContext context)
             throws PaymentApiException;
 
@@ -93,6 +101,7 @@ public interface PaymentApi {
      * @return the created Refund
      * @throws PaymentApiException
      */
+    @RequiresPermissions({PAYMENT_CAN_REFUND, INVOICE_CAN_ADJUST})
     public Refund createRefundWithAdjustment(Account account, UUID paymentId, BigDecimal refundAmount, CallContext context)
             throws PaymentApiException;
 
@@ -107,6 +116,7 @@ public interface PaymentApi {
      * @return the created Refund
      * @throws PaymentApiException
      */
+    @RequiresPermissions({PAYMENT_CAN_REFUND, INVOICE_CAN_ITEM_ADJUST})
     public Refund createRefundWithItemsAdjustments(Account account, UUID paymentId, Set<UUID> invoiceItemIds, CallContext context)
             throws PaymentApiException;
 
@@ -121,6 +131,7 @@ public interface PaymentApi {
      * @return the created Refund
      * @throws PaymentApiException
      */
+    @RequiresPermissions({PAYMENT_CAN_REFUND, INVOICE_CAN_ITEM_ADJUST})
     public Refund createRefundWithItemsAdjustments(Account account, UUID paymentId, Map<UUID, BigDecimal> invoiceItemIdsWithAmounts, CallContext context)
             throws PaymentApiException;
 
