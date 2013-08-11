@@ -16,36 +16,8 @@
 
 package com.ning.billing.entitlement.api;
 
-import java.util.UUID;
-
-import org.joda.time.DateTime;
-
-import com.ning.billing.util.entity.Entity;
-
-
-public interface BlockingState extends Entity, Comparable<BlockingState> {
-
-    public UUID getBlockedId();
-
-    public String getStateName();
-
-    public BlockingStateType getType();
-
-    public DateTime getTimestamp();
-
-    public boolean isBlockChange();
-
-    public boolean isBlockEntitlement();
-
-    public boolean isBlockBilling();
-
-    public int compareTo(BlockingState arg0);
-
-    public int hashCode();
-
-    public String getDescription();
-
-    public String toString();
-
-    public String getService();
+public enum BlockingStateType {
+    SUBSCRIPTION,
+    BUNDLE,
+    ACCOUNT
 }
