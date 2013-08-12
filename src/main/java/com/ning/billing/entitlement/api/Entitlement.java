@@ -147,7 +147,7 @@ public interface Entitlement extends Entity {
     /**
      * @return the last active ProductCategory
      */
-    public String getLastActiveProductCategory();
+    public ProductCategory getLastActiveProductCategory();
 
 
     /**
