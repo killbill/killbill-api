@@ -300,6 +300,13 @@ public enum ErrorCode {
 
     CUSTOM_FIELD_ALREADY_EXISTS(11000, "The custom field %s already exists"),
 
+    /*
+     *
+     * Range 11000: SECURITY
+     *
+     */
+    SECURITY_NOT_ENOUGH_PERMISSIONS(11000, "User doesn't have enough permissions"),
+
     __UNKNOWN_ERROR_CODE(-1, "Unknown ErrorCode");
 
     private final int code;
