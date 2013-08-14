@@ -31,7 +31,7 @@ public interface BlockingState extends Entity, Comparable<BlockingState> {
 
     public BlockingStateType getType();
 
-    public DateTime getTimestamp();
+    public DateTime getEffectiveDate();
 
     public boolean isBlockChange();
 

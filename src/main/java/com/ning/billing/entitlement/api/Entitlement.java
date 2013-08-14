@@ -29,8 +29,8 @@ public interface Entitlement extends Entity {
      * Used to control the effective date that should be used on Plan change or on cancellation.
      */
     public enum EntitlementActionPolicy {
-        /* Start of Term. */
-        SOT,
+        /* Immediate */
+        IMM,
         /* End of Term */
         EOT
     }

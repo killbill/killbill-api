@@ -69,23 +69,51 @@ public interface EntitlementApi {
 
 
     /**
-     * Will block all entitlements associated with the base entitlement. If there are no ADD_ONN this is only the base entitlement.
+     * Will pause all entitlements associated with the base entitlement. If there are no ADD_ONN this is only the base entitlement.
+     *
+     * @param bundleId
+     * @param effectiveDate
+     * @param context
+     *
+     *  @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
+     */
+    public void pause(UUID bundleId, LocalDate effectiveDate, CallContext context)
+            throws EntitlementApiException;
+
+
+    /**
+     * Will resume all entitlements associated with the base entitlement. If there are no ADD_ONN this is only the base entitlement.
+     *
+     * @param bundleId
+     * @param effectiveDate
+     * @param context
+     *
+     *  @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
+     */
+    public void resume(UUID bundleId, LocalDate effectiveDate, CallContext context)
+            throws EntitlementApiException;
+
+    /**
+     * Will add a blocking event for the specified service associated with the base entitlement.
      *
      * @param bundleId          the id of the bundle
-     * @param serviceName       the service name of who is blocking
+     * @param serviceName       the name of the service
      * @param effectiveDate     the date at which the operation should occur
+     * @param blockBilling      whether this event should block billing
+     * @param blockEntitlement  whether this event should block entitlement
+     * @param blockChange       whether this event should block any change
      * @param context           the context
      *
      * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
      */
-    public void block(UUID bundleId, String serviceName, LocalDate effectiveDate, CallContext context)
+    public void block(UUID bundleId, String serviceName, LocalDate effectiveDate, boolean blockBilling, boolean blockEntitlement, boolean blockChange, CallContext context)
             throws EntitlementApiException;
 
     /**
      * Will unblock all entitlements associated with the base entitlement. If there are no ADD_ONN this is only the base entitlement.
      *
      * @param bundleId          the id of the bundle
-     * @param serviceName       the service name of who is blocking
+     * @param serviceName       the name of the service
      * @param effectiveDate     the date at which the operation should occur
      * @param context           the context
      *
