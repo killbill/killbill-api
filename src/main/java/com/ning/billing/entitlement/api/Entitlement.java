@@ -153,57 +153,63 @@ public interface Entitlement extends Entity {
     public ProductCategory getLastActiveProductCategory();
 
     /**
-     * Cancels the <code>Entitlement</code> at the specified date
+     * Cancels the <code>Entitlement</code> at the specified date.
+     * After this operation, the existing object becomes stale.
+     *
      * <p/>
      * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
      *
      * @param effectiveDate the date at which the entitlement should be cancelled
      * @param context       the context
-     * @return true if the entitlement is in the <tt>CANCELLED</tt> state
+     *
+     * @return the new <code>Entitlement</code> after the cancellation was performed
      * @throws EntitlementApiException if cancellation failed
      */
-    public boolean cancelEntitlementWithDate(final LocalDate effectiveDate, final CallContext context)
+    public Entitlement cancelEntitlementWithDate(final LocalDate effectiveDate, final CallContext context)
             throws EntitlementApiException;
 
 
     /**
      * Cancel the <code>Entitlement</code> with a policy.
+     * After this operation, the existing object becomes stale.
      *
      * @param policy  the policy that is used by the system to calculate the cancellation date
      * @param context the context
-     * @return true if the entitlement is in the <tt>CANCELLED</tt> state
+     * @return the new <code>Entitlement</code> after the cancellation was performed
      * @throws EntitlementApiException if cancellation failed
      */
-    public boolean cancelEntitlementWithPolicy(final EntitlementActionPolicy policy, final CallContext context)
+    public Entitlement cancelEntitlementWithPolicy(final EntitlementActionPolicy policy, final CallContext context)
             throws EntitlementApiException;
 
 
     /**
      * Cancels the <code>Entitlement</code> at the specified date
+     * After this operation, the existing object becomes stale.
      * <p/>
      * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
      *
      * @param effectiveDate the date at which the entitlement should be cancelled
      * @param billingPolicy the billingPolicy
      * @param context       the context
-     * @return true if the entitlement is in the <tt>CANCELLED</tt> state
+     * @return the new <code>Entitlement</code> after the cancellation was performed
      * @throws EntitlementApiException if cancellation failed
      */
-    public boolean cancelEntitlementWithDateOverrideBillingPolicy(final LocalDate effectiveDate, final BillingActionPolicy billingPolicy, final CallContext context)
+    public Entitlement cancelEntitlementWithDateOverrideBillingPolicy(final LocalDate effectiveDate, final BillingActionPolicy billingPolicy, final CallContext context)
             throws EntitlementApiException;
 
 
     /**
      * Cancels the <code>Entitlement</code> at the specified date and overrides the default billing policy.
+     * After this operation, the existing object becomes stale.
      *
      * @param policy        the policy that is used by the system to calculate the cancellation date
      * @param billingPolicy the override billing policy
      * @param context       the context
-     * @return true if the entitlement is in the <tt>CANCELLED</tt> state
+     * @return the new <code>Entitlement</code> after the cancellation was performed
      *
      * @throws EntitlementApiException if cancellation failed
      */
-    public boolean cancelEntitlementWithPolicyOverrideBillingPolicy(final EntitlementActionPolicy policy, final BillingActionPolicy billingPolicy, final CallContext context)
+    public Entitlement cancelEntitlementWithPolicyOverrideBillingPolicy(final EntitlementActionPolicy policy, final BillingActionPolicy billingPolicy, final CallContext context)
             throws EntitlementApiException;
 
 
@@ -220,6 +226,7 @@ public interface Entitlement extends Entity {
 
     /**
      * Change <code>Entitlement</code> plan at the specified date.
+     * After this operation, the existing object becomes stale.
      * <p/>
      * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
      *
@@ -228,14 +235,15 @@ public interface Entitlement extends Entity {
      * @param priceList     the new priceList
      * @param effectiveDate the date at which the entitlement should be changed
      * @param context       the context
-     * @return true if the change has already taken effect
+     * @return the new <code>Entitlement</code> after the change was performed
      * @throws EntitlementApiException if change failed
      */
-    public boolean changePlan(final String productName, final BillingPeriod billingPeriod, final String priceList, final LocalDate effectiveDate, final CallContext context)
+    public Entitlement changePlan(final String productName, final BillingPeriod billingPeriod, final String priceList, final LocalDate effectiveDate, final CallContext context)
             throws EntitlementApiException;
 
     /**
      * Change <code>Entitlement</code> plan at the specified date and overrides the billing policy.
+     * After this operation, the existing object becomes stale.
      * <p/>
      * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
      *
@@ -245,39 +253,41 @@ public interface Entitlement extends Entity {
      * @param effectiveDate the date at which the entitlement should be changed
      * @param billingPolicy the override billing policy
      * @param context       the context
-     * @return true if the change has already taken effect
+     * @return the new <code>Entitlement</code> after the change was performed
      * @throws EntitlementApiException if change failed
      */
-    public boolean changePlanOverrideBillingPolicy(final String productName, final BillingPeriod billingPeriod, final String priceList, final LocalDate effectiveDate,
+    public Entitlement changePlanOverrideBillingPolicy(final String productName, final BillingPeriod billingPeriod, final String priceList, final LocalDate effectiveDate,
                                                    final BillingActionPolicy billingPolicy, final CallContext context)
             throws EntitlementApiException;
 
 
     /**
      * Pauses an <code>Entitlement</code> until it gets resumed.
+     * After this operation, the existing object becomes stale.
      * <p/>
      * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
      *
      * @param serviceName   the service name of who is blocking
      * @param effectiveDate the date at which the entitlement should be paused
      * @param context       the context
-     * @return true if the entitlement has been paused
+     * @return the new <code>Entitlement</code> after the operation was performed
      * @throws EntitlementApiException if the entitlement was not in <tt>ACTIVE</tt> state
      */
-    public boolean block(String serviceName, final LocalDate effectiveDate, final CallContext context)
+    public Entitlement block(String serviceName, final LocalDate effectiveDate, final CallContext context)
             throws EntitlementApiException;
 
     /**
      * Resumes an <code>Entitlement</code> that was paused
+     * After this operation, the existing object becomes stale.
      * <p/>
      * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
      *
      * @param serviceName   the service name of who is blocking
      * @param effectiveDate the date at which the entitlement should be resumed
      * @param context       the context
-     * @return true if the entitlement has been resumed
+     * @return the new <code>Entitlement</code> after the operation was performed
      * @throws EntitlementApiException
      */
-    public boolean unblock(String serviceName, final LocalDate effectiveDate, final CallContext context)
+    public Entitlement unblock(String serviceName, final LocalDate effectiveDate, final CallContext context)
             throws EntitlementApiException;
 }

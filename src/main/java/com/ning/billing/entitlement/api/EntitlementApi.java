@@ -41,12 +41,13 @@ public interface EntitlementApi {
      * @param accountId     the account id
      * @param spec          the product specification for that new entitlement
      * @param externalKey   the external key for that entitlement
+     * @param effectiveDate the date at which the entitlement should start
      * @param context       the context
      * @return              a new entitlement
      *
      * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>
      */
-    public Entitlement createBaseEntitlement(UUID accountId, PlanPhaseSpecifier spec, String externalKey, CallContext context)
+    public Entitlement createBaseEntitlement(UUID accountId, PlanPhaseSpecifier spec, String externalKey, LocalDate effectiveDate, CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -59,12 +60,13 @@ public interface EntitlementApi {
      *
      * @param bundleId          the id of the bundle
      * @param spec              the product specification for that new entitlement
+     * @param effectiveDate the date at which the entitlement should start
      * @param context           the context
      * @return                  a new entitlement
      *
      * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>
      */
-    public Entitlement addEntitlement(UUID bundleId, PlanPhaseSpecifier spec, CallContext context)
+    public Entitlement addEntitlement(UUID bundleId, PlanPhaseSpecifier spec, LocalDate effectiveDate, CallContext context)
             throws EntitlementApiException;
 
 

@@ -43,11 +43,23 @@ public interface SubscriptionApi {
      * @param externalKey   the external key
      * @param context       the context
      *
-     * @return              a list of Subscriptions
+     * @return              a <code>SubscriptionBundle</code>
      *
      * @throws SubscriptionApiException if the account does not exist.
      */
     public SubscriptionBundle getSubscriptionBundleForAccountIdAndExternalKey(UUID accountId, String externalKey, TenantContext context) throws SubscriptionApiException;
+
+
+    /**
+     * Retrieves all the <code>SubscriptionBundle</code> for a given bundle external key.
+     *
+     * @param context       the context
+     * @param externalKey   the external key
+     * @return              a list of <code>SubscriptionBundle</code>
+     *
+     * @throws SubscriptionApiException if the account does not exist
+     */
+    public List<SubscriptionBundle> getSubscriptionBundlesForExternalKey(String externalKey, TenantContext context) throws SubscriptionApiException;
 
     /**
      *
@@ -56,7 +68,7 @@ public interface SubscriptionApi {
      * @param accountId     the account id
      * @param context       the context
      *
-     * @return              a list of Subscriptions
+     * @return               list of <code>SubscriptionBundle</code>
      *
      * @throws SubscriptionApiException if the account does not exist
      */
