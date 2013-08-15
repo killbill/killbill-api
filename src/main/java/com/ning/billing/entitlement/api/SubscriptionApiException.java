@@ -22,10 +22,9 @@ import com.ning.billing.account.api.AccountApiException;
 
 public class SubscriptionApiException extends BillingExceptionBase {
 
-    public SubscriptionApiException(final AccountApiException e) {
+    public SubscriptionApiException(final BillingExceptionBase e) {
         super(e, e.getCode(), e.getMessage());
     }
-
 
     public SubscriptionApiException(final Throwable e, final ErrorCode code, final Object... args) {
         super(e, code, args);

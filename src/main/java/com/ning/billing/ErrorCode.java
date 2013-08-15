@@ -61,6 +61,7 @@ public enum ErrorCode {
     SUB_INVALID_SUBSCRIPTION_ID(1082, "Unknown subscription %s"),
     SUB_GET_INVALID_BUNDLE_KEY(1083, "Could not find a bundle matching key %s"),
     SUB_GET_NO_SUCH_BASE_SUBSCRIPTION(1084, "Could not find base subscription for bundle %s"),
+    SUB_GET_INVALID_ACCOUNT_ID(1085, "Could not find subscriptions for account %s"),
 
     /* Repair */
     SUB_REPAIR_INVALID_DELETE_SET(1091, "Event %s is not deleted for subscription %s but prior events were"),

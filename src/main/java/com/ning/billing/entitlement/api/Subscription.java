@@ -15,15 +15,6 @@ import java.util.UUID;
  */
 public interface Subscription extends Entitlement {
 
-    public enum BillingState {
-        /* The subscription is currently invoiced */
-        ACTIVE,
-        /* The subscription is not currently invoiced because its entitlement has been paused or blocked */
-        BLOCKED,
-        /* The subscription is not invoiced */
-        CANCELLED
-    }
-
 
     /**
      * @return the date at which the billing started for that subscription
@@ -44,12 +35,6 @@ public interface Subscription extends Entitlement {
      * @return the day of the month when that subscription is invoiced.
      */
     public int getBCD();
-
-    /**
-     *
-     * @return the billing state
-     */
-    public BillingState getBillingState();
 
     /**
      *
