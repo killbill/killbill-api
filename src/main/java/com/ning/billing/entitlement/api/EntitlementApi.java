@@ -69,6 +69,21 @@ public interface EntitlementApi {
 
 
     /**
+     * Simulate a change of product for the BP on that bundle and return the effect it would have on the existing ADD_ON-- if any.
+     *
+     * @param bundleId          the id of the bundle
+     * @param targetProductName the target product name for the BP
+     * @param effectiveDate     the date at which the change would occur
+     * @param context           the context
+     * @return                  the status for the existing ADD_ON <code>Entitlement</code>
+     *
+     * @throws EntitlementApiException if this operation is not carried on a base plan.
+     */
+    public List<EntitlementAOStatusDryRun> getDryRunStatusForChange(UUID bundleId, final String targetProductName, final LocalDate effectiveDate, final TenantContext context)
+            throws EntitlementApiException;
+
+
+    /**
      * Will pause all entitlements associated with the base entitlement. If there are no ADD_ONN this is only the base entitlement.
      *
      * @param bundleId
@@ -176,7 +191,7 @@ public interface EntitlementApi {
     public List<Entitlement> getAllEntitlementsForAccountId(UUID accountId, TenantContext context) throws EntitlementApiException;
 
     /**
-     * Transfer all the <code>Enitlement</code> For the source account and matching the external key to the destination account.
+     * Transfer all the <code>Entitlement</code> For the source account and matching the external key to the destination account.
      * <p>
      * The date is interpreted by the system to be in the timezone specified at the destination <code>Account</code>.
      * <p>

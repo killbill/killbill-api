@@ -8,7 +8,10 @@ import com.ning.billing.catalog.api.PriceList;
 import com.ning.billing.catalog.api.Product;
 import com.ning.billing.catalog.api.ProductCategory;
 import com.ning.billing.util.callcontext.CallContext;
+import com.ning.billing.util.callcontext.TenantContext;
 import com.ning.billing.util.entity.Entity;
+
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 import java.util.UUID;
@@ -30,9 +33,9 @@ public interface Entitlement extends Entity {
      */
     public enum EntitlementActionPolicy {
         /* Immediate */
-        IMM,
+        IMMEDIATE,
         /* End of Term */
-        EOT
+        END_OF_TERM
     }
 
     /**
@@ -148,7 +151,6 @@ public interface Entitlement extends Entity {
      * @return the last active ProductCategory
      */
     public ProductCategory getLastActiveProductCategory();
-
 
     /**
      * Cancels the <code>Entitlement</code> at the specified date
