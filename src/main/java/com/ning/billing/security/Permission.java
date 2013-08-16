@@ -19,18 +19,45 @@ package com.ning.billing.security;
 public enum Permission {
 
     /*
+     * Account
+     */
+    ACCOUNT_CAN_CHARGE("account", "charge"),
+    ACCOUNT_CAN_CREDIT("account", "credit"),
+
+    /*
+     * Bundle
+     */
+    BUNDLE_CAN_CHARGE("bundle", "charge"),
+
+    /*
+     * Entitlement
+     */
+    ENTITLEMENT_CAN_CREATE("entitlement", "create"),
+
+    /*
      * Invoice
      */
     INVOICE_CAN_CHARGE("invoice", "charge"),
     INVOICE_CAN_CREDIT("invoice", "credit"),
     INVOICE_CAN_ADJUST("invoice", "adjust"),
     INVOICE_CAN_ITEM_ADJUST("invoice", "item_adjust"),
+    INVOICE_CAN_DELETE_CBA("invoice", "delete_cba"),
 
     /*
      * Payment
      */
+    PAYMENT_CAN_TRIGGER_PAYMENT("payment", "trigger"),
     PAYMENT_CAN_REFUND("payment", "refund"),
-    PAYMENT_CAN_CREATE_EXTERNAL_PAYMENT("payment", "external_payment");
+    PAYMENT_CAN_CHARGEBACK("payment", "chargeback"),
+    PAYMENT_CAN_CREATE_EXTERNAL_PAYMENT("payment", "external_payment"),
+
+    /*
+     * Tag
+     */
+    TAG_CAN_CREATE_TAG_DEFINITION("tag", "create_tag_definition"),
+    TAG_CAN_DELETE_TAG_DEFINITION("tag", "delete_tag_definition"),
+    TAG_CAN_ADD("tag", "add"),
+    TAG_CAN_REMOVE("tag", "remove");
 
     private final String group;
     private final String value;

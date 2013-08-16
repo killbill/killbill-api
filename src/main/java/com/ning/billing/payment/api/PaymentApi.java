@@ -31,6 +31,7 @@ import static com.ning.billing.security.Permission.INVOICE_CAN_ADJUST;
 import static com.ning.billing.security.Permission.INVOICE_CAN_ITEM_ADJUST;
 import static com.ning.billing.security.Permission.PAYMENT_CAN_CREATE_EXTERNAL_PAYMENT;
 import static com.ning.billing.security.Permission.PAYMENT_CAN_REFUND;
+import static com.ning.billing.security.Permission.PAYMENT_CAN_TRIGGER_PAYMENT;
 
 public interface PaymentApi {
 
@@ -42,6 +43,7 @@ public interface PaymentApi {
      * @return the payment
      * @throws PaymentApiException
      */
+    @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
     public Payment createPayment(Account account, UUID invoiceId, BigDecimal amount, CallContext context)
             throws PaymentApiException;
 

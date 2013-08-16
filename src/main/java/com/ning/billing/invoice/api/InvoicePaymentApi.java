@@ -20,8 +20,12 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+import com.ning.billing.security.RequiresPermissions;
 import com.ning.billing.util.callcontext.CallContext;
 import com.ning.billing.util.callcontext.TenantContext;
+
+import static com.ning.billing.security.Permission.PAYMENT_CAN_CHARGEBACK;
+import static com.ning.billing.security.Permission.PAYMENT_CAN_REFUND;
 
 public interface InvoicePaymentApi {
 
@@ -37,8 +41,10 @@ public interface InvoicePaymentApi {
 
     public InvoicePayment getInvoicePaymentForAttempt(UUID paymentId, TenantContext context);
 
+    @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
     public InvoicePayment createChargeback(UUID invoicePaymentId, BigDecimal amount, CallContext context) throws InvoiceApiException;
 
+    @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
     public InvoicePayment createChargeback(UUID invoicePaymentId, CallContext context) throws InvoiceApiException;
 
     public BigDecimal getRemainingAmountPaid(UUID invoicePaymentId, TenantContext context);
