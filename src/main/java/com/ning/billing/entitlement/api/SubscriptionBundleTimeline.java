@@ -131,18 +131,27 @@ public interface SubscriptionBundleTimeline {
     }
 
     public enum SubscriptionEventType {
-        /* Initial events */
-        CREATE(ObjectType.SUBSCRIPTION_EVENT),
-        TRANSFER(ObjectType.SUBSCRIPTION_EVENT),
-        MIGRATE(ObjectType.SUBSCRIPTION_EVENT),
+        /* Start the entitlement */
+        START_ENTITLEMENT(ObjectType.SUBSCRIPTION_EVENT),
+        /* Start the billing  */
+        START_BILLING(ObjectType.SUBSCRIPTION_EVENT),
+        /* Pause entitlement. User has no access to the resource until resumed/stopped */
+        PAUSE_ENTITLEMENT(ObjectType.BLOCKING_STATES),
+        /* Pause billing. User is not billed from there until resumed/stopped */
+        PAUSE_BILLING(ObjectType.BLOCKING_STATES),
+        /* Resume entitlement. User has now access to the resource */
+        RESUME_ENTITLEMENT(ObjectType.BLOCKING_STATES),
+        /* Resume billing. User is now billed again */
+        RESUME_BILLING(ObjectType.BLOCKING_STATES),
         /* Phase transition */
         PHASE(ObjectType.SUBSCRIPTION_EVENT),
         /* User generated change plan */
         CHANGE(ObjectType.SUBSCRIPTION_EVENT),
-        /* Transition state change for a given service */
-        SERVICE_STATE_CHANGE(ObjectType.BLOCKING_STATES),
         /* User generated cancel */
-        CANCEL(ObjectType.SUBSCRIPTION_EVENT);
+        STOP_ENTITLEMENT(ObjectType.SUBSCRIPTION_EVENT),
+        STOP_BILLING(ObjectType.SUBSCRIPTION_EVENT),
+        /* Transition state change for a given service */
+        SERVICE_STATE_CHANGE(ObjectType.BLOCKING_STATES);
 
         private ObjectType objectType;
 
