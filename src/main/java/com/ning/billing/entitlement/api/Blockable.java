@@ -16,14 +16,11 @@
 
 package com.ning.billing.entitlement.api;
 
-import java.util.UUID;
-
 import com.ning.billing.util.entity.Entity;
 
+/**
+ * Marker interface for objects that can be blocked
+ */
 public interface Blockable extends Entity {
 
-    @Override
-    public UUID getId();
-
-    public BlockingState getBlockingState();
 }
