@@ -26,9 +26,18 @@ import org.joda.time.LocalDate;
 
 import com.ning.billing.account.api.AccountApiException;
 import com.ning.billing.catalog.api.Currency;
+import com.ning.billing.security.RequiresPermissions;
 import com.ning.billing.util.api.TagApiException;
 import com.ning.billing.util.callcontext.CallContext;
 import com.ning.billing.util.callcontext.TenantContext;
+
+import static com.ning.billing.security.Permission.ACCOUNT_CAN_CHARGE;
+import static com.ning.billing.security.Permission.ACCOUNT_CAN_CREDIT;
+import static com.ning.billing.security.Permission.BUNDLE_CAN_CHARGE;
+import static com.ning.billing.security.Permission.INVOICE_CAN_CHARGE;
+import static com.ning.billing.security.Permission.INVOICE_CAN_CREDIT;
+import static com.ning.billing.security.Permission.INVOICE_CAN_DELETE_CBA;
+import static com.ning.billing.security.Permission.INVOICE_CAN_ITEM_ADJUST;
 
 public interface InvoiceUserApi {
 
@@ -150,6 +159,7 @@ public interface InvoiceUserApi {
      * @return the external charge invoice item
      * @throws InvoiceApiException
      */
+    @RequiresPermissions(ACCOUNT_CAN_CHARGE)
     public InvoiceItem insertExternalCharge(UUID accountId, BigDecimal amount, String description, LocalDate effectiveDate,
                                             Currency currency, CallContext context) throws InvoiceApiException;
 
@@ -166,6 +176,7 @@ public interface InvoiceUserApi {
      * @return the external charge invoice item
      * @throws InvoiceApiException
      */
+    @RequiresPermissions(BUNDLE_CAN_CHARGE)
     public InvoiceItem insertExternalChargeForBundle(UUID accountId, UUID bundleId, BigDecimal amount, String description, LocalDate effectiveDate,
                                                      Currency currency, CallContext context) throws InvoiceApiException;
 
@@ -182,6 +193,7 @@ public interface InvoiceUserApi {
      * @return the external charge invoice item
      * @throws InvoiceApiException
      */
+    @RequiresPermissions(INVOICE_CAN_CHARGE)
     public InvoiceItem insertExternalChargeForInvoice(UUID accountId, UUID invoiceId, BigDecimal amount, String description,
                                                       LocalDate effectiveDate, Currency currency, CallContext context) throws InvoiceApiException;
 
@@ -199,6 +211,7 @@ public interface InvoiceUserApi {
      * @return the external charge invoice item
      * @throws InvoiceApiException
      */
+    @RequiresPermissions({BUNDLE_CAN_CHARGE, INVOICE_CAN_CHARGE})
     public InvoiceItem insertExternalChargeForInvoiceAndBundle(UUID accountId, UUID invoiceId, UUID bundleId, BigDecimal amount, String description,
                                                                LocalDate effectiveDate, Currency currency, CallContext context) throws InvoiceApiException;
 
@@ -223,6 +236,7 @@ public interface InvoiceUserApi {
      * @return the credit invoice item
      * @throws InvoiceApiException
      */
+    @RequiresPermissions(ACCOUNT_CAN_CREDIT)
     public InvoiceItem insertCredit(UUID accountId, BigDecimal amount, LocalDate effectiveDate,
                                     Currency currency, CallContext context) throws InvoiceApiException;
 
@@ -238,6 +252,7 @@ public interface InvoiceUserApi {
      * @return the credit invoice item
      * @throws InvoiceApiException
      */
+    @RequiresPermissions(INVOICE_CAN_CREDIT)
     public InvoiceItem insertCreditForInvoice(UUID accountId, UUID invoiceId, BigDecimal amount, LocalDate effectiveDate,
                                               Currency currency, CallContext context) throws InvoiceApiException;
 
@@ -252,6 +267,7 @@ public interface InvoiceUserApi {
      * @return the adjustment invoice item
      * @throws InvoiceApiException
      */
+    @RequiresPermissions(INVOICE_CAN_ITEM_ADJUST)
     public InvoiceItem insertInvoiceItemAdjustment(UUID accountId, UUID invoiceId, UUID invoiceItemId, LocalDate effectiveDate, CallContext context) throws InvoiceApiException;
 
     /**
@@ -267,6 +283,7 @@ public interface InvoiceUserApi {
      * @return the adjustment invoice item
      * @throws InvoiceApiException
      */
+    @RequiresPermissions(INVOICE_CAN_ITEM_ADJUST)
     public InvoiceItem insertInvoiceItemAdjustment(UUID accountId, UUID invoiceId, UUID invoiceItemId, LocalDate effectiveDate,
                                                    BigDecimal amount, Currency currency, CallContext context) throws InvoiceApiException;
 
@@ -279,6 +296,7 @@ public interface InvoiceUserApi {
      * @param context       the call context
      * @throws InvoiceApiException
      */
+    @RequiresPermissions(INVOICE_CAN_DELETE_CBA)
     public void deleteCBA(UUID accountId, UUID invoiceId, UUID invoiceItemId, CallContext context) throws InvoiceApiException;
 
     /**

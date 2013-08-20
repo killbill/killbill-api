@@ -21,10 +21,16 @@ import java.util.List;
 import java.util.UUID;
 
 import com.ning.billing.ObjectType;
+import com.ning.billing.security.RequiresPermissions;
 import com.ning.billing.util.callcontext.CallContext;
 import com.ning.billing.util.callcontext.TenantContext;
 import com.ning.billing.util.tag.Tag;
 import com.ning.billing.util.tag.TagDefinition;
+
+import static com.ning.billing.security.Permission.TAG_CAN_ADD;
+import static com.ning.billing.security.Permission.TAG_CAN_CREATE_TAG_DEFINITION;
+import static com.ning.billing.security.Permission.TAG_CAN_DELETE_TAG_DEFINITION;
+import static com.ning.billing.security.Permission.TAG_CAN_REMOVE;
 
 public interface TagUserApi {
 
@@ -41,6 +47,7 @@ public interface TagUserApi {
      * @return the newly created tag definition
      * @throws TagDefinitionApiException
      */
+    @RequiresPermissions(TAG_CAN_CREATE_TAG_DEFINITION)
     public TagDefinition createTagDefinition(String definitionName, String description, CallContext context) throws TagDefinitionApiException;
 
     /**
@@ -48,6 +55,7 @@ public interface TagUserApi {
      * @param context         The call context, for auditing purposes
      * @throws TagDefinitionApiException
      */
+    @RequiresPermissions(TAG_CAN_DELETE_TAG_DEFINITION)
     public void deleteTagDefinition(UUID tagDefinitionId, CallContext context) throws TagDefinitionApiException;
 
     /**
@@ -82,6 +90,7 @@ public interface TagUserApi {
      * @param context          The call context, for auditing purposes
      * @throws TagApiException
      */
+    @RequiresPermissions(TAG_CAN_ADD)
     public void addTags(UUID objectId, ObjectType objectType, Collection<UUID> tagDefinitionIds, CallContext context) throws TagApiException;
 
     /**
@@ -91,6 +100,7 @@ public interface TagUserApi {
      * @param context         The call context, for auditing purposes
      * @throws TagApiException
      */
+    @RequiresPermissions(TAG_CAN_ADD)
     public void addTag(UUID objectId, ObjectType objectType, UUID tagDefinitionId, CallContext context) throws TagApiException;
 
     /**
@@ -100,6 +110,7 @@ public interface TagUserApi {
      * @param context        The call context, for auditing purposes
      * @throws TagApiException
      */
+    @RequiresPermissions(TAG_CAN_REMOVE)
     public void removeTags(UUID objectId, ObjectType objectType, Collection<UUID> tagDefinitions, CallContext context) throws TagApiException;
 
     /**
@@ -109,6 +120,7 @@ public interface TagUserApi {
      * @param context         The call context, for auditing purposes
      * @throws TagApiException
      */
+    @RequiresPermissions(TAG_CAN_REMOVE)
     public void removeTag(UUID objectId, ObjectType objectType, UUID tagDefinitionId, CallContext context) throws TagApiException;
 
     /**

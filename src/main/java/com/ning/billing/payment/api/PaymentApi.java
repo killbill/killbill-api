@@ -16,15 +16,22 @@
 
 package com.ning.billing.payment.api;
 
-import com.ning.billing.account.api.Account;
-import com.ning.billing.util.callcontext.CallContext;
-import com.ning.billing.util.callcontext.TenantContext;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+
+import com.ning.billing.account.api.Account;
+import com.ning.billing.security.RequiresPermissions;
+import com.ning.billing.util.callcontext.CallContext;
+import com.ning.billing.util.callcontext.TenantContext;
+
+import static com.ning.billing.security.Permission.INVOICE_CAN_ADJUST;
+import static com.ning.billing.security.Permission.INVOICE_CAN_ITEM_ADJUST;
+import static com.ning.billing.security.Permission.PAYMENT_CAN_CREATE_EXTERNAL_PAYMENT;
+import static com.ning.billing.security.Permission.PAYMENT_CAN_REFUND;
+import static com.ning.billing.security.Permission.PAYMENT_CAN_TRIGGER_PAYMENT;
 
 public interface PaymentApi {
 
@@ -36,6 +43,7 @@ public interface PaymentApi {
      * @return the payment
      * @throws PaymentApiException
      */
+    @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
     public Payment createPayment(Account account, UUID invoiceId, BigDecimal amount, CallContext context)
             throws PaymentApiException;
 
@@ -47,6 +55,7 @@ public interface PaymentApi {
      * @return the payment
      * @throws PaymentApiException
      */
+    @RequiresPermissions(PAYMENT_CAN_CREATE_EXTERNAL_PAYMENT)
     public Payment createExternalPayment(Account account, UUID invoiceId, BigDecimal amount, CallContext context)
             throws PaymentApiException;
 
@@ -71,6 +80,7 @@ public interface PaymentApi {
      * @return the created Refund
      * @throws PaymentApiException
      */
+    @RequiresPermissions(PAYMENT_CAN_REFUND)
     public Refund createRefund(Account account, UUID paymentId, BigDecimal refundAmount, CallContext context)
             throws PaymentApiException;
 
@@ -93,6 +103,7 @@ public interface PaymentApi {
      * @return the created Refund
      * @throws PaymentApiException
      */
+    @RequiresPermissions({PAYMENT_CAN_REFUND, INVOICE_CAN_ADJUST})
     public Refund createRefundWithAdjustment(Account account, UUID paymentId, BigDecimal refundAmount, CallContext context)
             throws PaymentApiException;
 
@@ -107,6 +118,7 @@ public interface PaymentApi {
      * @return the created Refund
      * @throws PaymentApiException
      */
+    @RequiresPermissions({PAYMENT_CAN_REFUND, INVOICE_CAN_ITEM_ADJUST})
     public Refund createRefundWithItemsAdjustments(Account account, UUID paymentId, Set<UUID> invoiceItemIds, CallContext context)
             throws PaymentApiException;
 
@@ -121,6 +133,7 @@ public interface PaymentApi {
      * @return the created Refund
      * @throws PaymentApiException
      */
+    @RequiresPermissions({PAYMENT_CAN_REFUND, INVOICE_CAN_ITEM_ADJUST})
     public Refund createRefundWithItemsAdjustments(Account account, UUID paymentId, Map<UUID, BigDecimal> invoiceItemIdsWithAmounts, CallContext context)
             throws PaymentApiException;
 
@@ -207,6 +220,32 @@ public interface PaymentApi {
      */
     public PaymentMethod getPaymentMethodById(UUID paymentMethodId, final boolean includedInactive, final boolean withPluginInfo, TenantContext context)
             throws PaymentApiException;
+
+    /**
+     * Find all payment methods matching the search key across all plugins
+     * <p/>
+     * The match will be plugin specific: for instance some plugins will try to match the key
+     * against the last 4 credit cards digits, agreement ids, etc.
+     *
+     * @param searchKey the search key
+     * @param context   the user context
+     * @return the list of payment methods matching this search key for that tenant
+     */
+    public List<PaymentMethod> searchPaymentMethods(String searchKey, TenantContext context);
+
+    /**
+     * Find all payment methods matching the search key in a given plugin
+     * <p/>
+     * The match will be plugin specific: for instance some plugins will try to match the key
+     * against the last 4 credit cards digits, agreement ids, etc.
+     *
+     * @param searchKey  the search key
+     * @param pluginName the payment plugin name
+     * @param context    the user context
+     * @return the list of payment methods matching this search key for that tenant
+     * @throws PaymentApiException
+     */
+    public List<PaymentMethod> searchPaymentMethods(String searchKey, String pluginName, TenantContext context) throws PaymentApiException;
 
     /**
      * @param account         the account

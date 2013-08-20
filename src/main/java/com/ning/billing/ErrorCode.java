@@ -274,6 +274,7 @@ public enum ErrorCode {
     PAYMENT_PLUGIN_TIMEOUT(7100, "Plugin timeout for account %s and invoice %s"),
     PAYMENT_PLUGIN_ACCOUNT_INIT(7101, "Account initialization for account %s and plugin % s failed: %s"),
     PAYMENT_PLUGIN_GET_PAYMENT_INFO(7102, "Failed to retrieve payment plugin info for payment %s: %s"),
+    PAYMENT_PLUGIN_SEARCH_PAYMENT_METHODS(7103, "Error while searching payment methods in plugin %s for search key %s"),
 
     /*
     *
@@ -305,6 +306,13 @@ public enum ErrorCode {
     TENANT_NO_SUCH_KEY(10006, "Tenant %s does not have a key %s"),
 
     CUSTOM_FIELD_ALREADY_EXISTS(11000, "The custom field %s already exists"),
+
+    /*
+     *
+     * Range 11000: SECURITY
+     *
+     */
+    SECURITY_NOT_ENOUGH_PERMISSIONS(11000, "User doesn't have enough permissions"),
 
     __UNKNOWN_ERROR_CODE(-1, "Unknown ErrorCode");
 

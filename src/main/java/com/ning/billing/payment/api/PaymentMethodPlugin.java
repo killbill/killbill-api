@@ -17,9 +17,14 @@
 package com.ning.billing.payment.api;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface PaymentMethodPlugin {
 
+    /**
+     * @return the id in Kill Bill
+     */
+    public UUID getKbPaymentMethodId();
 
     /**
      * @return the id from the plugin
