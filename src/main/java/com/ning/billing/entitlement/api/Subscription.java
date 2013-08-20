@@ -40,5 +40,5 @@ public interface Subscription extends Entitlement {
      *
      * @return for each service, the current state
      */
-    public Map<String, String> getCurrentStatesForService();
+    public String getCurrentStateForService(String serviceName);
 }
