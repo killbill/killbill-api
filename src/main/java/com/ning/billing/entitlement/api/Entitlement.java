@@ -103,11 +103,6 @@ public interface Entitlement extends Entity {
     public LocalDate getEffectiveEndDate();
 
     /**
-     * @return the requested end date of the entitlement, that is the date at which the user submitted the cancellation.
-     */
-    public LocalDate getRequestedEndDate();
-
-    /**
      * @return the current <code>Product</code>
      */
     public Product getProduct();
@@ -272,9 +267,9 @@ public interface Entitlement extends Entity {
      * @param context       the context
      * @return the new <code>Entitlement</code> after the operation was performed
      * @throws EntitlementApiException if the entitlement was not in <tt>ACTIVE</tt> state
-     */
     public Entitlement block(String serviceName, final LocalDate effectiveDate, final CallContext context)
             throws EntitlementApiException;
+     */
 
     /**
      * Resumes an <code>Entitlement</code> that was paused
@@ -287,7 +282,7 @@ public interface Entitlement extends Entity {
      * @param context       the context
      * @return the new <code>Entitlement</code> after the operation was performed
      * @throws EntitlementApiException
-     */
     public Entitlement unblock(String serviceName, final LocalDate effectiveDate, final CallContext context)
             throws EntitlementApiException;
+     */
 }

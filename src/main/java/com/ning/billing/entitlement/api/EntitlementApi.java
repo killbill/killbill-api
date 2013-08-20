@@ -122,9 +122,9 @@ public interface EntitlementApi {
      * @param context           the context
      *
      * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
-     */
     public void block(UUID bundleId, String serviceName, LocalDate effectiveDate, boolean blockBilling, boolean blockEntitlement, boolean blockChange, CallContext context)
             throws EntitlementApiException;
+    */
 
     /**
      * Will unblock all entitlements associated with the base entitlement. If there are no ADD_ONN this is only the base entitlement.
@@ -135,9 +135,9 @@ public interface EntitlementApi {
      * @param context           the context
      *
      * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
-     */
     public void unblock(UUID bundleId, String serviceName, LocalDate effectiveDate, CallContext context)
             throws EntitlementApiException;
+     */
 
     /**
      *
