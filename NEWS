@@ -1,3 +1,7 @@
+0.6.0
+    New entitlement APIs
+    Overdue is by default account level
+
 0.5.0
     Initial security APIs for RBAC
     Rename OverdueCancellationPolicicy to OverdueCancellationPolicy
