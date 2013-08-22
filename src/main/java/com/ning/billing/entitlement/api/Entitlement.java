@@ -224,16 +224,6 @@ public interface Entitlement extends Entity {
             throws EntitlementApiException;
 
 
-    /**
-     * Uncancel a previously cancelled <code>Entitlement</code>. This will only work if the effective date of the cancellation is in the future, that is, the cancellation
-     * did not occur yet.
-     *
-     * @param context       the context
-     *
-     * @throws EntitlementApiException if the <code>Entitlement</code> is not in an <tt>ACTIVE</tt> state or if it's cancellation date is not in the future.
-     */
-    public void uncancel(final CallContext context)
-            throws EntitlementApiException;
 
     /**
      * Change <code>Entitlement</code> plan at the specified date.

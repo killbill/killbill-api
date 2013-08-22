@@ -18,6 +18,6 @@ package com.ning.billing.entitlement.api;
 
 public enum BlockingStateType {
     SUBSCRIPTION,
-    BUNDLE,
+    SUBSCRIPTION_BUNDLE,
     ACCOUNT
 }

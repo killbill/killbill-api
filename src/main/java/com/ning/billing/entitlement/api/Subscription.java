@@ -47,10 +47,6 @@ public interface Subscription extends Entitlement {
      */
     public LocalDate getChargedThroughDate();
 
-    /**
-     * @return the day of the month when that subscription is invoiced.
-     */
-    public int getBCD();
 
     /**
      *
