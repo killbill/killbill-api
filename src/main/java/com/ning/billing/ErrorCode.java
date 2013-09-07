@@ -37,6 +37,7 @@ public enum ErrorCode {
     SUB_CREATE_BAD_PHASE(1011, "Can't create plan initial phase %s"),
     SUB_CREATE_NO_BUNDLE(1012, "Bundle %s does not exist"),
     SUB_CREATE_NO_BP(1013, "Missing Base Subscription for bundle %s"),
+    SUB_CREATE_ACTIVE_BUNDLE_KEY_EXISTS(1014, "Active bundle with external key %s already exists"),
     SUB_CREATE_BP_EXISTS(1015, "Subscription bundle %s already has a base subscription"),
     SUB_CREATE_AO_BP_NON_ACTIVE(1017, "Can't create AddOn %s for non active Base Plan"),
     SUB_CREATE_AO_ALREADY_INCLUDED(1018, "Can't create AddOn %s for BasePlan %s (Already included)"),
