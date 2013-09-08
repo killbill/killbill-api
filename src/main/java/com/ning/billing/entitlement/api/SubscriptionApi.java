@@ -51,6 +51,7 @@ public interface SubscriptionApi {
      */
     public SubscriptionBundle getSubscriptionBundle(UUID bundleId, TenantContext context) throws SubscriptionApiException;
 
+
     /**
      *
      * Retrieves all the <code>SubscriptionBundle</code> for a given account and matching an external key.
@@ -61,21 +62,27 @@ public interface SubscriptionApi {
      *
      * @return              a <code>SubscriptionBundle</code>
      *
-     * @throws SubscriptionApiException if the account does not exist.
+     * @throws SubscriptionApiException if there is n o such object matching the account and external key
      */
     public SubscriptionBundle getSubscriptionBundleForAccountIdAndExternalKey(UUID accountId, String externalKey, TenantContext context) throws SubscriptionApiException;
 
 
     /**
-     * Retrieves all the <code>SubscriptionBundle</code> for a given bundle external key.
      *
-     * @param context       the context
+     * Retrieves all the <code>SubscriptionBundle</code> for the given external key.
+     * </p>
+     * It is possible to have multiple <code>SubscriptionBundle</code> for a given external key in the system but only one
+     * will be active -- i.e. will contain <code>Subscription</code> in the active state.
+     *
      * @param externalKey   the external key
-     * @return              a list of <code>SubscriptionBundle</code>
+     * @param context       the context
      *
-     * @throws SubscriptionApiException if the account does not exist
+     * @return              a <code>SubscriptionBundle</code>
+     *
+     * @throws SubscriptionApiException if there is no such object
      */
-    public List<SubscriptionBundle> getSubscriptionBundlesForExternalKey(String externalKey, TenantContext context) throws SubscriptionApiException;
+    public SubscriptionBundle getActiveSubscriptionBundleForExternalKey(String externalKey, TenantContext context) throws SubscriptionApiException;
+
 
     /**
      *

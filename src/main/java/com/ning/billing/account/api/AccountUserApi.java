@@ -66,6 +66,10 @@ public interface AccountUserApi {
     public void updateAccount(UUID accountId, AccountData accountData, CallContext context) throws AccountApiException;
 
     /**
+     * Retrieves an account by specifying its external key.
+     * <p/>
+     * Note that the system will enforce that only one account for a given external key exists in the system
+     *
      * @param key     the externalKey for the account
      * @param context the user context
      * @return the account

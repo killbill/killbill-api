@@ -40,12 +40,12 @@ public interface EntitlementApi {
      *
      * @param accountId     the account id
      * @param spec          the product specification for that new entitlement
-     * @param externalKey   the external key for that entitlement
+     * @param externalKey   the external key for that entitlement-- which must be unique in the system
      * @param effectiveDate the date at which the entitlement should start
      * @param context       the context
      * @return              a new entitlement
      *
-     * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>
+     * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>.
      */
     public Entitlement createBaseEntitlement(UUID accountId, PlanPhaseSpecifier spec, String externalKey, LocalDate effectiveDate, CallContext context)
             throws EntitlementApiException;

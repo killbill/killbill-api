@@ -46,7 +46,7 @@ public enum ErrorCode {
     /* Change plan */
     SUB_CHANGE_NON_ACTIVE(1021, "Subscription %s is in state %s: Failed to change plan"),
     SUB_CHANGE_FUTURE_CANCELLED(1022, "Subscription %s is future cancelled: Failed to change plan"),
-    SUB_CHANGE_DRY_RUN_NOT_BP(1022, "Change DryRun API is only available for BP"),
+    SUB_CHANGE_DRY_RUN_NOT_BP(1023, "Change DryRun API is only available for BP"),
 
     /* Cancellation */
     SUB_CANCEL_BAD_STATE(1031, "Subscription %s is in state %s: Failed to cancel"),
