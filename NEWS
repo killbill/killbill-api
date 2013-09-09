@@ -1,3 +1,6 @@
+0.6.4
+    Add more cases for entitlement cancellation/change from the matrix of possible cases
+
 0.6.3
     Add the ability to retrieve the active bundle using its external key only
 
