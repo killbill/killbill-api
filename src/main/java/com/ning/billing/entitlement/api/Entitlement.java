@@ -171,12 +171,13 @@ public interface Entitlement extends Entity {
      * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
      *
      * @param effectiveDate the date at which the entitlement should be cancelled
+     * @param overrideBillingEffectiveDate use effectiveDate for billing cancellation date as well
      * @param context       the context
      *
      * @return the new <code>Entitlement</code> after the cancellation was performed
      * @throws EntitlementApiException if cancellation failed
      */
-    public Entitlement cancelEntitlementWithDate(final LocalDate effectiveDate, final CallContext context)
+    public Entitlement cancelEntitlementWithDate(final LocalDate effectiveDate, final boolean overrideBillingEffectiveDate, final CallContext context)
             throws EntitlementApiException;
 
 
@@ -226,6 +227,22 @@ public interface Entitlement extends Entity {
 
 
     /**
+     * Change <code>Entitlement</code> plan using default policy.
+     * After this operation, the existing object becomes stale.
+     * <p/>
+     * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
+     *
+     * @param productName   the new product name
+     * @param billingPeriod the new billing period
+     * @param priceList     the new priceList
+     * @param context       the context
+     * @return the new <code>Entitlement</code> after the change was performed
+     * @throws EntitlementApiException if change failed
+     */
+    public Entitlement changePlan(final String productName, final BillingPeriod billingPeriod, final String priceList, final CallContext context)
+            throws EntitlementApiException;
+
+    /**
      * Change <code>Entitlement</code> plan at the specified date.
      * After this operation, the existing object becomes stale.
      * <p/>
@@ -239,8 +256,9 @@ public interface Entitlement extends Entity {
      * @return the new <code>Entitlement</code> after the change was performed
      * @throws EntitlementApiException if change failed
      */
-    public Entitlement changePlan(final String productName, final BillingPeriod billingPeriod, final String priceList, final LocalDate effectiveDate, final CallContext context)
+    public Entitlement changePlanWithDate(final String productName, final BillingPeriod billingPeriod, final String priceList, final LocalDate effectiveDate, final CallContext context)
             throws EntitlementApiException;
+
 
     /**
      * Change <code>Entitlement</code> plan at the specified date and overrides the billing policy.
