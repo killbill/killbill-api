@@ -1,3 +1,7 @@
+0.6.5
+    Api change for Entitlement (to return lastActive for all catalog methods)
+    Removed unsued APi for Payment (that now live in the plugins)
+
 0.6.4
     Add more cases for entitlement cancellation/change from the matrix of possible cases
 
