@@ -119,31 +119,6 @@ public interface Entitlement extends Entity {
     public LocalDate getEffectiveEndDate();
 
     /**
-     * @return the current <code>Product</code>
-     */
-    public Product getProduct();
-
-    /**
-     * @return the current <code>Plan</code>
-     */
-    public Plan getPlan();
-
-    /**
-     * @return the current <code>PriceList></code>
-     */
-    public PriceList getPriceList();
-
-    /**
-     * @return the current <Phase></Phase>
-     */
-    public PlanPhase getCurrentPhase();
-
-    /**
-     * @return the current <code>ProductCategory</code>
-     */
-    public ProductCategory getProductCategory();
-
-    /**
      * @return the last <code>Product</code> prior to cancellation
      */
     public Product getLastActiveProduct();
@@ -152,6 +127,11 @@ public interface Entitlement extends Entity {
      * @return the last <code>Plan</code> prior to cancellation
      */
     public Plan getLastActivePlan();
+
+    /**
+     * @return the last <code>Phase</code> prior to cancellation
+     */
+    public PlanPhase getLastActivePhase();
 
     /**
      * @return the last active PriceList

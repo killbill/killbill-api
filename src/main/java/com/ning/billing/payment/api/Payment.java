@@ -80,18 +80,6 @@ public interface Payment extends Entity {
     List<PaymentAttempt> getAttempts();
 
     /**
-     * @return the first payment ref id from the plugin
-     */
-    @Deprecated
-    String getExtFirstPaymentIdRef();
-
-    /**
-     * @return the second payment ref id from the plugin
-     */
-    @Deprecated
-    String getExtSecondPaymentIdRef();
-
-    /**
      * This will only be filled when the call requires the detail from the plugin
      *
      * @return the addtional info from the plugin
