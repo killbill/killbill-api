@@ -85,6 +85,13 @@ public interface SubscriptionApi {
 
 
     /**
+     * Returns an ordered list of all <code>SubscriptionBundle</code> for a given external key.
+     *
+     * @return
+     */
+    public List<SubscriptionBundle> getSubscriptionBundlesForExternalKey(String externalKey, TenantContext context) throws SubscriptionApiException;
+
+    /**
      *
      * Retrieves all the <code>SubscriptionBundle</code> for a given account.
      *

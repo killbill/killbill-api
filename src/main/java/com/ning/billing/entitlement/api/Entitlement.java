@@ -205,6 +205,17 @@ public interface Entitlement extends Entity {
             throws EntitlementApiException;
 
 
+    /**
+     * Removes a pending future cancellation on an entitlement.
+     * <p>
+     * The call will only succeed if the entitlement has been cancelled previously and if the effectiveDate of the cancellation
+     * did not occur yet. In such a case it will remove both the cancellation event at the entitlement and billing level-- regardless
+     * of when is the effectiveDate of the billing cancellation event.
+     *
+     * @param context       the context
+     */
+    public void uncancelEntitlement(final CallContext context)
+            throws EntitlementApiException;
 
     /**
      * Change <code>Entitlement</code> plan using default policy.
