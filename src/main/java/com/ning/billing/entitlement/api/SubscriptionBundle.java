@@ -17,6 +17,7 @@
 package com.ning.billing.entitlement.api;
 
 import com.ning.billing.util.entity.Entity;
+import org.joda.time.DateTime;
 
 import java.util.List;
 import java.util.UUID;
@@ -34,6 +35,12 @@ public interface SubscriptionBundle extends Entity {
      * @return the external key
      */
     public String getExternalKey();
+
+    /**
+     *
+     * @return the created date of the first bundle matching that externalKey
+     */
+    public DateTime getOriginalCreatedDate();
 
     /**
      * @return the list of <code>Subscription</code> in that bundle
