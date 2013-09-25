@@ -1,3 +1,6 @@
+0.6.6
+    Api change for Entitlement (uncancel, originalCreatedDate for SubscriptionBundle)
+
 0.6.5
     Api change for Entitlement (to return lastActive for all catalog methods)
     Removed unsued APi for Payment (that now live in the plugins)
