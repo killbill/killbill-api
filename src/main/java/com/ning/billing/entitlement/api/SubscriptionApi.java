@@ -64,7 +64,7 @@ public interface SubscriptionApi {
      *
      * @throws SubscriptionApiException if there is n o such object matching the account and external key
      */
-    public SubscriptionBundle getSubscriptionBundleForAccountIdAndExternalKey(UUID accountId, String externalKey, TenantContext context) throws SubscriptionApiException;
+    public List<SubscriptionBundle> getSubscriptionBundlesForAccountIdAndExternalKey(UUID accountId, String externalKey, TenantContext context) throws SubscriptionApiException;
 
 
     /**
