@@ -30,6 +30,7 @@ import com.ning.billing.security.RequiresPermissions;
 import com.ning.billing.util.api.TagApiException;
 import com.ning.billing.util.callcontext.CallContext;
 import com.ning.billing.util.callcontext.TenantContext;
+import com.ning.billing.util.entity.Pagination;
 
 import static com.ning.billing.security.Permission.ACCOUNT_CAN_CHARGE;
 import static com.ning.billing.security.Permission.ACCOUNT_CAN_CREDIT;
@@ -59,6 +60,14 @@ public interface InvoiceUserApi {
      * @return a list of invoices
      */
     public List<Invoice> getInvoicesByAccount(UUID accountId, LocalDate fromDate, TenantContext context);
+
+    /**
+     * @param context the user context
+     * @param offset  the offset of the first result
+     * @param limit   the maximum number of results to retrieve
+     * @return the list of invoices for that tenant
+     */
+    public Pagination<Invoice> getInvoices(Long offset, Long limit, TenantContext context);
 
     /**
      * Retrieve the account balance.

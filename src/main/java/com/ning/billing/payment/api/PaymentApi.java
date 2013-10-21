@@ -26,6 +26,7 @@ import com.ning.billing.account.api.Account;
 import com.ning.billing.security.RequiresPermissions;
 import com.ning.billing.util.callcontext.CallContext;
 import com.ning.billing.util.callcontext.TenantContext;
+import com.ning.billing.util.entity.Pagination;
 
 import static com.ning.billing.security.Permission.INVOICE_CAN_ADJUST;
 import static com.ning.billing.security.Permission.INVOICE_CAN_ITEM_ADJUST;
@@ -155,7 +156,6 @@ public interface PaymentApi {
     public List<Refund> getPaymentRefunds(UUID paymentId, TenantContext context)
             throws PaymentApiException;
 
-
     /**
      * @param invoiceId the invoice id
      * @param context   the call context
@@ -228,10 +228,12 @@ public interface PaymentApi {
      * against the last 4 credit cards digits, agreement ids, etc.
      *
      * @param searchKey the search key
+     * @param offset    the offset of the first result
+     * @param limit     the maximum number of results to retrieve
      * @param context   the user context
      * @return the list of payment methods matching this search key for that tenant
      */
-    public List<PaymentMethod> searchPaymentMethods(String searchKey, TenantContext context);
+    public Pagination<PaymentMethod> searchPaymentMethods(String searchKey, Long offset, Long limit, TenantContext context);
 
     /**
      * Find all payment methods matching the search key in a given plugin
@@ -240,12 +242,14 @@ public interface PaymentApi {
      * against the last 4 credit cards digits, agreement ids, etc.
      *
      * @param searchKey  the search key
+     * @param offset     the offset of the first result
+     * @param limit      the maximum number of results to retrieve
      * @param pluginName the payment plugin name
      * @param context    the user context
      * @return the list of payment methods matching this search key for that tenant
      * @throws PaymentApiException
      */
-    public List<PaymentMethod> searchPaymentMethods(String searchKey, String pluginName, TenantContext context) throws PaymentApiException;
+    public Pagination<PaymentMethod> searchPaymentMethods(String searchKey, Long offset, Long limit, String pluginName, TenantContext context) throws PaymentApiException;
 
     /**
      * @param account         the account
