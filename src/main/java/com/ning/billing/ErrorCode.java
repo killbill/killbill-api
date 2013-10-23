@@ -276,6 +276,7 @@ public enum ErrorCode {
     PAYMENT_PLUGIN_ACCOUNT_INIT(7101, "Account initialization for account %s and plugin % s failed: %s"),
     PAYMENT_PLUGIN_GET_PAYMENT_INFO(7102, "Failed to retrieve payment plugin info for payment %s: %s"),
     PAYMENT_PLUGIN_SEARCH_PAYMENT_METHODS(7103, "Error while searching payment methods in plugin %s for search key %s"),
+    PAYMENT_PLUGIN_GET_PAYMENT_METHODS(7104, "Error while retrieving payment methods in plugin %s"),
 
     /*
     *

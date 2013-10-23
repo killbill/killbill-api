@@ -21,6 +21,7 @@ import java.util.UUID;
 
 import com.ning.billing.util.callcontext.CallContext;
 import com.ning.billing.util.callcontext.TenantContext;
+import com.ning.billing.util.entity.Pagination;
 
 /**
  * The interface {@code AccountUserApi} offers APIs related to account operations.
@@ -89,16 +90,20 @@ public interface AccountUserApi {
      * Find all accounts having their name, email, external_key or company_name matching the search key
      *
      * @param searchKey the search key
+     * @param offset    the offset of the first result
+     * @param limit     the maximum number of results to retrieve
      * @param context   the user context
      * @return the list of accounts matching this search key for that tenant
      */
-    public List<Account> searchAccounts(String searchKey, TenantContext context);
+    public Pagination<Account> searchAccounts(String searchKey, Long offset, Long limit, TenantContext context);
 
     /**
      * @param context the user context
+     * @param offset  the offset of the first result
+     * @param limit   the maximum number of results to retrieve
      * @return the list of accounts for that tenant
      */
-    public List<Account> getAccounts(TenantContext context);
+    public Pagination<Account> getAccounts(Long offset, Long limit, TenantContext context);
 
     /**
      * @param externalKey the externalKey for the account
