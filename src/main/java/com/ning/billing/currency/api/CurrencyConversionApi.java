@@ -25,15 +25,17 @@ public interface CurrencyConversionApi {
 
     /**
      * @return the list of currency that can be used as a base currency for conversion
+     * @throws CurrencyConversionException if there is no currency provider
      */
-    public Set<Currency> getBaseRates();
+    public Set<Currency> getBaseRates()
+            throws CurrencyConversionException;
 
     /**
      * This will return the latest -- as known by the plugin -- information for the conversion rates.
      *
      * @param baseCurrency the base currency to be used
      * @return the currency list of currency conversion rates
-     * @throws CurrencyConversionException if baseCurrency is not supported
+     * @throws CurrencyConversionException if baseCurrency is not supported or if there is no currency provider
      */
     public CurrencyConversion getCurrentCurrencyConversion(Currency baseCurrency)
             throws CurrencyConversionException;
@@ -42,7 +44,7 @@ public interface CurrencyConversionApi {
      * @param baseCurrency   the base currency to be used
      * @param dateConversion the date for the conversion
      * @return the list of currency conversion rates for the date provided
-     * @throws CurrencyConversionException if baseCurrency is not supported
+     * @throws CurrencyConversionException if baseCurrency is not supported or if there is no currency provider
      */
     public CurrencyConversion getCurrencyConversion(Currency baseCurrency, DateTime dateConversion)
             throws CurrencyConversionException;

@@ -99,7 +99,7 @@ public enum ErrorCode {
 
     /* Plan change is disallowed by the catalog */
     CAT_ILLEGAL_CHANGE_REQUEST(2001, "Attempting to change plan from (product: '%s', billing period: '%s', " +
-                                     "pricelist '%s') to (product: '%s', billing period: '%s', pricelist '%s'). This transition is not allowed by catalog rules"),
+            "pricelist '%s') to (product: '%s', billing period: '%s', pricelist '%s'). This transition is not allowed by catalog rules"),
 
     /*
       * Price list
@@ -284,36 +284,48 @@ public enum ErrorCode {
     ENT_ALREADY_BLOCKED(8001, "The blockable entity %s is already blocked"),
 
     /*
-    *
-    * Range 9000: Miscellaneous
-    *
-    */
-    EMAIL_SENDING_FAILED(9000, "Sending email failed"),
-    EMAIL_PROPERTIES_FILE_MISSING(9001, "The properties file for email configuration could not be found."),
-    MISSING_TRANSLATION_RESOURCE(9010, "The resources for %s translation could not be found."),
-    MISSING_DEFAULT_TRANSLATION_RESOURCE(9011, "The default resource for %s translation could not be found."),
-
-    /*
-    *
-    * Range 10000: TENANT
-    *
-    */
-    TENANT_ALREADY_EXISTS(10000, "Tenant already exists for key %s"),
-    TENANT_DOES_NOT_EXIST_FOR_ID(10001, "Tenant does not exist for id %s"),
-    TENANT_DOES_NOT_EXIST_FOR_KEY(10002, "Tenant does not exist for key %s"),
-    TENANT_DOES_NOT_EXIST_FOR_API_KEY(10003, "Tenant does not exist for api key %s"),
-    TENANT_CREATION_FAILED(10004, "Tenant creation failed."),
-    TENANT_UPDATE_FAILED(10005, "Tenant update failed."),
-    TENANT_NO_SUCH_KEY(10006, "Tenant %s does not have a key %s"),
-
-    CUSTOM_FIELD_ALREADY_EXISTS(11000, "The custom field %s already exists"),
+   *
+   * Range 9000: Custom Fields
+   */
+    CUSTOM_FIELD_ALREADY_EXISTS(9000, "The custom field %s already exists"),
 
     /*
      *
-     * Range 11000: SECURITY
+     * Range 10000: Custom Fields
+    */
+    CURRENCY_NO_SUCH_PAYMENT_PLUGIN(10000, "Currency plugin %s is not registered"),
+    CURRENCY_NO_SUCH_RATE_FOR_CURRENCY(10001, "Rate for currency %s is non defined"),
+
+
+    /*
+    *
+    * Range 20000: TENANT
+    *
+    */
+    TENANT_ALREADY_EXISTS(20000, "Tenant already exists for key %s"),
+    TENANT_DOES_NOT_EXIST_FOR_ID(20001, "Tenant does not exist for id %s"),
+    TENANT_DOES_NOT_EXIST_FOR_KEY(20002, "Tenant does not exist for key %s"),
+    TENANT_DOES_NOT_EXIST_FOR_API_KEY(20003, "Tenant does not exist for api key %s"),
+    TENANT_CREATION_FAILED(20004, "Tenant creation failed."),
+    TENANT_UPDATE_FAILED(20005, "Tenant update failed."),
+    TENANT_NO_SUCH_KEY(20006, "Tenant %s does not have a key %s"),
+
+    /*
+    *
+    * Range 30000: Miscellaneous
+    *
+    */
+    EMAIL_SENDING_FAILED(30000, "Sending email failed"),
+    EMAIL_PROPERTIES_FILE_MISSING(30001, "The properties file for email configuration could not be found."),
+    MISSING_TRANSLATION_RESOURCE(30010, "The resources for %s translation could not be found."),
+    MISSING_DEFAULT_TRANSLATION_RESOURCE(30011, "The default resource for %s translation could not be found."),
+
+    /*
+     *
+     * Range 40000: SECURITY
      *
      */
-    SECURITY_NOT_ENOUGH_PERMISSIONS(11000, "User doesn't have enough permissions"),
+    SECURITY_NOT_ENOUGH_PERMISSIONS(40000, "User doesn't have enough permissions"),
 
     __UNKNOWN_ERROR_CODE(-1, "Unknown ErrorCode");
 
