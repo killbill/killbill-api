@@ -222,6 +222,28 @@ public interface PaymentApi {
             throws PaymentApiException;
 
     /**
+     * Find all payment methods across all plugins
+     *
+     * @param offset  the offset of the first result
+     * @param limit   the maximum number of results to retrieve
+     * @param context the user context
+     * @return the list of payment methods for that tenant
+     */
+    public Pagination<PaymentMethod> getPaymentMethods(Long offset, Long limit, TenantContext context);
+
+    /**
+     * Find all payment methods in a given plugin
+     *
+     * @param offset     the offset of the first result
+     * @param limit      the maximum number of results to retrieve
+     * @param pluginName the payment plugin name
+     * @param context    the user context
+     * @return the list of payment methods for that tenant
+     * @throws PaymentApiException
+     */
+    public Pagination<PaymentMethod> getPaymentMethods(Long offset, Long limit, String pluginName, TenantContext context) throws PaymentApiException;
+
+    /**
      * Find all payment methods matching the search key across all plugins
      * <p/>
      * The match will be plugin specific: for instance some plugins will try to match the key
