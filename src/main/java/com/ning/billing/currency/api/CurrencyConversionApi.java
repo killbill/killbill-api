@@ -16,32 +16,32 @@
 
 package com.ning.billing.currency.api;
 
-import java.util.List;
-
+import com.ning.billing.catalog.api.Currency;
 import org.joda.time.DateTime;
 
-import com.ning.billing.catalog.api.Currency;
+import java.util.Set;
 
 public interface CurrencyConversionApi {
 
     /**
-     *
      * @return the list of currency that can be used as a base currency for conversion
      */
-    public List<Currency> getBaseRates();
+    public Set<Currency> getBaseRates();
 
     /**
-     * @param baseCurrency                 the base currency to be used
-     * @return                             the currency list of currency conversion rates
+     * This will return the latest -- as known by the plugin -- information for the conversion rates.
+     *
+     * @param baseCurrency the base currency to be used
+     * @return the currency list of currency conversion rates
      * @throws CurrencyConversionException if baseCurrency is not supported
      */
     public CurrencyConversion getCurrentCurrencyConversion(Currency baseCurrency)
-        throws CurrencyConversionException;
+            throws CurrencyConversionException;
 
     /**
-     * @param baseCurrency                 the base currency to be used
-     * @param dateConversion               the date for the conversion
-     * @return                             the list of currency conversion rates for the date provided
+     * @param baseCurrency   the base currency to be used
+     * @param dateConversion the date for the conversion
+     * @return the list of currency conversion rates for the date provided
      * @throws CurrencyConversionException if baseCurrency is not supported
      */
     public CurrencyConversion getCurrencyConversion(Currency baseCurrency, DateTime dateConversion)

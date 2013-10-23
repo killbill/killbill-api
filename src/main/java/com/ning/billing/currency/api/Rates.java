@@ -16,23 +16,20 @@
 
 package com.ning.billing.currency.api;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 import com.ning.billing.catalog.api.Currency;
+
+import java.math.BigDecimal;
+import java.util.Set;
 
 public interface Rates {
 
     /**
-     *
      * @return the list of currencies
      */
-    public List<Currency> getCurrencies();
+    public Set<Currency> getCurrencies();
 
     /**
-     *
      * @param currency the currency
-     *
      * @return the rate for the specified currency
      * @throws CurrencyConversionException if currency is not defined
      */
