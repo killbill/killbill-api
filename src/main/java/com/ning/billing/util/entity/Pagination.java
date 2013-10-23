@@ -17,41 +17,38 @@
 package com.ning.billing.util.entity;
 
 /**
- * Represents a page, i.e. a subset, of results
+ * Represents a page, i.e. a subset, of records
  *
- * @param <T> type of result, usually an Entity
+ * @param <T> type of record, usually an Entity
  */
 public interface Pagination<T> extends Iterable<T> {
 
     /**
-     * @return offset from which these results are returned
+     * @return offset from which these records are returned
      */
     public Long getCurrentOffset();
 
     /**
-     * @return offset to use to retrieve the next set of results, null
-     *         if this is the last page of results
+     * @return offset to use to retrieve the next set of records, null
+     *         if this is the last page of records
      */
     public Long getNextOffset();
 
     /**
-     * Approximation of the expected total number of results - the implementation doesn't have to guarantee accuracy
+     * Total number of records in the complete data set, regardless of paging and filtering
+     * <p/>
+     * The implementation doesn't have to guarantee accuracy.
      *
-     * @return total number of results (approximation) across all pages, null if unknown
+     * @return total number of records (approximation), null if unknown
      */
-    public Long getTotalNbResults();
+    public Long getMaxNbRecords();
 
     /**
-     * Approximation of the number of results in this page - the implementation doesn't have to guarantee accuracy
+     * Total number of records in the data set, regardless of paging, but including filtering
+     * <p/>
+     * The implementation doesn't have to guarantee accuracy.
      *
-     * @return number of results in this page (approximation), null if unknown
+     * @return total number of records (approximation), null if unknown
      */
-    public Long getNbResults();
-
-    /**
-     * Approximation of the number of remaining results from this offset - the implementation doesn't have to guarantee accuracy
-     *
-     * @return total number of results (approximation) remaining from this offset, null if unknown
-     */
-    public Long getNbResultsFromOffset();
+    public Long getTotalNbRecords();
 }
