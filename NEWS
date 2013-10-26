@@ -1,3 +1,6 @@
+0.7.2
+    Add new plugin type for currency along with currency api
+
 0.7.0
     Add support for pagination
     Upgrade to killbill-oss-parent 0.5.0
