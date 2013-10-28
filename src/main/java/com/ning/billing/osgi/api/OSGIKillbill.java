@@ -18,6 +18,7 @@ package com.ning.billing.osgi.api;
 
 import com.ning.billing.account.api.AccountUserApi;
 import com.ning.billing.catalog.api.CatalogUserApi;
+import com.ning.billing.currency.api.CurrencyConversionApi;
 import com.ning.billing.entitlement.api.EntitlementApi;
 import com.ning.billing.entitlement.api.SubscriptionApi;
 import com.ning.billing.invoice.api.InvoicePaymentApi;
@@ -69,6 +70,8 @@ public interface OSGIKillbill {
     public EntitlementApi getEntitlementApi();
 
     public RecordIdApi getRecordIdApi();
+
+    public CurrencyConversionApi getCurrencyConversionApi();
 
     /**
      * Used by the OSGI bundles to discover their configuration

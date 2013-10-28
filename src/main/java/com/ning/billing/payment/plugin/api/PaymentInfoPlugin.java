@@ -16,6 +16,7 @@
 
 package com.ning.billing.payment.plugin.api;
 
+import com.ning.billing.catalog.api.Currency;
 import org.joda.time.DateTime;
 
 import java.math.BigDecimal;
@@ -26,6 +27,12 @@ public interface PaymentInfoPlugin {
      * @return payment amount
      */
     public BigDecimal getAmount();
+
+    /**
+     *
+     * @return payment currency
+     */
+    public Currency getCurrency();
 
     /**
      * @return date when the payment was created
