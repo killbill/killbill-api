@@ -21,13 +21,10 @@ import org.joda.time.DateTime;
 import com.ning.billing.BillingExceptionBase;
 import com.ning.billing.catalog.api.Currency;
 
-public interface CurrencyConversion {
+import java.util.List;
+import java.util.Set;
 
-    /**
-     *
-     * @return the date at which that conversion started to apply
-     */
-    public DateTime getConversionDate();
+public interface CurrencyConversion {
 
     /**
      *
@@ -37,7 +34,7 @@ public interface CurrencyConversion {
 
     /**
      *
-     * @return the list of currency rates
+     * @return the set of currency rates
      */
-    public Rates getRates();
+    public Set<Rate> getRates();
 }

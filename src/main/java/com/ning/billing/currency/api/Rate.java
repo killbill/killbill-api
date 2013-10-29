@@ -17,22 +17,17 @@
 package com.ning.billing.currency.api;
 
 import com.ning.billing.catalog.api.Currency;
+import org.joda.time.DateTime;
 
 import java.math.BigDecimal;
-import java.util.Set;
 
-public interface Rates {
+public interface Rate {
 
-    /**
-     * @return the list of currencies
-     */
-    public Set<Currency> getCurrencies();
+    public Currency getBaseCurrency();
 
-    /**
-     * @param currency the currency
-     * @return the rate for the specified currency
-     * @throws CurrencyConversionException if currency is not defined
-     */
-    public BigDecimal getRate(Currency currency)
-            throws CurrencyConversionException;
+    public Currency getCurrency();
+
+    public BigDecimal getValue();
+
+    public DateTime getConversionDate();
 }
