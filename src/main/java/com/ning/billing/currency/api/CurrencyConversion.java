@@ -16,24 +16,18 @@
 
 package com.ning.billing.currency.api;
 
-import org.joda.time.DateTime;
-
-import com.ning.billing.BillingExceptionBase;
-import com.ning.billing.catalog.api.Currency;
-
-import java.util.List;
 import java.util.Set;
+
+import com.ning.billing.catalog.api.Currency;
 
 public interface CurrencyConversion {
 
     /**
-     *
      * @return the base currency
      */
     public Currency getBaseCurrency();
 
     /**
-     *
      * @return the set of currency rates
      */
     public Set<Rate> getRates();

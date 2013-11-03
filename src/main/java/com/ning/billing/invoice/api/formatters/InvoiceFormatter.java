@@ -16,6 +16,7 @@
 
 package com.ning.billing.invoice.api.formatters;
 
+import com.ning.billing.catalog.api.Currency;
 import com.ning.billing.invoice.api.Invoice;
 
 public interface InvoiceFormatter extends Invoice {
@@ -27,4 +28,8 @@ public interface InvoiceFormatter extends Invoice {
     public String getFormattedPaidAmount();
 
     public String getFormattedBalance();
+
+    public Currency getProcessedCurrency();
+
+    public String getProcessedPaymentRate();
 }
