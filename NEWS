@@ -1,3 +1,6 @@
+0.7.5
+    Add InvoiceFormatter API for currency conversion
+
 0.7.4
     Currency api changes
 
