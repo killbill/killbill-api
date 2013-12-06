@@ -16,7 +16,6 @@
 
 package com.ning.billing.payment.api;
 
-// STEPH is that the enum we want to export? seems to internal
 public enum PaymentStatus {
     /* Success! */
     SUCCESS,

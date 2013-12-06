@@ -16,29 +16,9 @@
 
 package com.ning.billing.payment.api;
 
-import com.ning.billing.catalog.api.Currency;
-import com.ning.billing.payment.plugin.api.RefundInfoPlugin;
-import com.ning.billing.util.entity.Entity;
-import org.joda.time.DateTime;
-
-import java.math.BigDecimal;
-import java.util.UUID;
-
-public interface Refund extends Entity {
-
-    public UUID getId();
-
-    public UUID getPaymentId();
-
-    public boolean isAdjusted();
-
-    public BigDecimal getRefundAmount();
-
-    public Currency getCurrency();
-
-    public DateTime getEffectiveDate();
-
-    public RefundStatus getRefundStatus();
-
-    public RefundInfoPlugin getPluginDetail();
+public enum RefundStatus {
+    CREATED,
+    PLUGIN_COMPLETED,
+    COMPLETED,
+    PLUGIN_ERRORED
 }
