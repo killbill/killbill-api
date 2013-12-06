@@ -1,3 +1,6 @@
+0.7.6
+    Export refund status
+
 0.7.5
     Add InvoiceFormatter API for currency conversion
 
