@@ -19,7 +19,7 @@ package com.ning.billing.entitlement.api;
 import com.ning.billing.ObjectType;
 
 public enum SubscriptionEventType {
-    /* Start the entitlement */
+    /* Start the entitlement. We have a single START event today, which is in subscription_events */
     START_ENTITLEMENT(ObjectType.SUBSCRIPTION_EVENT),
     /* Start the billing  */
     START_BILLING(ObjectType.SUBSCRIPTION_EVENT),
@@ -36,7 +36,7 @@ public enum SubscriptionEventType {
     /* User generated change plan */
     CHANGE(ObjectType.SUBSCRIPTION_EVENT),
     /* User generated cancel */
-    STOP_ENTITLEMENT(ObjectType.SUBSCRIPTION_EVENT),
+    STOP_ENTITLEMENT(ObjectType.BLOCKING_STATES),
     STOP_BILLING(ObjectType.SUBSCRIPTION_EVENT),
     /* Transition state change for a given service */
     SERVICE_STATE_CHANGE(ObjectType.BLOCKING_STATES);
