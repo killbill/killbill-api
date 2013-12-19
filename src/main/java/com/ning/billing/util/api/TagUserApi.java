@@ -124,26 +124,29 @@ public interface TagUserApi {
     public void removeTag(UUID objectId, ObjectType objectType, UUID tagDefinitionId, CallContext context) throws TagApiException;
 
     /**
-     * @param objectId   UUID of the object on which to retrieve the tags
-     * @param objectType The type of object
-     * @param context    The tenant context
+     * @param objectId        UUID of the object on which to retrieve the tags
+     * @param objectType      The type of object
+     * @param includedDeleted Whether to include deleted tags
+     * @param context         The tenant context
      * @return A map of tag, key being the tagId, and value the tag
      */
-    public List<Tag> getTagsForObject(UUID objectId, ObjectType objectType, TenantContext context);
+    public List<Tag> getTagsForObject(UUID objectId, ObjectType objectType, boolean includedDeleted, TenantContext context);
 
     /**
-     * @param accountId  The account id
-     * @param objectType The type of object on which to retrieve the tags
-     * @param context    The tenant context
+     * @param accountId       The account id
+     * @param objectType      The type of object on which to retrieve the tags
+     * @param includedDeleted Whether to include deleted tags
+     * @param context         The tenant context
      * @return A list of tags for that object type and that given account
      */
-    public List<Tag> getTagsForAccountType(UUID accountId, ObjectType objectType, TenantContext context);
+    public List<Tag> getTagsForAccountType(UUID accountId, ObjectType objectType, boolean includedDeleted, TenantContext context);
 
 
     /**
-     * @param accountId The account id
-     * @param context   The tenant context
+     * @param accountId       The account id
+     * @param includedDeleted Whether to include deleted tags
+     * @param context         The tenant context
      * @return A list of tags for that given account
      */
-    public List<Tag> getTagsForAccount(UUID accountId, TenantContext context);
+    public List<Tag> getTagsForAccount(UUID accountId, boolean includedDeleted, TenantContext context);
 }

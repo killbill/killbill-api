@@ -1,3 +1,6 @@
+0.7.8
+    Add includedDeleted parameter in Tag APIs
+
 0.7.7
     Fix for https://github.com/killbill/killbill/issues/136
 
