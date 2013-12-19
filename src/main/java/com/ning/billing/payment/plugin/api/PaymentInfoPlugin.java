@@ -16,12 +16,19 @@
 
 package com.ning.billing.payment.plugin.api;
 
-import com.ning.billing.catalog.api.Currency;
+import java.math.BigDecimal;
+import java.util.UUID;
+
 import org.joda.time.DateTime;
 
-import java.math.BigDecimal;
+import com.ning.billing.catalog.api.Currency;
 
 public interface PaymentInfoPlugin {
+
+    /**
+     * @return the id in Kill Bill
+     */
+    public UUID getKbPaymentId();
 
     /**
      * @return payment amount
@@ -29,7 +36,6 @@ public interface PaymentInfoPlugin {
     public BigDecimal getAmount();
 
     /**
-     *
      * @return payment currency
      */
     public Currency getCurrency();
