@@ -2,6 +2,7 @@
     Add includedDeleted parameter in Tag APIs
     Add PaymentApi#searchPayments APIs
     Add PaymentInfoPlugin#getKbPaymentId
+    Add ErrorCode#PAYMENT_PLUGIN_SEARCH_PAYMENTS
 
 0.7.7
     Fix for https://github.com/killbill/killbill/issues/136
