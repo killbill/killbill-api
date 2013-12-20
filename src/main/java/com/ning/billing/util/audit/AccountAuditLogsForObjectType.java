@@ -17,13 +17,9 @@
 package com.ning.billing.util.audit;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
-public interface AuditLogsForPayments {
+public interface AccountAuditLogsForObjectType {
 
-    /**
-     * @return mapping between payment id and associated audit logs
-     */
-    public Map<UUID, List<AuditLog>> getPaymentsAuditLogs();
+    public List<AuditLog> getAuditLogs(UUID objectId);
 }

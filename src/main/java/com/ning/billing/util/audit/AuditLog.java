@@ -16,12 +16,29 @@
 
 package com.ning.billing.util.audit;
 
+import java.util.UUID;
+
 import org.joda.time.DateTime;
 
+import com.ning.billing.ObjectType;
 import com.ning.billing.util.entity.Entity;
 
 
 public interface AuditLog extends Entity {
+
+    /**
+     * Get the original Entity id for this log entry
+     *
+     * @return the original Entity id
+     */
+    public UUID getAuditedEntityId();
+
+    /**
+     * Get the original Entity object type for this log entry
+     *
+     * @return the original Entity object type
+     */
+    public ObjectType getAuditedObjectType();
 
     /**
      * Get the type of change for this log entry

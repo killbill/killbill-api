@@ -16,79 +16,37 @@
 
 package com.ning.billing.util.api;
 
-import com.ning.billing.ObjectType;
-import com.ning.billing.entitlement.api.SubscriptionBundle;
-import com.ning.billing.invoice.api.Invoice;
-import com.ning.billing.invoice.api.InvoicePayment;
-import com.ning.billing.payment.api.Payment;
-import com.ning.billing.payment.api.Refund;
-import com.ning.billing.util.audit.AuditLog;
-import com.ning.billing.util.audit.AuditLogsForAccount;
-import com.ning.billing.util.audit.AuditLogsForBundles;
-import com.ning.billing.util.audit.AuditLogsForInvoicePayments;
-import com.ning.billing.util.audit.AuditLogsForInvoices;
-import com.ning.billing.util.audit.AuditLogsForPayments;
-import com.ning.billing.util.audit.AuditLogsForRefunds;
-import com.ning.billing.util.callcontext.TenantContext;
-
 import java.util.List;
 import java.util.UUID;
 
+import com.ning.billing.ObjectType;
+import com.ning.billing.util.audit.AccountAuditLogs;
+import com.ning.billing.util.audit.AccountAuditLogsForObjectType;
+import com.ning.billing.util.audit.AuditLog;
+import com.ning.billing.util.callcontext.TenantContext;
+
 public interface AuditUserApi {
 
-
-    public AuditLogsForAccount getAuditLogsForAccount(UUID accountId, AuditLevel auditLevel, TenantContext context);
-
-
     /**
-     * Fetch all audit logs for bundles.
+     * Retrieve all audit logs (for all objects) for a given account
      *
-     * @param bundles    the bundles to lookup
+     * @param accountId  account id
      * @param auditLevel audit level (verbosity)
      * @param context    the tenant context
-     * @return all audit logs for these refunds
+     * @return all audit logs for this account
      */
-    public AuditLogsForBundles getAuditLogsForBundles(List<SubscriptionBundle> bundles, AuditLevel auditLevel, TenantContext context);
+    public AccountAuditLogs getAccountAuditLogs(UUID accountId, AuditLevel auditLevel, TenantContext context);
 
     /**
-     * Fetch all audit logs for invoice payments.
+     * Retrieve all audit logs (for all objects of a given type) for a given account
      *
-     * @param invoicePayments the invoice payments to lookup
-     * @param auditLevel      audit level (verbosity)
-     * @param context         the tenant context
-     * @return all audit logs for these invoice payments
-     */
-    public AuditLogsForInvoicePayments getAuditLogsForInvoicePayments(List<InvoicePayment> invoicePayments, AuditLevel auditLevel, TenantContext context);
-
-    /**
-     * Fetch all audit logs for refunds.
-     *
-     * @param refunds    the refunds to lookup
+     * @param accountId  account id
+     * @param objectType the type of object
      * @param auditLevel audit level (verbosity)
      * @param context    the tenant context
-     * @return all audit logs for these refunds
+     * @return all audit logs for this account
      */
-    public AuditLogsForRefunds getAuditLogsForRefunds(List<Refund> refunds, AuditLevel auditLevel, TenantContext context);
-
-    /**
-     * Fetch all audit logs for payments.
-     *
-     * @param payments   the payments to lookup
-     * @param auditLevel audit level (verbosity)
-     * @param context    the tenant context
-     * @return all audit logs for these payments
-     */
-    public AuditLogsForPayments getAuditLogsForPayments(List<Payment> payments, AuditLevel auditLevel, TenantContext context);
-
-    /**
-     * Fetch all audit logs for invoices and associated invoice items.
-     *
-     * @param invoices   the invoices to lookup
-     * @param auditLevel audit level (verbosity)
-     * @param context    the tenant context
-     * @return all audit logs for these invoices
-     */
-    public AuditLogsForInvoices getAuditLogsForInvoices(List<Invoice> invoices, AuditLevel auditLevel, TenantContext context);
+    public AccountAuditLogsForObjectType getAccountAuditLogs(UUID accountId, ObjectType objectType, AuditLevel auditLevel, TenantContext context);
 
     /**
      * Get all the audit entries for a given object.
