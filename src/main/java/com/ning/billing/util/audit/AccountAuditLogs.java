@@ -31,15 +31,23 @@ public interface AccountAuditLogs {
 
     public List<AuditLog> getAuditLogsForSubscriptionEvent(UUID subscriptionEventId);
 
+    public List<AuditLog> getAuditLogsForBlockingState(UUID blockingStateId);
+
     public List<AuditLog> getAuditLogsForInvoice(UUID invoiceId);
 
     public List<AuditLog> getAuditLogsForInvoiceItem(UUID invoiceItemId);
+
+    public List<AuditLog> getAuditLogsForInvoicePayment(UUID invoicePaymentId);
 
     public List<AuditLog> getAuditLogsForPayment(UUID paymentId);
 
     public List<AuditLog> getAuditLogsForRefund(UUID refundId);
 
     public List<AuditLog> getAuditLogsForChargeback(UUID chargebackId);
+
+    public List<AuditLog> getAuditLogsForTag(UUID tagId);
+
+    public List<AuditLog> getAuditLogsForCustomField(UUID customFieldId);
 
     public AccountAuditLogsForObjectType getAuditLogs(ObjectType objectType);
 }
