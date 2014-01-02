@@ -4,6 +4,7 @@
     Add PaymentInfoPlugin#getKbPaymentId
     Add ErrorCode#PAYMENT_PLUGIN_SEARCH_PAYMENTS
     Add AuditUserApi#getAccountAuditLogs
+    Update to killbill-oss-parent 0.5.9
 
 0.7.7
     Fix for https://github.com/killbill/killbill/issues/136
