@@ -22,7 +22,7 @@
         <version>0.5.9</version>
     </parent>
     <artifactId>killbill-api</artifactId>
-    <version>0.7.10</version>
+    <version>0.7.11-SNAPSHOT</version>
     <name>Kill Bill apis</name>
     <description>Kill Bill apis</description>
     <url>http://github.com/killbill/killbill-api</url>
