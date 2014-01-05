@@ -21,6 +21,8 @@ public enum PaymentStatus {
     SUCCESS,
     /* Initial status for Payment and PaymentAttempt */
     UNKNOWN,
+    /* The plugin is asynchronous and final state will be updated later */
+    PENDING,
     /* Status for Payment when AUTO_PAY_OFF is turned on */
     AUTO_PAY_OFF,
     /* Status for Payment and PaymentAttempt when the plugin failed to make the Payment and we will schedule a FailedPaymentRetry */

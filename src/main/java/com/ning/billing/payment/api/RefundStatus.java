@@ -19,6 +19,7 @@ package com.ning.billing.payment.api;
 public enum RefundStatus {
     CREATED,
     PLUGIN_COMPLETED,
+    PENDING,
     COMPLETED,
     PLUGIN_ERRORED
 }

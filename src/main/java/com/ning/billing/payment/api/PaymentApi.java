@@ -62,6 +62,16 @@ public interface PaymentApi {
 
 
     /**
+     *
+     * @param account    the account
+     * @param paymentId  the payment id
+     * @param isSuccess  whether pending payment turned out to be successful
+     * @param context    the call context
+     */
+    public void notifyPendingPaymentOfStateChanged(Account account, UUID paymentId, boolean isSuccess, CallContext context)
+            throws PaymentApiException;
+
+    /**
      * @param account   the account
      * @param paymentId the payment id
      * @param context
@@ -85,13 +95,24 @@ public interface PaymentApi {
     public Refund createRefund(Account account, UUID paymentId, BigDecimal refundAmount, CallContext context)
             throws PaymentApiException;
 
+
+    /**
+     *
+     * @param account    the account
+     * @param paymentId  the payment id
+     * @param isSuccess  whether pending refund turned out to be successful
+     * @param context    the call context
+     */
+    public void notifyPendingRefundOfStateChanged(Account account, UUID paymentId, boolean isSuccess, CallContext context)
+            throws PaymentApiException;
+
     /**
      * @param refundId       the refund id
      * @param withPluginInfo whether to fetch plugin info
      * @param context        the call context  @return the refund
      * @throws PaymentApiException
      */
-    public Refund getRefund(UUID refundId, final boolean withPluginInfo, TenantContext context)
+    public Refund getRefund(UUID refundId, boolean withPluginInfo, TenantContext context)
             throws PaymentApiException;
 
     /**
@@ -345,4 +366,6 @@ public interface PaymentApi {
      */
     public List<PaymentMethod> refreshPaymentMethods(Account account, CallContext context)
             throws PaymentApiException;
+
+
 }
