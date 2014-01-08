@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlEnum;
 
 @XmlEnum
 public enum Currency {
+    // Fiat currencies
     AED,
     AFN,
     ALL,
@@ -184,7 +185,10 @@ public enum Currency {
     YER,
     ZAR,
     ZMW,
-    ZWD;
+    ZWD,
+
+    // Alternative currencies
+    BTC;
 
     public static Currency getDefaultCurrency() {
         return Currency.USD;
