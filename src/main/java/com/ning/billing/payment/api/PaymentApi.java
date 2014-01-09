@@ -62,11 +62,10 @@ public interface PaymentApi {
 
 
     /**
-     *
-     * @param account    the account
-     * @param paymentId  the payment id
-     * @param isSuccess  whether pending payment turned out to be successful
-     * @param context    the call context
+     * @param account   the account
+     * @param paymentId the payment id
+     * @param isSuccess whether pending payment turned out to be successful
+     * @param context   the call context
      */
     public void notifyPendingPaymentOfStateChanged(Account account, UUID paymentId, boolean isSuccess, CallContext context)
             throws PaymentApiException;
@@ -97,11 +96,10 @@ public interface PaymentApi {
 
 
     /**
-     *
-     * @param account    the account
-     * @param paymentId  the payment id
-     * @param isSuccess  whether pending refund turned out to be successful
-     * @param context    the call context
+     * @param account   the account
+     * @param paymentId the payment id
+     * @param isSuccess whether pending refund turned out to be successful
+     * @param context   the call context
      */
     public void notifyPendingRefundOfStateChanged(Account account, UUID paymentId, boolean isSuccess, CallContext context)
             throws PaymentApiException;
@@ -204,6 +202,28 @@ public interface PaymentApi {
      */
     public Payment getPayment(UUID paymentId, final boolean withPluginInfo, TenantContext context)
             throws PaymentApiException;
+
+    /**
+     * Find all payments across all plugins
+     *
+     * @param offset  the offset of the first result
+     * @param limit   the maximum number of results to retrieve
+     * @param context the user context
+     * @return the list of payments for that tenant
+     */
+    public Pagination<Payment> getPayments(Long offset, Long limit, TenantContext context);
+
+    /**
+     * Find all payments in a given plugin
+     *
+     * @param offset     the offset of the first result
+     * @param limit      the maximum number of results to retrieve
+     * @param pluginName the payment plugin name
+     * @param context    the user context
+     * @return the list of payments for that tenant
+     * @throws PaymentApiException
+     */
+    public Pagination<Payment> getPayments(Long offset, Long limit, String pluginName, TenantContext context) throws PaymentApiException;
 
     /**
      * Find all payments matching the search key across all plugins
@@ -325,11 +345,10 @@ public interface PaymentApi {
     public Pagination<PaymentMethod> searchPaymentMethods(String searchKey, Long offset, Long limit, String pluginName, TenantContext context) throws PaymentApiException;
 
     /**
-     * @param account         the account
-     * @param paymentMethodId the id of the payment  method
-     * @param deleteDefaultPaymentMethodWithAutoPayOff
-     *                        whether to allow deletion of default payment method and set account into AUTO_PAY_OFF
-     * @param context         the call context
+     * @param account                                  the account
+     * @param paymentMethodId                          the id of the payment  method
+     * @param deleteDefaultPaymentMethodWithAutoPayOff whether to allow deletion of default payment method and set account into AUTO_PAY_OFF
+     * @param context                                  the call context
      * @throws PaymentApiException
      */
     public void deletedPaymentMethod(Account account, UUID paymentMethodId, boolean deleteDefaultPaymentMethodWithAutoPayOff, CallContext context)
