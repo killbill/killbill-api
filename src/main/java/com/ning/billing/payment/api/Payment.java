@@ -16,14 +16,15 @@
 
 package com.ning.billing.payment.api;
 
-import com.ning.billing.catalog.api.Currency;
-import com.ning.billing.payment.plugin.api.PaymentInfoPlugin;
-import com.ning.billing.util.entity.Entity;
-import org.joda.time.DateTime;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
+
+import org.joda.time.DateTime;
+
+import com.ning.billing.catalog.api.Currency;
+import com.ning.billing.payment.plugin.api.PaymentInfoPlugin;
+import com.ning.billing.util.entity.Entity;
 
 public interface Payment extends Entity {
 
@@ -80,11 +81,9 @@ public interface Payment extends Entity {
     List<PaymentAttempt> getAttempts();
 
     /**
-     * This will only be filled when the call requires the detail from the plugin
+     * This will only be filled when the call requires the details from the plugin
      *
-     * @return the addtional info from the plugin
+     * @return the additional info from the plugin
      */
     PaymentInfoPlugin getPaymentInfoPlugin();
-
-
 }

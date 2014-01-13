@@ -16,12 +16,19 @@
 
 package com.ning.billing.payment.plugin.api;
 
-import com.ning.billing.catalog.api.Currency;
+import java.math.BigDecimal;
+import java.util.UUID;
+
 import org.joda.time.DateTime;
 
-import java.math.BigDecimal;
+import com.ning.billing.catalog.api.Currency;
 
 public interface RefundInfoPlugin {
+
+    /**
+     * @return the id of the associated payment in Kill Bill
+     */
+    public UUID getKbPaymentId();
 
     /**
      * @return refund amount
@@ -29,7 +36,6 @@ public interface RefundInfoPlugin {
     public BigDecimal getAmount();
 
     /**
-     *
      * @return refund currency
      */
     public Currency getCurrency();
@@ -60,7 +66,12 @@ public interface RefundInfoPlugin {
     public String getGatewayErrorCode();
 
     /**
-     * @return the reference id
+     * @return the first refund reference id
      */
-    public String getReferenceId();
+    public String getFirstRefundReferenceId();
+
+    /**
+     * @return the second refund reference id
+     */
+    public String getSecondRefundReferenceId();
 }

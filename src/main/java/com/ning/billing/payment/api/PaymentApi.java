@@ -256,6 +256,58 @@ public interface PaymentApi {
     public Pagination<Payment> searchPayments(String searchKey, Long offset, Long limit, String pluginName, TenantContext context) throws PaymentApiException;
 
     /**
+     * Find all refunds across all plugins
+     *
+     * @param offset  the offset of the first result
+     * @param limit   the maximum number of results to retrieve
+     * @param context the user context
+     * @return the list of refunds for that tenant
+     */
+    public Pagination<Refund> getRefunds(Long offset, Long limit, TenantContext context);
+
+    /**
+     * Find all refunds in a given plugin
+     *
+     * @param offset     the offset of the first result
+     * @param limit      the maximum number of results to retrieve
+     * @param pluginName the refund plugin name
+     * @param context    the user context
+     * @return the list of refunds for that tenant
+     * @throws PaymentApiException
+     */
+    public Pagination<Refund> getRefunds(Long offset, Long limit, String pluginName, TenantContext context) throws PaymentApiException;
+
+    /**
+     * Find all refunds matching the search key across all plugins
+     * <p/>
+     * The match will be plugin specific: for instance some plugins will try to match the key
+     * against the transaction ids, etc.
+     *
+     * @param searchKey the search key
+     * @param offset    the offset of the first result
+     * @param limit     the maximum number of results to retrieve
+     * @param context   the user context
+     * @return the list of refunds matching this search key for that tenant
+     */
+    public Pagination<Refund> searchRefunds(String searchKey, Long offset, Long limit, TenantContext context);
+
+    /**
+     * Find all refunds matching the search key in a given plugin
+     * <p/>
+     * The match will be plugin specific: for instance some plugins will try to match the key
+     * against the transaction ids, etc.
+     *
+     * @param searchKey  the search key
+     * @param offset     the offset of the first result
+     * @param limit      the maximum number of results to retrieve
+     * @param pluginName the refund plugin name
+     * @param context    the user context
+     * @return the list of refunds matching this search key for that tenant
+     * @throws PaymentApiException
+     */
+    public Pagination<Refund> searchRefunds(String searchKey, Long offset, Long limit, String pluginName, TenantContext context) throws PaymentApiException;
+
+    /**
      * @return a list of all the payment plugins registered
      */
     public Set<String> getAvailablePlugins();

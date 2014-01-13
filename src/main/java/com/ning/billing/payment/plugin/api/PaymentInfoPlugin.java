@@ -71,8 +71,7 @@ public interface PaymentInfoPlugin {
     public String getFirstPaymentReferenceId();
 
     /**
-     * @return the first payment reference id
+     * @return the second payment reference id
      */
     public String getSecondPaymentReferenceId();
-
 }

@@ -279,6 +279,8 @@ public enum ErrorCode {
     PAYMENT_PLUGIN_SEARCH_PAYMENT_METHODS(7103, "Error while searching payment methods in plugin %s for search key %s"),
     PAYMENT_PLUGIN_GET_PAYMENT_METHODS(7104, "Error while retrieving payment methods in plugin %s"),
     PAYMENT_PLUGIN_SEARCH_PAYMENTS(7105, "Error while searching payments in plugin %s for search key %s"),
+    PAYMENT_PLUGIN_GET_REFUND_INFO(7106, "Failed to retrieve refund plugin info for refund %s: %s"),
+    PAYMENT_PLUGIN_SEARCH_REFUNDS(7107, "Error while searching refunds in plugin %s for search key %s"),
 
     /*
     *

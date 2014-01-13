@@ -16,29 +16,53 @@
 
 package com.ning.billing.payment.api;
 
-import com.ning.billing.catalog.api.Currency;
-import com.ning.billing.payment.plugin.api.RefundInfoPlugin;
-import com.ning.billing.util.entity.Entity;
-import org.joda.time.DateTime;
-
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import org.joda.time.DateTime;
+
+import com.ning.billing.catalog.api.Currency;
+import com.ning.billing.payment.plugin.api.RefundInfoPlugin;
+import com.ning.billing.util.entity.Entity;
+
 public interface Refund extends Entity {
 
-    public UUID getId();
-
+    /**
+     * @return the payment id
+     */
     public UUID getPaymentId();
 
+    /**
+     * @return whether the refund did trigger an invoice or invoice item adjustment
+     */
     public boolean isAdjusted();
 
+    /**
+     * @return the refund amount
+     */
     public BigDecimal getRefundAmount();
 
+    /**
+     * @return the currency associated with that refund
+     */
     public Currency getCurrency();
 
+    /**
+     * Date of the refund
+     *
+     * @return the effective date of the refund
+     */
     public DateTime getEffectiveDate();
 
+    /**
+     * @return the refund status
+     */
     public RefundStatus getRefundStatus();
 
-    public RefundInfoPlugin getPluginDetail();
+    /**
+     * This will only be filled when the call requires the details from the plugin
+     *
+     * @return the additional info from the plugin
+     */
+    public RefundInfoPlugin getRefundInfoPlugin();
 }
