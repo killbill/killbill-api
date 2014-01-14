@@ -23,8 +23,28 @@ import com.ning.billing.ObjectType;
 import com.ning.billing.util.callcontext.CallContext;
 import com.ning.billing.util.callcontext.TenantContext;
 import com.ning.billing.util.customfield.CustomField;
+import com.ning.billing.util.entity.Pagination;
 
 public interface CustomFieldUserApi {
+
+    /**
+     * Find all custom fields having their object type, field name or value matching the search key
+     *
+     * @param searchKey the search key
+     * @param offset    the offset of the first result
+     * @param limit     the maximum number of results to retrieve
+     * @param context   the user context
+     * @return the list of custom fields matching this search key for that tenant
+     */
+    public Pagination<CustomField> searchCustomFields(String searchKey, Long offset, Long limit, TenantContext context);
+
+    /**
+     * @param context the user context
+     * @param offset  the offset of the first result
+     * @param limit   the maximum number of results to retrieve
+     * @return the list of custom fields for that tenant
+     */
+    public Pagination<CustomField> getCustomFields(Long offset, Long limit, TenantContext context);
 
     /**
      * @param fields  the list of fields to add

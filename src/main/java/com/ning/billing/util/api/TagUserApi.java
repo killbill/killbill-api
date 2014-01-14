@@ -24,6 +24,7 @@ import com.ning.billing.ObjectType;
 import com.ning.billing.security.RequiresPermissions;
 import com.ning.billing.util.callcontext.CallContext;
 import com.ning.billing.util.callcontext.TenantContext;
+import com.ning.billing.util.entity.Pagination;
 import com.ning.billing.util.tag.Tag;
 import com.ning.billing.util.tag.TagDefinition;
 
@@ -79,7 +80,6 @@ public interface TagUserApi {
      * @param context          The call context, for auditing purposes
      * @return the tag definition
      * @throws TagDefinitionApiException
-     * @throws TagDefinitionApiException
      */
     public List<TagDefinition> getTagDefinitions(Collection<UUID> tagDefinitionIds, TenantContext context) throws TagDefinitionApiException;
 
@@ -122,6 +122,25 @@ public interface TagUserApi {
      */
     @RequiresPermissions(TAG_CAN_REMOVE)
     public void removeTag(UUID objectId, ObjectType objectType, UUID tagDefinitionId, CallContext context) throws TagApiException;
+
+    /**
+     * Find all tags having their object type, associated tag definition name or description matching the search key
+     *
+     * @param searchKey the search key
+     * @param offset    the offset of the first result
+     * @param limit     the maximum number of results to retrieve
+     * @param context   the user context
+     * @return the list of tags matching this search key for that tenant
+     */
+    public Pagination<Tag> searchTags(String searchKey, Long offset, Long limit, TenantContext context);
+
+    /**
+     * @param context the user context
+     * @param offset  the offset of the first result
+     * @param limit   the maximum number of results to retrieve
+     * @return the list of tags for that tenant
+     */
+    public Pagination<Tag> getTags(Long offset, Long limit, TenantContext context);
 
     /**
      * @param objectId        UUID of the object on which to retrieve the tags

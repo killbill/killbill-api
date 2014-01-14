@@ -5,6 +5,8 @@
     Add RefundInfoPlugin#getKbPaymentId
     Remove RefundInfoPlugin#getReferenceId and introduce RefundInfoPlugin#getFirstRefundReferenceId
     and RefundInfoPlugin#getRefundPaymentReferenceId for consistency
+    Add CustomFieldUserApi#searchCustomFields and CustomFieldUserApi#getCustomFields
+    Add TagUserApi#searchTags and TagUserApi#getTags
 
 0.7.12
     Payment: add getPayments APIs
