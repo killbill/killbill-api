@@ -8,6 +8,9 @@
     Add CustomFieldUserApi#searchCustomFields and CustomFieldUserApi#getCustomFields
     Add TagUserApi#searchTags and TagUserApi#getTags
 
+0.7.13
+    Add APIs updateExternalKey for bundle and removeCustomFields for all custom fields
+
 0.7.12
     Payment: add getPayments APIs
     Update killbill-oss-parent version to 0.5.15

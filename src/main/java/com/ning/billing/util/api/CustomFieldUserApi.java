@@ -54,6 +54,14 @@ public interface CustomFieldUserApi {
     void addCustomFields(List<CustomField> fields, CallContext context) throws CustomFieldApiException;
 
     /**
+     *
+     * @param fields
+     * @param context
+     * @throws CustomFieldApiException
+     */
+    void removeCustomFields(List<CustomField> fields, CallContext context) throws CustomFieldApiException;
+
+    /**
      * @param objectId   the object id
      * @param objectType the object type
      * @param context    the call context

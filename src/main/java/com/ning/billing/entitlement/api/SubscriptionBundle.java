@@ -16,6 +16,7 @@
 
 package com.ning.billing.entitlement.api;
 
+import com.ning.billing.util.callcontext.CallContext;
 import com.ning.billing.util.entity.Entity;
 import org.joda.time.DateTime;
 
@@ -51,4 +52,5 @@ public interface SubscriptionBundle extends Entity {
      * @return the timeline of event for that bundle
      */
     public SubscriptionBundleTimeline getTimeline();
+
 }
