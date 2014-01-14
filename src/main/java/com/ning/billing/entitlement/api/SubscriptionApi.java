@@ -16,6 +16,7 @@
 
 package com.ning.billing.entitlement.api;
 
+import com.ning.billing.util.callcontext.CallContext;
 import com.ning.billing.util.callcontext.TenantContext;
 
 import java.util.List;
@@ -50,6 +51,16 @@ public interface SubscriptionApi {
      * @throws SubscriptionApiException if the baseEntitlementId does not exist.
      */
     public SubscriptionBundle getSubscriptionBundle(UUID bundleId, TenantContext context) throws SubscriptionApiException;
+
+
+    /**
+     * Update the externalKey for a given bundle
+     *
+     * @param bundleId ; bundle id
+     * @param newExternalKey : the new value for the externalKey
+     * @param context : the call context
+     */
+    public void updateExternalKey(UUID bundleId, String newExternalKey, CallContext context);
 
 
     /**
