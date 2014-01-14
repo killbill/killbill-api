@@ -1,4 +1,5 @@
 0.8.0
+    Update killbill-oss-parent to 0.5.17
     Add ErrorCode.PAYMENT_PLUGIN_GET_REFUND_INFO and ErrorCode.PAYMENT_PLUGIN_SEARCH_REFUNDS
     Add PaymentApi#getRefunds and PaymentApi#searchRefunds APIs
     Rename Refund#getPluginDetail to Refund#getRefundInfoPlugin for consistency
