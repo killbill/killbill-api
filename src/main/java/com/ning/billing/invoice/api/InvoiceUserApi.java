@@ -70,6 +70,17 @@ public interface InvoiceUserApi {
     public Pagination<Invoice> getInvoices(Long offset, Long limit, TenantContext context);
 
     /**
+     * Find all invoices having their id, number, account id or currency matching the search key
+     *
+     * @param searchKey the search key
+     * @param offset    the offset of the first result
+     * @param limit     the maximum number of results to retrieve
+     * @param context   the user context
+     * @return the list of invoices matching this search key for that tenant
+     */
+    public Pagination<Invoice> searchInvoices(String searchKey, Long offset, Long limit, TenantContext context);
+
+    /**
      * Retrieve the account balance.
      *
      * @param accountId account id

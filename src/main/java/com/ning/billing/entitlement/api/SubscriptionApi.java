@@ -16,11 +16,12 @@
 
 package com.ning.billing.entitlement.api;
 
-import com.ning.billing.util.callcontext.CallContext;
-import com.ning.billing.util.callcontext.TenantContext;
-
 import java.util.List;
 import java.util.UUID;
+
+import com.ning.billing.util.callcontext.CallContext;
+import com.ning.billing.util.callcontext.TenantContext;
+import com.ning.billing.util.entity.Pagination;
 
 /**
  * API to manage the retrieval of <code>Subscription</code> information.
@@ -32,22 +33,17 @@ public interface SubscriptionApi {
      *
      * @param entitlementId the id of the entitlement associated with the subscription
      * @param context       the context
-     *
      * @return the subscription
-     *
      * @throws SubscriptionApiException if it odes not exist
      */
     Subscription getSubscriptionForEntitlementId(UUID entitlementId, TenantContext context) throws SubscriptionApiException;
 
     /**
-     *
      * Retrieves all the <code>Subscription</code> attached to the base entitlement.
      *
-     * @param bundleId              the id of the bundle
-     * @param context               the context
-     *
-     * @return                      a list of subscriptions
-     *
+     * @param bundleId the id of the bundle
+     * @param context  the context
+     * @return a list of subscriptions
      * @throws SubscriptionApiException if the baseEntitlementId does not exist.
      */
     public SubscriptionBundle getSubscriptionBundle(UUID bundleId, TenantContext context) throws SubscriptionApiException;
@@ -56,40 +52,34 @@ public interface SubscriptionApi {
     /**
      * Update the externalKey for a given bundle
      *
-     * @param bundleId ; bundle id
+     * @param bundleId       ; bundle id
      * @param newExternalKey : the new value for the externalKey
-     * @param context : the call context
+     * @param context        : the call context
      */
     public void updateExternalKey(UUID bundleId, String newExternalKey, CallContext context);
 
 
     /**
-     *
      * Retrieves all the <code>SubscriptionBundle</code> for a given account and matching an external key.
      *
-     * @param accountId     the account id
-     * @param externalKey   the external key
-     * @param context       the context
-     *
-     * @return              a <code>SubscriptionBundle</code>
-     *
+     * @param accountId   the account id
+     * @param externalKey the external key
+     * @param context     the context
+     * @return a <code>SubscriptionBundle</code>
      * @throws SubscriptionApiException if there is n o such object matching the account and external key
      */
     public List<SubscriptionBundle> getSubscriptionBundlesForAccountIdAndExternalKey(UUID accountId, String externalKey, TenantContext context) throws SubscriptionApiException;
 
 
     /**
-     *
      * Retrieves all the <code>SubscriptionBundle</code> for the given external key.
      * </p>
      * It is possible to have multiple <code>SubscriptionBundle</code> for a given external key in the system but only one
      * will be active -- i.e. will contain <code>Subscription</code> in the active state.
      *
-     * @param externalKey   the external key
-     * @param context       the context
-     *
-     * @return              a <code>SubscriptionBundle</code>
-     *
+     * @param externalKey the external key
+     * @param context     the context
+     * @return a <code>SubscriptionBundle</code>
      * @throws SubscriptionApiException if there is no such object
      */
     public SubscriptionBundle getActiveSubscriptionBundleForExternalKey(String externalKey, TenantContext context) throws SubscriptionApiException;
@@ -103,16 +93,32 @@ public interface SubscriptionApi {
     public List<SubscriptionBundle> getSubscriptionBundlesForExternalKey(String externalKey, TenantContext context) throws SubscriptionApiException;
 
     /**
-     *
      * Retrieves all the <code>SubscriptionBundle</code> for a given account.
      *
-     * @param accountId     the account id
-     * @param context       the context
-     *
-     * @return               list of <code>SubscriptionBundle</code>
-     *
+     * @param accountId the account id
+     * @param context   the context
+     * @return list of <code>SubscriptionBundle</code>
      * @throws SubscriptionApiException if the account does not exist
      */
     public List<SubscriptionBundle> getSubscriptionBundlesForAccountId(UUID accountId, TenantContext context) throws SubscriptionApiException;
 
+
+    /**
+     * @param context the user context
+     * @param offset  the offset of the first result
+     * @param limit   the maximum number of results to retrieve
+     * @return the list of <code>SubscriptionBundle</code> for that tenant
+     */
+    public Pagination<SubscriptionBundle> getSubscriptionBundles(Long offset, Long limit, TenantContext context);
+
+    /**
+     * Find all <code>SubscriptionBundle</code> having their id, account id or external key matching the search key
+     *
+     * @param searchKey the search key
+     * @param offset    the offset of the first result
+     * @param limit     the maximum number of results to retrieve
+     * @param context   the user context
+     * @return the list of <code>SubscriptionBundle</code> matching this search key for that tenant
+     */
+    public Pagination<SubscriptionBundle> searchSubscriptionBundles(String searchKey, Long offset, Long limit, TenantContext context);
 }
