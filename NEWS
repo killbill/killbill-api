@@ -1,4 +1,5 @@
 0.8.1
+    Update killbill-oss-parent to 0.5.23
     Add SubscriptionApi#getSubscriptionBundles and SubscriptionApi#searchSubscriptionBundles
     Add InvoiceUserApi#searchInvoices
     Add AccountAuditLogs#getAuditLogsForPaymentMethod
