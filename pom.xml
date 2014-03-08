@@ -18,8 +18,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>killbill-oss-parent</artifactId>
-        <groupId>com.ning.billing</groupId>
-        <version>0.5.23</version>
+        <groupId>org.kill-bill.billing</groupId>
+        <version>0.5.26-SNAPSHOT</version>
     </parent>
     <artifactId>killbill-api</artifactId>
     <version>0.8.2-SNAPSHOT</version>

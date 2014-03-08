@@ -1,0 +1,56 @@
+/*
+ * Copyright 2010-2013 Ning, Inc.
+ *
+ * Ning licenses this file to you under the Apache License, version 2.0
+ * (the "License"); you may not use this file except in compliance with the
+ * License.  You may obtain a copy of the License at:
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+
+package org.killbill.billing.entitlement.api;
+
+import org.joda.time.LocalDate;
+
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+/**
+ * An Subscription is created using the <code>SubscriptionApi</code>
+ * <p/>
+ * It contains its <code>Entitlement</code> and additional billing related information.
+ *
+ * @see org.killbill.billing.entitlement.api.SubscriptionApi
+ */
+public interface Subscription extends Entitlement {
+
+
+    /**
+     * @return the date at which the billing started for that subscription
+     */
+    public LocalDate getBillingStartDate();
+
+    /**
+     * @return the date at which the billing stopped for that subscription
+     */
+    public LocalDate getBillingEndDate();
+
+    /**
+     * @return the date up to which that <code>Subscription got invoiced</code>
+     */
+    public LocalDate getChargedThroughDate();
+
+
+    /**
+     *
+     * @return for each service, the current state
+     */
+    public String getCurrentStateForService(String serviceName);
+}
