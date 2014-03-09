@@ -1,3 +1,6 @@
+0.8.2
+    Move package name from com.ning -> org.killbill
+
 0.8.1
     Update killbill-oss-parent to 0.5.23
     Add SubscriptionApi#getSubscriptionBundles and SubscriptionApi#searchSubscriptionBundles
