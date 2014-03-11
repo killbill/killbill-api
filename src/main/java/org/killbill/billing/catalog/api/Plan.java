@@ -59,7 +59,7 @@ public interface Plan {
     /**
      * @return the {@code BillingPeriod}
      */
-    public BillingPeriod getBillingPeriod();
+    public BillingPeriod getRecurringBillingPeriod();
 
     /**
      * @return the number of instance of subscriptions in a bundle with that {@code Plan}

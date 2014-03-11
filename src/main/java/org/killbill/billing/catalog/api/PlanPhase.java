@@ -25,19 +25,22 @@ package org.killbill.billing.catalog.api;
 public interface PlanPhase {
 
     /**
-     * @return the recurring {@code InternationalPrice} for that {@code Phase} if defined
+     *
+     * @return the {@code Fixed} section
      */
-    public InternationalPrice getRecurringPrice();
+    public Fixed getFixed();
 
     /**
-     * @return the fixed {@code InternationalPrice} for that {@code Phase} if defined
+     *
+     * @return the {@code Recurring} section
      */
-    public InternationalPrice getFixedPrice();
+    public Recurring getRecurring();
 
     /**
-     * @return the {@code BillingPeriod}
+     *
+     * @return the {@code Usage} section
      */
-    public BillingPeriod getBillingPeriod();
+    public Usage [] getUsages();
 
     /**
      * @return the unique name for that {@code Phase}
@@ -60,12 +63,8 @@ public interface PlanPhase {
     public PhaseType getPhaseType();
 
     /**
-     * @return the {@code Limit}
-     */
-    public Limit[] getLimits();
-
-    /**
      * @return compliance boolean
      */
     public boolean compliesWithLimits(String unit, double value);
+
 }
