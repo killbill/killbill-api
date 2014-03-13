@@ -38,6 +38,13 @@ public interface StaticCatalog {
     public Date getEffectiveDate() throws CatalogApiException;
 
     /**
+     *
+     * @return the recurring billing mode for this catalog
+     * @throws CatalogApiException
+     */
+    public BillingMode getRecurringBillingMode();
+
+    /**
      * @return an array of supported {@code Currency}
      * @throws CatalogApiException
      */
