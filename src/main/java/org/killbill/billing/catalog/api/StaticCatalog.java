@@ -32,17 +32,16 @@ public interface StaticCatalog {
     public String getCatalogName();
 
     /**
+     *
+     * @return the recurring billing mode for this catalog
+     */
+    public BillingMode getRecurringBillingMode();
+
+    /**
      * @return the date at which this version of {@code Catalog} becomes effective
      * @throws CatalogApiException
      */
     public Date getEffectiveDate() throws CatalogApiException;
-
-    /**
-     *
-     * @return the recurring billing mode for this catalog
-     * @throws CatalogApiException
-     */
-    public BillingMode getRecurringBillingMode();
 
     /**
      * @return an array of supported {@code Currency}

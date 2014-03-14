@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2013 Ning, Inc.
+ * Copyright 2014 The Billing Project, Inc.
  *
  * Ning licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
@@ -16,15 +16,11 @@
 
 package org.killbill.billing.catalog.api;
 
+public interface TieredBlock extends Block {
 
-public interface Limit {
-
-    public Unit getUnit();
-
+    /**
+     *
+     * @return the max used usage to consider this tiered block.
+     */
     public Double getMax();
-
-    public Double getMin();
-
-    public boolean compliesWith(double value);
-
 }
