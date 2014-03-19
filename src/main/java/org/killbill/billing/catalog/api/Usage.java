@@ -4,6 +4,12 @@ public interface Usage {
 
     /**
      *
+     * @return the name of the usage section
+     */
+    public String getName();
+
+    /**
+     *
      * @return the {@code BillingMode}
      */
     public BillingMode getBillingMode();

@@ -17,6 +17,8 @@
 package org.killbill.billing.usage.api;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.joda.time.DateTime;
@@ -45,8 +47,22 @@ public interface UsageUserApi {
      * Get usage information for a given subscription.
      *
      * @param subscriptionId subscription id
+     * @param unitType       unit type for this usage
+     * @param startTime      start date of the usage period
+     * @param endTime        end date of the usage period
      * @param context        tenant context
      * @return usage data (rolled-up)
      */
-    public RolledUpUsage getUsageForSubscription(UUID subscriptionId, TenantContext context);
+    public RolledUpUsage getUsageForSubscription(UUID subscriptionId, String unitType, DateTime startTime, DateTime endTime, TenantContext context);
+
+
+    /**
+     * Get usage information for a given subscription.
+     *
+     * @param subscriptionId subscription id
+     * @param unitType       unit type for this usage
+     * @param context        tenant context
+     * @return usage data (rolled-up)
+     */
+    public List<RolledUpUsage> getAllUsageForSubscription(UUID subscriptionId, Set<String> unitType, List<DateTime> transitionTimes, TenantContext context);
 }

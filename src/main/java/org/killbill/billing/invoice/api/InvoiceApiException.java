@@ -21,6 +21,11 @@ import org.killbill.billing.ErrorCode;
 
 public class InvoiceApiException extends BillingExceptionBase {
 
+
+    public InvoiceApiException(final BillingExceptionBase cause) {
+        super(cause);
+    }
+
     public InvoiceApiException(final Throwable cause, final int code, final String msg) {
         super(cause, code, msg);
     }
