@@ -58,6 +58,8 @@ public interface InvoiceItem extends Entity {
 
     String getPhaseName();
 
+    String getUsageName();
+
     BigDecimal getRate();
 
     UUID getLinkedItemId();
