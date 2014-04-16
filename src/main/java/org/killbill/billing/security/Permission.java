@@ -27,7 +27,6 @@ public enum Permission {
     /*
      * Bundle
      */
-    BUNDLE_CAN_CHARGE("bundle", "charge"),
 
     /*
      * Entitlement
@@ -37,7 +36,6 @@ public enum Permission {
     /*
      * Invoice
      */
-    INVOICE_CAN_CHARGE("invoice", "charge"),
     INVOICE_CAN_CREDIT("invoice", "credit"),
     INVOICE_CAN_ADJUST("invoice", "adjust"),
     INVOICE_CAN_ITEM_ADJUST("invoice", "item_adjust"),

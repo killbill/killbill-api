@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.joda.time.LocalDate;
-
 import org.killbill.billing.account.api.AccountApiException;
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.security.RequiresPermissions;
@@ -34,8 +33,6 @@ import org.killbill.billing.util.entity.Pagination;
 
 import static org.killbill.billing.security.Permission.ACCOUNT_CAN_CHARGE;
 import static org.killbill.billing.security.Permission.ACCOUNT_CAN_CREDIT;
-import static org.killbill.billing.security.Permission.BUNDLE_CAN_CHARGE;
-import static org.killbill.billing.security.Permission.INVOICE_CAN_CHARGE;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_CREDIT;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_DELETE_CBA;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_ITEM_ADJUST;
@@ -168,72 +165,17 @@ public interface InvoiceUserApi {
     public InvoiceItem getExternalChargeById(UUID externalChargeId, TenantContext context) throws InvoiceApiException;
 
     /**
-     * Add an external charge to an account.
+     * Add one or multiple external charges to an account.
      *
      * @param accountId     account id
-     * @param amount        the external charge amount
-     * @param description   a description for that charge
-     * @param effectiveDate the day to post the external charge, in the account timezone
-     * @param currency      the external charge currency
+     * @param effectiveDate the effective date for newly created invoices (in the account timezone)
+     * @param charges       the charges
      * @param context       the call context
-     * @return the external charge invoice item
+     * @return the external charges invoice items
      * @throws InvoiceApiException
      */
     @RequiresPermissions(ACCOUNT_CAN_CHARGE)
-    public InvoiceItem insertExternalCharge(UUID accountId, BigDecimal amount, String description, LocalDate effectiveDate,
-                                            Currency currency, CallContext context) throws InvoiceApiException;
-
-    /**
-     * Add an external charge to an account tied to a particular bundle.
-     *
-     * @param accountId     account id
-     * @param bundleId      bundle id
-     * @param amount        the external charge amount
-     * @param description   a description for that charge
-     * @param effectiveDate the day to post the external charge, in the account timezone
-     * @param currency      the external charge currency
-     * @param context       the call context
-     * @return the external charge invoice item
-     * @throws InvoiceApiException
-     */
-    @RequiresPermissions(BUNDLE_CAN_CHARGE)
-    public InvoiceItem insertExternalChargeForBundle(UUID accountId, UUID bundleId, BigDecimal amount, String description, LocalDate effectiveDate,
-                                                     Currency currency, CallContext context) throws InvoiceApiException;
-
-    /**
-     * Add an external charge to an invoice.
-     *
-     * @param accountId     account id
-     * @param invoiceId     invoice id
-     * @param amount        the external charge amount
-     * @param description   a description for that charge
-     * @param effectiveDate the day to post the external charge, in the account timezone
-     * @param currency      the external charge currency
-     * @param context       the call context
-     * @return the external charge invoice item
-     * @throws InvoiceApiException
-     */
-    @RequiresPermissions(INVOICE_CAN_CHARGE)
-    public InvoiceItem insertExternalChargeForInvoice(UUID accountId, UUID invoiceId, BigDecimal amount, String description,
-                                                      LocalDate effectiveDate, Currency currency, CallContext context) throws InvoiceApiException;
-
-    /**
-     * Add an external charge to an invoice tied to a particular bundle.
-     *
-     * @param accountId     account id
-     * @param invoiceId     invoice id
-     * @param bundleId      bundle id
-     * @param amount        the external charge amount
-     * @param description   a description for that charge
-     * @param effectiveDate the day to post the external charge, in the account timezone
-     * @param currency      the external charge currency
-     * @param context       the call context
-     * @return the external charge invoice item
-     * @throws InvoiceApiException
-     */
-    @RequiresPermissions({BUNDLE_CAN_CHARGE, INVOICE_CAN_CHARGE})
-    public InvoiceItem insertExternalChargeForInvoiceAndBundle(UUID accountId, UUID invoiceId, UUID bundleId, BigDecimal amount, String description,
-                                                               LocalDate effectiveDate, Currency currency, CallContext context) throws InvoiceApiException;
+    public List<InvoiceItem> insertExternalCharges(UUID accountId, LocalDate effectiveDate, Iterable<InvoiceItem> charges, CallContext context) throws InvoiceApiException;
 
     /**
      * Retrieve a credit by id.
