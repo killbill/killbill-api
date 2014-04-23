@@ -1,7 +1,7 @@
 /*
- * Copyright 2010-2013 Ning, Inc.
+ * Copyright 2014 Groupon, Inc
  *
- * Ning licenses this file to you under the Apache License, version 2.0
+ * Groupon licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
  * License.  You may obtain a copy of the License at:
  *
@@ -14,27 +14,12 @@
  * under the License.
  */
 
-package org.killbill.billing;
+package org.killbill.billing.payment.api;
 
-public enum ObjectType {
-    ACCOUNT,
-    ACCOUNT_EMAIL,
-    BLOCKING_STATES,
-    BUNDLE,
-    CUSTOM_FIELD,
-    INVOICE,
-    PAYMENT,
-    DIRECT_PAYMENT,
-    DIRECT_TRANSACTION,
-    INVOICE_ITEM,
-    INVOICE_PAYMENT,
-    SUBSCRIPTION,
-    SUBSCRIPTION_EVENT,
-    PAYMENT_ATTEMPT,
-    PAYMENT_METHOD,
-    REFUND,
-    TAG,
-    TAG_DEFINITION,
-    TENANT,
-    TENANT_KVS;
+public enum TransactionType {
+    AUTHORIZE,
+    CAPTURE,
+    PURCHASE,
+    CREDIT,
+    VOID
 }
