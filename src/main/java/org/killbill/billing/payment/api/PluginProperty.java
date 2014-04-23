@@ -1,7 +1,9 @@
 /*
  * Copyright 2010-2013 Ning, Inc.
+ * Copyright 2014 Groupon, Inc
+ * Copyright 2014 The Billing Project, LLC
  *
- * Ning licenses this file to you under the Apache License, version 2.0
+ * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
  * License.  You may obtain a copy of the License at:
  *
@@ -16,13 +18,13 @@
 
 package org.killbill.billing.payment.api;
 
-public class PaymentMethodKVInfo {
+public class PluginProperty {
 
     private final String key;
     private final Object value;
     private final Boolean isUpdatable;
 
-    public PaymentMethodKVInfo(final String key, final Object value, final Boolean isUpdatable) {
+    public PluginProperty(final String key, final Object value, final Boolean isUpdatable) {
         this.key = key;
         this.value = value;
         this.isUpdatable = isUpdatable;
@@ -40,11 +42,10 @@ public class PaymentMethodKVInfo {
         return isUpdatable;
     }
 
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("PaymentMethodKVInfo");
+        sb.append("PluginProperty");
         sb.append("{key='").append(key).append('\'');
         sb.append(", value=").append(value);
         sb.append(", isUpdatable=").append(isUpdatable);
@@ -61,7 +62,7 @@ public class PaymentMethodKVInfo {
             return false;
         }
 
-        final PaymentMethodKVInfo that = (PaymentMethodKVInfo) o;
+        final PluginProperty that = (PluginProperty) o;
 
         if (isUpdatable != null ? !isUpdatable.equals(that.isUpdatable) : that.isUpdatable != null) {
             return false;

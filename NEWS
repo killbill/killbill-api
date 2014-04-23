@@ -1,3 +1,9 @@
+0.9.0
+    Simplify APIs for external charges, add bulk creation capability
+    Rename PaymentMethodKVInfo to PluginProperty
+    Add getProperties() to PaymentInfoPlugin and RefundInfoPlugin
+    Update killbill-oss-parent to 0.7.0
+
 0.8.4
     Introduction of direct payment apis (unstable)
 
