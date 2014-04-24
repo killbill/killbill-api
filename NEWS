@@ -1,3 +1,6 @@
+0.9.1
+    Update Payment APIs to pass plugin specific properties
+
 0.9.0
     Simplify APIs for external charges, add bulk creation capability
     Rename PaymentMethodKVInfo to PluginProperty
