@@ -1,3 +1,6 @@
+0.9.5
+    Introduction of PaymentGatewayApi (unstable)
+
 0.9.4
     Add AuditLogs support for DirectPayment and DirectPaymentTransaction
 
