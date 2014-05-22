@@ -36,4 +36,6 @@ public enum InvoiceItemType {
     REFUND_ADJ,
     // Usage item
     USAGE,
+    // Tax item
+    TAX
 }
