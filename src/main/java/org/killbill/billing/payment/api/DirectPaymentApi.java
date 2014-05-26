@@ -37,6 +37,7 @@ public interface DirectPaymentApi {
      * Authorize a direct payment.
      *
      * @param account                             the account
+     * @param paymentMethodId                     the payment method id to use
      * @param directPaymentId                     the direct payment id (non-null for multi-steps flows, such as 3D Secure)
      * @param amount                              the amount to pay
      * @param currency                            the amount currency
@@ -48,7 +49,7 @@ public interface DirectPaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public DirectPayment createAuthorization(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
+    public DirectPayment createAuthorization(Account account, UUID paymentMethodId, UUID directPaymentId, BigDecimal amount, Currency currency,
                                              String directPaymentExternalKey, String directPaymentTransactionExternalKey,
                                              Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
@@ -74,6 +75,7 @@ public interface DirectPaymentApi {
      * Combine an authorize and capture direct payment.
      *
      * @param account                             the account
+     * @param paymentMethodId                     the payment method id to use
      * @param directPaymentId                     the direct payment id (non-null for multi-steps flows, such as 3D Secure)
      * @param amount                              the amount to pay
      * @param currency                            the amount currency
@@ -85,7 +87,7 @@ public interface DirectPaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public DirectPayment createPurchase(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
+    public DirectPayment createPurchase(Account account, UUID paymentMethodId, UUID directPaymentId, BigDecimal amount, Currency currency,
                                         String directPaymentExternalKey, String directPaymentTransactionExternalKey,
                                         Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
