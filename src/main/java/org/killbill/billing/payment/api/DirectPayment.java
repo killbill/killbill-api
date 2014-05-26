@@ -16,14 +16,15 @@
 
 package org.killbill.billing.payment.api;
 
-import org.killbill.billing.catalog.api.Currency;
-import org.killbill.billing.util.entity.Entity;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+import org.killbill.billing.catalog.api.Currency;
+import org.killbill.billing.util.entity.Entity;
+
 public interface DirectPayment extends Entity {
+
     /**
      * @return the account id
      */
@@ -65,7 +66,7 @@ public interface DirectPayment extends Entity {
     Currency getCurrency();
 
     /**
-     * @return the payment status
+     * @return the payment status of the latest transaction
      */
     PaymentStatus getPaymentStatus();
 
@@ -73,5 +74,4 @@ public interface DirectPayment extends Entity {
      * @return the list of attempts on that payment
      */
     List<DirectPaymentTransaction> getTransactions();
-
 }

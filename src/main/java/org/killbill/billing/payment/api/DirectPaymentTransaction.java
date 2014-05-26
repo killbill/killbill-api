@@ -16,30 +16,32 @@
 
 package org.killbill.billing.payment.api;
 
+import java.math.BigDecimal;
+import java.util.UUID;
+
 import org.joda.time.DateTime;
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.payment.plugin.api.PaymentInfoPlugin;
 import org.killbill.billing.util.entity.Entity;
 
-import java.math.BigDecimal;
-import java.util.UUID;
-
 public interface DirectPaymentTransaction extends Entity {
 
     /**
-     *
      * @return the id of the direct payment.
      */
     UUID getDirectPaymentId();
 
     /**
-     *
+     * @return the external key
+     */
+    String getExternalKey();
+
+    /**
      * @return the type of transaction
      */
     TransactionType getTransactionType();
 
     /**
-     *
      * @return the effective date of the payment
      */
     DateTime getEffectiveDate();
@@ -75,5 +77,4 @@ public interface DirectPaymentTransaction extends Entity {
      * @return the additional info from the plugin
      */
     PaymentInfoPlugin getPaymentInfoPlugin();
-
 }

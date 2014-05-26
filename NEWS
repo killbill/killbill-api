@@ -1,3 +1,7 @@
+0.9.6
+    Add DirectPaymentTransaction#getExternalKey (killbill#180)
+    Add Tax invoice item
+
 0.9.5
     Introduction of PaymentGatewayApi (unstable)
 

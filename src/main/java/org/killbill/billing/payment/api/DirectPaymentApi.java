@@ -36,78 +36,91 @@ public interface DirectPaymentApi {
     /**
      * Authorize a direct payment.
      *
-     * @param account         the account
-     * @param directPaymentId the direct payment id (non-null for multi-steps flows, such as 3D Secure)
-     * @param amount          the amount to pay
-     * @param currency        the amount currency
-     * @param properties      plugin specific properties
-     * @param context         the call context
+     * @param account                             the account
+     * @param directPaymentId                     the direct payment id (non-null for multi-steps flows, such as 3D Secure)
+     * @param amount                              the amount to pay
+     * @param currency                            the amount currency
+     * @param directPaymentExternalKey            the direct payment external key
+     * @param directPaymentTransactionExternalKey the direct payment transaction external key
+     * @param properties                          plugin specific properties
+     * @param context                             the call context
      * @return the payment
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public DirectPayment createAuthorization(Account account, UUID directPaymentId, BigDecimal amount, Currency currency, String externalKey, Iterable<PluginProperty> properties, CallContext context)
+    public DirectPayment createAuthorization(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
+                                             String directPaymentExternalKey, String directPaymentTransactionExternalKey,
+                                             Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
      * Capture a previously authorized direct payment.
      *
-     * @param account    the account
-     * @param amount     the amount to pay
-     * @param currency   the amount currency
-     * @param properties plugin specific properties
-     * @param context    the call context
+     * @param account                             the account
+     * @param amount                              the amount to pay
+     * @param currency                            the amount currency
+     * @param directPaymentTransactionExternalKey the direct payment transaction external key
+     * @param properties                          plugin specific properties
+     * @param context                             the call context
      * @return the payment
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public DirectPayment createCapture(Account account, UUID directPaymentId, BigDecimal amount, Currency currency, Iterable<PluginProperty> properties, CallContext context)
+    public DirectPayment createCapture(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
+                                       String directPaymentTransactionExternalKey, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
      * Combine an authorize and capture direct payment.
      *
-     * @param account         the account
-     * @param directPaymentId the direct payment id (non-null for multi-steps flows, such as 3D Secure)
-     * @param amount          the amount to pay
-     * @param currency        the amount currency
-     * @param properties      plugin specific properties
-     * @param context         the call context
+     * @param account                             the account
+     * @param directPaymentId                     the direct payment id (non-null for multi-steps flows, such as 3D Secure)
+     * @param amount                              the amount to pay
+     * @param currency                            the amount currency
+     * @param directPaymentExternalKey            the direct payment external key
+     * @param directPaymentTransactionExternalKey the direct payment transaction external key
+     * @param properties                          plugin specific properties
+     * @param context                             the call context
      * @return the payment
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public DirectPayment createPurchase(Account account, UUID directPaymentId, BigDecimal amount, Currency currency, String externalKey, Iterable<PluginProperty> properties, CallContext context)
+    public DirectPayment createPurchase(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
+                                        String directPaymentExternalKey, String directPaymentTransactionExternalKey,
+                                        Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
      * Void a previously authorized payment.
      *
-     * @param account         the account
-     * @param directPaymentId the direct payment id
-     * @param properties      plugin specific properties
-     * @param context         the call context
+     * @param account                             the account
+     * @param directPaymentId                     the direct payment id
+     * @param directPaymentTransactionExternalKey the direct payment transaction external key
+     * @param properties                          plugin specific properties
+     * @param context                             the call context
      * @return the payment
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public DirectPayment createVoid(Account account, UUID directPaymentId, Iterable<PluginProperty> properties, CallContext context)
+    public DirectPayment createVoid(Account account, UUID directPaymentId, String directPaymentTransactionExternalKey, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
      * Credit a previously captured payment.
      *
-     * @param account         the account
-     * @param directPaymentId the direct payment id
-     * @param amount          the amount to credit
-     * @param currency        the amount currency
-     * @param properties      plugin specific properties
-     * @param context         the call context
+     * @param account                             the account
+     * @param directPaymentId                     the direct payment id
+     * @param amount                              the amount to credit
+     * @param currency                            the amount currency
+     * @param directPaymentTransactionExternalKey the direct payment transaction external key
+     * @param properties                          plugin specific properties
+     * @param context                             the call context
      * @return the payment
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public DirectPayment createCredit(Account account, UUID directPaymentId, BigDecimal amount, Currency currency, Iterable<PluginProperty> properties, CallContext context)
+    public DirectPayment createCredit(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
+                                      String directPaymentTransactionExternalKey, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
