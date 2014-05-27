@@ -19,7 +19,8 @@ package org.killbill.billing.payment.api;
 public enum TransactionType {
     AUTHORIZE,
     CAPTURE,
-    PURCHASE,
     CREDIT,
+    PURCHASE,
+    REFUND,
     VOID
 }

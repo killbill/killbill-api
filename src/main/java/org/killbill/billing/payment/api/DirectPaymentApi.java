@@ -108,11 +108,11 @@ public interface DirectPaymentApi {
             throws PaymentApiException;
 
     /**
-     * Credit a previously captured payment.
+     * Refund a previously captured payment.
      *
      * @param account                             the account
      * @param directPaymentId                     the direct payment id
-     * @param amount                              the amount to credit
+     * @param amount                              the amount to refund
      * @param currency                            the amount currency
      * @param directPaymentTransactionExternalKey the direct payment transaction external key
      * @param properties                          plugin specific properties
@@ -121,8 +121,31 @@ public interface DirectPaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public DirectPayment createCredit(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
+    public DirectPayment createRefund(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
                                       String directPaymentTransactionExternalKey, Iterable<PluginProperty> properties, CallContext context)
+            throws PaymentApiException;
+
+    /**
+     * Credit a payment method.
+     * <p/>
+     * This is also known as payment in reverse.
+     *
+     * @param account                             the account
+     * @param paymentMethodId                     the payment method id to use
+     * @param directPaymentId                     the direct payment id (non-null for multi-steps flows)
+     * @param amount                              the amount to credit
+     * @param currency                            the amount currency
+     * @param directPaymentExternalKey            the direct payment external key
+     * @param directPaymentTransactionExternalKey the direct payment transaction external key
+     * @param properties                          plugin specific properties
+     * @param context                             the call context
+     * @return the payment
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
+    public DirectPayment createCredit(Account account, UUID paymentMethodId, UUID directPaymentId, BigDecimal amount, Currency currency,
+                                      String directPaymentExternalKey, String directPaymentTransactionExternalKey,
+                                      Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
