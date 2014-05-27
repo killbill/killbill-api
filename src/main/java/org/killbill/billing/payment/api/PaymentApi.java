@@ -25,6 +25,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.killbill.billing.account.api.Account;
+import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
@@ -64,12 +65,28 @@ public interface PaymentApi {
             throws PaymentApiException;
 
     /**
+     * Mark a PENDING payment as successful or failed.
+     * <p/>
+     * This is often used by plugins when processing notifications from the gateways.
+     *
      * @param account   the account
      * @param paymentId the payment id
      * @param isSuccess whether pending payment turned out to be successful
      * @param context   the call context
      */
     public void notifyPendingPaymentOfStateChanged(Account account, UUID paymentId, boolean isSuccess, CallContext context)
+            throws PaymentApiException;
+
+    /**
+     * Register a chargeback for a payment.
+     *
+     * @param account   the account
+     * @param paymentId the payment id
+     * @param amount    the chargeback amount
+     * @param currency  the chargeback currency
+     * @param context   the call context
+     */
+    public void notifyPaymentOfChargeback(Account account, UUID paymentId, BigDecimal amount, Currency currency, CallContext context)
             throws PaymentApiException;
 
     /**
