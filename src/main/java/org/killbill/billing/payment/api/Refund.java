@@ -20,9 +20,8 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 import org.joda.time.DateTime;
-
 import org.killbill.billing.catalog.api.Currency;
-import org.killbill.billing.payment.plugin.api.RefundInfoPlugin;
+import org.killbill.billing.payment.plugin.api.PaymentInfoPlugin;
 import org.killbill.billing.util.entity.Entity;
 
 public interface Refund extends Entity {
@@ -64,5 +63,5 @@ public interface Refund extends Entity {
      *
      * @return the additional info from the plugin
      */
-    public RefundInfoPlugin getRefundInfoPlugin();
+    public PaymentInfoPlugin getRefundInfoPlugin();
 }

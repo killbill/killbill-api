@@ -66,11 +66,6 @@ public interface DirectPayment extends Entity {
     Currency getCurrency();
 
     /**
-     * @return the payment status of the latest transaction
-     */
-    PaymentStatus getPaymentStatus();
-
-    /**
      * @return the list of attempts on that payment
      */
     List<DirectPaymentTransaction> getTransactions();

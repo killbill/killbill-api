@@ -4,6 +4,8 @@
     Separate refund and credit (https://github.com/killbill/killbill/issues/187)
     Add chargeback support (https://github.com/killbill/killbill/issues/187)
     Add Tax invoice item
+    Deprecate RefundInfoPlugin for PaymentInfoPlugin
+    Remove PaymentStatus from DirectPayment
 
 0.9.5
     Introduction of PaymentGatewayApi (unstable)

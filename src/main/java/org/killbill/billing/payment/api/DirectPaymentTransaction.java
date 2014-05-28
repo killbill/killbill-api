@@ -67,7 +67,7 @@ public interface DirectPaymentTransaction extends Entity {
     String getGatewayErrorMsg();
 
     /**
-     * @return the status for that attempt
+     * @return the status for that transaction
      */
     PaymentStatus getPaymentStatus();
 
