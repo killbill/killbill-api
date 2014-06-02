@@ -25,6 +25,7 @@ import org.killbill.billing.invoice.api.InvoicePaymentApi;
 import org.killbill.billing.invoice.api.InvoiceUserApi;
 import org.killbill.billing.osgi.api.config.PluginConfigServiceApi;
 import org.killbill.billing.payment.api.PaymentApi;
+import org.killbill.billing.security.api.SecurityApi;
 import org.killbill.billing.tenant.api.TenantUserApi;
 import org.killbill.billing.usage.api.UsageUserApi;
 import org.killbill.billing.util.api.AuditUserApi;
@@ -79,4 +80,6 @@ public interface OSGIKillbill {
      * @return the PluginConfigServiceApi
      */
     public PluginConfigServiceApi getPluginConfigServiceApi();
+
+    public SecurityApi getSecurityApi();
 }
