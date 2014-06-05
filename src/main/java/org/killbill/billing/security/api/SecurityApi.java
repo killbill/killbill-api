@@ -35,6 +35,11 @@ public interface SecurityApi {
     public void login(Object principal, Object credentials);
 
     /**
+     * Log out the current user and invalidate and/or remove any associated entities (e.g. session).
+     */
+    public void logout();
+
+    /**
      * Return the set of permissions for the currently logged-in user.
      *
      * @param context tenant context
