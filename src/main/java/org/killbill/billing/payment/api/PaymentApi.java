@@ -49,7 +49,7 @@ public interface PaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public Payment createPayment(Account account, UUID invoiceId, BigDecimal amount, Iterable<PluginProperty> properties, CallContext context)
+    public DirectPayment createPayment(Account account, UUID invoiceId, BigDecimal amount, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
@@ -61,7 +61,7 @@ public interface PaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_CREATE_EXTERNAL_PAYMENT)
-    public Payment createExternalPayment(Account account, UUID invoiceId, BigDecimal amount, CallContext context)
+    public DirectPayment createExternalPayment(Account account, UUID invoiceId, BigDecimal amount, CallContext context)
             throws PaymentApiException;
 
     /**
@@ -97,7 +97,7 @@ public interface PaymentApi {
      * @return
      * @throws PaymentApiException
      */
-    public Payment retryPayment(Account account, UUID paymentId, Iterable<PluginProperty> properties, CallContext context)
+    public DirectPayment retryPayment(Account account, UUID paymentId, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
@@ -112,7 +112,7 @@ public interface PaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_REFUND)
-    public Refund createRefund(Account account, UUID paymentId, BigDecimal refundAmount, Iterable<PluginProperty> properties, CallContext context)
+    public DirectPayment createRefund(Account account, UUID paymentId, BigDecimal refundAmount, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
@@ -131,7 +131,7 @@ public interface PaymentApi {
      * @param context        the call context  @return the refund
      * @throws PaymentApiException
      */
-    public Refund getRefund(UUID refundId, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
+    public DirectPayment getRefund(UUID refundId, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
     /**
@@ -146,7 +146,7 @@ public interface PaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions({PAYMENT_CAN_REFUND, INVOICE_CAN_ADJUST})
-    public Refund createRefundWithAdjustment(Account account, UUID paymentId, BigDecimal refundAmount, Iterable<PluginProperty> properties, CallContext context)
+    public DirectPayment createRefundWithAdjustment(Account account, UUID paymentId, BigDecimal refundAmount, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
@@ -162,7 +162,7 @@ public interface PaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions({PAYMENT_CAN_REFUND, INVOICE_CAN_ITEM_ADJUST})
-    public Refund createRefundWithItemsAdjustments(Account account, UUID paymentId, Set<UUID> invoiceItemIds, Iterable<PluginProperty> properties, CallContext context)
+    public DirectPayment createRefundWithItemsAdjustments(Account account, UUID paymentId, Set<UUID> invoiceItemIds, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
@@ -178,7 +178,7 @@ public interface PaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions({PAYMENT_CAN_REFUND, INVOICE_CAN_ITEM_ADJUST})
-    public Refund createRefundWithItemsAdjustments(Account account, UUID paymentId, Map<UUID, BigDecimal> invoiceItemIdsWithAmounts, Iterable<PluginProperty> properties, CallContext context)
+    public DirectPayment createRefundWithItemsAdjustments(Account account, UUID paymentId, Map<UUID, BigDecimal> invoiceItemIdsWithAmounts, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
@@ -187,7 +187,7 @@ public interface PaymentApi {
      * @return the list of refund on this account
      * @throws PaymentApiException
      */
-    public List<Refund> getAccountRefunds(Account account, TenantContext context)
+    public List<DirectPayment> getAccountRefunds(Account account, TenantContext context)
             throws PaymentApiException;
 
     /**
@@ -196,7 +196,7 @@ public interface PaymentApi {
      * @return the list of refund on this account
      * @throws PaymentApiException
      */
-    public List<Refund> getPaymentRefunds(UUID paymentId, TenantContext context)
+    public List<DirectPayment> getPaymentRefunds(UUID paymentId, TenantContext context)
             throws PaymentApiException;
 
     /**
@@ -205,7 +205,7 @@ public interface PaymentApi {
      * @return the list of payment on this invoice
      * @throws PaymentApiException
      */
-    public List<Payment> getInvoicePayments(UUID invoiceId, TenantContext context)
+    public List<DirectPayment> getInvoicePayments(UUID invoiceId, TenantContext context)
             throws PaymentApiException;
 
     /**
@@ -214,7 +214,7 @@ public interface PaymentApi {
      * @return the list of payment on this account
      * @throws PaymentApiException
      */
-    public List<Payment> getAccountPayments(UUID accountId, TenantContext context)
+    public List<DirectPayment> getAccountPayments(UUID accountId, TenantContext context)
             throws PaymentApiException;
 
     /**
@@ -225,7 +225,7 @@ public interface PaymentApi {
      * @return the payment
      * @throws PaymentApiException
      */
-    public Payment getPayment(UUID paymentId, final boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
+    public DirectPayment getPayment(UUID paymentId, final boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
     /**
@@ -237,7 +237,7 @@ public interface PaymentApi {
      * @param context    the user context
      * @return the list of payments for that tenant
      */
-    public Pagination<Payment> getPayments(Long offset, Long limit, Iterable<PluginProperty> properties, TenantContext context);
+    public Pagination<DirectPayment> getPayments(Long offset, Long limit, Iterable<PluginProperty> properties, TenantContext context);
 
     /**
      * Find all payments in a given plugin
@@ -250,7 +250,7 @@ public interface PaymentApi {
      * @return the list of payments for that tenant
      * @throws PaymentApiException
      */
-    public Pagination<Payment> getPayments(Long offset, Long limit, String pluginName, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
+    public Pagination<DirectPayment> getPayments(Long offset, Long limit, String pluginName, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
 
     /**
      * Find all payments matching the search key across all plugins
@@ -265,7 +265,7 @@ public interface PaymentApi {
      * @param context    the user context
      * @return the list of payments matching this search key for that tenant
      */
-    public Pagination<Payment> searchPayments(String searchKey, Long offset, Long limit, Iterable<PluginProperty> properties, TenantContext context);
+    public Pagination<DirectPayment> searchPayments(String searchKey, Long offset, Long limit, Iterable<PluginProperty> properties, TenantContext context);
 
     /**
      * Find all payments matching the search key in a given plugin
@@ -282,7 +282,7 @@ public interface PaymentApi {
      * @return the list of payments matching this search key for that tenant
      * @throws PaymentApiException
      */
-    public Pagination<Payment> searchPayments(String searchKey, Long offset, Long limit, String pluginName, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
+    public Pagination<DirectPayment> searchPayments(String searchKey, Long offset, Long limit, String pluginName, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
 
     /**
      * Find all refunds across all plugins
@@ -293,7 +293,7 @@ public interface PaymentApi {
      * @param context    the user context
      * @return the list of refunds for that tenant
      */
-    public Pagination<Refund> getRefunds(Long offset, Long limit, Iterable<PluginProperty> properties, TenantContext context);
+    public Pagination<DirectPayment> getRefunds(Long offset, Long limit, Iterable<PluginProperty> properties, TenantContext context);
 
     /**
      * Find all refunds in a given plugin
@@ -306,7 +306,7 @@ public interface PaymentApi {
      * @return the list of refunds for that tenant
      * @throws PaymentApiException
      */
-    public Pagination<Refund> getRefunds(Long offset, Long limit, String pluginName, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
+    public Pagination<DirectPayment> getRefunds(Long offset, Long limit, String pluginName, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
 
     /**
      * Find all refunds matching the search key across all plugins
@@ -321,7 +321,7 @@ public interface PaymentApi {
      * @param context    the user context
      * @return the list of refunds matching this search key for that tenant
      */
-    public Pagination<Refund> searchRefunds(String searchKey, Long offset, Long limit, Iterable<PluginProperty> properties, TenantContext context);
+    public Pagination<DirectPayment> searchRefunds(String searchKey, Long offset, Long limit, Iterable<PluginProperty> properties, TenantContext context);
 
     /**
      * Find all refunds matching the search key in a given plugin
@@ -338,7 +338,7 @@ public interface PaymentApi {
      * @return the list of refunds matching this search key for that tenant
      * @throws PaymentApiException
      */
-    public Pagination<Refund> searchRefunds(String searchKey, Long offset, Long limit, String pluginName, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
+    public Pagination<DirectPayment> searchRefunds(String searchKey, Long offset, Long limit, String pluginName, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
 
     /**
      * @return a list of all the payment plugins registered

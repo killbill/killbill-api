@@ -25,8 +25,9 @@ import java.util.UUID;
 import org.joda.time.DateTime;
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.payment.api.PluginProperty;
+import org.killbill.billing.payment.api.TransactionType;
 
-public interface PaymentInfoPlugin {
+public interface PaymentTransactionInfoPlugin {
 
     /**
      * @return the id in Kill Bill
@@ -34,12 +35,22 @@ public interface PaymentInfoPlugin {
     public UUID getKbPaymentId();
 
     /**
-     * @return payment amount
+     * @return the id in Kill Bill
+     */
+    public UUID getKbTransactionPaymentId();
+
+    /**
+     * The payment transaction type
+     */
+    public TransactionType getTransactionType();
+
+    /**
+     * @return processed amount
      */
     public BigDecimal getAmount();
 
     /**
-     * @return payment currency
+     * @return processed currency
      */
     public Currency getCurrency();
 

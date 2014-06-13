@@ -56,9 +56,24 @@ public interface DirectPayment extends Entity {
     BigDecimal getCapturedAmount();
 
     /**
+     * @return the purchased amount
+     */
+    BigDecimal getPurchasedAmount();
+
+    /**
+     * @return the credited amount
+     */
+    BigDecimal getCreditedAmount();
+
+    /**
      * @return the refunded amount
      */
     BigDecimal getRefundedAmount();
+
+    /**
+     *  @return true if there was a void operation following an authorization
+     */
+    boolean isAuthVoided();
 
     /**
      * @return the currency associated with that payment

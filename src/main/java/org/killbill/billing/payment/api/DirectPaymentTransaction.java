@@ -21,7 +21,7 @@ import java.util.UUID;
 
 import org.joda.time.DateTime;
 import org.killbill.billing.catalog.api.Currency;
-import org.killbill.billing.payment.plugin.api.PaymentInfoPlugin;
+import org.killbill.billing.payment.plugin.api.PaymentTransactionInfoPlugin;
 import org.killbill.billing.util.entity.Entity;
 
 public interface DirectPaymentTransaction extends Entity {
@@ -47,7 +47,7 @@ public interface DirectPaymentTransaction extends Entity {
     DateTime getEffectiveDate();
 
     /**
-     * @return the captured amount
+     * @return the amount
      */
     BigDecimal getAmount();
 
@@ -55,6 +55,16 @@ public interface DirectPaymentTransaction extends Entity {
      * @return the currency associated with that payment
      */
     Currency getCurrency();
+
+    /**
+     * @return the processed amount
+     */
+    BigDecimal getProcessedAmount();
+
+    /**
+     * @return the real currency used by the plugin
+     */
+    Currency getProcessedCurrency();
 
     /**
      * @return the error code from the gateway
@@ -76,5 +86,5 @@ public interface DirectPaymentTransaction extends Entity {
      *
      * @return the additional info from the plugin
      */
-    PaymentInfoPlugin getPaymentInfoPlugin();
+    PaymentTransactionInfoPlugin getPaymentInfoPlugin();
 }
