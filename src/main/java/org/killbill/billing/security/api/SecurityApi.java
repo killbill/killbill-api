@@ -27,6 +27,19 @@ import org.killbill.billing.util.callcontext.TenantContext;
 public interface SecurityApi {
 
     /**
+     * Perform a login attempt.
+     *
+     * @param principal   account identity (e.g. username)
+     * @param credentials account credentials (e.g. password)
+     */
+    public void login(Object principal, Object credentials);
+
+    /**
+     * Log out the current user and invalidate and/or remove any associated entities (e.g. session).
+     */
+    public void logout();
+
+    /**
      * Return the set of permissions for the currently logged-in user.
      *
      * @param context tenant context
