@@ -200,17 +200,16 @@ public interface DirectPaymentApi {
      * Transition a currently PENDING payment into either a SUCCESS or a FAILURE
      *
      * @param account                             the account
-     * @param paymentId                           the payment id
      * @param isSuccess                           whether payment is successful or not
      * @param context                             the call context
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public void notifyPendingPaymentOfStateChanged(final Account account, final UUID paymentId, String directPaymentExternalKey, final boolean isSuccess, final CallContext context) throws PaymentApiException;
+    public void notifyPendingPaymentOfStateChanged(final Account account, String directTransactionExternalKey, boolean isSuccess, CallContext context) throws PaymentApiException;
 
 
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public void notifyPaymentPaymentOfChargeback(final Account account, final UUID paymentId, String directPaymentExternalKey, final boolean isSuccess, final CallContext context) throws PaymentApiException;
+    public void notifyPaymentPaymentOfChargeback(final Account account, String paymentExternalKey, String chargebackTransactionExternalKey, BigDecimal amount, Currency currency, CallContext context) throws PaymentApiException;
 
 
 
