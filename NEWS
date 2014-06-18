@@ -6,6 +6,7 @@
     Add Tax invoice item
     Deprecate RefundInfoPlugin for PaymentInfoPlugin
     Remove PaymentStatus from DirectPayment
+    security: add login/logout
 
 0.9.5
     Introduction of PaymentGatewayApi (unstable)
