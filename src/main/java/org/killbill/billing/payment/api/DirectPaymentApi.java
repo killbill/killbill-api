@@ -212,11 +212,13 @@ public interface DirectPaymentApi {
      * @param account                          the account
      * @param directPaymentTransactionId       the direct transaction id
      * @param chargebackTransactionExternalKey the chargeback external key
+     * @param amount                           the amount to chargeback
+     * @param currency                         the amount currency
      * @param context                          the call context
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
-    public void notifyChargeback(Account account, UUID directPaymentTransactionId, String chargebackTransactionExternalKey, CallContext context) throws PaymentApiException;
+    public void notifyChargeback(Account account, UUID directPaymentTransactionId, String chargebackTransactionExternalKey, BigDecimal amount, Currency currency, CallContext context) throws PaymentApiException;
 
     /**
      * @param accountId      the account id
