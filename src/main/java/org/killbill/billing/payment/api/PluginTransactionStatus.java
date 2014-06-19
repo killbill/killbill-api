@@ -16,35 +16,17 @@
 
 package org.killbill.billing.payment.api;
 
-import org.killbill.billing.util.entity.Entity;
-import org.joda.time.DateTime;
-
-import java.util.UUID;
-
-public interface PaymentAttempt extends Entity {
-
-    /**
-     * @return the payment attempt id
-     */
-    UUID getId();
-
-    /**
-     * @return the date when that attempt was made
-     */
-    DateTime getEffectiveDate();
-
-    /**
-     * @return the error code from the gateway
-     */
-    String getGatewayErrorCode();
-
-    /**
-     * @return the error message from the gateway
-     */
-    String getGatewayErrorMsg();
-
-    /**
-     * @return the status for that attempt
-     */
-    PaymentStatus getPaymentStatus();
+public enum PluginTransactionStatus {
+    /* Success! */
+    SUCCESS,
+    /* Initial status */
+    UNKNOWN,
+    /* The payment is asynchronous and final state will be updated later */
+    PENDING,
+    /* Plugin failed to make the payment */
+    PAYMENT_FAILURE,
+    /* Exception from plugin, state is unknown */
+    PLUGIN_FAILURE,
+    /* Payment Subsystem is off */
+    PAYMENT_SYSTEM_OFF;
 }
