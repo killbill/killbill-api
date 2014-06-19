@@ -25,7 +25,6 @@ import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_CHARGEBACK;
-import static org.killbill.billing.security.Permission.PAYMENT_CAN_REFUND;
 
 public interface InvoicePaymentApi {
 

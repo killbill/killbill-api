@@ -20,7 +20,6 @@ package org.killbill.billing.payment.api;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 import org.killbill.billing.account.api.Account;
@@ -30,6 +29,8 @@ import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.entity.Pagination;
 
+import static org.killbill.billing.security.Permission.PAYMENT_CAN_CHARGEBACK;
+import static org.killbill.billing.security.Permission.PAYMENT_CAN_REFUND;
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_TRIGGER_PAYMENT;
 
 public interface DirectPaymentApi {
@@ -94,7 +95,6 @@ public interface DirectPaymentApi {
                                         Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
-
     /**
      * Combine an authorize and capture direct payment.
      *
@@ -146,7 +146,7 @@ public interface DirectPaymentApi {
      * @return the payment
      * @throws PaymentApiException
      */
-    @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
+    @RequiresPermissions(PAYMENT_CAN_REFUND)
     public DirectPayment createRefund(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
                                       String directPaymentTransactionExternalKey, Iterable<PluginProperty> properties,
                                       CallContext context)
@@ -166,12 +166,11 @@ public interface DirectPaymentApi {
      * @return the payment
      * @throws PaymentApiException
      */
-    @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
+    @RequiresPermissions(PAYMENT_CAN_REFUND)
     public DirectPayment createRefundWithPaymentControl(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
-                                      String directPaymentTransactionExternalKey, Iterable<PluginProperty> properties,
-                                      PaymentOptions paymentOptions, CallContext context)
+                                                        String directPaymentTransactionExternalKey, Iterable<PluginProperty> properties,
+                                                        PaymentOptions paymentOptions, CallContext context)
             throws PaymentApiException;
-
 
     /**
      * Credit a payment method.
@@ -197,29 +196,37 @@ public interface DirectPaymentApi {
             throws PaymentApiException;
 
     /**
-     * Transition a currently PENDING payment into either a SUCCESS or a FAILURE
+     * Transition a currently PENDING transaction into either a SUCCESS or a FAILURE
      *
-     * @param account                             the account
-     * @param isSuccess                           whether payment is successful or not
-     * @param context                             the call context
+     * @param account                    the account
+     * @param directPaymentTransactionId the direct transaction id
+     * @param isSuccess                  whether the transaction is successful or not
+     * @param context                    the call context
      * @throws PaymentApiException
      */
-    @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public void notifyPendingPaymentOfStateChanged(final Account account, String directTransactionExternalKey, boolean isSuccess, CallContext context) throws PaymentApiException;
-
-
-    @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public void notifyPaymentPaymentOfChargeback(final Account account, String paymentExternalKey, String chargebackTransactionExternalKey, BigDecimal amount, Currency currency, CallContext context) throws PaymentApiException;
-
-
+    public void notifyPendingTransactionOfStateChanged(Account account, UUID directPaymentTransactionId, boolean isSuccess, CallContext context) throws PaymentApiException;
 
     /**
-     * @param accountId the account id
-     * @param context   the call context
+     * Record a chargeback
+     *
+     * @param account                          the account
+     * @param directPaymentTransactionId       the direct transaction id
+     * @param chargebackTransactionExternalKey the chargeback external key
+     * @param context                          the call context
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
+    public void notifyChargeback(Account account, UUID directPaymentTransactionId, String chargebackTransactionExternalKey, CallContext context) throws PaymentApiException;
+
+    /**
+     * @param accountId      the account id
+     * @param withPluginInfo whether to fetch plugin info
+     * @param properties     plugin specific properties
+     * @param context        the call context
      * @return the list of direct payments on this account
      * @throws PaymentApiException
      */
-    public List<DirectPayment> getAccountPayments(UUID accountId, TenantContext context)
+    public List<DirectPayment> getAccountPayments(UUID accountId, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
     /**
@@ -230,7 +237,7 @@ public interface DirectPaymentApi {
      * @return the payment
      * @throws PaymentApiException
      */
-    public DirectPayment getPayment(UUID directPaymentId, final boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
+    public DirectPayment getPayment(UUID directPaymentId, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
     /**
@@ -241,32 +248,34 @@ public interface DirectPaymentApi {
      * @return the payment
      * @throws PaymentApiException
      */
-    public DirectPayment getPaymentByExternalKey(String paymentExternalKey, final boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
+    public DirectPayment getPaymentByExternalKey(String paymentExternalKey, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
     /**
      * Find all payments across all plugins
      *
-     * @param offset     the offset of the first result
-     * @param limit      the maximum number of results to retrieve
-     * @param properties plugin specific properties
-     * @param context    the user context
+     * @param offset         the offset of the first result
+     * @param limit          the maximum number of results to retrieve
+     * @param withPluginInfo whether to fetch plugin info
+     * @param properties     plugin specific properties
+     * @param context        the user context
      * @return the list of payments for that tenant
      */
-    public Pagination<DirectPayment> getPayments(Long offset, Long limit, Iterable<PluginProperty> properties, TenantContext context);
+    public Pagination<DirectPayment> getPayments(Long offset, Long limit, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context);
 
     /**
      * Find all payments in a given plugin
      *
-     * @param offset     the offset of the first result
-     * @param limit      the maximum number of results to retrieve
-     * @param pluginName the payment plugin name
-     * @param properties plugin specific properties
-     * @param context    the user context
+     * @param offset         the offset of the first result
+     * @param limit          the maximum number of results to retrieve
+     * @param pluginName     the payment plugin name
+     * @param withPluginInfo whether to fetch plugin info
+     * @param properties     plugin specific properties
+     * @param context        the user context
      * @return the list of payments for that tenant
      * @throws PaymentApiException
      */
-    public Pagination<DirectPayment> getPayments(Long offset, Long limit, String pluginName, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
+    public Pagination<DirectPayment> getPayments(Long offset, Long limit, String pluginName, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
 
     /**
      * Find all payments matching the search key across all plugins
@@ -274,14 +283,15 @@ public interface DirectPaymentApi {
      * The match will be plugin specific: for instance some plugins will try to match the key
      * against the transaction ids, etc.
      *
-     * @param searchKey  the search key
-     * @param offset     the offset of the first result
-     * @param limit      the maximum number of results to retrieve
-     * @param properties plugin specific properties
-     * @param context    the user context
+     * @param searchKey      the search key
+     * @param offset         the offset of the first result
+     * @param limit          the maximum number of results to retrieve
+     * @param withPluginInfo whether to fetch plugin info
+     * @param properties     plugin specific properties
+     * @param context        the user context
      * @return the list of payments matching this search key for that tenant
      */
-    public Pagination<DirectPayment> searchPayments(String searchKey, Long offset, Long limit, Iterable<PluginProperty> properties, TenantContext context);
+    public Pagination<DirectPayment> searchPayments(String searchKey, Long offset, Long limit, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context);
 
     /**
      * Find all payments matching the search key in a given plugin
@@ -289,25 +299,21 @@ public interface DirectPaymentApi {
      * The match will be plugin specific: for instance some plugins will try to match the key
      * against the transaction ids, etc.
      *
-     * @param searchKey  the search key
-     * @param offset     the offset of the first result
-     * @param limit      the maximum number of results to retrieve
-     * @param pluginName the payment plugin name
-     * @param properties plugin specific properties
-     * @param context    the user context
+     * @param searchKey      the search key
+     * @param offset         the offset of the first result
+     * @param limit          the maximum number of results to retrieve
+     * @param pluginName     the payment plugin name
+     * @param withPluginInfo whether to fetch plugin info
+     * @param properties     plugin specific properties
+     * @param context        the user context
      * @return the list of payments matching this search key for that tenant
      * @throws PaymentApiException
      */
-    public Pagination<DirectPayment> searchPayments(String searchKey, Long offset, Long limit, String pluginName, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
+    public Pagination<DirectPayment> searchPayments(String searchKey, Long offset, Long limit, String pluginName, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
 
     /**
-     * @return a list of all the payment plugins registered
-     */
-    public Set<String> getAvailablePlugins();
-
-    /**
-     * @param pluginName        the plugin name
      * @param account           the account
+     * @param pluginName        the plugin name
      * @param setDefault        whether this should be set as a default payment method
      * @param paymentMethodInfo the details for the payment method
      * @param properties        plugin specific properties
@@ -315,54 +321,56 @@ public interface DirectPaymentApi {
      * @return the uuid of the payment method
      * @throws PaymentApiException
      */
-    public UUID addPaymentMethod(String pluginName, Account account, boolean setDefault, PaymentMethodPlugin paymentMethodInfo, Iterable<PluginProperty> properties, CallContext context)
+    public UUID addPaymentMethod(Account account, String pluginName, boolean setDefault, PaymentMethodPlugin paymentMethodInfo, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
-     * @param account        the account id
+     * @param accountId      the account id
      * @param withPluginInfo whether we want to retrieve the plugin info for that payment method
      * @param properties     plugin specific properties
      * @param context        the call context
      * @return the list of payment methods
      * @throws PaymentApiException
      */
-    public List<PaymentMethod> getPaymentMethods(Account account, final boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
+    public List<PaymentMethod> getAccountPaymentMethods(UUID accountId, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
     /**
-     * @param paymentMethodId  the payment methid id
+     * @param paymentMethodId  the payment method id
      * @param includedInactive returns the payment method even if this is not active
      * @param withPluginInfo   whether we want to retrieve the plugin info for that payment method
      * @param properties       plugin specific properties
      * @param context          the call context   @return the payment method
      * @throws PaymentApiException
      */
-    public PaymentMethod getPaymentMethodById(UUID paymentMethodId, final boolean includedInactive, final boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
+    public PaymentMethod getPaymentMethodById(UUID paymentMethodId, boolean includedInactive, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
     /**
      * Find all payment methods across all plugins
      *
-     * @param offset     the offset of the first result
-     * @param limit      the maximum number of results to retrieve
-     * @param properties plugin specific properties
-     * @param context    the user context
+     * @param offset         the offset of the first result
+     * @param limit          the maximum number of results to retrieve
+     * @param withPluginInfo whether to fetch plugin info
+     * @param properties     plugin specific properties
+     * @param context        the user context
      * @return the list of payment methods for that tenant
      */
-    public Pagination<PaymentMethod> getPaymentMethods(Long offset, Long limit, Iterable<PluginProperty> properties, TenantContext context);
+    public Pagination<PaymentMethod> getPaymentMethods(Long offset, Long limit, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context);
 
     /**
      * Find all payment methods in a given plugin
      *
-     * @param offset     the offset of the first result
-     * @param limit      the maximum number of results to retrieve
-     * @param pluginName the payment plugin name
-     * @param properties plugin specific properties
-     * @param context    the user context
+     * @param offset         the offset of the first result
+     * @param limit          the maximum number of results to retrieve
+     * @param pluginName     the payment plugin name
+     * @param withPluginInfo whether to fetch plugin info
+     * @param properties     plugin specific properties
+     * @param context        the user context
      * @return the list of payment methods for that tenant
      * @throws PaymentApiException
      */
-    public Pagination<PaymentMethod> getPaymentMethods(Long offset, Long limit, String pluginName, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
+    public Pagination<PaymentMethod> getPaymentMethods(Long offset, Long limit, String pluginName, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
 
     /**
      * Find all payment methods matching the search key across all plugins
@@ -370,14 +378,15 @@ public interface DirectPaymentApi {
      * The match will be plugin specific: for instance some plugins will try to match the key
      * against the last 4 credit cards digits, agreement ids, etc.
      *
-     * @param searchKey  the search key
-     * @param offset     the offset of the first result
-     * @param limit      the maximum number of results to retrieve
-     * @param properties plugin specific properties
-     * @param context    the user context
+     * @param searchKey      the search key
+     * @param offset         the offset of the first result
+     * @param limit          the maximum number of results to retrieve
+     * @param withPluginInfo whether to fetch plugin info
+     * @param properties     plugin specific properties
+     * @param context        the user context
      * @return the list of payment methods matching this search key for that tenant
      */
-    public Pagination<PaymentMethod> searchPaymentMethods(String searchKey, Long offset, Long limit, Iterable<PluginProperty> properties, TenantContext context);
+    public Pagination<PaymentMethod> searchPaymentMethods(String searchKey, Long offset, Long limit, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context);
 
     /**
      * Find all payment methods matching the search key in a given plugin
@@ -385,16 +394,17 @@ public interface DirectPaymentApi {
      * The match will be plugin specific: for instance some plugins will try to match the key
      * against the last 4 credit cards digits, agreement ids, etc.
      *
-     * @param searchKey  the search key
-     * @param offset     the offset of the first result
-     * @param limit      the maximum number of results to retrieve
-     * @param pluginName the payment plugin name
-     * @param properties plugin specific properties
-     * @param context    the user context
+     * @param searchKey      the search key
+     * @param offset         the offset of the first result
+     * @param limit          the maximum number of results to retrieve
+     * @param pluginName     the payment plugin name
+     * @param withPluginInfo whether to fetch plugin info
+     * @param properties     plugin specific properties
+     * @param context        the user context
      * @return the list of payment methods matching this search key for that tenant
      * @throws PaymentApiException
      */
-    public Pagination<PaymentMethod> searchPaymentMethods(String searchKey, Long offset, Long limit, String pluginName, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
+    public Pagination<PaymentMethod> searchPaymentMethods(String searchKey, Long offset, Long limit, String pluginName, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
 
     /**
      * @param account                                  the account
@@ -404,7 +414,7 @@ public interface DirectPaymentApi {
      * @param context                                  the call context
      * @throws PaymentApiException
      */
-    public void deletedPaymentMethod(Account account, UUID paymentMethodId, boolean deleteDefaultPaymentMethodWithAutoPayOff, Iterable<PluginProperty> properties, CallContext context)
+    public void deletePaymentMethod(Account account, UUID paymentMethodId, boolean deleteDefaultPaymentMethodWithAutoPayOff, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
@@ -418,14 +428,14 @@ public interface DirectPaymentApi {
             throws PaymentApiException;
 
     /**
-     * @param pluginName the name of the plugin
      * @param account    the account
+     * @param pluginName the name of the plugin
      * @param properties plugin specific properties
      * @param context    the call context
      * @return the list of payment methods for that account
      * @throws PaymentApiException
      */
-    public List<PaymentMethod> refreshPaymentMethods(String pluginName, Account account, Iterable<PluginProperty> properties, CallContext context)
+    public List<PaymentMethod> refreshPaymentMethods(Account account, String pluginName, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
