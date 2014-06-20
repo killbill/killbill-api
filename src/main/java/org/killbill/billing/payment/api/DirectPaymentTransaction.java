@@ -79,7 +79,7 @@ public interface DirectPaymentTransaction extends Entity {
     /**
      * @return the status for that transaction
      */
-    PaymentStatus getPaymentStatus();
+    TransactionStatus getTransactionStatus();
 
     /**
      * This will only be filled when the call requires the details from the plugin

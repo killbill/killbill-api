@@ -1,7 +1,9 @@
 /*
  * Copyright 2010-2013 Ning, Inc.
+ * Copyright 2014 Groupon, Inc
+ * Copyright 2014 The Billing Project, LLC
  *
- * Ning licenses this file to you under the Apache License, version 2.0
+ * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
  * License.  You may obtain a copy of the License at:
  *
@@ -16,23 +18,17 @@
 
 package org.killbill.billing.payment.api;
 
-public enum PaymentStatus {
+public enum TransactionStatus {
     /* Success! */
     SUCCESS,
-    /* Initial status for Payment and PaymentAttempt */
+    /* Initial status */
     UNKNOWN,
-    /* The plugin is asynchronous and final state will be updated later */
+    /* The payment is asynchronous and final state will be updated later */
     PENDING,
-    /* Status for Payment when AUTO_PAY_OFF is turned on */
-    AUTO_PAY_OFF,
-    /* Status for Payment and PaymentAttempt when the plugin failed to make the Payment and we will schedule a FailedPaymentRetry */
+    /* Plugin failed to make the payment */
     PAYMENT_FAILURE,
-    /* Payment failure , we already retried a maximum of time */
-    PAYMENT_FAILURE_ABORTED,
-    /* Exception from plugin, state is unknown and needs to be retried */
+    /* Exception from plugin, state is unknown */
     PLUGIN_FAILURE,
-    /* Exception from plugin, we already retried a maximum of time */
-    PLUGIN_FAILURE_ABORTED,
     /* Payment Subsystem is off */
     PAYMENT_SYSTEM_OFF;
 }
