@@ -274,7 +274,7 @@ public enum ErrorCode {
     PAYMENT_NO_SUCH_SUCCESS_PAYMENT(7024, "Payment %s did not succeed"),
     PAYMENT_REFUND_AMOUNT_TOO_LARGE(7025, "Refund amount if larger than payment"),
     PAYMENT_REFUND_AMOUNT_NEGATIVE_OR_NULL(7026, "Refund amount needs to be strictly positive"),
-    PAYMENT_BAD_ACCOUNT(7027, "Account %s has payments left in an unknwon state"),
+    PAYMENT_BAD_ACCOUNT(7027, "Account %s has payments left in an unknown state"),
     PAYMENT_NO_SUCH_PAYMENT_PLUGIN(7028, "Payment plugin %s is not registered"),
     PAYMENT_NOT_PENDING(7029, "Payment % is not in a PENDING state"),
 
@@ -286,6 +286,7 @@ public enum ErrorCode {
     PAYMENT_PLUGIN_SEARCH_PAYMENTS(7105, "Error while searching payments in plugin %s for search key %s"),
     PAYMENT_PLUGIN_GET_REFUND_INFO(7106, "Failed to retrieve refund plugin info for refund %s: %s"),
     PAYMENT_PLUGIN_SEARCH_REFUNDS(7107, "Error while searching refunds in plugin %s for search key %s"),
+    PAYMENT_PLUGIN_EXCEPTION(7199, "Plugin exception %s"),
 
     /*
     *

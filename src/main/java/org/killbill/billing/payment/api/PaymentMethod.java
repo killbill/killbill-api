@@ -24,6 +24,8 @@ public interface PaymentMethod extends Entity {
 
     public UUID getId();
 
+    public String getExternalKey();
+
     public UUID getAccountId();
 
     public Boolean isActive();
