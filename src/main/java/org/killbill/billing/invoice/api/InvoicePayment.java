@@ -69,7 +69,7 @@ public interface InvoicePayment extends Entity {
      *
      * @return payment cookie id
      */
-    UUID getPaymentCookieId();
+    String getPaymentCookieId();
 
     Currency getProcessedCurrency();
 
