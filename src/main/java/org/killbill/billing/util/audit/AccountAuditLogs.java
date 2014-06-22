@@ -41,15 +41,9 @@ public interface AccountAuditLogs {
 
     public List<AuditLog> getAuditLogsForPayment(UUID paymentId);
 
-    public List<AuditLog> getAuditLogsForDirectPayment(UUID directPaymentId);
-
-    public List<AuditLog> getAuditLogsForDirectPaymentTransaction(UUID directPaymentTransactionId);
+    public List<AuditLog> getAuditLogsForPaymentTransaction(UUID directPaymentTransactionId);
 
     public List<AuditLog> getAuditLogsForPaymentMethod(UUID paymentMethodId);
-
-    public List<AuditLog> getAuditLogsForRefund(UUID refundId);
-
-    public List<AuditLog> getAuditLogsForChargeback(UUID chargebackId);
 
     public List<AuditLog> getAuditLogsForTag(UUID tagId);
 
