@@ -38,6 +38,8 @@ public interface InvoicePaymentApi {
 
     public List<InvoicePayment> getInvoicePayments(UUID paymentId, TenantContext context);
 
+    public List<InvoicePayment> getInvoicePaymentsByAccount(UUID accountId, TenantContext context);
+
     public InvoicePayment getInvoicePaymentForAttempt(UUID paymentId, TenantContext context);
 
     @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
