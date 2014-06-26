@@ -277,6 +277,8 @@ public enum ErrorCode {
     PAYMENT_BAD_ACCOUNT(7027, "Account %s has payments left in an unknown state"),
     PAYMENT_NO_SUCH_PAYMENT_PLUGIN(7028, "Payment plugin %s is not registered"),
     PAYMENT_NOT_PENDING(7029, "Payment % is not in a PENDING state"),
+    PAYMENT_ACTIVE_TRANSACTION_KEY_EXISTS(7030, "Successful transaction with external key %s already exists"),
+    PAYMENT_INVALID_PARAMETER(7031, "Invalid parameter %s: %s"),
 
     PAYMENT_PLUGIN_TIMEOUT(7100, "Plugin timeout for account %s and invoice %s"),
     PAYMENT_PLUGIN_ACCOUNT_INIT(7101, "Account initialization for account %s and plugin % s failed: %s"),
