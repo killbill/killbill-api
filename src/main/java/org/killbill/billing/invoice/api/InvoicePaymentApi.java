@@ -16,45 +16,14 @@
 
 package org.killbill.billing.invoice.api;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
-import org.killbill.billing.security.RequiresPermissions;
-import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 
-import static org.killbill.billing.security.Permission.PAYMENT_CAN_CHARGEBACK;
-
 public interface InvoicePaymentApi {
-
-    /**
-     * @param accountId id of the account
-     * @return All invoices, including migrated invoices
-     */
-    public List<Invoice> getAllInvoicesByAccount(UUID accountId, TenantContext context);
-
-    public Invoice getInvoice(UUID invoiceId, TenantContext context) throws InvoiceApiException;
 
     public List<InvoicePayment> getInvoicePayments(UUID paymentId, TenantContext context);
 
     public List<InvoicePayment> getInvoicePaymentsByAccount(UUID accountId, TenantContext context);
-
-    public InvoicePayment getInvoicePaymentForAttempt(UUID paymentId, TenantContext context);
-
-    @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
-    public InvoicePayment createChargeback(UUID invoicePaymentId, BigDecimal amount, CallContext context) throws InvoiceApiException;
-
-    @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
-    public InvoicePayment createChargeback(UUID invoicePaymentId, CallContext context) throws InvoiceApiException;
-
-    public BigDecimal getRemainingAmountPaid(UUID invoicePaymentId, TenantContext context);
-
-    public List<InvoicePayment> getChargebacksByAccountId(UUID accountId, TenantContext context);
-
-    public UUID getAccountIdFromInvoicePaymentId(UUID uuid, TenantContext context) throws InvoiceApiException;
-
-    public List<InvoicePayment> getChargebacksByPaymentId(UUID paymentId, TenantContext context);
-
-    public InvoicePayment getChargebackById(UUID chargebackId, TenantContext context) throws InvoiceApiException;
 }
