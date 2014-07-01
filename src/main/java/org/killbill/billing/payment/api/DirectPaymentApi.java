@@ -351,6 +351,18 @@ public interface DirectPaymentApi {
             throws PaymentApiException;
 
     /**
+     *
+     * @param paymentMethodExternalKey the payment method external key
+     * @param includedInactive returns the payment method even if this is not active
+     * @param withPluginInfo   whether we want to retrieve the plugin info for that payment method
+     * @param properties       plugin specific properties
+     * @param context          the call context   @return the payment method
+     * @throws PaymentApiException
+     */
+    public PaymentMethod getPaymentMethodByExternalKey(String paymentMethodExternalKey, boolean includedInactive, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
+            throws PaymentApiException;
+
+    /**
      * Find all payment methods across all plugins
      *
      * @param offset         the offset of the first result
