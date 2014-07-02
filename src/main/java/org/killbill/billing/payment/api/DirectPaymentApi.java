@@ -347,8 +347,8 @@ public interface DirectPaymentApi {
     public Pagination<DirectPayment> searchPayments(String searchKey, Long offset, Long limit, String pluginName, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
 
     /**
-     * @param paymentMethodExternalKey the externl key
      * @param account                  the account
+     * @param paymentMethodExternalKey the external key
      * @param pluginName               the plugin name
      * @param setDefault               whether this should be set as a default payment method
      * @param paymentMethodInfo        the details for the payment method
@@ -357,7 +357,7 @@ public interface DirectPaymentApi {
      * @return the uuid of the payment method
      * @throws PaymentApiException
      */
-    public UUID addPaymentMethod(String paymentMethodExternalKey, Account account, String pluginName, boolean setDefault, PaymentMethodPlugin paymentMethodInfo, Iterable<PluginProperty> properties, CallContext context)
+    public UUID addPaymentMethod(Account account, String paymentMethodExternalKey, String pluginName, boolean setDefault, PaymentMethodPlugin paymentMethodInfo, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
