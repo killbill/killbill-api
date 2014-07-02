@@ -206,6 +206,20 @@ public interface DirectPaymentApi {
      */
     public void notifyPendingTransactionOfStateChanged(Account account, UUID directPaymentTransactionId, boolean isSuccess, CallContext context) throws PaymentApiException;
 
+
+    /**
+     * Transition a currently PENDING transaction into either a SUCCESS or a FAILURE
+     *
+     * @param account                    the account
+     * @param directPaymentTransactionId the direct transaction id
+     * @param isSuccess                  whether the transaction is successful or not
+     * @param paymentOptions             options to control payment behavior
+     * @param context                    the call context
+     * @throws PaymentApiException
+     */
+    public void notifyPendingTransactionOfStateChangedWithPaymentControl(Account account, UUID directPaymentTransactionId, boolean isSuccess, PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
+
+
     /**
      * Record a chargeback
      *
@@ -220,6 +234,24 @@ public interface DirectPaymentApi {
      */
     @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
     public DirectPayment notifyChargeback(Account account, UUID directPaymentTransactionId, String chargebackTransactionExternalKey, BigDecimal amount, Currency currency, CallContext context) throws PaymentApiException;
+
+
+
+    /**
+     * Record a chargeback
+     *
+     * @param account                          the account
+     * @param directPaymentTransactionId       the direct transaction id
+     * @param chargebackTransactionExternalKey the chargeback external key
+     * @param amount                           the amount to chargeback
+     * @param currency                         the amount currency
+     * @param paymentOptions                   options to control payment behavior
+     * @param context                          the call context
+     * @return the chargeback transactionId
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
+    public DirectPayment notifyChargebackWithPaymentControl(Account account, UUID directPaymentTransactionId, String chargebackTransactionExternalKey, BigDecimal amount, Currency currency, final PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
 
     /**
      * @param accountId      the account id
