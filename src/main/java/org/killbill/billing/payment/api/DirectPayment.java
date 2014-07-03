@@ -73,7 +73,7 @@ public interface DirectPayment extends Entity {
     /**
      *  @return true if there was a void operation following an authorization
      */
-    boolean isAuthVoided();
+    Boolean isAuthVoided();
 
     /**
      * @return the currency associated with that payment
