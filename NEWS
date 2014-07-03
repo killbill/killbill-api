@@ -1,3 +1,6 @@
+0.9.7
+    Update killbill-oss-parent to 0.7.12
+
 0.9.6
     Invoice:
       Change PaymentCookieId in InvoicePaymentApi to be a string
