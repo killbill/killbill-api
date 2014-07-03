@@ -41,5 +41,4 @@ public class PlanChangeResult {
         return alignment;
     }
 
-
 }

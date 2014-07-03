@@ -16,25 +16,23 @@
 
 package org.killbill.billing.entitlement.api;
 
+import java.util.List;
+import java.util.UUID;
+
+import org.joda.time.LocalDate;
 import org.killbill.billing.catalog.api.BillingActionPolicy;
 import org.killbill.billing.catalog.api.PlanPhaseSpecifier;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
-import org.joda.time.LocalDate;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  * Primary API to manage the creation and retrieval of <code>Entitlement</code>.
- *
  */
 public interface EntitlementApi {
 
     /**
-     *
      * Create a new entitlement for that account.
-     * <p>
+     * <p/>
      * The <code>PlanPhaseSpecifier<code/> should refer to a <code>ProductCategory.BASE</code> of
      * <code>ProductCategory.STANDALONE</code>.
      *
@@ -43,32 +41,28 @@ public interface EntitlementApi {
      * @param externalKey   the external key for that entitlement-- which must be unique in the system
      * @param effectiveDate the date at which the entitlement should start
      * @param context       the context
-     * @return              a new entitlement
-     *
+     * @return a new entitlement
      * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>.
      */
     public Entitlement createBaseEntitlement(UUID accountId, PlanPhaseSpecifier spec, String externalKey, LocalDate effectiveDate, CallContext context)
             throws EntitlementApiException;
 
     /**
-     *
      * Adds an ADD_ON entitlement to previously created entitlement.
-     * <p>
+     * <p/>
      * The <code>PlanPhaseSpecifier<code/> should refer to a <code>ProductCategory.ADD_ON</code>.
      * The new entitlement will be bundled using the externalKey that was specified when creating the
      * base entitlement.
      *
-     * @param bundleId          the id of the bundle
-     * @param spec              the product specification for that new entitlement
+     * @param bundleId      the id of the bundle
+     * @param spec          the product specification for that new entitlement
      * @param effectiveDate the date at which the entitlement should start
-     * @param context           the context
-     * @return                  a new entitlement
-     *
+     * @param context       the context
+     * @return a new entitlement
      * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>
      */
     public Entitlement addEntitlement(UUID bundleId, PlanPhaseSpecifier spec, LocalDate effectiveDate, CallContext context)
             throws EntitlementApiException;
-
 
     /**
      * Simulate a change of product for the BP on that bundle and return the effect it would have on the existing ADD_ON-- if any.
@@ -77,13 +71,11 @@ public interface EntitlementApi {
      * @param targetProductName the target product name for the BP
      * @param effectiveDate     the date at which the change would occur
      * @param context           the context
-     * @return                  the status for the existing ADD_ON <code>Entitlement</code>
-     *
+     * @return the status for the existing ADD_ON <code>Entitlement</code>
      * @throws EntitlementApiException if this operation is not carried on a base plan.
      */
     public List<EntitlementAOStatusDryRun> getDryRunStatusForChange(UUID bundleId, final String targetProductName, final LocalDate effectiveDate, final TenantContext context)
             throws EntitlementApiException;
-
 
     /**
      * Will pause all entitlements associated with the base entitlement. If there are no ADD_ONN this is only the base entitlement.
@@ -91,12 +83,10 @@ public interface EntitlementApi {
      * @param bundleId
      * @param effectiveDate
      * @param context
-     *
-     *  @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
+     * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
      */
     public void pause(UUID bundleId, LocalDate effectiveDate, CallContext context)
             throws EntitlementApiException;
-
 
     /**
      * Will resume all entitlements associated with the base entitlement. If there are no ADD_ONN this is only the base entitlement.
@@ -104,8 +94,7 @@ public interface EntitlementApi {
      * @param bundleId
      * @param effectiveDate
      * @param context
-     *
-     *  @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
+     * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
      */
     public void resume(UUID bundleId, LocalDate effectiveDate, CallContext context)
             throws EntitlementApiException;
@@ -123,8 +112,8 @@ public interface EntitlementApi {
      *
      * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
     public void block(UUID bundleId, String serviceName, LocalDate effectiveDate, boolean blockBilling, boolean blockEntitlement, boolean blockChange, CallContext context)
-            throws EntitlementApiException;
-    */
+    throws EntitlementApiException;
+     */
 
     /**
      * Will unblock all entitlements associated with the base entitlement. If there are no ADD_ONN this is only the base entitlement.
@@ -136,80 +125,67 @@ public interface EntitlementApi {
      *
      * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
     public void unblock(UUID bundleId, String serviceName, LocalDate effectiveDate, CallContext context)
-            throws EntitlementApiException;
+    throws EntitlementApiException;
      */
 
     /**
-     *
      * Retrieves an <code>Entitlement</code> using its id.
      *
-     * @param id        the id of the entitlement
-     * @param context   the context
-     * @return          the entitlement
-     *
+     * @param id      the id of the entitlement
+     * @param context the context
+     * @return the entitlement
      * @throws EntitlementApiException if the entitlement does not exist
      */
     public Entitlement getEntitlementForId(UUID id, TenantContext context) throws EntitlementApiException;
 
     /**
-     *
      * Retrieves all the <code>Entitlement</code> attached to the base entitlement.
      *
-     * @param bundleId              the id of the bundle
-     * @param context               the context
-     * @return                      a list of entitlements
-     *
+     * @param bundleId the id of the bundle
+     * @param context  the context
+     * @return a list of entitlements
      * @throws EntitlementApiException if the entitlement does not exist
      */
     public List<Entitlement> getAllEntitlementsForBundle(UUID bundleId, TenantContext context)
             throws EntitlementApiException;
 
     /**
-     *
      * Retrieves all the <code>Entitlement</code> for a given account and matching an external key.
      *
-     * @param accountId     the account id
-     * @param externalKey   the external key
-     * @param context       the context
-     *
-     * @return              a list of entitlements
-     *
+     * @param accountId   the account id
+     * @param externalKey the external key
+     * @param context     the context
+     * @return a list of entitlements
      * @throws EntitlementApiException if the account does not exist
      */
     public List<Entitlement> getAllEntitlementsForAccountIdAndExternalKey(UUID accountId, String externalKey, TenantContext context)
             throws EntitlementApiException;
 
     /**
-     *
      * Retrieves all the <code>Entitlement</code> for a given account.
      *
-     * @param accountId     the account id
-     * @param context       the context
-     *
-     * @return              a list of entitlements
-     *
+     * @param accountId the account id
+     * @param context   the context
+     * @return a list of entitlements
      * @throws EntitlementApiException if the account does not exist
      */
     public List<Entitlement> getAllEntitlementsForAccountId(UUID accountId, TenantContext context) throws EntitlementApiException;
 
     /**
      * Transfer all the <code>Entitlement</code> For the source account and matching the external key to the destination account.
-     * <p>
+     * <p/>
      * The date is interpreted by the system to be in the timezone specified at the destination <code>Account</code>.
-     * <p>
+     * <p/>
      * The <code>Entitlement</code> on the source account will be cancelled at effective date and the <code>Entitlement</code>
      * on the destination account will be created at the effectiveDate.
      *
-     * @param sourceAccountId   the unique id for the account on which the bundle will be transferred For
-     * @param destAccountId     the unique id for the account on which the bundle will be transferred to
-     * @param externalKey       the externalKey for the bundle
-     * @param effectiveDate     the date at which this transfer should occur
-     * @param context           the user context
-     *
-     * @return                  the id of the newly created bundle for the destination account
-     *
+     * @param sourceAccountId the unique id for the account on which the bundle will be transferred For
+     * @param destAccountId   the unique id for the account on which the bundle will be transferred to
+     * @param externalKey     the externalKey for the bundle
+     * @param effectiveDate   the date at which this transfer should occur
+     * @param context         the user context
+     * @return the id of the newly created bundle for the destination account
      * @throws EntitlementApiException if the system could not transfer the entitlements
-     *
      */
     public UUID transferEntitlements(final UUID sourceAccountId, final UUID destAccountId, final String externalKey, final LocalDate effectiveDate,
                                      final CallContext context)
@@ -217,25 +193,21 @@ public interface EntitlementApi {
 
     /**
      * Transfer all the <code>Entitlement</code> for the source account and matching the external key to the destination account.
-     * <p>
+     * <p/>
      * The date is interpreted by the system to be in the timezone specified at the destination <code>Account</code>.
-     * <p>
+     * <p/>
      * The <code>Entitlement</code> on the source account will be cancelled at effective date and the <code>Entitlement</code>
      * on the destination account will be created at the effectiveDate. The <tt>billingPolicy</tt> will be used to override
      * the default billing behavior for the cancellation of the subscriptions on the source account.
      *
-     *
-     * @param sourceAccountId   the unique id for the account on which the bundle will be transferred For
-     * @param destAccountId     the unique id for the account on which the bundle will be transferred to
-     * @param externalKey       the externalKey for the bundle
-     * @param effectiveDate     the date at which this transfer should occur
-     * @param billingPolicy     the override billing policy
-     * @param context           the user context
-     *
-     * @return                  the id of the newly created base entitlement for the destination account
-     *
+     * @param sourceAccountId the unique id for the account on which the bundle will be transferred For
+     * @param destAccountId   the unique id for the account on which the bundle will be transferred to
+     * @param externalKey     the externalKey for the bundle
+     * @param effectiveDate   the date at which this transfer should occur
+     * @param billingPolicy   the override billing policy
+     * @param context         the user context
+     * @return the id of the newly created base entitlement for the destination account
      * @throws EntitlementApiException if the system could not transfer the entitlements
-     *
      */
     public UUID transferEntitlementsOverrideBillingPolicy(final UUID sourceAccountId, final UUID destAccountId, final String externalKey, final LocalDate effectiveDate,
                                                           final BillingActionPolicy billingPolicy, final CallContext context)

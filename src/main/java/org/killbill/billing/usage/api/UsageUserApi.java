@@ -22,7 +22,6 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.joda.time.DateTime;
-
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 
@@ -54,7 +53,6 @@ public interface UsageUserApi {
      * @return usage data (rolled-up)
      */
     public RolledUpUsage getUsageForSubscription(UUID subscriptionId, String unitType, DateTime startTime, DateTime endTime, TenantContext context);
-
 
     /**
      * Get usage information for a given subscription.

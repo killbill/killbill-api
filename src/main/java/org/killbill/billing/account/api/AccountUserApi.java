@@ -86,7 +86,6 @@ public interface AccountUserApi {
      */
     public Account getAccountById(UUID accountId, TenantContext context) throws AccountApiException;
 
-
     /**
      * Find all accounts having their name, email, external_key or company_name matching the search key
      *

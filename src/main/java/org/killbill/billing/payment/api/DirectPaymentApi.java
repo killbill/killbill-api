@@ -198,35 +198,33 @@ public interface DirectPaymentApi {
     /**
      * Record a chargeback
      *
-     * @param account                          the account
-     * @param directPaymentId                  the direct payment id
+     * @param account                             the account
+     * @param directPaymentId                     the direct payment id
      * @param directPaymentTransactionExternalKey the chargeback external key
-     * @param amount                           the amount to chargeback
-     * @param currency                         the amount currency
-     * @param context                          the call context
+     * @param amount                              the amount to chargeback
+     * @param currency                            the amount currency
+     * @param context                             the call context
      * @return the chargeback transactionId
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
     public DirectPayment createChargeback(Account account, UUID directPaymentId, BigDecimal amount, Currency currency, String directPaymentTransactionExternalKey, CallContext context) throws PaymentApiException;
 
-
     /**
      * Record a chargeback
      *
-     * @param account                          the account
-     * @param directPaymentId                  the direct payment id
+     * @param account                             the account
+     * @param directPaymentId                     the direct payment id
      * @param directPaymentTransactionExternalKey the chargeback external key
-     * @param amount                           the amount to chargeback
-     * @param currency                         the amount currency
-     * @param paymentOptions                   options to control payment behavior
-     * @param context                          the call context
+     * @param amount                              the amount to chargeback
+     * @param currency                            the amount currency
+     * @param paymentOptions                      options to control payment behavior
+     * @param context                             the call context
      * @return the chargeback transactionId
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
     public DirectPayment createChargebackWithPaymentControl(Account account, UUID directPaymentId, BigDecimal amount, Currency currency, String directPaymentTransactionExternalKey, final PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
-
 
     /**
      * Transition a currently PENDING transaction into either a SUCCESS or a FAILURE
@@ -238,7 +236,6 @@ public interface DirectPaymentApi {
      * @throws PaymentApiException
      */
     public void notifyPendingTransactionOfStateChanged(Account account, UUID directPaymentTransactionId, boolean isSuccess, CallContext context) throws PaymentApiException;
-
 
     /**
      * Transition a currently PENDING transaction into either a SUCCESS or a FAILURE
@@ -382,12 +379,11 @@ public interface DirectPaymentApi {
             throws PaymentApiException;
 
     /**
-     *
      * @param paymentMethodExternalKey the payment method external key
-     * @param includedInactive returns the payment method even if this is not active
-     * @param withPluginInfo   whether we want to retrieve the plugin info for that payment method
-     * @param properties       plugin specific properties
-     * @param context          the call context   @return the payment method
+     * @param includedInactive         returns the payment method even if this is not active
+     * @param withPluginInfo           whether we want to retrieve the plugin info for that payment method
+     * @param properties               plugin specific properties
+     * @param context                  the call context   @return the payment method
      * @throws PaymentApiException
      */
     public PaymentMethod getPaymentMethodByExternalKey(String paymentMethodExternalKey, boolean includedInactive, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)

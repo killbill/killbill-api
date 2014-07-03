@@ -16,9 +16,9 @@
 
 package org.killbill.billing.payment.api;
 
-import org.killbill.billing.util.entity.Entity;
-
 import java.util.UUID;
+
+import org.killbill.billing.util.entity.Entity;
 
 public interface PaymentMethod extends Entity {
 

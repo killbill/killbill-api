@@ -99,7 +99,7 @@ public enum ErrorCode {
 
     /* Plan change is disallowed by the catalog */
     CAT_ILLEGAL_CHANGE_REQUEST(2001, "Attempting to change plan from (product: '%s', billing period: '%s', " +
-            "pricelist '%s') to (product: '%s', billing period: '%s', pricelist '%s'). This transition is not allowed by catalog rules"),
+                                     "pricelist '%s') to (product: '%s', billing period: '%s', pricelist '%s'). This transition is not allowed by catalog rules"),
 
     /*
       * Price list
@@ -145,7 +145,6 @@ public enum ErrorCode {
     CAT_NO_SUCH_OVEDUE_STATE(2070, "No such overdue state '%s'"),
     CAT_MISSING_CLEAR_STATE(2071, "Missing a clear state"),
     CAT_NO_OVERDUEABLE_TYPE(2072, "No such overdueable type: "),
-
 
     CAT_NOT_TOP_UP_BLOCK(2075, "Block for phase %s defines a TOP_UP property for a non TOP_UP block"),
     /*
@@ -308,7 +307,6 @@ public enum ErrorCode {
     */
     CURRENCY_NO_SUCH_PAYMENT_PLUGIN(10000, "Currency plugin %s is not registered"),
     CURRENCY_NO_SUCH_RATE_FOR_CURRENCY(10001, "Rate for currency %s is non defined"),
-
 
     /*
     *

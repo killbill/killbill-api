@@ -16,7 +16,6 @@
 
 package org.killbill.billing.catalog.api;
 
-
 public interface Limit {
 
     public Unit getUnit();

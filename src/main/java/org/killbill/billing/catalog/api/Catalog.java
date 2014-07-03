@@ -104,7 +104,6 @@ public interface Catalog {
      */
     public PriceList findPriceList(String name, DateTime requestedDate) throws CatalogApiException;
 
-
     /**
      * @param name                  the unique name for the {@code PlanPhase}
      * @param requestedDate         specifies the state of the catalog for that date
@@ -114,11 +113,10 @@ public interface Catalog {
      */
     public PlanPhase findPhase(String name, DateTime requestedDate, DateTime subscriptionStartDate) throws CatalogApiException;
 
-
     // TODO : should they be private APIs
 
     public BillingActionPolicy planChangePolicy(PlanPhaseSpecifier from,
-                                         PlanSpecifier to, DateTime requestedDate) throws CatalogApiException;
+                                                PlanSpecifier to, DateTime requestedDate) throws CatalogApiException;
 
     public PlanChangeResult planChange(PlanPhaseSpecifier from,
                                        PlanSpecifier to, DateTime requestedDate) throws CatalogApiException;

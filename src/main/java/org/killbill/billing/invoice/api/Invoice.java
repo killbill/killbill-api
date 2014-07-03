@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.joda.time.LocalDate;
-
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.util.entity.Entity;
 

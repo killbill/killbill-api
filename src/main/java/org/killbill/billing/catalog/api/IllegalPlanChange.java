@@ -32,6 +32,5 @@ public class IllegalPlanChange extends CatalogApiException {
         super(ErrorCode.CAT_ILLEGAL_CHANGE_REQUEST, from.getProductName(), from.getBillingPeriod(), from.getPriceListName(), to.getProductName(), to.getBillingPeriod(), to.getPriceListName());
     }
 
-
 }
 

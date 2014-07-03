@@ -16,19 +16,18 @@
 
 package org.killbill.billing.entitlement.api;
 
+import java.util.UUID;
+
+import org.joda.time.LocalDate;
 import org.killbill.billing.catalog.api.BillingPeriod;
 import org.killbill.billing.catalog.api.Plan;
 import org.killbill.billing.catalog.api.PlanPhase;
 import org.killbill.billing.catalog.api.PriceList;
 import org.killbill.billing.catalog.api.Product;
-import org.joda.time.LocalDate;
-
-import java.util.UUID;
 
 public interface SubscriptionEvent {
 
     /**
-     *
      * @return the unique id for the event
      */
     public UUID getId();
@@ -52,7 +51,6 @@ public interface SubscriptionEvent {
      * @return the type of transition
      */
     public SubscriptionEventType getSubscriptionEventType();
-
 
     /**
      * @return whether the billing is blocked

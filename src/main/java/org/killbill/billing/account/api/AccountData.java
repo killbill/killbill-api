@@ -19,7 +19,6 @@ package org.killbill.billing.account.api;
 import java.util.UUID;
 
 import org.joda.time.DateTimeZone;
-
 import org.killbill.billing.catalog.api.Currency;
 
 /**

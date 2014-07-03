@@ -48,7 +48,6 @@ public interface SubscriptionApi {
      */
     public SubscriptionBundle getSubscriptionBundle(UUID bundleId, TenantContext context) throws SubscriptionApiException;
 
-
     /**
      * Update the externalKey for a given bundle
      *
@@ -57,7 +56,6 @@ public interface SubscriptionApi {
      * @param context        : the call context
      */
     public void updateExternalKey(UUID bundleId, String newExternalKey, CallContext context);
-
 
     /**
      * Retrieves all the <code>SubscriptionBundle</code> for a given account and matching an external key.
@@ -69,7 +67,6 @@ public interface SubscriptionApi {
      * @throws SubscriptionApiException if there is n o such object matching the account and external key
      */
     public List<SubscriptionBundle> getSubscriptionBundlesForAccountIdAndExternalKey(UUID accountId, String externalKey, TenantContext context) throws SubscriptionApiException;
-
 
     /**
      * Retrieves all the <code>SubscriptionBundle</code> for the given external key.
@@ -83,7 +80,6 @@ public interface SubscriptionApi {
      * @throws SubscriptionApiException if there is no such object
      */
     public SubscriptionBundle getActiveSubscriptionBundleForExternalKey(String externalKey, TenantContext context) throws SubscriptionApiException;
-
 
     /**
      * Returns an ordered list of all <code>SubscriptionBundle</code> for a given external key.
@@ -101,7 +97,6 @@ public interface SubscriptionApi {
      * @throws SubscriptionApiException if the account does not exist
      */
     public List<SubscriptionBundle> getSubscriptionBundlesForAccountId(UUID accountId, TenantContext context) throws SubscriptionApiException;
-
 
     /**
      * @param context the user context

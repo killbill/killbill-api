@@ -19,9 +19,7 @@ package org.killbill.billing.entitlement.api;
 import java.util.UUID;
 
 import org.joda.time.DateTime;
-
 import org.killbill.billing.util.entity.Entity;
-
 
 public interface BlockingState extends Entity, Comparable<BlockingState> {
 

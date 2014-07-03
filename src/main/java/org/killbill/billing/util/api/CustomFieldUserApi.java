@@ -54,7 +54,6 @@ public interface CustomFieldUserApi {
     void addCustomFields(List<CustomField> fields, CallContext context) throws CustomFieldApiException;
 
     /**
-     *
      * @param fields
      * @param context
      * @throws CustomFieldApiException
@@ -69,7 +68,6 @@ public interface CustomFieldUserApi {
      */
     List<CustomField> getCustomFieldsForObject(UUID objectId, ObjectType objectType, TenantContext context);
 
-
     /**
      * @param accountId  the account id
      * @param objectType the object type
@@ -77,7 +75,6 @@ public interface CustomFieldUserApi {
      * @return the list of custom fields associated with that account for the specified type
      */
     List<CustomField> getCustomFieldsForAccountType(UUID accountId, ObjectType objectType, TenantContext context);
-
 
     /**
      * @param accountId the account id

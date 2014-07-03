@@ -16,8 +16,6 @@
 
 package org.killbill.billing.entitlement.api;
 
-import org.killbill.billing.ObjectType;
-
 import java.util.List;
 import java.util.UUID;
 

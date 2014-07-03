@@ -16,6 +16,9 @@
 
 package org.killbill.billing.entitlement.api;
 
+import java.util.UUID;
+
+import org.joda.time.LocalDate;
 import org.killbill.billing.catalog.api.BillingActionPolicy;
 import org.killbill.billing.catalog.api.BillingPeriod;
 import org.killbill.billing.catalog.api.Plan;
@@ -24,22 +27,17 @@ import org.killbill.billing.catalog.api.PriceList;
 import org.killbill.billing.catalog.api.Product;
 import org.killbill.billing.catalog.api.ProductCategory;
 import org.killbill.billing.util.callcontext.CallContext;
-import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.entity.Entity;
-
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-
-import java.util.UUID;
 
 /**
  * An Entitlement is created using the <code>EntitlementApi</code>
  * <p/>
  * It contains all the catalog information and current state that answers the entitlement question.
- * <p>
+ * <p/>
  * The users of that API will control all the entitlement behavior when making changes such as the effectiveDate, catalog info,...
  * By default the system will use system wide policies to control the billing aspect, but specific APIs also allow to override those.
- * <p>
+ * <p/>
+ *
  * @see org.killbill.billing.entitlement.api.EntitlementApi
  */
 public interface Entitlement extends Entity {
@@ -80,20 +78,17 @@ public interface Entitlement extends Entity {
      */
     public UUID getBaseEntitlementId();
 
-
     /**
-     *
      * @return the unique Id of the SubscriptionBundle
      */
     public UUID getBundleId();
+
     /**
-     *
      * @return the account id
      */
     public UUID getAccountId();
 
     /**
-     *
      * @return the external key that was supplied when creating the base entitlement
      */
     public String getExternalKey();
@@ -146,20 +141,18 @@ public interface Entitlement extends Entity {
     /**
      * Cancels the <code>Entitlement</code> at the specified date.
      * After this operation, the existing object becomes stale.
-     *
+     * <p/>
      * <p/>
      * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
      *
-     * @param effectiveDate the date at which the entitlement should be cancelled
+     * @param effectiveDate                the date at which the entitlement should be cancelled
      * @param overrideBillingEffectiveDate use effectiveDate for billing cancellation date as well
-     * @param context       the context
-     *
+     * @param context                      the context
      * @return the new <code>Entitlement</code> after the cancellation was performed
      * @throws EntitlementApiException if cancellation failed
      */
     public Entitlement cancelEntitlementWithDate(final LocalDate effectiveDate, final boolean overrideBillingEffectiveDate, final CallContext context)
             throws EntitlementApiException;
-
 
     /**
      * Cancel the <code>Entitlement</code> with a policy.
@@ -172,7 +165,6 @@ public interface Entitlement extends Entity {
      */
     public Entitlement cancelEntitlementWithPolicy(final EntitlementActionPolicy policy, final CallContext context)
             throws EntitlementApiException;
-
 
     /**
      * Cancels the <code>Entitlement</code> at the specified date
@@ -189,7 +181,6 @@ public interface Entitlement extends Entity {
     public Entitlement cancelEntitlementWithDateOverrideBillingPolicy(final LocalDate effectiveDate, final BillingActionPolicy billingPolicy, final CallContext context)
             throws EntitlementApiException;
 
-
     /**
      * Cancels the <code>Entitlement</code> at the specified date and overrides the default billing policy.
      * After this operation, the existing object becomes stale.
@@ -198,21 +189,19 @@ public interface Entitlement extends Entity {
      * @param billingPolicy the override billing policy
      * @param context       the context
      * @return the new <code>Entitlement</code> after the cancellation was performed
-     *
      * @throws EntitlementApiException if cancellation failed
      */
     public Entitlement cancelEntitlementWithPolicyOverrideBillingPolicy(final EntitlementActionPolicy policy, final BillingActionPolicy billingPolicy, final CallContext context)
             throws EntitlementApiException;
 
-
     /**
      * Removes a pending future cancellation on an entitlement.
-     * <p>
+     * <p/>
      * The call will only succeed if the entitlement has been cancelled previously and if the effectiveDate of the cancellation
      * did not occur yet. In such a case it will remove both the cancellation event at the entitlement and billing level-- regardless
      * of when is the effectiveDate of the billing cancellation event.
      *
-     * @param context       the context
+     * @param context the context
      */
     public void uncancelEntitlement(final CallContext context)
             throws EntitlementApiException;
@@ -250,7 +239,6 @@ public interface Entitlement extends Entity {
     public Entitlement changePlanWithDate(final String productName, final BillingPeriod billingPeriod, final String priceList, final LocalDate effectiveDate, final CallContext context)
             throws EntitlementApiException;
 
-
     /**
      * Change <code>Entitlement</code> plan at the specified date and overrides the billing policy.
      * After this operation, the existing object becomes stale.
@@ -267,9 +255,8 @@ public interface Entitlement extends Entity {
      * @throws EntitlementApiException if change failed
      */
     public Entitlement changePlanOverrideBillingPolicy(final String productName, final BillingPeriod billingPeriod, final String priceList, final LocalDate effectiveDate,
-                                                   final BillingActionPolicy billingPolicy, final CallContext context)
+                                                       final BillingActionPolicy billingPolicy, final CallContext context)
             throws EntitlementApiException;
-
 
     /**
      * Pauses an <code>Entitlement</code> until it gets resumed.
@@ -283,7 +270,7 @@ public interface Entitlement extends Entity {
      * @return the new <code>Entitlement</code> after the operation was performed
      * @throws EntitlementApiException if the entitlement was not in <tt>ACTIVE</tt> state
     public Entitlement block(String serviceName, final LocalDate effectiveDate, final CallContext context)
-            throws EntitlementApiException;
+    throws EntitlementApiException;
      */
 
     /**
@@ -298,6 +285,6 @@ public interface Entitlement extends Entity {
      * @return the new <code>Entitlement</code> after the operation was performed
      * @throws EntitlementApiException
     public Entitlement unblock(String serviceName, final LocalDate effectiveDate, final CallContext context)
-            throws EntitlementApiException;
+    throws EntitlementApiException;
      */
 }

@@ -18,10 +18,6 @@ package org.killbill.billing.entitlement.api;
 
 import org.joda.time.LocalDate;
 
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 /**
  * An Subscription is created using the <code>SubscriptionApi</code>
  * <p/>
@@ -30,7 +26,6 @@ import java.util.UUID;
  * @see org.killbill.billing.entitlement.api.SubscriptionApi
  */
 public interface Subscription extends Entitlement {
-
 
     /**
      * @return the date at which the billing started for that subscription
@@ -47,9 +42,7 @@ public interface Subscription extends Entitlement {
      */
     public LocalDate getChargedThroughDate();
 
-
     /**
-     *
      * @return for each service, the current state
      */
     public String getCurrentStateForService(String serviceName);
