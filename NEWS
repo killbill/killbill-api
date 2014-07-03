@@ -1,15 +1,27 @@
 0.9.6
-    Change PaymentCookieId in InvoicePaymentApi to be a string
-    Add paymentMethodExternalKey for PaymentMethod
-    Rename PaymentStatus to TransactionStatus
-    Allow override of payment method id for auth and purchase (https://github.com/killbill/killbill/issues/177)
-    Add DirectPaymentTransaction#getExternalKey (https://github.com/killbill/killbill/issues/180)
-    Separate refund and credit (https://github.com/killbill/killbill/issues/187)
-    Add chargeback support (https://github.com/killbill/killbill/issues/187)
-    Add Tax invoice item
-    Deprecate RefundInfoPlugin for PaymentInfoPlugin
-    Remove PaymentStatus from DirectPayment
-    security: add login/logout
+    Invoice:
+      Change PaymentCookieId in InvoicePaymentApi to be a string
+      Remove chargeback APIs in InvoicePaymentApi
+      Add InvoiceUserApi#getInvoiceByPayment
+      Add Tax invoice item
+    Payment:
+      Expose purchased and credited amounts in DirectPayment
+      Expose isAuthVoided in DirectPayment
+      Allow override of payment method id for auth and purchase (https://github.com/killbill/killbill/issues/177)
+      Separate refund and credit (https://github.com/killbill/killbill/issues/187)
+      Add chargeback support (https://github.com/killbill/killbill/issues/187)
+      Introduce PaymentControl APIs
+      Add DirectPaymentTransaction#getExternalKey (https://github.com/killbill/killbill/issues/180)
+      Remove PaymentStatus from DirectPayment
+      Deprecate the old PaymentApi
+      Add PaymentMethod#getExternalKey
+      Remove CC information from PaymentMethodPlugin
+      Rename PaymentStatus to TransactionStatus
+      Deprecate PaymentInfoPlugin and RefundInfoPlugin for PaymentTransactionInfoPlugin
+    OSGI:
+      Export DirectPaymentApi instead of PaymentApi
+      Export SecurityApi
+    Security: add login/logout APIs
 
 0.9.5
     Introduction of PaymentGatewayApi (unstable)
