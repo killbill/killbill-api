@@ -247,6 +247,7 @@ public enum ErrorCode {
     */
 
     PAYMENT_NO_SUCH_PAYMENT_METHOD(7000, "Payment method %s does not exist"),
+    PAYMENT_REFUND_AMOUNT_NEGATIVE_OR_NULL(7001, "Refund on payment %s not allowed with amount %s"),
     PAYMENT_GET_PAYMENT_METHODS(7004, "Failed to retrieve payment method for account %s : %s"),
     PAYMENT_ADD_PAYMENT_METHOD(7005, "Failed to add payment method for account %s : %s"),
     PAYMENT_REFRESH_PAYMENT_METHOD(7006, "Failed to resfresh payment methods for account %s : %s"),
