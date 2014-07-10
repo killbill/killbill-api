@@ -23,7 +23,7 @@ import java.util.UUID;
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.util.entity.Entity;
 
-public interface DirectPayment extends Entity {
+public interface Payment extends Entity {
 
     /**
      * @return the account id
@@ -83,5 +83,5 @@ public interface DirectPayment extends Entity {
     /**
      * @return the list of attempts on that payment
      */
-    List<DirectPaymentTransaction> getTransactions();
+    List<PaymentTransaction> getTransactions();
 }

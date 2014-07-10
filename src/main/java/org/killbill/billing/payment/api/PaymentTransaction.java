@@ -24,12 +24,12 @@ import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.payment.plugin.api.PaymentTransactionInfoPlugin;
 import org.killbill.billing.util.entity.Entity;
 
-public interface DirectPaymentTransaction extends Entity {
+public interface PaymentTransaction extends Entity {
 
     /**
      * @return the id of the direct payment.
      */
-    UUID getDirectPaymentId();
+    UUID getPaymentId();
 
     /**
      * @return the external key

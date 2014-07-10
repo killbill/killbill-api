@@ -24,7 +24,7 @@ import org.killbill.billing.entitlement.api.SubscriptionApi;
 import org.killbill.billing.invoice.api.InvoicePaymentApi;
 import org.killbill.billing.invoice.api.InvoiceUserApi;
 import org.killbill.billing.osgi.api.config.PluginConfigServiceApi;
-import org.killbill.billing.payment.api.DirectPaymentApi;
+import org.killbill.billing.payment.api.PaymentApi;
 import org.killbill.billing.security.api.SecurityApi;
 import org.killbill.billing.tenant.api.TenantUserApi;
 import org.killbill.billing.usage.api.UsageUserApi;
@@ -54,7 +54,7 @@ public interface OSGIKillbill {
 
     public InvoiceUserApi getInvoiceUserApi();
 
-    public DirectPaymentApi getPaymentApi();
+    public PaymentApi getPaymentApi();
 
     public TenantUserApi getTenantUserApi();
 

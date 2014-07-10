@@ -33,7 +33,7 @@ import static org.killbill.billing.security.Permission.PAYMENT_CAN_CHARGEBACK;
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_REFUND;
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_TRIGGER_PAYMENT;
 
-public interface DirectPaymentApi {
+public interface PaymentApi {
 
     /**
      * Authorize a direct payment.
@@ -51,7 +51,7 @@ public interface DirectPaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public DirectPayment createAuthorization(Account account, UUID paymentMethodId, UUID directPaymentId, BigDecimal amount, Currency currency,
+    public Payment createAuthorization(Account account, UUID paymentMethodId, UUID directPaymentId, BigDecimal amount, Currency currency,
                                              String directPaymentExternalKey, String directPaymentTransactionExternalKey,
                                              Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
@@ -69,7 +69,7 @@ public interface DirectPaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public DirectPayment createCapture(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
+    public Payment createCapture(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
                                        String directPaymentTransactionExternalKey, Iterable<PluginProperty> properties,
                                        CallContext context)
             throws PaymentApiException;
@@ -90,7 +90,7 @@ public interface DirectPaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public DirectPayment createPurchase(Account account, UUID paymentMethodId, UUID directPaymentId, BigDecimal amount, Currency currency,
+    public Payment createPurchase(Account account, UUID paymentMethodId, UUID directPaymentId, BigDecimal amount, Currency currency,
                                         String directPaymentExternalKey, String directPaymentTransactionExternalKey,
                                         Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
@@ -112,7 +112,7 @@ public interface DirectPaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public DirectPayment createPurchaseWithPaymentControl(Account account, UUID paymentMethodId, UUID directPaymentId, BigDecimal amount, Currency currency,
+    public Payment createPurchaseWithPaymentControl(Account account, UUID paymentMethodId, UUID directPaymentId, BigDecimal amount, Currency currency,
                                                           String directPaymentExternalKey, String directPaymentTransactionExternalKey,
                                                           Iterable<PluginProperty> properties, PaymentOptions paymentOptions, CallContext context)
             throws PaymentApiException;
@@ -129,7 +129,7 @@ public interface DirectPaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public DirectPayment createVoid(Account account, UUID directPaymentId, String directPaymentTransactionExternalKey, Iterable<PluginProperty> properties,
+    public Payment createVoid(Account account, UUID directPaymentId, String directPaymentTransactionExternalKey, Iterable<PluginProperty> properties,
                                     CallContext context)
             throws PaymentApiException;
 
@@ -147,7 +147,7 @@ public interface DirectPaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_REFUND)
-    public DirectPayment createRefund(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
+    public Payment createRefund(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
                                       String directPaymentTransactionExternalKey, Iterable<PluginProperty> properties,
                                       CallContext context)
             throws PaymentApiException;
@@ -167,7 +167,7 @@ public interface DirectPaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_REFUND)
-    public DirectPayment createRefundWithPaymentControl(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
+    public Payment createRefundWithPaymentControl(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
                                                         String directPaymentTransactionExternalKey, Iterable<PluginProperty> properties,
                                                         PaymentOptions paymentOptions, CallContext context)
             throws PaymentApiException;
@@ -190,7 +190,7 @@ public interface DirectPaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public DirectPayment createCredit(Account account, UUID paymentMethodId, UUID directPaymentId, BigDecimal amount, Currency currency,
+    public Payment createCredit(Account account, UUID paymentMethodId, UUID directPaymentId, BigDecimal amount, Currency currency,
                                       String directPaymentExternalKey, String directPaymentTransactionExternalKey,
                                       Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
@@ -208,7 +208,7 @@ public interface DirectPaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
-    public DirectPayment createChargeback(Account account, UUID directPaymentId, BigDecimal amount, Currency currency, String directPaymentTransactionExternalKey, CallContext context) throws PaymentApiException;
+    public Payment createChargeback(Account account, UUID directPaymentId, BigDecimal amount, Currency currency, String directPaymentTransactionExternalKey, CallContext context) throws PaymentApiException;
 
 
     /**
@@ -225,7 +225,7 @@ public interface DirectPaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
-    public DirectPayment createChargebackWithPaymentControl(Account account, UUID directPaymentId, BigDecimal amount, Currency currency, String directPaymentTransactionExternalKey, final PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
+    public Payment createChargebackWithPaymentControl(Account account, UUID directPaymentId, BigDecimal amount, Currency currency, String directPaymentTransactionExternalKey, final PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
 
 
     /**
@@ -260,7 +260,7 @@ public interface DirectPaymentApi {
      * @return the list of direct payments on this account
      * @throws PaymentApiException
      */
-    public List<DirectPayment> getAccountPayments(UUID accountId, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
+    public List<Payment> getAccountPayments(UUID accountId, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
     /**
@@ -271,7 +271,7 @@ public interface DirectPaymentApi {
      * @return the payment
      * @throws PaymentApiException
      */
-    public DirectPayment getPayment(UUID directPaymentId, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
+    public Payment getPayment(UUID directPaymentId, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
     /**
@@ -282,7 +282,7 @@ public interface DirectPaymentApi {
      * @return the payment
      * @throws PaymentApiException
      */
-    public DirectPayment getPaymentByExternalKey(String paymentExternalKey, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
+    public Payment getPaymentByExternalKey(String paymentExternalKey, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
     /**
@@ -295,7 +295,7 @@ public interface DirectPaymentApi {
      * @param context        the user context
      * @return the list of payments for that tenant
      */
-    public Pagination<DirectPayment> getPayments(Long offset, Long limit, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context);
+    public Pagination<Payment> getPayments(Long offset, Long limit, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context);
 
     /**
      * Find all payments in a given plugin
@@ -309,7 +309,7 @@ public interface DirectPaymentApi {
      * @return the list of payments for that tenant
      * @throws PaymentApiException
      */
-    public Pagination<DirectPayment> getPayments(Long offset, Long limit, String pluginName, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
+    public Pagination<Payment> getPayments(Long offset, Long limit, String pluginName, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
 
     /**
      * Find all payments matching the search key across all plugins
@@ -325,7 +325,7 @@ public interface DirectPaymentApi {
      * @param context        the user context
      * @return the list of payments matching this search key for that tenant
      */
-    public Pagination<DirectPayment> searchPayments(String searchKey, Long offset, Long limit, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context);
+    public Pagination<Payment> searchPayments(String searchKey, Long offset, Long limit, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context);
 
     /**
      * Find all payments matching the search key in a given plugin
@@ -343,7 +343,7 @@ public interface DirectPaymentApi {
      * @return the list of payments matching this search key for that tenant
      * @throws PaymentApiException
      */
-    public Pagination<DirectPayment> searchPayments(String searchKey, Long offset, Long limit, String pluginName, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
+    public Pagination<Payment> searchPayments(String searchKey, Long offset, Long limit, String pluginName, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
 
     /**
      * @param account                  the account
