@@ -18,11 +18,8 @@ package org.killbill.billing.entitlement.api;
 
 import org.killbill.billing.BillingExceptionBase;
 import org.killbill.billing.ErrorCode;
-import org.killbill.billing.account.api.AccountApiException;
 
 public class EntitlementApiException extends BillingExceptionBase {
-
-
 
     public EntitlementApiException(final BillingExceptionBase e) {
         super(e, e.getCode(), e.getMessage());

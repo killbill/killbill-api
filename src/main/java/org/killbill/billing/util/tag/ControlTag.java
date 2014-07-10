@@ -16,7 +16,6 @@
 
 package org.killbill.billing.util.tag;
 
-
 public interface ControlTag extends Tag {
 
     public ControlTagType getControlTagType();

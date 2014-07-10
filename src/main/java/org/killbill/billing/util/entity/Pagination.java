@@ -30,7 +30,7 @@ public interface Pagination<T> extends Iterable<T> {
 
     /**
      * @return offset to use to retrieve the next set of records, null
-     *         if this is the last page of records
+     * if this is the last page of records
      */
     public Long getNextOffset();
 

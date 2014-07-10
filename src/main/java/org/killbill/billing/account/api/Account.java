@@ -29,8 +29,7 @@ import org.killbill.billing.util.entity.Entity;
  * @see org.killbill.billing.account.api.AccountData
  */
 
-public interface Account extends AccountData, Blockable, Entity
-{
+public interface Account extends AccountData, Blockable, Entity {
 
     /**
      * @return the mutable account data

@@ -16,29 +16,25 @@
 
 package org.killbill.billing.entitlement.api;
 
-import org.killbill.billing.util.callcontext.CallContext;
-import org.killbill.billing.util.entity.Entity;
-import org.joda.time.DateTime;
-
 import java.util.List;
 import java.util.UUID;
+
+import org.joda.time.DateTime;
+import org.killbill.billing.util.entity.Entity;
 
 public interface SubscriptionBundle extends Entity {
 
     /**
-     *
      * @return the account id
      */
     public UUID getAccountId();
 
     /**
-     *
      * @return the external key
      */
     public String getExternalKey();
 
     /**
-     *
      * @return the created date of the first bundle matching that externalKey
      */
     public DateTime getOriginalCreatedDate();

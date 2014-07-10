@@ -160,7 +160,6 @@ public interface TagUserApi {
      */
     public List<Tag> getTagsForAccountType(UUID accountId, ObjectType objectType, boolean includedDeleted, TenantContext context);
 
-
     /**
      * @param accountId       The account id
      * @param includedDeleted Whether to include deleted tags

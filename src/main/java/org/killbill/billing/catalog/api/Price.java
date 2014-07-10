@@ -18,7 +18,6 @@ package org.killbill.billing.catalog.api;
 
 import java.math.BigDecimal;
 
-
 public interface Price {
 
     /**

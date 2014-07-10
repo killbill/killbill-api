@@ -58,7 +58,6 @@ public interface InvoiceUserApi {
      */
     public List<Invoice> getInvoicesByAccount(UUID accountId, LocalDate fromDate, TenantContext context);
 
-
     /**
      * @param context the user context
      * @param offset  the offset of the first result
@@ -114,7 +113,6 @@ public interface InvoiceUserApi {
      */
     public Invoice getInvoiceByPayment(UUID paymentId, TenantContext context) throws InvoiceApiException;
 
-
     /**
      * Retrieve an invoice by invoice number.
      *
@@ -123,7 +121,6 @@ public interface InvoiceUserApi {
      * @return the invoice
      */
     public Invoice getInvoiceByNumber(Integer number, TenantContext context) throws InvoiceApiException;
-
 
     /**
      * Find unpaid invoices for a given account, up to a given day.

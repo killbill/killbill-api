@@ -20,7 +20,6 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 import org.joda.time.DateTime;
-
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.util.entity.Entity;
 

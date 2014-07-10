@@ -18,7 +18,6 @@ package org.killbill.billing.catalog.api;
 
 import javax.xml.bind.annotation.XmlEnum;
 
-
 @XmlEnum
 public enum Currency {
     // Fiat currencies

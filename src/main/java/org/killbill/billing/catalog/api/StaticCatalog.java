@@ -19,7 +19,6 @@ package org.killbill.billing.catalog.api;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  * The interface {@code StaticCatalog} gives the view of that {@code Catalog} at a given time.
  * This represents a specific version of the {@code Catalog}
@@ -32,7 +31,6 @@ public interface StaticCatalog {
     public String getCatalogName();
 
     /**
-     *
      * @return the recurring billing mode for this catalog
      */
     public BillingMode getRecurringBillingMode();
@@ -97,7 +95,6 @@ public interface StaticCatalog {
      */
     public PlanPhase findCurrentPhase(String name) throws CatalogApiException;
 
-
     /**
      * @param name the name of the {@code PriceList}
      * @return the {@code PriceList}
@@ -105,15 +102,13 @@ public interface StaticCatalog {
      */
     public PriceList findCurrentPricelist(String name) throws CatalogApiException;
 
-
     // TODO private APIs ?
 
     public BillingActionPolicy planChangePolicy(PlanPhaseSpecifier from,
-                                         PlanSpecifier to) throws CatalogApiException;
+                                                PlanSpecifier to) throws CatalogApiException;
 
     public PlanChangeResult planChange(PlanPhaseSpecifier from,
                                        PlanSpecifier to) throws CatalogApiException;
-
 
     public BillingActionPolicy planCancelPolicy(PlanPhaseSpecifier planPhase) throws CatalogApiException;
 
@@ -131,6 +126,5 @@ public interface StaticCatalog {
     public List<Listing> getAvailableAddonListings(String baseProductName) throws CatalogApiException;
 
     boolean compliesWithLimits(String phaseName, String unit, double value) throws CatalogApiException;
-
 
 }

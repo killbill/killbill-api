@@ -14,13 +14,12 @@
  * under the License.
  */
 
-
 package org.killbill.billing.currency.api;
 
 import org.killbill.billing.BillingExceptionBase;
 import org.killbill.billing.ErrorCode;
 
-public class CurrencyConversionException  extends BillingExceptionBase {
+public class CurrencyConversionException extends BillingExceptionBase {
 
     public CurrencyConversionException(final Throwable cause, final int code, final String msg) {
         super(cause, code, msg);

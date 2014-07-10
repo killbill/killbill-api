@@ -16,7 +16,6 @@
 
 package org.killbill.billing.catalog.api;
 
-
 /**
  * The interface {@code PlanPhase} is used to express the various phases available on a given {@code Plan}
  *
@@ -25,22 +24,19 @@ package org.killbill.billing.catalog.api;
 public interface PlanPhase {
 
     /**
-     *
      * @return the {@code Fixed} section
      */
     public Fixed getFixed();
 
     /**
-     *
      * @return the {@code Recurring} section
      */
     public Recurring getRecurring();
 
     /**
-     *
      * @return the {@code Usage} section
      */
-    public Usage [] getUsages();
+    public Usage[] getUsages();
 
     /**
      * @return the unique name for that {@code Phase}

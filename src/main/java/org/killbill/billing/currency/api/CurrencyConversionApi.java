@@ -16,10 +16,10 @@
 
 package org.killbill.billing.currency.api;
 
-import org.killbill.billing.catalog.api.Currency;
-import org.joda.time.DateTime;
-
 import java.util.Set;
+
+import org.joda.time.DateTime;
+import org.killbill.billing.catalog.api.Currency;
 
 public interface CurrencyConversionApi {
 

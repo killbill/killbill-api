@@ -18,7 +18,6 @@ package org.killbill.billing.catalog.api;
 
 import java.math.BigDecimal;
 
-
 /**
  * The interface {@code InternationalPrice} allows to associate a set of prices in different currencies to
  * a given object.

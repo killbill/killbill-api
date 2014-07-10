@@ -19,10 +19,8 @@ package org.killbill.billing.util.audit;
 import java.util.UUID;
 
 import org.joda.time.DateTime;
-
 import org.killbill.billing.ObjectType;
 import org.killbill.billing.util.entity.Entity;
-
 
 public interface AuditLog extends Entity {
 

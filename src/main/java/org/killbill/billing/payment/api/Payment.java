@@ -71,7 +71,7 @@ public interface Payment extends Entity {
     BigDecimal getRefundedAmount();
 
     /**
-     *  @return true if there was a void operation following an authorization
+     * @return true if there was a void operation following an authorization
      */
     Boolean isAuthVoided();
 

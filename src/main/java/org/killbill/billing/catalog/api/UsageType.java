@@ -16,7 +16,6 @@
 
 package org.killbill.billing.catalog.api;
 
-
 public enum UsageType {
     CAPACITY,
     CONSUMABLE

@@ -16,7 +16,6 @@
 
 package org.killbill.billing.tenant.api;
 
-
 import org.killbill.billing.util.entity.Entity;
 
 public interface TenantKV extends Entity {

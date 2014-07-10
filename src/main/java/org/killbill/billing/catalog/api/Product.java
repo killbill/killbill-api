@@ -16,7 +16,6 @@
 
 package org.killbill.billing.catalog.api;
 
-
 /**
  * The interface {@code Product}
  */
@@ -61,6 +60,5 @@ public interface Product {
      * @return whether the given unit-value pair meets the limits of the product
      */
     public boolean compliesWithLimits(String unit, double value);
-
 
 }
