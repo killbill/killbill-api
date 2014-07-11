@@ -23,6 +23,5 @@ public enum TransactionType {
     CREDIT,
     PURCHASE,
     REFUND,
-    VOID,
-    NOTIFY_STATE_CHANGE
+    VOID
 }
