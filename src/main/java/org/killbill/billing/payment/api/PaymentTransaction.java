@@ -27,7 +27,7 @@ import org.killbill.billing.util.entity.Entity;
 public interface PaymentTransaction extends Entity {
 
     /**
-     * @return the id of the direct payment.
+     * @return the id of the payment.
      */
     UUID getPaymentId();
 

@@ -36,75 +36,75 @@ import static org.killbill.billing.security.Permission.PAYMENT_CAN_TRIGGER_PAYME
 public interface PaymentApi {
 
     /**
-     * Authorize a direct payment.
+     * Authorize a payment.
      *
      * @param account                             the account
      * @param paymentMethodId                     the payment method id to use
-     * @param directPaymentId                     the direct payment id (non-null for multi-steps flows, such as 3D Secure)
+     * @param paymentId                     the payment id (non-null for multi-steps flows, such as 3D Secure)
      * @param amount                              the amount to pay
      * @param currency                            the amount currency
-     * @param directPaymentExternalKey            the direct payment external key
-     * @param directPaymentTransactionExternalKey the direct payment transaction external key
+     * @param paymentExternalKey            the payment external key
+     * @param paymentTransactionExternalKey the payment transaction external key
      * @param properties                          plugin specific properties
      * @param context                             the call context
      * @return the payment
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public Payment createAuthorization(Account account, UUID paymentMethodId, UUID directPaymentId, BigDecimal amount, Currency currency,
-                                             String directPaymentExternalKey, String directPaymentTransactionExternalKey,
+    public Payment createAuthorization(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency,
+                                             String paymentExternalKey, String paymentTransactionExternalKey,
                                              Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
-     * Capture a previously authorized direct payment.
+     * Capture a previously authorized payment.
      *
      * @param account                             the account
      * @param amount                              the amount to pay
      * @param currency                            the amount currency
-     * @param directPaymentTransactionExternalKey the direct payment transaction external key
+     * @param paymentTransactionExternalKey the payment transaction external key
      * @param properties                          plugin specific properties
      * @param context                             the call context
      * @return the payment
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public Payment createCapture(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
-                                       String directPaymentTransactionExternalKey, Iterable<PluginProperty> properties,
+    public Payment createCapture(Account account, UUID paymentId, BigDecimal amount, Currency currency,
+                                       String paymentTransactionExternalKey, Iterable<PluginProperty> properties,
                                        CallContext context)
             throws PaymentApiException;
 
     /**
-     * Combine an authorize and capture direct payment.
+     * Combine an authorize and capture payment.
      *
      * @param account                             the account
      * @param paymentMethodId                     the payment method id to use
-     * @param directPaymentId                     the direct payment id (non-null for multi-steps flows, such as 3D Secure)
+     * @param paymentId                     the payment id (non-null for multi-steps flows, such as 3D Secure)
      * @param amount                              the amount to pay
      * @param currency                            the amount currency
-     * @param directPaymentExternalKey            the direct payment external key
-     * @param directPaymentTransactionExternalKey the direct payment transaction external key
+     * @param paymentExternalKey            the payment external key
+     * @param paymentTransactionExternalKey the payment transaction external key
      * @param properties                          plugin specific properties
      * @param context                             the call context
      * @return the payment
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public Payment createPurchase(Account account, UUID paymentMethodId, UUID directPaymentId, BigDecimal amount, Currency currency,
-                                        String directPaymentExternalKey, String directPaymentTransactionExternalKey,
+    public Payment createPurchase(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency,
+                                        String paymentExternalKey, String paymentTransactionExternalKey,
                                         Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
-     * Combine an authorize and capture direct payment.
+     * Combine an authorize and capture payment.
      *
      * @param account                             the account
      * @param paymentMethodId                     the payment method id to use
-     * @param directPaymentId                     the direct payment id (non-null for multi-steps flows, such as 3D Secure)
+     * @param paymentId                     the payment id (non-null for multi-steps flows, such as 3D Secure)
      * @param amount                              the amount to pay
      * @param currency                            the amount currency
-     * @param directPaymentExternalKey            the direct payment external key
-     * @param directPaymentTransactionExternalKey the direct payment transaction external key
+     * @param paymentExternalKey            the payment external key
+     * @param paymentTransactionExternalKey the payment transaction external key
      * @param properties                          plugin specific properties
      * @param paymentOptions                      options to control payment behavior
      * @param context                             the call context
@@ -112,8 +112,8 @@ public interface PaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public Payment createPurchaseWithPaymentControl(Account account, UUID paymentMethodId, UUID directPaymentId, BigDecimal amount, Currency currency,
-                                                          String directPaymentExternalKey, String directPaymentTransactionExternalKey,
+    public Payment createPurchaseWithPaymentControl(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency,
+                                                          String paymentExternalKey, String paymentTransactionExternalKey,
                                                           Iterable<PluginProperty> properties, PaymentOptions paymentOptions, CallContext context)
             throws PaymentApiException;
 
@@ -121,15 +121,15 @@ public interface PaymentApi {
      * Void a previously authorized payment.
      *
      * @param account                             the account
-     * @param directPaymentId                     the direct payment id
-     * @param directPaymentTransactionExternalKey the direct payment transaction external key
+     * @param paymentId                     the payment id
+     * @param paymentTransactionExternalKey the payment transaction external key
      * @param properties                          plugin specific properties
      * @param context                             the call context
      * @return the payment
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public Payment createVoid(Account account, UUID directPaymentId, String directPaymentTransactionExternalKey, Iterable<PluginProperty> properties,
+    public Payment createVoid(Account account, UUID paymentId, String paymentTransactionExternalKey, Iterable<PluginProperty> properties,
                                     CallContext context)
             throws PaymentApiException;
 
@@ -137,18 +137,18 @@ public interface PaymentApi {
      * Refund a previously captured payment.
      *
      * @param account                             the account
-     * @param directPaymentId                     the direct payment id
+     * @param paymentId                     the payment id
      * @param amount                              the amount to refund
      * @param currency                            the amount currency
-     * @param directPaymentTransactionExternalKey the direct payment transaction external key
+     * @param paymentTransactionExternalKey the payment transaction external key
      * @param properties                          plugin specific properties
      * @param context                             the call context
      * @return the payment
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_REFUND)
-    public Payment createRefund(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
-                                      String directPaymentTransactionExternalKey, Iterable<PluginProperty> properties,
+    public Payment createRefund(Account account, UUID paymentId, BigDecimal amount, Currency currency,
+                                      String paymentTransactionExternalKey, Iterable<PluginProperty> properties,
                                       CallContext context)
             throws PaymentApiException;
 
@@ -156,10 +156,10 @@ public interface PaymentApi {
      * Refund a previously captured payment.
      *
      * @param account                             the account
-     * @param directPaymentId                     the direct payment id
+     * @param paymentId                     the payment id
      * @param amount                              the amount to refund
      * @param currency                            the amount currency
-     * @param directPaymentTransactionExternalKey the direct payment transaction external key
+     * @param paymentTransactionExternalKey the payment transaction external key
      * @param properties                          plugin specific properties
      * @param paymentOptions                      options to control payment behavior
      * @param context                             the call context
@@ -167,8 +167,8 @@ public interface PaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_REFUND)
-    public Payment createRefundWithPaymentControl(Account account, UUID directPaymentId, BigDecimal amount, Currency currency,
-                                                        String directPaymentTransactionExternalKey, Iterable<PluginProperty> properties,
+    public Payment createRefundWithPaymentControl(Account account, UUID paymentId, BigDecimal amount, Currency currency,
+                                                        String paymentTransactionExternalKey, Iterable<PluginProperty> properties,
                                                         PaymentOptions paymentOptions, CallContext context)
             throws PaymentApiException;
 
@@ -179,19 +179,19 @@ public interface PaymentApi {
      *
      * @param account                             the account
      * @param paymentMethodId                     the payment method id to use
-     * @param directPaymentId                     the direct payment id (non-null for multi-steps flows)
+     * @param paymentId                     the payment id (non-null for multi-steps flows)
      * @param amount                              the amount to credit
      * @param currency                            the amount currency
-     * @param directPaymentExternalKey            the direct payment external key
-     * @param directPaymentTransactionExternalKey the direct payment transaction external key
+     * @param paymentExternalKey            the payment external key
+     * @param paymentTransactionExternalKey the payment transaction external key
      * @param properties                          plugin specific properties
      * @param context                             the call context
      * @return the payment
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public Payment createCredit(Account account, UUID paymentMethodId, UUID directPaymentId, BigDecimal amount, Currency currency,
-                                      String directPaymentExternalKey, String directPaymentTransactionExternalKey,
+    public Payment createCredit(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency,
+                                      String paymentExternalKey, String paymentTransactionExternalKey,
                                       Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
@@ -199,8 +199,8 @@ public interface PaymentApi {
      * Record a chargeback
      *
      * @param account                             the account
-     * @param directPaymentId                     the direct payment id
-     * @param directPaymentTransactionExternalKey the chargeback external key
+     * @param paymentId                     the payment id
+     * @param paymentTransactionExternalKey the chargeback external key
      * @param amount                              the amount to chargeback
      * @param currency                            the amount currency
      * @param context                             the call context
@@ -208,14 +208,14 @@ public interface PaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
-    public Payment createChargeback(Account account, UUID directPaymentId, BigDecimal amount, Currency currency, String directPaymentTransactionExternalKey, CallContext context) throws PaymentApiException;
+    public Payment createChargeback(Account account, UUID paymentId, BigDecimal amount, Currency currency, String paymentTransactionExternalKey, CallContext context) throws PaymentApiException;
 
     /**
      * Record a chargeback
      *
      * @param account                             the account
-     * @param directPaymentId                     the direct payment id
-     * @param directPaymentTransactionExternalKey the chargeback external key
+     * @param paymentId                     the payment id
+     * @param paymentTransactionExternalKey the chargeback external key
      * @param amount                              the amount to chargeback
      * @param currency                            the amount currency
      * @param paymentOptions                      options to control payment behavior
@@ -224,51 +224,51 @@ public interface PaymentApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
-    public Payment createChargebackWithPaymentControl(Account account, UUID directPaymentId, BigDecimal amount, Currency currency, String directPaymentTransactionExternalKey, final PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
+    public Payment createChargebackWithPaymentControl(Account account, UUID paymentId, BigDecimal amount, Currency currency, String paymentTransactionExternalKey, final PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
 
     /**
      * Transition a currently PENDING transaction into either a SUCCESS or a FAILURE
      *
      * @param account                    the account
-     * @param directPaymentTransactionId the direct transaction id
+     * @param paymentTransactionId the transaction id
      * @param isSuccess                  whether the transaction is successful or not
      * @param context                    the call context
      * @throws PaymentApiException
      */
-    public void notifyPendingTransactionOfStateChanged(Account account, UUID directPaymentTransactionId, boolean isSuccess, CallContext context) throws PaymentApiException;
+    public void notifyPendingTransactionOfStateChanged(Account account, UUID paymentTransactionId, boolean isSuccess, CallContext context) throws PaymentApiException;
 
     /**
      * Transition a currently PENDING transaction into either a SUCCESS or a FAILURE
      *
      * @param account                    the account
-     * @param directPaymentTransactionId the direct transaction id
+     * @param paymentTransactionId the transaction id
      * @param isSuccess                  whether the transaction is successful or not
      * @param paymentOptions             options to control payment behavior
      * @param context                    the call context
      * @throws PaymentApiException
      */
-    public void notifyPendingTransactionOfStateChangedWithPaymentControl(Account account, UUID directPaymentTransactionId, boolean isSuccess, PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
+    public void notifyPendingTransactionOfStateChangedWithPaymentControl(Account account, UUID paymentTransactionId, boolean isSuccess, PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
 
     /**
      * @param accountId      the account id
      * @param withPluginInfo whether to fetch plugin info
      * @param properties     plugin specific properties
      * @param context        the call context
-     * @return the list of direct payments on this account
+     * @return the list of payments on this account
      * @throws PaymentApiException
      */
     public List<Payment> getAccountPayments(UUID accountId, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
     /**
-     * @param directPaymentId the direct payment id
+     * @param paymentId the payment id
      * @param withPluginInfo  whether to fetch plugin info
      * @param properties      plugin specific properties
      * @param context         the call context
      * @return the payment
      * @throws PaymentApiException
      */
-    public Payment getPayment(UUID directPaymentId, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
+    public Payment getPayment(UUID paymentId, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
     /**
