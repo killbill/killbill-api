@@ -204,7 +204,7 @@ public interface PaymentApi {
      * @param amount                              the amount to chargeback
      * @param currency                            the amount currency
      * @param context                             the call context
-     * @return the chargeback transactionId
+     * @return the payment
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
@@ -220,7 +220,7 @@ public interface PaymentApi {
      * @param currency                            the amount currency
      * @param paymentOptions                      options to control payment behavior
      * @param context                             the call context
-     * @return the chargeback transactionId
+     * @return the payment
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
@@ -233,9 +233,10 @@ public interface PaymentApi {
      * @param paymentTransactionId the transaction id
      * @param isSuccess                  whether the transaction is successful or not
      * @param context                    the call context
+     * @return the payment
      * @throws PaymentApiException
      */
-    public void notifyPendingTransactionOfStateChanged(Account account, UUID paymentTransactionId, boolean isSuccess, CallContext context) throws PaymentApiException;
+    public Payment notifyPendingTransactionOfStateChanged(Account account, UUID paymentTransactionId, boolean isSuccess, CallContext context) throws PaymentApiException;
 
     /**
      * Transition a currently PENDING transaction into either a SUCCESS or a FAILURE
@@ -245,9 +246,10 @@ public interface PaymentApi {
      * @param isSuccess                  whether the transaction is successful or not
      * @param paymentOptions             options to control payment behavior
      * @param context                    the call context
+     * @return the payment
      * @throws PaymentApiException
      */
-    public void notifyPendingTransactionOfStateChangedWithPaymentControl(Account account, UUID paymentTransactionId, boolean isSuccess, PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
+    public Payment notifyPendingTransactionOfStateChangedWithPaymentControl(Account account, UUID paymentTransactionId, boolean isSuccess, PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
 
     /**
      * @param accountId      the account id
