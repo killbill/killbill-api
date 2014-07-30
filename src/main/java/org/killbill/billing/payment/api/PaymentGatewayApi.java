@@ -17,12 +17,13 @@
 
 package org.killbill.billing.payment.api;
 
+import org.killbill.billing.KillbillApi;
 import org.killbill.billing.account.api.Account;
 import org.killbill.billing.payment.plugin.api.GatewayNotification;
 import org.killbill.billing.payment.plugin.api.HostedPaymentPageFormDescriptor;
 import org.killbill.billing.util.callcontext.CallContext;
 
-public interface PaymentGatewayApi {
+public interface PaymentGatewayApi extends KillbillApi {
 
     /**
      * Build metadata for the client to create a redirect form

@@ -19,10 +19,11 @@ package org.killbill.billing.util.api;
 import java.io.OutputStream;
 import java.util.UUID;
 
+import org.killbill.billing.KillbillApi;
 import org.killbill.billing.util.callcontext.CallContext;
 
 // Although it's a read-only call, we want to know who triggered the export - hence the call context here
-public interface ExportUserApi {
+public interface ExportUserApi extends KillbillApi {
 
     public void exportDataForAccount(UUID accountId, DatabaseExportOutputStream out, CallContext context);
 

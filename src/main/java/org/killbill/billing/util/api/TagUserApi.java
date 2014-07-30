@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+import org.killbill.billing.KillbillApi;
 import org.killbill.billing.ObjectType;
 import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
@@ -33,7 +34,7 @@ import static org.killbill.billing.security.Permission.TAG_CAN_CREATE_TAG_DEFINI
 import static org.killbill.billing.security.Permission.TAG_CAN_DELETE_TAG_DEFINITION;
 import static org.killbill.billing.security.Permission.TAG_CAN_REMOVE;
 
-public interface TagUserApi {
+public interface TagUserApi extends KillbillApi {
 
     /**
      * @param context The tenant context

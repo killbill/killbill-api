@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.joda.time.LocalDate;
+import org.killbill.billing.KillbillApi;
 import org.killbill.billing.account.api.AccountApiException;
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.security.RequiresPermissions;
@@ -37,7 +38,7 @@ import static org.killbill.billing.security.Permission.INVOICE_CAN_CREDIT;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_DELETE_CBA;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_ITEM_ADJUST;
 
-public interface InvoiceUserApi {
+public interface InvoiceUserApi extends KillbillApi {
 
     /**
      * Get all invoices for a given account.

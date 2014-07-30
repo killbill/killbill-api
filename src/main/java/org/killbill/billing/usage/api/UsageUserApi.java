@@ -22,10 +22,11 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.joda.time.DateTime;
+import org.killbill.billing.KillbillApi;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 
-public interface UsageUserApi {
+public interface UsageUserApi extends KillbillApi {
 
     /**
      * Bulk usage API when the external system (or the meter module) rolls-up usage data.

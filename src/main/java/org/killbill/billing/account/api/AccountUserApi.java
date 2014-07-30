@@ -19,6 +19,7 @@ package org.killbill.billing.account.api;
 import java.util.List;
 import java.util.UUID;
 
+import org.killbill.billing.KillbillApi;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.entity.Pagination;
@@ -26,7 +27,7 @@ import org.killbill.billing.util.entity.Pagination;
 /**
  * The interface {@code AccountUserApi} offers APIs related to account operations.
  */
-public interface AccountUserApi {
+public interface AccountUserApi extends KillbillApi {
 
     /**
      * @param data    the account data

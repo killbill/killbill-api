@@ -18,10 +18,11 @@ package org.killbill.billing.util.api;
 
 import java.util.UUID;
 
+import org.killbill.billing.KillbillApi;
 import org.killbill.billing.ObjectType;
 import org.killbill.billing.util.callcontext.TenantContext;
 
-public interface RecordIdApi {
+public interface RecordIdApi extends KillbillApi {
 
     /**
      * This can be used by external plugins to keep the mapping between UUID  and recordId

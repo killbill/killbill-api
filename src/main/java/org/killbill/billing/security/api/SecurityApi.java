@@ -19,12 +19,13 @@ package org.killbill.billing.security.api;
 import java.util.List;
 import java.util.Set;
 
+import org.killbill.billing.KillbillApi;
 import org.killbill.billing.security.Logical;
 import org.killbill.billing.security.Permission;
 import org.killbill.billing.security.SecurityApiException;
 import org.killbill.billing.util.callcontext.TenantContext;
 
-public interface SecurityApi {
+public interface SecurityApi extends KillbillApi {
 
     /**
      * Perform a login attempt.

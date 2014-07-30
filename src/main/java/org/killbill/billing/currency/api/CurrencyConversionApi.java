@@ -19,9 +19,10 @@ package org.killbill.billing.currency.api;
 import java.util.Set;
 
 import org.joda.time.DateTime;
+import org.killbill.billing.KillbillApi;
 import org.killbill.billing.catalog.api.Currency;
 
-public interface CurrencyConversionApi {
+public interface CurrencyConversionApi extends KillbillApi {
 
     /**
      * @return the list of currency that can be used as a base currency for conversion

@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.joda.time.LocalDate;
+import org.killbill.billing.KillbillApi;
 import org.killbill.billing.catalog.api.BillingActionPolicy;
 import org.killbill.billing.catalog.api.PlanPhaseSpecifier;
 import org.killbill.billing.util.callcontext.CallContext;
@@ -28,7 +29,7 @@ import org.killbill.billing.util.callcontext.TenantContext;
 /**
  * Primary API to manage the creation and retrieval of <code>Entitlement</code>.
  */
-public interface EntitlementApi {
+public interface EntitlementApi extends KillbillApi {
 
     /**
      * Create a new entitlement for that account.

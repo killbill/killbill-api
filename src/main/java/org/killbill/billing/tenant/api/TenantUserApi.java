@@ -19,10 +19,11 @@ package org.killbill.billing.tenant.api;
 import java.util.List;
 import java.util.UUID;
 
+import org.killbill.billing.KillbillApi;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 
-public interface TenantUserApi {
+public interface TenantUserApi extends KillbillApi {
 
     public Tenant createTenant(final TenantData data, final CallContext context) throws TenantApiException;
 

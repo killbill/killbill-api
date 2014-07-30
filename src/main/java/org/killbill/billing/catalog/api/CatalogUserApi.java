@@ -16,12 +16,13 @@
 
 package org.killbill.billing.catalog.api;
 
+import org.killbill.billing.KillbillApi;
 import org.killbill.billing.util.callcontext.TenantContext;
 
 /**
  * The interface {@code CatalogUserApi} to retrieve catalog information
  */
-public interface CatalogUserApi {
+public interface CatalogUserApi extends KillbillApi {
 
     /**
      * @param catalogName the name of the catalog

@@ -19,6 +19,7 @@ package org.killbill.billing.entitlement.api;
 import java.util.List;
 import java.util.UUID;
 
+import org.killbill.billing.KillbillApi;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.entity.Pagination;
@@ -26,7 +27,7 @@ import org.killbill.billing.util.entity.Pagination;
 /**
  * API to manage the retrieval of <code>Subscription</code> information.
  */
-public interface SubscriptionApi {
+public interface SubscriptionApi extends KillbillApi {
 
     /**
      * Retrieves a <code>Subscription</code> For the entitlementId

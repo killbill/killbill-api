@@ -19,13 +19,14 @@ package org.killbill.billing.util.api;
 import java.util.List;
 import java.util.UUID;
 
+import org.killbill.billing.KillbillApi;
 import org.killbill.billing.ObjectType;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.customfield.CustomField;
 import org.killbill.billing.util.entity.Pagination;
 
-public interface CustomFieldUserApi {
+public interface CustomFieldUserApi extends KillbillApi {
 
     /**
      * Find all custom fields having their object type, field name or value matching the search key

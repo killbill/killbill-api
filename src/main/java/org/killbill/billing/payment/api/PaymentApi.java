@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+import org.killbill.billing.KillbillApi;
 import org.killbill.billing.account.api.Account;
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.security.RequiresPermissions;
@@ -33,7 +34,7 @@ import static org.killbill.billing.security.Permission.PAYMENT_CAN_CHARGEBACK;
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_REFUND;
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_TRIGGER_PAYMENT;
 
-public interface PaymentApi {
+public interface PaymentApi extends KillbillApi {
 
     /**
      * Authorize a payment.

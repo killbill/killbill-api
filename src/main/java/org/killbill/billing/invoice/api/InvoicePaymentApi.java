@@ -19,9 +19,10 @@ package org.killbill.billing.invoice.api;
 import java.util.List;
 import java.util.UUID;
 
+import org.killbill.billing.KillbillApi;
 import org.killbill.billing.util.callcontext.TenantContext;
 
-public interface InvoicePaymentApi {
+public interface InvoicePaymentApi extends KillbillApi {
 
     public List<InvoicePayment> getInvoicePayments(UUID paymentId, TenantContext context);
 

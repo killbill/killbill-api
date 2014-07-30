@@ -19,13 +19,14 @@ package org.killbill.billing.util.api;
 import java.util.List;
 import java.util.UUID;
 
+import org.killbill.billing.KillbillApi;
 import org.killbill.billing.ObjectType;
 import org.killbill.billing.util.audit.AccountAuditLogs;
 import org.killbill.billing.util.audit.AccountAuditLogsForObjectType;
 import org.killbill.billing.util.audit.AuditLog;
 import org.killbill.billing.util.callcontext.TenantContext;
 
-public interface AuditUserApi {
+public interface AuditUserApi extends KillbillApi {
 
     /**
      * Retrieve all audit logs (for all objects) for a given account
