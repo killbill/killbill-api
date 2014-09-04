@@ -263,6 +263,7 @@ public enum ErrorCode {
     PAYMENT_NO_SUCH_PAYMENT_PLUGIN(7028, "Payment plugin %s is not registered"),
     PAYMENT_ACTIVE_TRANSACTION_KEY_EXISTS(7030, "Successful transaction with external key %s already exists"),
     PAYMENT_INVALID_PARAMETER(7031, "Invalid parameter %s: %s"),
+    PAYMENT_INVALID_OPERATION(7032, "Invalid payment transition %s from state %s"),
 
     PAYMENT_PLUGIN_TIMEOUT(7100, "Plugin timeout for account %s and invoice %s"),
     PAYMENT_PLUGIN_GET_PAYMENT_INFO(7102, "Failed to retrieve payment plugin info for payment %s: %s"),
