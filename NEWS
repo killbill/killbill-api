@@ -1,3 +1,6 @@
+0.9.10
+    Update usage api for bulk record and change granularity to LocalDate
+
 0.9.9
     Add new payment ErrorCode
 
