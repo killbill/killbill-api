@@ -16,12 +16,10 @@
 
 package org.killbill.billing.usage.api;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
@@ -31,37 +29,30 @@ public interface UsageUserApi extends KillbillApi {
     /**
      * Bulk usage API when the external system (or the meter module) rolls-up usage data.
      * <p/>
-     * This is used to record e.g. "X has used 12 minutes of his data plan between 2012/02/04 and 2012/02/06".
      *
-     * @param subscriptionId subscription id source
-     * @param unitType       unit type for this usage
-     * @param startTime      start date of the usage period
-     * @param endTime        end date of the usage period
-     * @param amount         value to record
-     * @param context        tenant context
+     * @param usage   the usage for a given period of time associated with a subscription
+     * @param context tenant context
      */
-    public void recordRolledUpUsage(UUID subscriptionId, String unitType, DateTime startTime, DateTime endTime,
-                                    BigDecimal amount, CallContext context);
+    public void recordRolledUpUsage(SubscriptionUsageRecord usage, CallContext context);
 
     /**
      * Get usage information for a given subscription.
      *
      * @param subscriptionId subscription id
      * @param unitType       unit type for this usage
-     * @param startTime      start date of the usage period
-     * @param endTime        end date of the usage period
+     * @param startDate      start date of the usage period (with respect to the account timezone)
+     * @param endDate        end date of the usage period (with respect to the account timezone)
      * @param context        tenant context
      * @return usage data (rolled-up)
      */
-    public RolledUpUsage getUsageForSubscription(UUID subscriptionId, String unitType, DateTime startTime, DateTime endTime, TenantContext context);
+    public RolledUpUsage getUsageForSubscription(UUID subscriptionId, String unitType, LocalDate startDate, LocalDate endDate, TenantContext context);
 
     /**
      * Get usage information for a given subscription.
      *
      * @param subscriptionId subscription id
-     * @param unitType       unit type for this usage
      * @param context        tenant context
      * @return usage data (rolled-up)
      */
-    public List<RolledUpUsage> getAllUsageForSubscription(UUID subscriptionId, Set<String> unitType, List<DateTime> transitionTimes, TenantContext context);
+    public List<RolledUpUsage> getAllUsageForSubscription(UUID subscriptionId, List<LocalDate> transitionDates, TenantContext context);
 }
