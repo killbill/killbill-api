@@ -18,6 +18,8 @@
 
 package org.killbill.billing.payment.api;
 
+import java.util.List;
+
 /**
  * The retryOnFailure parameter will be passed to the plugin to allow or not for retry logic after the call has failed.
  */
@@ -33,5 +35,5 @@ public interface PaymentOptions {
      *
      * @return the name of the RetryPluginApi that payment should invoke or null
      */
-    public String getPaymentControlPluginName();
+    public List<String> getPaymentControlPluginNames();
 }
