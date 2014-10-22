@@ -123,7 +123,7 @@ public interface StaticCatalog {
 
     public List<Listing> getAvailableBasePlanListings() throws CatalogApiException;
 
-    public List<Listing> getAvailableAddonListings(String baseProductName) throws CatalogApiException;
+    public List<Listing> getAvailableAddOnListings(String baseProductName, String priceListName) throws CatalogApiException;
 
     boolean compliesWithLimits(String phaseName, String unit, double value) throws CatalogApiException;
 
