@@ -25,6 +25,7 @@ import java.util.UUID;
 import org.joda.time.LocalDate;
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.account.api.AccountApiException;
+import org.killbill.billing.catalog.api.BillingPeriod;
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.api.TagApiException;
@@ -136,14 +137,14 @@ public interface InvoiceUserApi extends KillbillApi {
     /**
      * Trigger an invoice for a given account and a given day.
      *
-     * @param accountId  account id
-     * @param targetDate the target day, in the account timezone
-     * @param dryRun     dry run mode or not
-     * @param context    the call context
+     * @param accountId       account id
+     * @param targetDate      the target day, in the account timezone
+     * @param dryRunArguments dry run arguments
+     * @param context         the call context
      * @return the invoice generated
      * @throws InvoiceApiException
      */
-    public Invoice triggerInvoiceGeneration(UUID accountId, LocalDate targetDate, boolean dryRun, CallContext context) throws InvoiceApiException;
+    public Invoice triggerInvoiceGeneration(UUID accountId, LocalDate targetDate, DryRunArguments dryRunArguments, CallContext context) throws InvoiceApiException;
 
     /**
      * Mark an invoice as written off.
