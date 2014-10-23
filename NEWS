@@ -1,3 +1,6 @@
+0.10.2
+    catalog: Add optional priceList filter when retrieving available ADD_ONs.
+
 0.10.1
     Modify invoice api to trigger dryRun invoice to it also supports adding subscription info (CREATE, CHANGE, CANCEL) 
 
