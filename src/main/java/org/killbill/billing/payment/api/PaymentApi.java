@@ -53,8 +53,31 @@ public interface PaymentApi extends KillbillApi {
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
     public Payment createAuthorization(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency,
-                                             String paymentExternalKey, String paymentTransactionExternalKey,
-                                             Iterable<PluginProperty> properties, CallContext context)
+                                       String paymentExternalKey, String paymentTransactionExternalKey,
+                                       Iterable<PluginProperty> properties, CallContext context)
+            throws PaymentApiException;
+
+
+    /**
+     * Authorize a payment and allow to go through registered routing  plugins
+     *
+     * @param account                             the account
+     * @param paymentMethodId                     the payment method id to use
+     * @param paymentId                     the payment id (non-null for multi-steps flows, such as 3D Secure)
+     * @param amount                              the amount to pay
+     * @param currency                            the amount currency
+     * @param paymentExternalKey            the payment external key
+     * @param paymentTransactionExternalKey the payment transaction external key
+     * @param properties                          plugin specific properties
+     * @param paymentOptions                      options to control payment behavior
+     * @param context                             the call context
+     * @return the payment
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
+    public Payment createAuthorizationWithPaymentControl(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency,
+                                       String paymentExternalKey, String paymentTransactionExternalKey,
+                                       Iterable<PluginProperty> properties, PaymentOptions paymentOptions, CallContext context)
             throws PaymentApiException;
 
     /**
@@ -97,7 +120,7 @@ public interface PaymentApi extends KillbillApi {
             throws PaymentApiException;
 
     /**
-     * Combine an authorize and capture payment.
+     * Combine an authorize and capture payment and allow to go through registered routing  plugins
      *
      * @param account                             the account
      * @param paymentMethodId                     the payment method id to use
@@ -154,7 +177,7 @@ public interface PaymentApi extends KillbillApi {
             throws PaymentApiException;
 
     /**
-     * Refund a previously captured payment.
+     * Refund a previously captured payment and allow to go through registered routing  plugins
      *
      * @param account                             the account
      * @param paymentId                     the payment id
@@ -192,9 +215,35 @@ public interface PaymentApi extends KillbillApi {
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
     public Payment createCredit(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency,
-                                      String paymentExternalKey, String paymentTransactionExternalKey,
-                                      Iterable<PluginProperty> properties, CallContext context)
+                                String paymentExternalKey, String paymentTransactionExternalKey,
+                                Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
+
+
+    /**
+     * Credit a payment method and allow to go through registered routing  plugins
+     * <p/>
+     * This is also known as payment in reverse.
+     *
+     * @param account                             the account
+     * @param paymentMethodId                     the payment method id to use
+     * @param paymentId                     the payment id (non-null for multi-steps flows)
+     * @param amount                              the amount to credit
+     * @param currency                            the amount currency
+     * @param paymentExternalKey            the payment external key
+     * @param paymentTransactionExternalKey the payment transaction external key
+     * @param properties                          plugin specific properties
+     * @param paymentOptions                      options to control payment behavior
+     * @param context                             the call context
+     * @return the payment
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
+    public Payment createCreditWithPaymentControl(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency,
+                                String paymentExternalKey, String paymentTransactionExternalKey,
+                                Iterable<PluginProperty> properties, PaymentOptions paymentOptions, CallContext context)
+            throws PaymentApiException;
+
 
     /**
      * Record a chargeback
