@@ -25,9 +25,21 @@ import org.killbill.billing.util.callcontext.TenantContext;
 public interface CatalogUserApi extends KillbillApi {
 
     /**
+     * Retrieves the multi versioned catalog.
+     *
      * @param catalogName the name of the catalog
-     * @param context     the user context that specifies the enant information
+     * @param context     the user context that specifies the tenant information
      * @return the {@code Catalog}
      */
-    Catalog getCatalog(String catalogName, TenantContext context);
+    Catalog getCatalog(String catalogName, TenantContext context) throws CatalogApiException;
+
+
+    /**
+     * Retrieves the current catalog
+     *
+     * @param catalogName the name of the catalog
+     * @param context     the user context that specifies the tenant information
+     * @return the {@code Catalog}
+     */
+    StaticCatalog getCurrentCatalog(String catalogName, TenantContext context) throws CatalogApiException;
 }

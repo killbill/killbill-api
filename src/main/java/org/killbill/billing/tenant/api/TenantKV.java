@@ -26,6 +26,8 @@ public interface TenantKV extends Entity {
 
     public enum TenantKey {
         // Key for push notification callback
-        PUSH_NOTIFICATION_CB
+        PUSH_NOTIFICATION_CB,
+        // Catalog Key
+        CATALOG,
     }
 }

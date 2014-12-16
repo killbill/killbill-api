@@ -23,6 +23,10 @@ public class CatalogApiException extends BillingExceptionBase {
 
     private static final long serialVersionUID = 1L;
 
+    public CatalogApiException(final BillingExceptionBase cause) {
+        super(cause);
+    }
+
     public CatalogApiException(final Throwable cause, final ErrorCode code, final Object... args) {
         super(cause, code, args);
     }

@@ -147,6 +147,9 @@ public enum ErrorCode {
     CAT_NO_OVERDUEABLE_TYPE(2072, "No such overdueable type: "),
 
     CAT_NOT_TOP_UP_BLOCK(2075, "Block for phase %s defines a TOP_UP property for a non TOP_UP block"),
+
+    CAT_INVALID_FOR_TENANT(2080, "Invalid catalog for tenant : %s"),
+
     /*
     *
     * Range 3000 : ACCOUNT
