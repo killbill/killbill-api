@@ -1,3 +1,6 @@
+0.10.4
+    Add new api to retrieve OverdueConfig
+
 0.10.3
     Add payment apis (to go through payment control/routing logic)
 
