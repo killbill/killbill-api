@@ -19,16 +19,14 @@
 package org.killbill.billing.overdue.api;
 
 import org.killbill.billing.KillbillApi;
-import org.killbill.billing.catalog.api.CatalogApiException;
 import org.killbill.billing.util.callcontext.TenantContext;
 
 public interface OverdueApi extends KillbillApi {
 
     /**
-     *
      * @param context the tenant information.
      * @return the overdue configuration associated with the tenant
-     * @throws CatalogApiException
+     * @throws OverdueApiException
      */
-    OverdueConfig getOverdueConfig(TenantContext context) throws CatalogApiException;
+    OverdueConfig getOverdueConfig(TenantContext context) throws OverdueApiException;
 }
