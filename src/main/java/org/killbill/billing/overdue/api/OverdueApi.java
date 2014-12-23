@@ -19,6 +19,7 @@
 package org.killbill.billing.overdue.api;
 
 import org.killbill.billing.KillbillApi;
+import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 
 public interface OverdueApi extends KillbillApi {
@@ -29,4 +30,11 @@ public interface OverdueApi extends KillbillApi {
      * @throws OverdueApiException
      */
     OverdueConfig getOverdueConfig(TenantContext context) throws OverdueApiException;
+
+    /**
+     *
+     * @param context the context
+     * @throws OverdueApiException
+     */
+    void uploadOverdueConfig(String overdueXML, CallContext context)  throws OverdueApiException;
 }

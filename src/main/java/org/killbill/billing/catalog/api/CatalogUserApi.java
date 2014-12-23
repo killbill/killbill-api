@@ -17,6 +17,7 @@
 package org.killbill.billing.catalog.api;
 
 import org.killbill.billing.KillbillApi;
+import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 
 /**
@@ -42,4 +43,12 @@ public interface CatalogUserApi extends KillbillApi {
      * @return the {@code Catalog}
      */
     StaticCatalog getCurrentCatalog(String catalogName, TenantContext context) throws CatalogApiException;
+
+    /**
+     *
+     * @param catalogXML the catalog XML
+     * @param context the user context
+     * @throws CatalogApiException
+     */
+    void uploadCatalog(String catalogXML, CallContext context)  throws CatalogApiException;
 }
