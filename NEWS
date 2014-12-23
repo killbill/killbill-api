@@ -1,3 +1,6 @@
+0.11.2
+    Add api for catalog and overdue to upload the per tenant catalog
+
 0.11.1
     Add new tenant keys for invoice resources (templates, translations, ..)
 
