@@ -23,6 +23,7 @@ public interface PluginConfig {
     public enum PluginType {
         PAYMENT,
         NOTIFICATION,
+        INVOICE,
         CURRENCY,
         __UNKNOWN__
     }
