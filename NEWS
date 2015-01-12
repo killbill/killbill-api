@@ -1,5 +1,6 @@
 0.11.3
     Add PluginType.INVOICE for invoice plugins
+    Update killbill-oss-parent to 0.9.5
 
 0.11.2
     Add api for catalog and overdue to upload the per tenant catalog
