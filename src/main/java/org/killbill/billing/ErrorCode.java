@@ -23,7 +23,8 @@ public enum ErrorCode {
      */
     NOT_IMPLEMENTED(1, "Api not implemented yet"),
     DATA_TRUNCATION(2, "Data truncation error. (%s)"),
-    UNEXPECTED_ERROR(3, "%s"),
+    CURRENCY_INVALID(3, "Invalid currency %s, expected %s"),
+    UNEXPECTED_ERROR(4, "%s"),
     /*
      *
      * Range 1000 : SUBSCRIPTIONS
@@ -213,7 +214,6 @@ public enum ErrorCode {
     INVOICE_NUMBER_NOT_FOUND(4018, "No invoice could be found for number %s."),
     INVOICE_INVALID_NUMBER(4019, "Invalid invoice number %s."),
     INVOICE_ITEM_ADJUSTMENT_AMOUNT_INVALID(4020, "Invoice adjustment amount %s should be lower than %s"),
-    EXTERNAL_CHARGE_CURRENCY_INVALID(4021, "External charge currency should match the account currency %s"),
 
     /*
      *
