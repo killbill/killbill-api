@@ -214,6 +214,8 @@ public enum ErrorCode {
     INVOICE_NUMBER_NOT_FOUND(4018, "No invoice could be found for number %s."),
     INVOICE_INVALID_NUMBER(4019, "Invalid invoice number %s."),
     INVOICE_ITEM_ADJUSTMENT_AMOUNT_INVALID(4020, "Invoice adjustment amount %s should be lower than %s"),
+    INVOICE_ITEM_ADJUSTMENT_ITEM_INVALID(4021, "Invoice item %s cannot be adjusted"),
+    INVOICE_ITEM_TYPE_INVALID(4022, "Invalid invoice item type %s"),
 
     /*
      *
