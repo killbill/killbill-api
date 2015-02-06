@@ -1,3 +1,9 @@
+0.12.1
+    ErrorCode: add INVOICE_ITEM_ADJUSTMENT_ITEM_INVALID and INVOICE_ITEM_TYPE_INVALID
+
+0.12.0
+    ErrorCode: rename EXTERNAL_CHARGE_CURRENCY_INVALID to CURRENCY_INVALID
+
 0.11.3
     Add PluginType.INVOICE for invoice plugins
     Update killbill-oss-parent to 0.9.5
