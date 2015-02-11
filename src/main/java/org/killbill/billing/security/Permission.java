@@ -19,6 +19,12 @@ package org.killbill.billing.security;
 public enum Permission {
 
     /*
+     * Tenants
+     */
+    TENANTS_CAN_VIEW("admin_tenant", "view"),
+    TENANTS_CAN_CREATE("admin_tenant", "create"),
+
+    /*
      * Account
      */
     ACCOUNT_CAN_CHARGE("account", "charge"),
