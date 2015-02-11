@@ -44,11 +44,6 @@ public interface PlanPhase {
     public String getName();
 
     /**
-     * @return the parent {@code Plan}
-     */
-    public Plan getPlan();
-
-    /**
      * @return the duration of that {@code PlanPhase}
      */
     public Duration getDuration();
