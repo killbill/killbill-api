@@ -17,8 +17,11 @@
 package org.killbill.billing.catalog.api;
 
 import org.killbill.billing.KillbillApi;
+import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
+
+import static org.killbill.billing.security.Permission.CATALOG_CAN_UPLOAD;
 
 /**
  * The interface {@code CatalogUserApi} to retrieve catalog information
@@ -34,7 +37,6 @@ public interface CatalogUserApi extends KillbillApi {
      */
     Catalog getCatalog(String catalogName, TenantContext context) throws CatalogApiException;
 
-
     /**
      * Retrieves the current catalog
      *
@@ -45,10 +47,10 @@ public interface CatalogUserApi extends KillbillApi {
     StaticCatalog getCurrentCatalog(String catalogName, TenantContext context) throws CatalogApiException;
 
     /**
-     *
      * @param catalogXML the catalog XML
-     * @param context the user context
+     * @param context    the user context
      * @throws CatalogApiException
      */
-    void uploadCatalog(String catalogXML, CallContext context)  throws CatalogApiException;
+    @RequiresPermissions(CATALOG_CAN_UPLOAD)
+    void uploadCatalog(String catalogXML, CallContext context) throws CatalogApiException;
 }

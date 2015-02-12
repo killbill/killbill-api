@@ -19,8 +19,11 @@
 package org.killbill.billing.overdue.api;
 
 import org.killbill.billing.KillbillApi;
+import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
+
+import static org.killbill.billing.security.Permission.OVERDUE_CAN_UPLOAD;
 
 public interface OverdueApi extends KillbillApi {
 
@@ -32,9 +35,9 @@ public interface OverdueApi extends KillbillApi {
     OverdueConfig getOverdueConfig(TenantContext context) throws OverdueApiException;
 
     /**
-     *
      * @param context the context
      * @throws OverdueApiException
      */
-    void uploadOverdueConfig(String overdueXML, CallContext context)  throws OverdueApiException;
+    @RequiresPermissions(OVERDUE_CAN_UPLOAD)
+    void uploadOverdueConfig(String overdueXML, CallContext context) throws OverdueApiException;
 }

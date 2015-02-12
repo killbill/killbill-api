@@ -20,16 +20,15 @@ import java.util.List;
 import java.util.UUID;
 
 import org.killbill.billing.KillbillApi;
-import org.killbill.billing.security.Permission;
 import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 
-import static org.killbill.billing.security.Permission.TENANTS_CAN_CREATE;
+import static org.killbill.billing.security.Permission.TENANT_CAN_CREATE;
 
 public interface TenantUserApi extends KillbillApi {
 
-    @RequiresPermissions(TENANTS_CAN_CREATE)
+    @RequiresPermissions(TENANT_CAN_CREATE)
     public Tenant createTenant(final TenantData data, final CallContext context) throws TenantApiException;
 
     public Tenant getTenantByApiKey(final String key) throws TenantApiException;

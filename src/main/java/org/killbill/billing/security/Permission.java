@@ -19,20 +19,15 @@ package org.killbill.billing.security;
 public enum Permission {
 
     /*
-     * Tenants
-     */
-    TENANTS_CAN_VIEW("admin_tenant", "view"),
-    TENANTS_CAN_CREATE("admin_tenant", "create"),
-
-    /*
      * Account
      */
     ACCOUNT_CAN_CHARGE("account", "charge"),
     ACCOUNT_CAN_CREDIT("account", "credit"),
 
     /*
-     * Bundle
+     * Catalog
      */
+    CATALOG_CAN_UPLOAD("catalog", "config_upload"),
 
     /*
      * Entitlement
@@ -46,6 +41,11 @@ public enum Permission {
     INVOICE_CAN_ADJUST("invoice", "adjust"),
     INVOICE_CAN_ITEM_ADJUST("invoice", "item_adjust"),
     INVOICE_CAN_DELETE_CBA("invoice", "delete_cba"),
+
+   /*
+    * Overdue
+    */
+    OVERDUE_CAN_UPLOAD("overdue", "config_upload"),
 
     /*
      * Payment
@@ -61,7 +61,14 @@ public enum Permission {
     TAG_CAN_CREATE_TAG_DEFINITION("tag", "create_tag_definition"),
     TAG_CAN_DELETE_TAG_DEFINITION("tag", "delete_tag_definition"),
     TAG_CAN_ADD("tag", "add"),
-    TAG_CAN_REMOVE("tag", "remove");
+    TAG_CAN_REMOVE("tag", "remove"),
+
+   /*
+    * Tenants
+    */
+    TENANT_CAN_VIEW("tenant", "view"),
+    TENANT_CAN_CREATE("tenant", "create");
+
 
     private final String group;
     private final String value;
