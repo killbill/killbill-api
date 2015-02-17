@@ -1,3 +1,8 @@
+0.12.2
+    Entitlement: expose subscription events in Subscription
+    Catalog: remove PlanPhase#getPlan
+    New permissions for tenants, overdue and catalog
+
 0.12.1
     ErrorCode: add INVOICE_ITEM_ADJUSTMENT_ITEM_INVALID and INVOICE_ITEM_TYPE_INVALID
 
