@@ -25,19 +25,32 @@ public interface TenantKV extends Entity {
     public String getValue();
 
     public enum TenantKey {
+
         // Key for push notification callback
-        PUSH_NOTIFICATION_CB,
+        PUSH_NOTIFICATION_CB(true),
         // Catalog Key
-        CATALOG,
+        CATALOG(false),
         // Overdue Configuration Key
-        OVERDUE_CONFIG,
+        OVERDUE_CONFIG(true),
         // Invoice Translation Key Prefix
-        INVOICE_TRANSLATION_,
+        INVOICE_TRANSLATION_(true),
         // Catalog Translation Key Prefix
-        CATALOG_TRANSLATION_,
+        CATALOG_TRANSLATION_(true),
         // Invoice Template Key
-        INVOICE_TEMPLATE,
+        INVOICE_TEMPLATE(true),
         // Invoice Template ManualPay Key
-        INVOICE_MP_TEMPLATE,
+        INVOICE_MP_TEMPLATE(true),
+        // Plugin config
+        PLUGIN_CONFIG_(true);
+
+        private final boolean singleValue;
+
+        TenantKey(final boolean singleValue) {
+            this.singleValue = singleValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
     }
 }
