@@ -17,6 +17,8 @@
 
 package org.killbill.billing.payment.api;
 
+import java.util.UUID;
+
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.account.api.Account;
 import org.killbill.billing.payment.plugin.api.GatewayNotification;
@@ -35,7 +37,7 @@ public interface PaymentGatewayApi extends KillbillApi {
      * @return redirect form metadata
      * @throws PaymentApiException
      */
-    public HostedPaymentPageFormDescriptor buildFormDescriptor(Account account, Iterable<PluginProperty> customFields, Iterable<PluginProperty> properties, CallContext context)
+    public HostedPaymentPageFormDescriptor buildFormDescriptor(Account account, UUID paymentMethodId, Iterable<PluginProperty> customFields, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
