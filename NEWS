@@ -1,3 +1,7 @@
+0.12.3
+    Add new PLUGIN_CONFIG_ TenantKey
+    Expose paymentMethodId in buildFormDescriptor
+
 0.12.2
     Entitlement: expose subscription events in Subscription
     Catalog: remove PlanPhase#getPlan
