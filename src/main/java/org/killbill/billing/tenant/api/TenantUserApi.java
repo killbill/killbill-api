@@ -35,7 +35,7 @@ public interface TenantUserApi extends KillbillApi {
 
     public Tenant getTenantById(final UUID tenantId) throws TenantApiException;
 
-    public List<String> getTenantValueForKey(final String key, final TenantContext context) throws TenantApiException;
+    public List<String> getTenantValuesForKey(final String key, final TenantContext context) throws TenantApiException;
 
     public void addTenantKeyValue(final String key, final String value, final CallContext context) throws TenantApiException;
 
