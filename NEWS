@@ -1,3 +1,6 @@
+0.12.4
+    API renaming for getTenantValueForKey -> getTenantValuesForKey
+
 0.12.3
     Add new PLUGIN_CONFIG_ TenantKey
     Expose paymentMethodId in buildFormDescriptor
