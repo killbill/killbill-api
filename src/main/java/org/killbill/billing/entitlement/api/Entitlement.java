@@ -16,6 +16,7 @@
 
 package org.killbill.billing.entitlement.api;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.joda.time.LocalDate;
@@ -23,6 +24,7 @@ import org.killbill.billing.catalog.api.BillingActionPolicy;
 import org.killbill.billing.catalog.api.BillingPeriod;
 import org.killbill.billing.catalog.api.Plan;
 import org.killbill.billing.catalog.api.PlanPhase;
+import org.killbill.billing.catalog.api.PlanPhasePriceOverride;
 import org.killbill.billing.catalog.api.PriceList;
 import org.killbill.billing.catalog.api.Product;
 import org.killbill.billing.catalog.api.ProductCategory;
@@ -215,11 +217,12 @@ public interface Entitlement extends Entity {
      * @param productName   the new product name
      * @param billingPeriod the new billing period
      * @param priceList     the new priceList
+     * @param overrides     the price override for each phase and for a specific currency
      * @param context       the context
      * @return the new <code>Entitlement</code> after the change was performed
      * @throws EntitlementApiException if change failed
      */
-    public Entitlement changePlan(final String productName, final BillingPeriod billingPeriod, final String priceList, final CallContext context)
+    public Entitlement changePlan(final String productName, final BillingPeriod billingPeriod, final String priceList, final List<PlanPhasePriceOverride> overrides, final CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -231,12 +234,13 @@ public interface Entitlement extends Entity {
      * @param productName   the new product name
      * @param billingPeriod the new billing period
      * @param priceList     the new priceList
+     * @param overrides     the price override for each phase and for a specific currency
      * @param effectiveDate the date at which the entitlement should be changed
      * @param context       the context
      * @return the new <code>Entitlement</code> after the change was performed
      * @throws EntitlementApiException if change failed
      */
-    public Entitlement changePlanWithDate(final String productName, final BillingPeriod billingPeriod, final String priceList, final LocalDate effectiveDate, final CallContext context)
+    public Entitlement changePlanWithDate(final String productName, final BillingPeriod billingPeriod, final String priceList, final List<PlanPhasePriceOverride> overrides, final LocalDate effectiveDate, final CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -248,13 +252,14 @@ public interface Entitlement extends Entity {
      * @param productName   the new product name
      * @param billingPeriod the new billing period
      * @param priceList     the new priceList
+     * @param overrides     the price override for each phase and for a specific currency
      * @param effectiveDate the date at which the entitlement should be changed
      * @param billingPolicy the override billing policy
      * @param context       the context
      * @return the new <code>Entitlement</code> after the change was performed
      * @throws EntitlementApiException if change failed
      */
-    public Entitlement changePlanOverrideBillingPolicy(final String productName, final BillingPeriod billingPeriod, final String priceList, final LocalDate effectiveDate,
+    public Entitlement changePlanOverrideBillingPolicy(final String productName, final BillingPeriod billingPeriod, final String priceList, final List<PlanPhasePriceOverride> overrides, final LocalDate effectiveDate,
                                                        final BillingActionPolicy billingPolicy, final CallContext context)
             throws EntitlementApiException;
 

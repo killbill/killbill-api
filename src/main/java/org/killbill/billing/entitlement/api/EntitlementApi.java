@@ -22,6 +22,7 @@ import java.util.UUID;
 import org.joda.time.LocalDate;
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.catalog.api.BillingActionPolicy;
+import org.killbill.billing.catalog.api.PlanPhasePriceOverride;
 import org.killbill.billing.catalog.api.PlanPhaseSpecifier;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
@@ -40,12 +41,13 @@ public interface EntitlementApi extends KillbillApi {
      * @param accountId     the account id
      * @param spec          the product specification for that new entitlement
      * @param externalKey   the external key for that entitlement-- which must be unique in the system
+     * @param overrides     the price override for each phase and for a specific currency
      * @param effectiveDate the date at which the entitlement should start
      * @param context       the context
      * @return a new entitlement
      * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>.
      */
-    public Entitlement createBaseEntitlement(UUID accountId, PlanPhaseSpecifier spec, String externalKey, LocalDate effectiveDate, CallContext context)
+    public Entitlement createBaseEntitlement(UUID accountId, PlanPhaseSpecifier spec, String externalKey, List<PlanPhasePriceOverride> overrides, LocalDate effectiveDate, CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -57,12 +59,13 @@ public interface EntitlementApi extends KillbillApi {
      *
      * @param bundleId      the id of the bundle
      * @param spec          the product specification for that new entitlement
+     * @param overrides     the price override for each phase and for a specific currency
      * @param effectiveDate the date at which the entitlement should start
      * @param context       the context
      * @return a new entitlement
      * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>
      */
-    public Entitlement addEntitlement(UUID bundleId, PlanPhaseSpecifier spec, LocalDate effectiveDate, CallContext context)
+    public Entitlement addEntitlement(UUID bundleId, PlanPhaseSpecifier spec, List<PlanPhasePriceOverride> overrides, LocalDate effectiveDate, CallContext context)
             throws EntitlementApiException;
 
     /**

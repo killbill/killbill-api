@@ -150,7 +150,9 @@ public enum ErrorCode {
     CAT_NOT_TOP_UP_BLOCK(2075, "Block for phase %s defines a TOP_UP property for a non TOP_UP block"),
 
     CAT_INVALID_FOR_TENANT(2080, "Invalid catalog for tenant : %s"),
-    CAT_INVALID_DEFAULT(2081, "Invalid default catalog : %s"),
+    CAT_INVALID_INVALID_PRICE_OVERRIDE(2081, "Cannot override price for plan %s : %s"),
+
+    CAT_INVALID_DEFAULT(2999, "Invalid default catalog : %s"),
 
     /*
     *

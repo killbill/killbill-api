@@ -18,10 +18,12 @@
 
 package org.killbill.billing.invoice.api;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.joda.time.DateTime;
 import org.killbill.billing.catalog.api.BillingActionPolicy;
+import org.killbill.billing.catalog.api.PlanPhasePriceOverride;
 import org.killbill.billing.catalog.api.PlanPhaseSpecifier;
 import org.killbill.billing.entitlement.api.SubscriptionEventType;
 
@@ -38,4 +40,6 @@ public interface DryRunArguments {
     public UUID getBundleId();
 
     public BillingActionPolicy getBillingActionPolicy();
+
+    public List<PlanPhasePriceOverride> getPlanPhasePriceoverrides();
 }

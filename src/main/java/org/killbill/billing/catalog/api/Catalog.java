@@ -16,6 +16,8 @@
 
 package org.killbill.billing.catalog.api;
 
+import java.util.List;
+
 import org.joda.time.DateTime;
 
 /**
@@ -61,11 +63,12 @@ public interface Catalog {
      * @param productName   the unique name for the {@code Product}
      * @param billingPeriod the unique name for the {@code BillingPeriod}
      * @param priceListName the unique name for the {@code PriceList}
+     * @param overrides     the price override for each phase and for a specific currency
      * @param requestedDate specifies the state of the catalog for that date
      * @return the {@code Plan}
      * @throws CatalogApiException if {@code Plan} does not exist
      */
-    public Plan findPlan(String productName, BillingPeriod billingPeriod, String priceListName,
+    public Plan createOrFindPlan(String productName, BillingPeriod billingPeriod, String priceListName, PlanPhasePriceOverridesWithCallContext overrides,
                          DateTime requestedDate) throws CatalogApiException;
 
     /**
@@ -81,11 +84,12 @@ public interface Catalog {
      * @param productName   the unique name for the {@code Product}
      * @param billingPeriod the unique name for the {@code BillingPeriod}
      * @param priceListName the unique name for the {@code PriceList}
+     * @param overrides     the price override for each phase and for a specific currency
      * @param requestedDate specifies the state of the catalog for that date
      * @return the {@code Plan}
      * @throws CatalogApiException if {@code Plan} does not exist
      */
-    public Plan findPlan(String productName, BillingPeriod billingPeriod, String priceListName,
+    public Plan createOrFindPlan(String productName, BillingPeriod billingPeriod, String priceListName, PlanPhasePriceOverridesWithCallContext overrides,
                          DateTime requestedDate, DateTime subscriptionStartDate) throws CatalogApiException;
 
     /**

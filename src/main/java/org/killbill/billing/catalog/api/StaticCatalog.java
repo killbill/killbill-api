@@ -69,10 +69,11 @@ public interface StaticCatalog {
      * @param productName   the {@code Product} name
      * @param billingPeriod the billingPeriod
      * @param priceList     the name of the {@code PriceList}
+     * @param overrides     the price override for each phase and for a specific currency
      * @return the {@code Plan}
      * @throws CatalogApiException if not such {@code Plan} can be found
      */
-    public Plan findCurrentPlan(String productName, BillingPeriod billingPeriod, String priceList) throws CatalogApiException;
+    public Plan createOrFindCurrentPlan(String productName, BillingPeriod billingPeriod, String priceList, PlanPhasePriceOverridesWithCallContext overrides) throws CatalogApiException;
 
     /**
      * @param name the name of the {@Plan}
