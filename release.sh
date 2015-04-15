@@ -25,7 +25,7 @@ set -e
 git pull
 
 LAST_NEWS_VERSION=$(head -1 NEWS)
-NEXT_VERSION=`grep -E '<version>([0-9]+\.[0-9]+\.[0-9]+)-SNAPSHOT</version>' pom.xml | sed 's/[\t \n]*<version>\(.*\)-SNAPSHOT<\/version>[\t \n]*/\1/'`
+NEXT_VERSION=`grep -E '<version>([0-9]+\.[0-9]+(\.[0-9]+)?)-SNAPSHOT</version>' pom.xml | sed 's/[\t \n]*<version>\(.*\)-SNAPSHOT<\/version>[\t \n]*/\1/'`
 
 echo "Enter the NEWS changelog for version $NEXT_VERSION and hit ctrl-d when done (ctrl-c to abort)"
 original_news_message=$(cat)
