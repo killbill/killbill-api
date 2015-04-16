@@ -76,6 +76,39 @@ public interface SecurityApi extends KillbillApi {
     public void addUserRoles(String username, String clearPassword, List<String> roles, CallContext context) throws SecurityApiException;
 
     /**
+     * Update password for the user
+     *
+     * @param username       the username
+     * @param clearPassword  the password (in clear)
+     * @param context        context (does not include tenant nor account info)
+     * @throws SecurityApiException
+     */
+    @RequiresPermissions(USER_CAN_CREATE)
+    public void updateUserPassword(String username, String clearPassword, CallContext context) throws SecurityApiException;
+
+    /**
+     *
+     * Update the roles associated with the user (only the specified roles will be in effect)
+     *
+     * @param username       the username
+     * @param roles          the new roles
+     * @param context        context (does not include tenant nor account info)
+     * @throws SecurityApiException
+     */
+    @RequiresPermissions(USER_CAN_CREATE)
+    public void updateUserRoles(String username, List<String> roles, CallContext context) throws SecurityApiException;
+
+    /**
+     * Invalidate a user
+     *
+     * @param username       the username
+     * @param context        context (does not include tenant nor account info)
+     * @throws SecurityApiException
+     */
+    @RequiresPermissions(USER_CAN_CREATE)
+    public void invalidateUser(String username, CallContext context) throws SecurityApiException;
+
+    /**
      * Retrieves the roles associated to a user in the Shiro store (JDBCRealm)
      *
      * @param username      the username
