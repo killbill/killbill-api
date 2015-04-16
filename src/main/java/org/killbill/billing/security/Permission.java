@@ -42,9 +42,9 @@ public enum Permission {
     INVOICE_CAN_ITEM_ADJUST("invoice", "item_adjust"),
     INVOICE_CAN_DELETE_CBA("invoice", "delete_cba"),
 
-   /*
-    * Overdue
-    */
+    /*
+     * Overdue
+     */
     OVERDUE_CAN_UPLOAD("overdue", "config_upload"),
 
     /*
@@ -63,12 +63,17 @@ public enum Permission {
     TAG_CAN_ADD("tag", "add"),
     TAG_CAN_REMOVE("tag", "remove"),
 
-   /*
-    * Tenants
-    */
+    /*
+     * Tenants
+     */
     TENANT_CAN_VIEW("tenant", "view"),
-    TENANT_CAN_CREATE("tenant", "create");
+    TENANT_CAN_CREATE("tenant", "create"),
 
+    /*
+     * Users (authentication, authorization)
+    */
+    USER_CAN_VIEW("user", "view"),
+    USER_CAN_CREATE("user", "create");
 
     private final String group;
     private final String value;

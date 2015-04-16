@@ -330,6 +330,8 @@ public enum ErrorCode {
      *
      */
     SECURITY_NOT_ENOUGH_PERMISSIONS(40000, "User doesn't have enough permissions"),
+    SECURITY_INVALID_PERMISSIONS(40001, "The permission %s is invalid"),
+    SECURITY_INVALID_ROLE(40002, "The role %s does not exist"),
 
     __UNKNOWN_ERROR_CODE(-1, "Unknown ErrorCode");
 

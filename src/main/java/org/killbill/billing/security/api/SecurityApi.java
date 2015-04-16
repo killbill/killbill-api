@@ -22,8 +22,13 @@ import java.util.Set;
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.security.Logical;
 import org.killbill.billing.security.Permission;
+import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.security.SecurityApiException;
+import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
+
+import static org.killbill.billing.security.Permission.TENANT_CAN_CREATE;
+import static org.killbill.billing.security.Permission.USER_CAN_CREATE;
 
 public interface SecurityApi extends KillbillApi {
 
@@ -57,4 +62,46 @@ public interface SecurityApi extends KillbillApi {
      * @throws SecurityException
      */
     void checkCurrentUserPermissions(List<Permission> permissions, Logical logical, TenantContext context) throws SecurityApiException;
+
+    /**
+     * Add a user with roles in the Shiro store (JDBCRealm)
+     *
+     * @param username       the username
+     * @param clearPassword  the password (in clear)
+     * @param roles          the list of (existing) roles
+     * @param context        context (does not include tenant nor account info)
+     * @throws SecurityApiException
+     */
+    @RequiresPermissions(USER_CAN_CREATE)
+    public void addUserRoles(String username, String clearPassword, List<String> roles, CallContext context) throws SecurityApiException;
+
+    /**
+     * Retrieves the roles associated to a user in the Shiro store (JDBCRealm)
+     *
+     * @param username      the username
+     * @param tenantContext dummy context
+     * @return
+     */
+    public List<String> getUserRoles(String username, final TenantContext tenantContext);
+
+    /**
+     * Add a role definition  in the Shiro store (JDBCRealm)
+     * @param role        the role name
+     * @param permissions the list of permissions
+     * @param context     context (does not include tenant nor account info)
+     * @throws SecurityApiException
+     *
+     * @see org.killbill.billing.security.Permission
+     */
+    @RequiresPermissions(USER_CAN_CREATE)
+    public void addRoleDefinition(String role, List<String> permissions, CallContext context) throws SecurityApiException;
+
+    /**
+     * Retrieves the list of permissions associated to that role  in the Shiro store (JDBCRealm)
+     * @param role           the role name
+     * @param tenantContext  dummy context
+     * @return
+     */
+    public List<String> getRoleDefinition(final String role, final TenantContext tenantContext);
+
 }
