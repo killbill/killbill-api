@@ -25,6 +25,7 @@ public interface PluginConfig {
         NOTIFICATION,
         INVOICE,
         CURRENCY,
+        CATALOG,
         __UNKNOWN__
     }
 
