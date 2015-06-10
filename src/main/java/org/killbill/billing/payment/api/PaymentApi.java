@@ -86,7 +86,7 @@ public interface PaymentApi extends KillbillApi {
      * @param account                             the account
      * @param amount                              the amount to pay
      * @param currency                            the amount currency
-     * @param paymentTransactionExternalKey the payment transaction external key
+     * @param paymentTransactionExternalKey       the payment transaction external key
      * @param properties                          plugin specific properties
      * @param context                             the call context
      * @return the payment
@@ -94,9 +94,29 @@ public interface PaymentApi extends KillbillApi {
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
     public Payment createCapture(Account account, UUID paymentId, BigDecimal amount, Currency currency,
-                                       String paymentTransactionExternalKey, Iterable<PluginProperty> properties,
-                                       CallContext context)
+                                 String paymentTransactionExternalKey, Iterable<PluginProperty> properties,
+                                 CallContext context)
             throws PaymentApiException;
+
+    /**
+     * Capture a previously authorized payment and allow to go through registered routing  plugins
+     *
+     * @param account                             the account
+     * @param amount                              the amount to pay
+     * @param currency                            the amount currency
+     * @param paymentTransactionExternalKey       the payment transaction external key
+     * @param properties                          plugin specific properties
+     * @param paymentOptions                      options to control payment behavior
+     * @param context                             the call context
+     * @return the payment
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
+    public Payment createCaptureWithPaymentControl(Account account, UUID paymentId, BigDecimal amount, Currency currency,
+                                 String paymentTransactionExternalKey, Iterable<PluginProperty> properties,
+                                 PaymentOptions paymentOptions, CallContext context)
+            throws PaymentApiException;
+
 
     /**
      * Combine an authorize and capture payment.
@@ -154,8 +174,28 @@ public interface PaymentApi extends KillbillApi {
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
     public Payment createVoid(Account account, UUID paymentId, String paymentTransactionExternalKey, Iterable<PluginProperty> properties,
-                                    CallContext context)
+                              CallContext context)
             throws PaymentApiException;
+
+
+    /**
+     * Void a previously authorized payment and allow to go through registered routing  plugins
+     *
+     * @param account                             the account
+     * @param paymentId                     the payment id
+     * @param paymentTransactionExternalKey the payment transaction external key
+     * @param properties                          plugin specific properties
+     * @param paymentOptions                      options to control payment behavior
+     * @param context                             the call context
+     * @return the payment
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
+    public Payment createVoidWithPaymentControl(Account account, UUID paymentId, String paymentTransactionExternalKey, Iterable<PluginProperty> properties,
+                                                PaymentOptions paymentOptions, CallContext context)
+            throws PaymentApiException;
+
+
 
     /**
      * Refund a previously captured payment.
@@ -287,6 +327,8 @@ public interface PaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     public Payment notifyPendingTransactionOfStateChanged(Account account, UUID paymentTransactionId, boolean isSuccess, CallContext context) throws PaymentApiException;
+
+
 
     /**
      * Transition a currently PENDING transaction into either a SUCCESS or a FAILURE

@@ -40,6 +40,21 @@ public interface PaymentGatewayApi extends KillbillApi {
     public HostedPaymentPageFormDescriptor buildFormDescriptor(Account account, UUID paymentMethodId, Iterable<PluginProperty> customFields, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
+
+    /**
+     * Build metadata for the client to create a redirect form
+     *
+     * @param account      account
+     * @param customFields form fields
+     * @param properties   custom properties for the gateway
+     * @param paymentOptions options to control payment behavior
+     * @param context      call context
+     * @return redirect form metadata
+     * @throws PaymentApiException
+     */
+    public HostedPaymentPageFormDescriptor buildFormDescriptorWithPaymentControl(Account account, UUID paymentMethodId, Iterable<PluginProperty> customFields, Iterable<PluginProperty> properties, PaymentOptions paymentOptions, CallContext context)
+            throws PaymentApiException;
+
     /**
      * Process a notification from the gateway
      * <p/>
@@ -54,5 +69,23 @@ public interface PaymentGatewayApi extends KillbillApi {
      * @throws PaymentApiException
      */
     public GatewayNotification processNotification(String notification, String pluginName, Iterable<PluginProperty> properties, CallContext context)
+            throws PaymentApiException;
+
+
+    /**
+     * Process a notification from the gateway
+     * <p/>
+     * This potentially does more than just deserialize the payload. The plugin may have to acknowledge it
+     * with the gateway.
+     *
+     * @param notification serialized notification object
+     * @param pluginName   the payment plugin name
+     * @param properties   custom properties for the gateway
+     * @param paymentOptions options to control payment behavior
+     * @param context      call context
+     * @return gateway notification object used to build the response to the gateway
+     * @throws PaymentApiException
+     */
+    public GatewayNotification processNotificationWithPaymentControl(String notification, String pluginName, Iterable<PluginProperty> properties, PaymentOptions paymentOptions, CallContext context)
             throws PaymentApiException;
 }
