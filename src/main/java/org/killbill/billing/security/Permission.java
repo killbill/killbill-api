@@ -73,7 +73,13 @@ public enum Permission {
      * Users (authentication, authorization)
     */
     USER_CAN_VIEW("user", "view"),
-    USER_CAN_CREATE("user", "create");
+    USER_CAN_CREATE("user", "create"),
+
+
+    /*
+     * Administrator that can update state (to correct data associated to bugs, ...)
+     */
+    ADMIN_CAN_FIX_DATA("admin", "update");
 
     private final String group;
     private final String value;
