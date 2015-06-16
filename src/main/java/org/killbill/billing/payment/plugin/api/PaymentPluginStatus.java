@@ -17,8 +17,12 @@
 package org.killbill.billing.payment.plugin.api;
 
 public enum PaymentPluginStatus {
-    UNDEFINED,
+    /* The payment transaction went through and was successful */
     PROCESSED,
+    /* The payment transaction went through and requires a completion step */
     PENDING,
-    ERROR;
+    /* The payment transaction went through but failed (for e.g: insufficient funds on a CC) */
+    ERROR,
+    /* The payment transaction may or not have succeeded */
+    UNDEFINED;
 }
