@@ -20,5 +20,6 @@ public enum PaymentPluginStatus {
     UNDEFINED,
     PROCESSED,
     PENDING,
-    ERROR;
+    ERROR,
+    CANCELED;
 }
