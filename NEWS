@@ -1,3 +1,6 @@
+0.16
+    Add new CANCELED PaymentPluginStatus (used to return info about a payment that was not even submitted)
+
 0.15
     Add new Payment apis *WithControl and AdminPaymentApi
 
