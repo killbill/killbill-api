@@ -24,5 +24,7 @@ public enum PaymentPluginStatus {
     /* The payment transaction went through but failed (for e.g: insufficient funds on a CC) */
     ERROR,
     /* The payment transaction may or not have succeeded */
-    UNDEFINED;
+    UNDEFINED,
+    /* The payment transaction did NOT happen (was not even submitted, for e.g connection failure) */
+    CANCELED;
 }
