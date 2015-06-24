@@ -1,3 +1,6 @@
+0.18
+    Add new api for catalog rules
+
 0.16
     Add new CANCELED PaymentPluginStatus (used to return info about a payment that was not even submitted)
 
