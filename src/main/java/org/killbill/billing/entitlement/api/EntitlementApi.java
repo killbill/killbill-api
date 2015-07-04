@@ -24,6 +24,7 @@ import org.killbill.billing.KillbillApi;
 import org.killbill.billing.catalog.api.BillingActionPolicy;
 import org.killbill.billing.catalog.api.PlanPhasePriceOverride;
 import org.killbill.billing.catalog.api.PlanPhaseSpecifier;
+import org.killbill.billing.payment.api.PluginProperty;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 
@@ -43,11 +44,12 @@ public interface EntitlementApi extends KillbillApi {
      * @param externalKey   the external key for that entitlement-- which must be unique in the system
      * @param overrides     the price override for each phase and for a specific currency
      * @param effectiveDate the date at which the entitlement should start
+     * @param properties     plugin specific properties
      * @param context       the context
      * @return a new entitlement
      * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>.
      */
-    public Entitlement createBaseEntitlement(UUID accountId, PlanPhaseSpecifier spec, String externalKey, List<PlanPhasePriceOverride> overrides, LocalDate effectiveDate, CallContext context)
+    public Entitlement createBaseEntitlement(UUID accountId, PlanPhaseSpecifier spec, String externalKey, List<PlanPhasePriceOverride> overrides, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -61,11 +63,12 @@ public interface EntitlementApi extends KillbillApi {
      * @param spec          the product specification for that new entitlement
      * @param overrides     the price override for each phase and for a specific currency
      * @param effectiveDate the date at which the entitlement should start
+     * @param properties     plugin specific properties
      * @param context       the context
      * @return a new entitlement
      * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>
      */
-    public Entitlement addEntitlement(UUID bundleId, PlanPhaseSpecifier spec, List<PlanPhasePriceOverride> overrides, LocalDate effectiveDate, CallContext context)
+    public Entitlement addEntitlement(UUID bundleId, PlanPhaseSpecifier spec, List<PlanPhasePriceOverride> overrides, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -86,10 +89,11 @@ public interface EntitlementApi extends KillbillApi {
      *
      * @param bundleId
      * @param effectiveDate
+     * @param properties     plugin specific properties
      * @param context
      * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
      */
-    public void pause(UUID bundleId, LocalDate effectiveDate, CallContext context)
+    public void pause(UUID bundleId, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -97,10 +101,11 @@ public interface EntitlementApi extends KillbillApi {
      *
      * @param bundleId
      * @param effectiveDate
+     * @param properties     plugin specific properties
      * @param context
      * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
      */
-    public void resume(UUID bundleId, LocalDate effectiveDate, CallContext context)
+    public void resume(UUID bundleId, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -187,12 +192,13 @@ public interface EntitlementApi extends KillbillApi {
      * @param destAccountId   the unique id for the account on which the bundle will be transferred to
      * @param externalKey     the externalKey for the bundle
      * @param effectiveDate   the date at which this transfer should occur
+     * @param properties     plugin specific properties
      * @param context         the user context
      * @return the id of the newly created bundle for the destination account
      * @throws EntitlementApiException if the system could not transfer the entitlements
      */
     public UUID transferEntitlements(final UUID sourceAccountId, final UUID destAccountId, final String externalKey, final LocalDate effectiveDate,
-                                     final CallContext context)
+                                     Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -209,12 +215,13 @@ public interface EntitlementApi extends KillbillApi {
      * @param externalKey     the externalKey for the bundle
      * @param effectiveDate   the date at which this transfer should occur
      * @param billingPolicy   the override billing policy
+     * @param properties     plugin specific properties
      * @param context         the user context
      * @return the id of the newly created base entitlement for the destination account
      * @throws EntitlementApiException if the system could not transfer the entitlements
      */
     public UUID transferEntitlementsOverrideBillingPolicy(final UUID sourceAccountId, final UUID destAccountId, final String externalKey, final LocalDate effectiveDate,
-                                                          final BillingActionPolicy billingPolicy, final CallContext context)
+                                                          final BillingActionPolicy billingPolicy, Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
 }
