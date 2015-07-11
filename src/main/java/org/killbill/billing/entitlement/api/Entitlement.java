@@ -150,25 +150,25 @@ public interface Entitlement extends Entity {
      *
      * @param effectiveDate                the date at which the entitlement should be cancelled
      * @param overrideBillingEffectiveDate use effectiveDate for billing cancellation date as well
-     * @param properties     plugin specific properties
+     * @param properties                   plugin specific properties
      * @param context                      the context
      * @return the new <code>Entitlement</code> after the cancellation was performed
      * @throws EntitlementApiException if cancellation failed
      */
-    public Entitlement cancelEntitlementWithDate(final LocalDate effectiveDate, final boolean overrideBillingEffectiveDate, Iterable<PluginProperty> properties, final CallContext context)
+    public Entitlement cancelEntitlementWithDate(final LocalDate effectiveDate, final boolean overrideBillingEffectiveDate, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
     /**
      * Cancel the <code>Entitlement</code> with a policy.
      * After this operation, the existing object becomes stale.
      *
-     * @param policy  the policy that is used by the system to calculate the cancellation date
-     * @param properties     plugin specific properties
-     * @param context the context
+     * @param policy     the policy that is used by the system to calculate the cancellation date
+     * @param properties plugin specific properties
+     * @param context    the context
      * @return the new <code>Entitlement</code> after the cancellation was performed
      * @throws EntitlementApiException if cancellation failed
      */
-    public Entitlement cancelEntitlementWithPolicy(final EntitlementActionPolicy policy, Iterable<PluginProperty> properties, final CallContext context)
+    public Entitlement cancelEntitlementWithPolicy(final EntitlementActionPolicy policy, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -179,12 +179,12 @@ public interface Entitlement extends Entity {
      *
      * @param effectiveDate the date at which the entitlement should be cancelled
      * @param billingPolicy the billingPolicy
-     * @param properties     plugin specific properties
+     * @param properties    plugin specific properties
      * @param context       the context
      * @return the new <code>Entitlement</code> after the cancellation was performed
      * @throws EntitlementApiException if cancellation failed
      */
-    public Entitlement cancelEntitlementWithDateOverrideBillingPolicy(final LocalDate effectiveDate, final BillingActionPolicy billingPolicy, Iterable<PluginProperty> properties, final CallContext context)
+    public Entitlement cancelEntitlementWithDateOverrideBillingPolicy(final LocalDate effectiveDate, final BillingActionPolicy billingPolicy, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -193,12 +193,12 @@ public interface Entitlement extends Entity {
      *
      * @param policy        the policy that is used by the system to calculate the cancellation date
      * @param billingPolicy the override billing policy
-     * @param properties     plugin specific properties
+     * @param properties    plugin specific properties
      * @param context       the context
      * @return the new <code>Entitlement</code> after the cancellation was performed
      * @throws EntitlementApiException if cancellation failed
      */
-    public Entitlement cancelEntitlementWithPolicyOverrideBillingPolicy(final EntitlementActionPolicy policy, final BillingActionPolicy billingPolicy, Iterable<PluginProperty> properties, final CallContext context)
+    public Entitlement cancelEntitlementWithPolicyOverrideBillingPolicy(final EntitlementActionPolicy policy, final BillingActionPolicy billingPolicy, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -208,10 +208,10 @@ public interface Entitlement extends Entity {
      * did not occur yet. In such a case it will remove both the cancellation event at the entitlement and billing level-- regardless
      * of when is the effectiveDate of the billing cancellation event.
      *
-     * @param properties     plugin specific properties
-     * @param context the context
+     * @param properties plugin specific properties
+     * @param context    the context
      */
-    public void uncancelEntitlement(Iterable<PluginProperty> properties, final CallContext context)
+    public void uncancelEntitlement(final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -224,12 +224,12 @@ public interface Entitlement extends Entity {
      * @param billingPeriod the new billing period
      * @param priceList     the new priceList
      * @param overrides     the price override for each phase and for a specific currency
-     * @param properties     plugin specific properties
+     * @param properties    plugin specific properties
      * @param context       the context
      * @return the new <code>Entitlement</code> after the change was performed
      * @throws EntitlementApiException if change failed
      */
-    public Entitlement changePlan(final String productName, final BillingPeriod billingPeriod, final String priceList, final List<PlanPhasePriceOverride> overrides, Iterable<PluginProperty> properties, final CallContext context)
+    public Entitlement changePlan(final String productName, final BillingPeriod billingPeriod, final String priceList, final List<PlanPhasePriceOverride> overrides, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -243,12 +243,12 @@ public interface Entitlement extends Entity {
      * @param priceList     the new priceList
      * @param overrides     the price override for each phase and for a specific currency
      * @param effectiveDate the date at which the entitlement should be changed
-     * @param properties     plugin specific properties
+     * @param properties    plugin specific properties
      * @param context       the context
      * @return the new <code>Entitlement</code> after the change was performed
      * @throws EntitlementApiException if change failed
      */
-    public Entitlement changePlanWithDate(final String productName, final BillingPeriod billingPeriod, final String priceList, final List<PlanPhasePriceOverride> overrides, final LocalDate effectiveDate, Iterable<PluginProperty> properties, final CallContext context)
+    public Entitlement changePlanWithDate(final String productName, final BillingPeriod billingPeriod, final String priceList, final List<PlanPhasePriceOverride> overrides, final LocalDate effectiveDate, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -263,13 +263,13 @@ public interface Entitlement extends Entity {
      * @param overrides     the price override for each phase and for a specific currency
      * @param effectiveDate the date at which the entitlement should be changed
      * @param billingPolicy the override billing policy
-     * @param properties     plugin specific properties
+     * @param properties    plugin specific properties
      * @param context       the context
      * @return the new <code>Entitlement</code> after the change was performed
      * @throws EntitlementApiException if change failed
      */
     public Entitlement changePlanOverrideBillingPolicy(final String productName, final BillingPeriod billingPeriod, final String priceList, final List<PlanPhasePriceOverride> overrides, final LocalDate effectiveDate,
-                                                       final BillingActionPolicy billingPolicy, Iterable<PluginProperty> properties, final CallContext context)
+                                                       final BillingActionPolicy billingPolicy, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
     /**
