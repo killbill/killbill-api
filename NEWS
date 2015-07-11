@@ -1,3 +1,6 @@
+0.19
+    Add PluginProperty for Entitlement apis and some error code for handling entitlement plugin errors
+
 0.18
     Add new api for catalog rules
 
