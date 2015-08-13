@@ -1,3 +1,6 @@
+0.20
+    Add missing ENTITLEMENT enum value in PluginConfig
+
 0.19
     Add PluginProperty for Entitlement apis and some error code for handling entitlement plugin errors
 
