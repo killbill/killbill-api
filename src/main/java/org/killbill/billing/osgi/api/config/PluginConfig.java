@@ -27,6 +27,7 @@ public interface PluginConfig {
         CURRENCY,
         PAYMENT_CONTROL,
         CATALOG,
+        ENTITLEMENT,
         __UNKNOWN__
     }
 
