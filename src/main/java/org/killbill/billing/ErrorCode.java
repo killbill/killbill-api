@@ -22,7 +22,6 @@ public enum ErrorCode {
      * Range 0 : COMMON EXCEPTIONS
      */
     NOT_IMPLEMENTED(1, "Api not implemented yet"),
-    DATA_TRUNCATION(2, "Data truncation error. (%s)"),
     CURRENCY_INVALID(3, "Invalid currency %s, expected %s"),
     UNEXPECTED_ERROR(4, "%s"),
     /*
@@ -47,7 +46,8 @@ public enum ErrorCode {
     /* Change plan */
     SUB_CHANGE_NON_ACTIVE(1021, "Subscription %s is in state %s: Failed to change plan"),
     SUB_CHANGE_FUTURE_CANCELLED(1022, "Subscription %s is future cancelled: Failed to change plan"),
-    SUB_CHANGE_DRY_RUN_NOT_BP(1023, "Change DryRun API is only available for BP"),
+    SUB_CHANGE_INVALID(1023, "Invalid change plan for subscription %s"),
+    SUB_CHANGE_DRY_RUN_NOT_BP(1024, "Change DryRun API is only available for BP"),
 
     /* Cancellation */
     SUB_CANCEL_BAD_STATE(1031, "Subscription %s is in state %s: Failed to cancel"),
@@ -63,24 +63,9 @@ public enum ErrorCode {
     SUB_INVALID_SUBSCRIPTION_ID(1082, "Unknown subscription %s"),
     SUB_GET_INVALID_BUNDLE_KEY(1083, "Could not find a bundle matching key %s"),
     SUB_GET_NO_SUCH_BASE_SUBSCRIPTION(1084, "Could not find base subscription for bundle %s"),
-    SUB_GET_INVALID_ACCOUNT_ID(1085, "Could not find subscriptions for account %s"),
 
-    /* Repair */
-    SUB_REPAIR_INVALID_DELETE_SET(1091, "Event %s is not deleted for subscription %s but prior events were"),
-    SUB_REPAIR_NON_EXISTENT_DELETE_EVENT(1092, "Event %s does not exist for subscription %s"),
-    SUB_REPAIR_MISSING_AO_DELETE_EVENT(1093, "Event %s should be in deleted set for subscription %s because BP events got deleted earlier"),
-    SUB_REPAIR_NEW_EVENT_BEFORE_LAST_BP_REMAINING(1094, "New event %s for subscription %s is before last remaining event for BP"),
-    SUB_REPAIR_NEW_EVENT_BEFORE_LAST_AO_REMAINING(1095, "New event %s for subscription %s is before last remaining event"),
-    SUB_REPAIR_UNKNOWN_TYPE(1096, "Unknown new event type %s for subscription %s"),
-    SUB_REPAIR_UNKNOWN_BUNDLE(1097, "Unknown bundle %s"),
-    SUB_REPAIR_UNKNOWN_SUBSCRIPTION(1098, "Unknown subscription %s"),
-    SUB_REPAIR_NO_ACTIVE_SUBSCRIPTIONS(1099, "No active subscriptions on bundle %s"),
-    SUB_REPAIR_VIEW_CHANGED(1100, "View for bundle %s has changed from %s to %s"),
-    SUB_REPAIR_SUB_RECREATE_NOT_EMPTY(1101, "Subscription %s with recreation for bundle %s should specify all existing events to be deleted"),
-    SUB_REPAIR_SUB_EMPTY(1102, "Subscription %s with recreation for bundle %s should specify all existing events to be deleted"),
-    SUB_REPAIR_BP_RECREATE_MISSING_AO(1103, "BP recreation for bundle %s implies repair all subscriptions"),
-    SUB_REPAIR_BP_RECREATE_MISSING_AO_CREATE(1104, "BP recreation for bundle %s implies that all AO should be start also with a CREATE"),
-    SUB_REPAIR_AO_CREATE_BEFORE_BP_START(1105, "Can't recreate AO %s for bundle %s before BP starts"),
+    SUB_NO_ACTIVE_SUBSCRIPTIONS(1099, "No active subscriptions on bundle %s"),
+
 
     SUB_BUNDLE_IS_OVERDUE_BLOCKED(1090, "Changes to this bundle are blocked by overdue enforcement (%s :  %s)"),
     SUB_ACCOUNT_IS_OVERDUE_BLOCKED(1091, "Changes to this account are blocked by overdue enforcement (%s)"),
@@ -95,16 +80,10 @@ public enum ErrorCode {
     */
 
     /*
-    * Rules exceptions
-    */
-
-    /* Plan change is disallowed by the catalog */
-    CAT_ILLEGAL_CHANGE_REQUEST(2001, "Attempting to change plan from (product: '%s', billing period: '%s', " +
-                                     "pricelist '%s') to (product: '%s', billing period: '%s', pricelist '%s'). This transition is not allowed by catalog rules"),
-
-    /*
       * Price list
       */
+    CAT_ILLEGAL_CHANGE_REQUEST(2001, "Attempting to change plan from (product: '%s', billing period: '%s', " +
+                                     "pricelist '%s') to (product: '%s', billing period: '%s', pricelist '%s'). This transition is not allowed by catalog rules"),
 
     /*Attempt to reference a price that is not present - should only happen if it is a currency not available in the catalog */
     CAT_NO_PRICE_FOR_CURRENCY(2010, "This price does not have a value for the currency '%s'."),
@@ -133,7 +112,6 @@ public enum ErrorCode {
      * Versioned Catalog
      */
     CAT_NO_CATALOG_FOR_GIVEN_DATE(2050, "There is no catalog version that applies for the given date '%s'"),
-    CAT_NO_CATALOG_ENTRIES_FOR_GIVEN_DATE(2051, "The are no catalog entries that apply for the given date '%s'"),
     CAT_CATALOG_NAME_MISMATCH(2052, "The catalog name '%s' does not match the name of the catalog we are trying to add '%s'"),
     CAT_CATALOG_RECURRING_MODE_MISMATCH(2053, "The catalog recurring billing mode '%s' does not match the one of the catalog we are trying to add '%s'"),
     /*
@@ -145,7 +123,6 @@ public enum ErrorCode {
      */
     CAT_NO_SUCH_OVEDUE_STATE(2070, "No such overdue state '%s'"),
     CAT_MISSING_CLEAR_STATE(2071, "Missing a clear state"),
-    CAT_NO_OVERDUEABLE_TYPE(2072, "No such overdueable type: "),
 
     CAT_NOT_TOP_UP_BLOCK(2075, "Block for phase %s defines a TOP_UP property for a non TOP_UP block"),
 
@@ -181,8 +158,6 @@ public enum ErrorCode {
     TAG_DEFINITION_DOES_NOT_EXIST(3902, "The tag definition id does not exist %s"),
     TAG_DEFINITION_IN_USE(3903, "The tag definition name is currently in use %s"),
 
-    CONTROL_TAG_DOES_NOT_EXIST(3904, "The control tag does not exist %s"),
-
     /*
     *
     * Range 3950: Tags
@@ -212,7 +187,6 @@ public enum ErrorCode {
     INVOICE_NO_SUCH_EXTERNAL_CHARGE(4014, "External charge item for id %s does not exist"),
     EXTERNAL_CHARGE_AMOUNT_INVALID(4015, "External charge amount %s should be strictly positive"),
     INVOICE_WOULD_BE_NEGATIVE(4016, "Cannot execute operation, the invoice balance would become negative"),
-    INVOICE_ALREADY_EXISTS(4017, "The invoice already exists %s"),
     INVOICE_NUMBER_NOT_FOUND(4018, "No invoice could be found for number %s."),
     INVOICE_INVALID_NUMBER(4019, "Invalid invoice number %s."),
     INVOICE_ITEM_ADJUSTMENT_AMOUNT_INVALID(4020, "Invoice adjustment amount %s should be lower than %s"),
@@ -239,9 +213,7 @@ public enum ErrorCode {
      *
      */
     OVERDUE_CAT_ERROR_ENCOUNTERED(5001, "Catalog error encountered on Overdueable: id='%s', type='%s'"),
-    OVERDUE_TYPE_NOT_SUPPORTED(5002, "Overdue of this type is not supported: id='%s', type='%s'"),
     OVERDUE_NO_REEVALUATION_INTERVAL(5003, "No valid reevaluation interval for state (name: %s)"),
-    OVERDUE_NOT_CONFIGURED(5004, "No configuration was found for the overdue system"),
 
     OVERDUE_INVALID_FOR_TENANT(5010, "Invalid overdue config for tenant : %s"),
 
@@ -251,7 +223,6 @@ public enum ErrorCode {
      *
      */
     BLOCK_BLOCKED_ACTION(6000, "The action %s is block on this %s with id=%s"),
-    BLOCK_TYPE_NOT_SUPPORTED(6001, "The Blockable type '%s' is not supported"),
 
     /*
     * Range 7000 : Payment
@@ -288,7 +259,6 @@ public enum ErrorCode {
     */
     ENT_ALREADY_BLOCKED(8001, "The blockable entity %s is already blocked"),
     ENT_PLUGIN_API_ABORTED(8002, "Entitlement plugin aborted call"),
-    ENT_PLUGIN_API_EXCEPTION(8003, "Exception in plugin : %s"),
 
     /*
    *
@@ -301,7 +271,6 @@ public enum ErrorCode {
      * Range 10000: Custom Fields
     */
     CURRENCY_NO_SUCH_PAYMENT_PLUGIN(10000, "Currency plugin %s is not registered"),
-    CURRENCY_NO_SUCH_RATE_FOR_CURRENCY(10001, "Rate for currency %s is non defined"),
 
     /*
     *
@@ -322,9 +291,6 @@ public enum ErrorCode {
     *
     */
     EMAIL_SENDING_FAILED(30000, "Sending email failed"),
-    EMAIL_PROPERTIES_FILE_MISSING(30001, "The properties file for email configuration could not be found."),
-    MISSING_TRANSLATION_RESOURCE(30010, "The resources for %s translation could not be found."),
-    MISSING_DEFAULT_TRANSLATION_RESOURCE(30011, "The default resource for %s translation could not be found."),
 
     /*
      *
