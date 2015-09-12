@@ -1,3 +1,6 @@
+0.22
+    Add isSuccess flag for InvoicePayment
+
 0.21
     Error code cleanup
 
