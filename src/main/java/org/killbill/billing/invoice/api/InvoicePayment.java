@@ -72,4 +72,6 @@ public interface InvoicePayment extends Entity {
 
     Currency getProcessedCurrency();
 
+    Boolean isSuccess();
+
 }
