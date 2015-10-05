@@ -29,17 +29,19 @@ import org.killbill.billing.entitlement.api.SubscriptionEventType;
 
 public interface DryRunArguments {
 
-    public PlanPhaseSpecifier getPlanPhaseSpecifier();
+    DryRunType getDryRunType();
 
-    public SubscriptionEventType getAction();
+    PlanPhaseSpecifier getPlanPhaseSpecifier();
 
-    public UUID getSubscriptionId();
+    SubscriptionEventType getAction();
 
-    public DateTime getEffectiveDate();
+    UUID getSubscriptionId();
 
-    public UUID getBundleId();
+    DateTime getEffectiveDate();
 
-    public BillingActionPolicy getBillingActionPolicy();
+    UUID getBundleId();
 
-    public List<PlanPhasePriceOverride> getPlanPhasePriceoverrides();
+    BillingActionPolicy getBillingActionPolicy();
+
+    List<PlanPhasePriceOverride> getPlanPhasePriceOverrides();
 }
