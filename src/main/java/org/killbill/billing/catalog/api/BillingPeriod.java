@@ -23,6 +23,7 @@ public enum BillingPeriod {
     MONTHLY(1),
     QUARTERLY(3),
     ANNUAL(12),
+    BI_ANNUAL(24),
     NO_BILLING_PERIOD(0);
 
     private final int numberOfMonths;
