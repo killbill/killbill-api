@@ -1,3 +1,7 @@
+0.23
+    Modify invoice dryRun arguments
+    Add support for BI_ANNAUL BillingPeriod
+
 0.22
     Add isSuccess flag for InvoicePayment
 
