@@ -22,8 +22,9 @@ package org.killbill.billing.catalog.api;
 public enum BillingPeriod {
     MONTHLY(1),
     QUARTERLY(3),
+    BIANNUAL(6),
     ANNUAL(12),
-    BI_ANNUAL(24),
+    BIENNIAL(24),
     NO_BILLING_PERIOD(0);
 
     private final int numberOfMonths;
