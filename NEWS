@@ -1,3 +1,6 @@
+0.24
+    Fix BillingPeriod enum
+
 0.23
     Modify invoice dryRun arguments
     Add support for BI_ANNAUL BillingPeriod
