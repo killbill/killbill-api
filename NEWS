@@ -1,3 +1,6 @@
+0.25
+    Add new interfaces to retrieve PluginInfo + new ErrorCode
+
 0.24
     Fix BillingPeriod enum
 
