@@ -157,6 +157,7 @@ public enum ErrorCode {
     TAG_DEFINITION_ALREADY_EXISTS(3901, "The tag definition name already exists %s"),
     TAG_DEFINITION_DOES_NOT_EXIST(3902, "The tag definition id does not exist %s"),
     TAG_DEFINITION_IN_USE(3903, "The tag definition name is currently in use %s"),
+    TAG_DEFINITION_HAS_UPPERCASE(3904, "The tag definition name must be in lowercase %s"),
 
     /*
     *
