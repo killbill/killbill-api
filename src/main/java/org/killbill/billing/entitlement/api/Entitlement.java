@@ -29,8 +29,12 @@ import org.killbill.billing.catalog.api.PriceList;
 import org.killbill.billing.catalog.api.Product;
 import org.killbill.billing.catalog.api.ProductCategory;
 import org.killbill.billing.payment.api.PluginProperty;
+import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.entity.Entity;
+
+import static org.killbill.billing.security.Permission.ENTITLEMENT_CAN_CHANGE_PLAN;
+import static org.killbill.billing.security.Permission.ENTITLEMENT_CAN_CANCEL;
 
 /**
  * An Entitlement is created using the <code>EntitlementApi</code>
@@ -155,6 +159,7 @@ public interface Entitlement extends Entity {
      * @return the new <code>Entitlement</code> after the cancellation was performed
      * @throws EntitlementApiException if cancellation failed
      */
+    @RequiresPermissions(ENTITLEMENT_CAN_CANCEL)
     public Entitlement cancelEntitlementWithDate(final LocalDate effectiveDate, final boolean overrideBillingEffectiveDate, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
@@ -168,6 +173,7 @@ public interface Entitlement extends Entity {
      * @return the new <code>Entitlement</code> after the cancellation was performed
      * @throws EntitlementApiException if cancellation failed
      */
+    @RequiresPermissions(ENTITLEMENT_CAN_CANCEL)
     public Entitlement cancelEntitlementWithPolicy(final EntitlementActionPolicy policy, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
@@ -184,6 +190,7 @@ public interface Entitlement extends Entity {
      * @return the new <code>Entitlement</code> after the cancellation was performed
      * @throws EntitlementApiException if cancellation failed
      */
+    @RequiresPermissions(ENTITLEMENT_CAN_CANCEL)
     public Entitlement cancelEntitlementWithDateOverrideBillingPolicy(final LocalDate effectiveDate, final BillingActionPolicy billingPolicy, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
@@ -198,6 +205,7 @@ public interface Entitlement extends Entity {
      * @return the new <code>Entitlement</code> after the cancellation was performed
      * @throws EntitlementApiException if cancellation failed
      */
+    @RequiresPermissions(ENTITLEMENT_CAN_CANCEL)
     public Entitlement cancelEntitlementWithPolicyOverrideBillingPolicy(final EntitlementActionPolicy policy, final BillingActionPolicy billingPolicy, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
@@ -211,6 +219,7 @@ public interface Entitlement extends Entity {
      * @param properties plugin specific properties
      * @param context    the context
      */
+    @RequiresPermissions(ENTITLEMENT_CAN_CANCEL)
     public void uncancelEntitlement(final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
@@ -229,6 +238,7 @@ public interface Entitlement extends Entity {
      * @return the new <code>Entitlement</code> after the change was performed
      * @throws EntitlementApiException if change failed
      */
+    @RequiresPermissions(ENTITLEMENT_CAN_CHANGE_PLAN)
     public Entitlement changePlan(final String productName, final BillingPeriod billingPeriod, final String priceList, final List<PlanPhasePriceOverride> overrides, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
@@ -248,6 +258,7 @@ public interface Entitlement extends Entity {
      * @return the new <code>Entitlement</code> after the change was performed
      * @throws EntitlementApiException if change failed
      */
+    @RequiresPermissions(ENTITLEMENT_CAN_CHANGE_PLAN)
     public Entitlement changePlanWithDate(final String productName, final BillingPeriod billingPeriod, final String priceList, final List<PlanPhasePriceOverride> overrides, final LocalDate effectiveDate, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
@@ -268,6 +279,7 @@ public interface Entitlement extends Entity {
      * @return the new <code>Entitlement</code> after the change was performed
      * @throws EntitlementApiException if change failed
      */
+    @RequiresPermissions(ENTITLEMENT_CAN_CHANGE_PLAN)
     public Entitlement changePlanOverrideBillingPolicy(final String productName, final BillingPeriod billingPeriod, final String priceList, final List<PlanPhasePriceOverride> overrides, final LocalDate effectiveDate,
                                                        final BillingActionPolicy billingPolicy, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;

@@ -21,8 +21,11 @@ import java.util.UUID;
 
 import org.joda.time.LocalDate;
 import org.killbill.billing.KillbillApi;
+import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
+
+import static org.killbill.billing.security.Permission.USAGE_CAN_RECORD;
 
 public interface UsageUserApi extends KillbillApi {
 
@@ -33,6 +36,7 @@ public interface UsageUserApi extends KillbillApi {
      * @param usage   the usage for a given period of time associated with a subscription
      * @param context tenant context
      */
+    @RequiresPermissions(USAGE_CAN_RECORD)
     public void recordRolledUpUsage(SubscriptionUsageRecord usage, CallContext context);
 
     /**

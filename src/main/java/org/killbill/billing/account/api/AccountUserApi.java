@@ -20,9 +20,14 @@ import java.util.List;
 import java.util.UUID;
 
 import org.killbill.billing.KillbillApi;
+import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.entity.Pagination;
+
+import static org.killbill.billing.security.Permission.ACCOUNT_CAN_CREATE;
+import static org.killbill.billing.security.Permission.ACCOUNT_CAN_UPDATE;
+import static org.killbill.billing.security.Permission.ACCOUNT_CAN_MODIFY_EMAILS;
 
 /**
  * The interface {@code AccountUserApi} offers APIs related to account operations.
@@ -35,6 +40,7 @@ public interface AccountUserApi extends KillbillApi {
      * @return the created Account
      * @throws AccountApiException
      */
+    @RequiresPermissions(ACCOUNT_CAN_CREATE)
     public Account createAccount(AccountData data, CallContext context) throws AccountApiException;
 
     /**
@@ -45,6 +51,7 @@ public interface AccountUserApi extends KillbillApi {
      * @param context contains specific information about the call
      * @throws AccountApiException if a failure occurs
      */
+    @RequiresPermissions(ACCOUNT_CAN_UPDATE)
     public void updateAccount(Account account, CallContext context) throws AccountApiException;
 
     /**
@@ -55,6 +62,7 @@ public interface AccountUserApi extends KillbillApi {
      * @param context contains specific information about the call
      * @throws AccountApiException if a failure occurs
      */
+    @RequiresPermissions(ACCOUNT_CAN_UPDATE)
     public void updateAccount(String key, AccountData accountData, CallContext context) throws AccountApiException;
 
     /**
@@ -65,6 +73,7 @@ public interface AccountUserApi extends KillbillApi {
      * @param context   contains specific information about the call
      * @throws AccountApiException if a failure occurs
      */
+    @RequiresPermissions(ACCOUNT_CAN_UPDATE)
     public void updateAccount(UUID accountId, AccountData accountData, CallContext context) throws AccountApiException;
 
     /**
@@ -126,6 +135,7 @@ public interface AccountUserApi extends KillbillApi {
      * @param email     the email to be added
      * @param context   the user context
      */
+    @RequiresPermissions(ACCOUNT_CAN_MODIFY_EMAILS)
     public void addEmail(UUID accountId, AccountEmail email, CallContext context) throws AccountApiException;
 
     /**
@@ -133,5 +143,6 @@ public interface AccountUserApi extends KillbillApi {
      * @param email     the email to be removed
      * @param context   the user context
      */
+    @RequiresPermissions(ACCOUNT_CAN_MODIFY_EMAILS)
     public void removeEmail(UUID accountId, AccountEmail email, CallContext context);
 }

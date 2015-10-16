@@ -20,9 +20,12 @@ import java.util.List;
 import java.util.UUID;
 
 import org.killbill.billing.KillbillApi;
+import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.entity.Pagination;
+
+import static org.killbill.billing.security.Permission.ENTITLEMENT_CAN_CREATE;
 
 /**
  * API to manage the retrieval of <code>Subscription</code> information.
@@ -56,6 +59,7 @@ public interface SubscriptionApi extends KillbillApi {
      * @param newExternalKey : the new value for the externalKey
      * @param context        : the call context
      */
+    @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
     public void updateExternalKey(UUID bundleId, String newExternalKey, CallContext context);
 
     /**

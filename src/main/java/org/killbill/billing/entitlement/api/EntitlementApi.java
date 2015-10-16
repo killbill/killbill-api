@@ -25,8 +25,13 @@ import org.killbill.billing.catalog.api.BillingActionPolicy;
 import org.killbill.billing.catalog.api.PlanPhasePriceOverride;
 import org.killbill.billing.catalog.api.PlanPhaseSpecifier;
 import org.killbill.billing.payment.api.PluginProperty;
+import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
+
+import static org.killbill.billing.security.Permission.ENTITLEMENT_CAN_CREATE;
+import static org.killbill.billing.security.Permission.ENTITLEMENT_CAN_TRANSFER;
+import static org.killbill.billing.security.Permission.ENTITLEMENT_CAN_PAUSE_RESUME;
 
 /**
  * Primary API to manage the creation and retrieval of <code>Entitlement</code>.
@@ -49,6 +54,7 @@ public interface EntitlementApi extends KillbillApi {
      * @return a new entitlement
      * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>.
      */
+    @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
     public Entitlement createBaseEntitlement(UUID accountId, PlanPhaseSpecifier spec, String externalKey, List<PlanPhasePriceOverride> overrides, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
@@ -68,6 +74,7 @@ public interface EntitlementApi extends KillbillApi {
      * @return a new entitlement
      * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>
      */
+    @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
     public Entitlement addEntitlement(UUID bundleId, PlanPhaseSpecifier spec, List<PlanPhasePriceOverride> overrides, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
@@ -93,6 +100,7 @@ public interface EntitlementApi extends KillbillApi {
      * @param context
      * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
      */
+    @RequiresPermissions(ENTITLEMENT_CAN_PAUSE_RESUME)
     public void pause(UUID bundleId, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
@@ -105,6 +113,7 @@ public interface EntitlementApi extends KillbillApi {
      * @param context
      * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
      */
+    @RequiresPermissions(ENTITLEMENT_CAN_PAUSE_RESUME)
     public void resume(UUID bundleId, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
@@ -120,7 +129,8 @@ public interface EntitlementApi extends KillbillApi {
      * @param context           the context
      *
      * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
-    public void block(UUID bundleId, String serviceName, LocalDate effectiveDate, boolean blockBilling, boolean blockEntitlement, boolean blockChange, CallContext context)
+     @RequiresPermissions(ENTITLEMENT_CAN_PAUSE_RESUME)
+     public void block(UUID bundleId, String serviceName, LocalDate effectiveDate, boolean blockBilling, boolean blockEntitlement, boolean blockChange, CallContext context)
     throws EntitlementApiException;
      */
 
@@ -133,7 +143,8 @@ public interface EntitlementApi extends KillbillApi {
      * @param context           the context
      *
      * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
-    public void unblock(UUID bundleId, String serviceName, LocalDate effectiveDate, CallContext context)
+     @RequiresPermissions(ENTITLEMENT_CAN_PAUSE_RESUME)
+     public void unblock(UUID bundleId, String serviceName, LocalDate effectiveDate, CallContext context)
     throws EntitlementApiException;
      */
 
@@ -197,6 +208,7 @@ public interface EntitlementApi extends KillbillApi {
      * @return the id of the newly created bundle for the destination account
      * @throws EntitlementApiException if the system could not transfer the entitlements
      */
+    @RequiresPermissions(ENTITLEMENT_CAN_TRANSFER)
     public UUID transferEntitlements(final UUID sourceAccountId, final UUID destAccountId, final String externalKey, final LocalDate effectiveDate,
                                      Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
@@ -220,6 +232,7 @@ public interface EntitlementApi extends KillbillApi {
      * @return the id of the newly created base entitlement for the destination account
      * @throws EntitlementApiException if the system could not transfer the entitlements
      */
+    @RequiresPermissions(ENTITLEMENT_CAN_TRANSFER)
     public UUID transferEntitlementsOverrideBillingPolicy(final UUID sourceAccountId, final UUID destAccountId, final String externalKey, final LocalDate effectiveDate,
                                                           final BillingActionPolicy billingPolicy, Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;

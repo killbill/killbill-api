@@ -21,6 +21,9 @@ public enum Permission {
     /*
      * Account
      */
+    ACCOUNT_CAN_CREATE("account", "create"),
+    ACCOUNT_CAN_UPDATE("account", "update"),
+    ACCOUNT_CAN_MODIFY_EMAILS("account", "modify_emails"),
     ACCOUNT_CAN_CHARGE("account", "charge"),
     ACCOUNT_CAN_CREDIT("account", "credit"),
 
@@ -29,10 +32,20 @@ public enum Permission {
      */
     CATALOG_CAN_UPLOAD("catalog", "config_upload"),
 
+    /**
+     * Custom fields
+     */
+    CUSTOM_FIELDS_CAN_ADD("custom_fields", "add"),
+    CUSTOM_FIELDS_CAN_REMOVE("custom_fields", "remove"),
+
     /*
      * Entitlement
      */
     ENTITLEMENT_CAN_CREATE("entitlement", "create"),
+    ENTITLEMENT_CAN_CHANGE_PLAN("entitlement", "change_plan"),
+    ENTITLEMENT_CAN_PAUSE_RESUME("entitlement", "pause_resume"),
+    ENTITLEMENT_CAN_CANCEL("entitlement", "cancel"),
+    ENTITLEMENT_CAN_TRANSFER("entitlement", "transfer"),
 
     /*
      * Invoice
@@ -41,6 +54,7 @@ public enum Permission {
     INVOICE_CAN_ADJUST("invoice", "adjust"),
     INVOICE_CAN_ITEM_ADJUST("invoice", "item_adjust"),
     INVOICE_CAN_DELETE_CBA("invoice", "delete_cba"),
+    INVOICE_CAN_TRIGGER_INVOICE("invoice", "trigger"),
 
     /*
      * Overdue
@@ -68,6 +82,13 @@ public enum Permission {
      */
     TENANT_CAN_VIEW("tenant", "view"),
     TENANT_CAN_CREATE("tenant", "create"),
+    TENANT_CAN_MODIFY_KEYS("tenant", "modify_keys"),
+
+    /**
+     * Usage
+     */
+    USAGE_CAN_RECORD("usage", "record"),
+
 
     /*
      * Users (authentication, authorization)

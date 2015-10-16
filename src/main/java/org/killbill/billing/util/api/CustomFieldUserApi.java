@@ -21,10 +21,14 @@ import java.util.UUID;
 
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.ObjectType;
+import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.customfield.CustomField;
 import org.killbill.billing.util.entity.Pagination;
+
+import static org.killbill.billing.security.Permission.CUSTOM_FIELDS_CAN_ADD;
+import static org.killbill.billing.security.Permission.CUSTOM_FIELDS_CAN_REMOVE;
 
 public interface CustomFieldUserApi extends KillbillApi {
 
@@ -52,6 +56,7 @@ public interface CustomFieldUserApi extends KillbillApi {
      * @param context the call context
      * @throws CustomFieldApiException
      */
+    @RequiresPermissions(CUSTOM_FIELDS_CAN_ADD)
     void addCustomFields(List<CustomField> fields, CallContext context) throws CustomFieldApiException;
 
     /**
@@ -59,6 +64,7 @@ public interface CustomFieldUserApi extends KillbillApi {
      * @param context
      * @throws CustomFieldApiException
      */
+    @RequiresPermissions(CUSTOM_FIELDS_CAN_REMOVE)
     void removeCustomFields(List<CustomField> fields, CallContext context) throws CustomFieldApiException;
 
     /**

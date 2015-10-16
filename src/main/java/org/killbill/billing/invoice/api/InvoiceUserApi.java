@@ -38,6 +38,7 @@ import static org.killbill.billing.security.Permission.ACCOUNT_CAN_CREDIT;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_CREDIT;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_DELETE_CBA;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_ITEM_ADJUST;
+import static org.killbill.billing.security.Permission.INVOICE_CAN_TRIGGER_INVOICE;
 
 public interface InvoiceUserApi extends KillbillApi {
 
@@ -144,6 +145,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @return the invoice generated
      * @throws InvoiceApiException
      */
+    @RequiresPermissions(INVOICE_CAN_TRIGGER_INVOICE)
     public Invoice triggerInvoiceGeneration(UUID accountId, LocalDate targetDate, DryRunArguments dryRunArguments, CallContext context) throws InvoiceApiException;
 
     /**
