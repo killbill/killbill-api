@@ -46,6 +46,12 @@ public interface SecurityApi extends KillbillApi {
     public void logout();
 
     /**
+     *
+     * @return true if the subscjet is authenticated
+     */
+    public boolean isSubjectAuthenticated();
+
+    /**
      * Return the set of permissions for the currently logged-in user.
      *
      * @param context tenant context
