@@ -23,7 +23,8 @@ public enum Permission {
      */
     ACCOUNT_CAN_CREATE("account", "create"),
     ACCOUNT_CAN_UPDATE("account", "update"),
-    ACCOUNT_CAN_MODIFY_EMAILS("account", "modify_emails"),
+    ACCOUNT_CAN_ADD_EMAILS("account", "add_emails"),
+    ACCOUNT_CAN_REMOVE_EMAILS("account", "remove_emails"),
     ACCOUNT_CAN_CHARGE("account", "charge"),
     ACCOUNT_CAN_CREDIT("account", "credit"),
 
@@ -82,7 +83,8 @@ public enum Permission {
      */
     TENANT_CAN_VIEW("tenant", "view"),
     TENANT_CAN_CREATE("tenant", "create"),
-    TENANT_CAN_MODIFY_KEYS("tenant", "modify_keys"),
+    TENANT_CAN_ADD_KEYS("tenant", "add_keys"),
+    TENANT_CAN_REMOVE_KEYS("tenant", "remove_keys"),
 
     /**
      * Usage
