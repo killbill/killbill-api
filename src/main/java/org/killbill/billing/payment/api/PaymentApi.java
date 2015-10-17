@@ -33,6 +33,9 @@ import org.killbill.billing.util.entity.Pagination;
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_CHARGEBACK;
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_REFUND;
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_TRIGGER_PAYMENT;
+import static org.killbill.billing.security.Permission.PAYMENT_METHOD_CAN_CREATE;
+import static org.killbill.billing.security.Permission.PAYMENT_METHOD_CAN_UPDATE;
+import static org.killbill.billing.security.Permission.PAYMENT_METHOD_CAN_DELETE;
 
 public interface PaymentApi extends KillbillApi {
 
@@ -447,6 +450,7 @@ public interface PaymentApi extends KillbillApi {
      * @return the uuid of the payment method
      * @throws PaymentApiException
      */
+    @RequiresPermissions(PAYMENT_METHOD_CAN_CREATE)
     public UUID addPaymentMethod(Account account, String paymentMethodExternalKey, String pluginName, boolean setDefault, PaymentMethodPlugin paymentMethodInfo, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
@@ -551,6 +555,8 @@ public interface PaymentApi extends KillbillApi {
      * @param context                                  the call context
      * @throws PaymentApiException
      */
+    @RequiresPermissions(PAYMENT_METHOD_CAN_DELETE)
+
     public void deletePaymentMethod(Account account, UUID paymentMethodId, boolean deleteDefaultPaymentMethodWithAutoPayOff, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
@@ -561,6 +567,7 @@ public interface PaymentApi extends KillbillApi {
      * @param context         the call context
      * @throws PaymentApiException
      */
+    @RequiresPermissions(PAYMENT_METHOD_CAN_CREATE)
     public void setDefaultPaymentMethod(Account account, UUID paymentMethodId, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
@@ -572,6 +579,7 @@ public interface PaymentApi extends KillbillApi {
      * @return the list of payment methods for that account
      * @throws PaymentApiException
      */
+    @RequiresPermissions(PAYMENT_METHOD_CAN_UPDATE)
     public List<PaymentMethod> refreshPaymentMethods(Account account, String pluginName, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
@@ -586,6 +594,7 @@ public interface PaymentApi extends KillbillApi {
      * @return the list of payment methods for that account
      * @throws PaymentApiException
      */
+    @RequiresPermissions(PAYMENT_METHOD_CAN_UPDATE)
     public List<PaymentMethod> refreshPaymentMethods(Account account, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 }

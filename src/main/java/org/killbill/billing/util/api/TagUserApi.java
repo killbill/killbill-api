@@ -32,7 +32,7 @@ import org.killbill.billing.util.tag.TagDefinition;
 import static org.killbill.billing.security.Permission.TAG_CAN_ADD;
 import static org.killbill.billing.security.Permission.TAG_CAN_CREATE_TAG_DEFINITION;
 import static org.killbill.billing.security.Permission.TAG_CAN_DELETE_TAG_DEFINITION;
-import static org.killbill.billing.security.Permission.TAG_CAN_REMOVE;
+import static org.killbill.billing.security.Permission.TAG_CAN_DELETE;
 
 public interface TagUserApi extends KillbillApi {
 
@@ -111,7 +111,7 @@ public interface TagUserApi extends KillbillApi {
      * @param context        The call context, for auditing purposes
      * @throws TagApiException
      */
-    @RequiresPermissions(TAG_CAN_REMOVE)
+    @RequiresPermissions(TAG_CAN_DELETE)
     public void removeTags(UUID objectId, ObjectType objectType, Collection<UUID> tagDefinitions, CallContext context) throws TagApiException;
 
     /**
@@ -121,7 +121,7 @@ public interface TagUserApi extends KillbillApi {
      * @param context         The call context, for auditing purposes
      * @throws TagApiException
      */
-    @RequiresPermissions(TAG_CAN_REMOVE)
+    @RequiresPermissions(TAG_CAN_DELETE)
     public void removeTag(UUID objectId, ObjectType objectType, UUID tagDefinitionId, CallContext context) throws TagApiException;
 
     /**

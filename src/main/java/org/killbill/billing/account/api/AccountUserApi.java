@@ -28,7 +28,7 @@ import org.killbill.billing.util.entity.Pagination;
 import static org.killbill.billing.security.Permission.ACCOUNT_CAN_CREATE;
 import static org.killbill.billing.security.Permission.ACCOUNT_CAN_UPDATE;
 import static org.killbill.billing.security.Permission.ACCOUNT_CAN_ADD_EMAILS;
-import static org.killbill.billing.security.Permission.ACCOUNT_CAN_REMOVE_EMAILS;
+import static org.killbill.billing.security.Permission.ACCOUNT_CAN_DELETE_EMAILS;
 
 /**
  * The interface {@code AccountUserApi} offers APIs related to account operations.
@@ -144,6 +144,6 @@ public interface AccountUserApi extends KillbillApi {
      * @param email     the email to be removed
      * @param context   the user context
      */
-    @RequiresPermissions(ACCOUNT_CAN_REMOVE_EMAILS)
+    @RequiresPermissions(ACCOUNT_CAN_DELETE_EMAILS)
     public void removeEmail(UUID accountId, AccountEmail email, CallContext context);
 }

@@ -25,8 +25,8 @@ import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 
 import static org.killbill.billing.security.Permission.TENANT_CAN_CREATE;
-import static org.killbill.billing.security.Permission.TENANT_CAN_ADD_KEYS;
-import static org.killbill.billing.security.Permission.TENANT_CAN_REMOVE_KEYS;
+import static org.killbill.billing.security.Permission.TENANT_KEYS_CAN_ADD;
+import static org.killbill.billing.security.Permission.TENANT_KEYS_CAN_DELETE;
 
 public interface TenantUserApi extends KillbillApi {
 
@@ -40,9 +40,9 @@ public interface TenantUserApi extends KillbillApi {
     public List<String> getTenantValuesForKey(final String key, final TenantContext context) throws TenantApiException;
 
 
-    @RequiresPermissions(TENANT_CAN_ADD_KEYS)
+    @RequiresPermissions(TENANT_KEYS_CAN_ADD)
     public void addTenantKeyValue(final String key, final String value, final CallContext context) throws TenantApiException;
 
-    @RequiresPermissions(TENANT_CAN_REMOVE_KEYS)
+    @RequiresPermissions(TENANT_KEYS_CAN_DELETE)
     public void deleteTenantKey(final String key, final CallContext context) throws TenantApiException;
 }

@@ -28,7 +28,7 @@ import org.killbill.billing.util.customfield.CustomField;
 import org.killbill.billing.util.entity.Pagination;
 
 import static org.killbill.billing.security.Permission.CUSTOM_FIELDS_CAN_ADD;
-import static org.killbill.billing.security.Permission.CUSTOM_FIELDS_CAN_REMOVE;
+import static org.killbill.billing.security.Permission.CUSTOM_FIELDS_CAN_DELETE;
 
 public interface CustomFieldUserApi extends KillbillApi {
 
@@ -64,7 +64,7 @@ public interface CustomFieldUserApi extends KillbillApi {
      * @param context
      * @throws CustomFieldApiException
      */
-    @RequiresPermissions(CUSTOM_FIELDS_CAN_REMOVE)
+    @RequiresPermissions(CUSTOM_FIELDS_CAN_DELETE)
     void removeCustomFields(List<CustomField> fields, CallContext context) throws CustomFieldApiException;
 
     /**
