@@ -95,7 +95,7 @@ public enum Permission {
      * Tenant keys
      */
     TENANT_KEYS_CAN_ADD("tenant_kvs", "add"),
-    TENANT_KEYS_CAN_DELETE("tenant_kvs", "delete_keys"),
+    TENANT_KEYS_CAN_DELETE("tenant_kvs", "delete"),
 
     /**
      * Usage
