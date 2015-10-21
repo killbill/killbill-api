@@ -1,3 +1,7 @@
+0.26
+    Permission rework
+    Add ErrorCode
+
 0.25
     Add new interfaces to retrieve PluginInfo + new ErrorCode
 
