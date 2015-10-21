@@ -242,6 +242,7 @@ public enum ErrorCode {
     PAYMENT_NO_SUCH_PAYMENT(7020, "Payment %s does not exist"),
     PAYMENT_NO_DEFAULT_PAYMENT_METHOD(7021, "Account %s does not have a default payment method set"),
     PAYMENT_DEL_DEFAULT_PAYMENT_METHOD(7022, "Cannot delete default payment method for account %s"),
+    PAYMENT_EXTERNAL_PAYMENT_METHOD_ALREADY_EXISTS(7023, "External payment method already exists for account %s"),
     PAYMENT_NO_SUCH_SUCCESS_PAYMENT(7024, "Payment %s did not succeed"),
     PAYMENT_NO_SUCH_PAYMENT_PLUGIN(7028, "Payment plugin %s is not registered"),
     PAYMENT_ACTIVE_TRANSACTION_KEY_EXISTS(7030, "Successful transaction with external key %s already exists"),
