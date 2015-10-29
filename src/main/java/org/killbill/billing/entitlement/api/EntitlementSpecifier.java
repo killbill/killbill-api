@@ -23,9 +23,6 @@ import java.util.List;
 import org.killbill.billing.catalog.api.PlanPhasePriceOverride;
 import org.killbill.billing.catalog.api.PlanPhaseSpecifier;
 
-/**
- * ...
- */
 public interface EntitlementSpecifier {
 
     /**
