@@ -46,10 +46,6 @@ public interface Subscription extends Entitlement {
      */
     public LocalDate getChargedThroughDate();
 
-    /**
-     * @return for each service, the current state
-     */
-    public String getCurrentStateForService(String serviceName);
 
     /**
      * @return the ordered list of transitions that occurred for that subscription

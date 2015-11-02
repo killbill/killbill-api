@@ -260,7 +260,8 @@ public enum ErrorCode {
     * Range 8000: Entitlement
     */
     ENT_ALREADY_BLOCKED(8001, "The blockable entity %s is already blocked"),
-    ENT_PLUGIN_API_ABORTED(8002, "Entitlement plugin aborted call"),
+    ENT_INVALID_REQUESTED_DATE(8002, "Requested date %s for entitlement operation is invalid"),
+    ENT_PLUGIN_API_ABORTED(8003, "Entitlement plugin aborted call"),
 
     /*
    *
