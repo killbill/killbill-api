@@ -1,3 +1,6 @@
+0.27
+    Add entitlement setBlockingState api
+
 0.26
     Permission rework
     Add ErrorCode
