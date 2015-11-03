@@ -133,24 +133,8 @@ public interface EntitlementApi extends KillbillApi {
      * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
      */
      @RequiresPermissions(ENTITLEMENT_CAN_PAUSE_RESUME)
-     public void block(UUID bundleId, String stateName, String serviceName, LocalDate effectiveDate, boolean blockBilling, boolean blockEntitlement, boolean blockChange, Iterable<PluginProperty> properties, CallContext context)
+     public void setBlockingState(UUID bundleId, String stateName, String serviceName, LocalDate effectiveDate, boolean blockBilling, boolean blockEntitlement, boolean blockChange, Iterable<PluginProperty> properties, CallContext context)
              throws EntitlementApiException;
-
-    /**
-     * Will unblock all entitlements associated with the base entitlement. If there are no ADD_ONN this is only the base entitlement.
-     *
-     * @param bundleId          the id of the bundle
-     * @param stateName         the name of the state
-     * @param serviceName       the name of the service
-     * @param effectiveDate     the date at which the operation should occur
-     * @param properties        plugin specific properties
-     * @param context           the context
-     *
-     * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
-     @RequiresPermissions(ENTITLEMENT_CAN_PAUSE_RESUME)
-     */
-    public void unblock(UUID bundleId, String stateName, String serviceName, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
-            throws EntitlementApiException;
 
     /**
      *
