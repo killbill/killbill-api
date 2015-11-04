@@ -137,32 +137,30 @@ public interface EntitlementApi extends KillbillApi {
      * Will add a blocking event for the specified service associated with the base entitlement.
      *
      * @param bundleId          the id of the bundle
+     * @param stateName         the name of the state
      * @param serviceName       the name of the service
      * @param effectiveDate     the date at which the operation should occur
      * @param blockBilling      whether this event should block billing
      * @param blockEntitlement  whether this event should block entitlement
      * @param blockChange       whether this event should block any change
+     * @param properties        plugin specific properties
      * @param context           the context
      *
      * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
-     @RequiresPermissions(ENTITLEMENT_CAN_PAUSE_RESUME)
-     public void block(UUID bundleId, String serviceName, LocalDate effectiveDate, boolean blockBilling, boolean blockEntitlement, boolean blockChange, CallContext context)
-    throws EntitlementApiException;
      */
+     @RequiresPermissions(ENTITLEMENT_CAN_PAUSE_RESUME)
+     public void setBlockingState(UUID bundleId, String stateName, String serviceName, LocalDate effectiveDate, boolean blockBilling, boolean blockEntitlement, boolean blockChange, Iterable<PluginProperty> properties, CallContext context)
+             throws EntitlementApiException;
 
     /**
-     * Will unblock all entitlements associated with the base entitlement. If there are no ADD_ONN this is only the base entitlement.
      *
-     * @param bundleId          the id of the bundle
-     * @param serviceName       the name of the service
-     * @param effectiveDate     the date at which the operation should occur
-     * @param context           the context
-     *
-     * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
-     @RequiresPermissions(ENTITLEMENT_CAN_PAUSE_RESUME)
-     public void unblock(UUID bundleId, String serviceName, LocalDate effectiveDate, CallContext context)
-    throws EntitlementApiException;
+     * @param blockableId     the id of the blockable (account/bundle/subscription)
+     * @param type            the type
+     * @param serviceName     the name of the service
+     * @param context         the context
+     * @return
      */
+    public Iterable<BlockingState> getBlockingStatesForServiceAndType(UUID blockableId, BlockingStateType type, String serviceName, TenantContext context);
 
     /**
      * Retrieves an <code>Entitlement</code> using its id.
