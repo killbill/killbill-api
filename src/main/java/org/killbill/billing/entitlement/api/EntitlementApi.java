@@ -63,6 +63,7 @@ public interface EntitlementApi extends KillbillApi {
      * <p/>
      *
      * @param accountId     the account id
+     * @param externalKey   the bundle external key
      * @param effectiveDate the date at which the entitlement should start
      * @param entitlementSpecifier     a list of entitlement specifier
      * @param properties     plugin specific properties
@@ -71,7 +72,7 @@ public interface EntitlementApi extends KillbillApi {
      * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>.
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
-    Entitlement createBaseEntitlementWithAddOns(UUID accountId, Iterable<EntitlementSpecifier> entitlementSpecifier, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
+    Entitlement createBaseEntitlementWithAddOns(UUID accountId, String externalKey, Iterable<EntitlementSpecifier> entitlementSpecifier, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
     /**

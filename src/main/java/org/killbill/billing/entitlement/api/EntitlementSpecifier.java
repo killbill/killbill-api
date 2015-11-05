@@ -26,11 +26,6 @@ import org.killbill.billing.catalog.api.PlanPhaseSpecifier;
 public interface EntitlementSpecifier {
 
     /**
-     * @return the external key for that entitlement-- which must be unique in the system
-     */
-    String getExternalkey();
-
-    /**
      * @return the plan specifier definition for the plan
      */
     PlanPhaseSpecifier getPlanPhaseSpecifier();
