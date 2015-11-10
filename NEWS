@@ -1,3 +1,6 @@
+0.28
+    Add new entitlement api to create combo subscriptions (base + add-ons)
+
 0.27
     Add entitlement setBlockingState api
 
