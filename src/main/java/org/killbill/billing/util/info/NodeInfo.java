@@ -16,40 +16,28 @@
  * under the License.
  */
 
-package org.killbill.billing.osgi.api;
+package org.killbill.billing.util.info;
 
-import java.util.Set;
+import org.joda.time.DateTime;
+import org.killbill.billing.osgi.api.PluginInfo;
 
-public interface PluginInfo {
+public interface NodeInfo {
 
-    /**
-     *
-     * @return the osgi bundle symbolic name
-     */
-    public String getBundleSymbolicName();
+    public String getNodeName();
 
-    /**
-     *
-     * @return the killbill plugin name (as seen on the filesystem)
-     */
-    public String getPluginName();
+    public DateTime getBootTime();
 
-    /**
-     *
-     * @return the killbill plugin version (as seen on the filesystem)
-     */
-    public String getVersion();
+    public DateTime getLastUpdatedDate();
 
-    /**
-     *
-     * @return whether plugin is running
-     */
-    public boolean isRunning();
+    public String getKillbillVersion();
 
-    /**
-     *
-     * @return the set of services this plugin registered
-     */
-    public Set<PluginServiceInfo> getServices();
+    public String getApiVersion();
 
+    public String getPlatformVersion();
+
+    public String getCommonVersion();
+
+    public String getPluginApiVersion();
+
+    public Iterable<PluginInfo> getPluginInfo();
 }

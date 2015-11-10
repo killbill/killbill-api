@@ -18,38 +18,17 @@
 
 package org.killbill.billing.osgi.api;
 
-import java.util.Set;
-
-public interface PluginInfo {
+public interface PluginServiceInfo {
 
     /**
      *
-     * @return the osgi bundle symbolic name
+     * @return the service type name (killbill plugin api, servlet)
      */
-    public String getBundleSymbolicName();
+    public String getServiceTypeName();
 
     /**
      *
-     * @return the killbill plugin name (as seen on the filesystem)
+     * @return the name under which the plugin registered that service
      */
-    public String getPluginName();
-
-    /**
-     *
-     * @return the killbill plugin version (as seen on the filesystem)
-     */
-    public String getVersion();
-
-    /**
-     *
-     * @return whether plugin is running
-     */
-    public boolean isRunning();
-
-    /**
-     *
-     * @return the set of services this plugin registered
-     */
-    public Set<PluginServiceInfo> getServices();
-
+    public String getRegistrationName();
 }
