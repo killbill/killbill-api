@@ -59,6 +59,23 @@ public interface EntitlementApi extends KillbillApi {
             throws EntitlementApiException;
 
     /**
+     * Create a new base entitlement and addOn entitlements for that account.
+     * <p/>
+     *
+     * @param accountId     the account id
+     * @param externalKey   the bundle external key
+     * @param effectiveDate the date at which the entitlement should start
+     * @param entitlementSpecifier     a list of entitlement specifier
+     * @param properties     plugin specific properties
+     * @param context       the context
+     * @return the common bundle created
+     * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>.
+     */
+    @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
+    Entitlement createBaseEntitlementWithAddOns(UUID accountId, String externalKey, Iterable<EntitlementSpecifier> entitlementSpecifier, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
+            throws EntitlementApiException;
+
+    /**
      * Adds an ADD_ON entitlement to previously created entitlement.
      * <p/>
      * The <code>PlanPhaseSpecifier<code/> should refer to a <code>ProductCategory.ADD_ON</code>.
