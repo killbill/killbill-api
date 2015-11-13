@@ -27,11 +27,6 @@ public interface Product {
     public String getName();
 
     /**
-     * @return whether this {@code Product} has been retired
-     */
-    public boolean isRetired();
-
-    /**
      * @return an array of other {@code Product} that can be purchased with that one
      */
     public Product[] getAvailable();
