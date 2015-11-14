@@ -16,14 +16,32 @@
  * under the License.
  */
 
-package org.killbill.billing.util.info;
+package org.killbill.billing.util.nodes;
 
-import org.killbill.billing.KillbillApi;
-import org.killbill.billing.osgi.api.PluginInfo;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public interface KillbillInfoApi extends KillbillApi {
+public class NodeCommandProperty {
 
-    public Iterable<NodeInfo> getNodeInfo();
+    /**
+     * System keys
+     */
 
-    public void updatePluginInfo(Iterable<PluginInfo> plugins);
+    private final String key;
+    private final Object value;
+
+    @JsonCreator
+    public NodeCommandProperty(@JsonProperty("key") final String key,
+                               @JsonProperty("value") final Object value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public Object getValue() {
+        return value;
+    }
 }

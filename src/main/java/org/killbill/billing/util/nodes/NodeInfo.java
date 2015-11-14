@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.killbill.billing.util.info;
+package org.killbill.billing.util.nodes;
 
 import org.joda.time.DateTime;
 import org.killbill.billing.osgi.api.PluginInfo;
