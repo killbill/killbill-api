@@ -19,7 +19,12 @@
 package org.killbill.billing.osgi.api;
 
 import org.killbill.billing.KillbillApi;
+import org.killbill.billing.osgi.api.config.PluginConfig.PluginLanguage;
 
 public interface PluginsInfoApi extends KillbillApi {
+
     public Iterable<PluginInfo> getPluginsInfo();
+
+
+    public void notifyOfStateChanged(String pluginName, String pluginVersion, PluginLanguage pluginLanguage);
 }
