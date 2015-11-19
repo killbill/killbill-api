@@ -43,7 +43,7 @@ public interface KillbillNodesApi extends KillbillApi {
     /**
      * The api is used to notify core killbill system about changes in the plugins (new installed plugin, started, stopped,..)
      *
-     * @param plugins the current list of know installed plugins on the node
+     * @param plugin the info associated to the plugin
      */
-    public void notifyPluginChanged(Iterable<PluginInfo> plugins);
+    public void notifyPluginChanged(PluginInfo plugin);
 }

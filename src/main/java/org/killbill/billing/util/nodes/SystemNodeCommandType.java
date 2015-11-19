@@ -19,11 +19,10 @@
 package org.killbill.billing.util.nodes;
 
 public enum SystemNodeCommandType {
-    /*
-    If handled by KPM plugin, they are not technically system types
+    // INSTALL_PLUGIN and UNINSTALL_PLUGIN are handled by KPM plugin, so they are not technically system types
+    // but we do want to the same json for all plugin commands
     INSTALL_PLUGIN(PluginNodeCommandMetadata.class),
     UNINSTALL_PLUGIN(PluginNodeCommandMetadata.class),
-    */
     START_PLUGIN(PluginNodeCommandMetadata.class),
     STOP_PLUGIN(PluginNodeCommandMetadata.class),
     RESTART_PLUGIN(PluginNodeCommandMetadata.class);

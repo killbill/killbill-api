@@ -23,8 +23,19 @@ import org.killbill.billing.osgi.api.config.PluginConfig.PluginLanguage;
 
 public interface PluginsInfoApi extends KillbillApi {
 
+    /**
+     *
+     * @return the list of plugins as seen by the OSGI registry
+     */
     public Iterable<PluginInfo> getPluginsInfo();
 
-
-    public void notifyOfStateChanged(String pluginName, String pluginVersion, PluginLanguage pluginLanguage);
+    /**
+     * Notify OSGI component that a new plugin was installed (downloaded) on the file system.
+     *
+     * @param newState       the state (currently only {@code NEW_VERSION} is allowed
+     * @param pluginName     the name of the plugin
+     * @param pluginVersion  the version of the plugin
+     * @param pluginLanguage the language (JAVA or RUBY)
+     */
+    public void notifyOfStateChanged(PluginStateChange newState, String pluginName, String pluginVersion, PluginLanguage pluginLanguage);
 }
