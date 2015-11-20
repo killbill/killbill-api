@@ -25,13 +25,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PluginNodeCommandMetadata implements NodeCommandMetadata {
 
+    public final static String PLUGIN_NAME = "pluginName";
+    public final static String PLUGIN_VERSION = "pluginVersion";
+
     private final String pluginName;
     private final String pluginVersion;
     private final List<NodeCommandProperty> properties;
 
     @JsonCreator
-    public PluginNodeCommandMetadata(@JsonProperty("pluginName") final String pluginName,
-                                     @JsonProperty("pluginVersion") final String pluginVersion,
+    public PluginNodeCommandMetadata(@JsonProperty(PLUGIN_NAME) final String pluginName,
+                                     @JsonProperty(PLUGIN_VERSION) final String pluginVersion,
                                      @JsonProperty("properties") final List<NodeCommandProperty> properties) {
         this.pluginName = pluginName;
         this.pluginVersion = pluginVersion;
