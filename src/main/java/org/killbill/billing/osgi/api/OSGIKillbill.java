@@ -33,6 +33,7 @@ import org.killbill.billing.util.api.CustomFieldUserApi;
 import org.killbill.billing.util.api.ExportUserApi;
 import org.killbill.billing.util.api.RecordIdApi;
 import org.killbill.billing.util.api.TagUserApi;
+import org.killbill.billing.util.nodes.KillbillNodesApi;
 
 /**
  * This interface encapsulates all the OSGI interfaces seen by the Killbill OSGI plugins
@@ -82,4 +83,9 @@ public interface OSGIKillbill {
     public PluginConfigServiceApi getPluginConfigServiceApi();
 
     public SecurityApi getSecurityApi();
+
+    public PluginsInfoApi getPluginsInfoApi();
+
+    public KillbillNodesApi getKillbillNodesApi();
+
 }
