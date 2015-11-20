@@ -19,7 +19,7 @@
 package org.killbill.billing.osgi.api;
 
 import org.killbill.billing.KillbillApi;
-import org.killbill.billing.osgi.api.config.PluginConfig.PluginLanguage;
+import org.killbill.billing.osgi.api.config.PluginLanguage;
 
 public interface PluginsInfoApi extends KillbillApi {
 

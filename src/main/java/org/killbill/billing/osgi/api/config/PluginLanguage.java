@@ -1,7 +1,9 @@
 /*
  * Copyright 2010-2013 Ning, Inc.
+ * Copyright 2015 Groupon, Inc
+ * Copyright 2015 The Billing Project, LLC
  *
- * Ning licenses this file to you under the Apache License, version 2.0
+ * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
  * License.  You may obtain a copy of the License at:
  *
@@ -16,22 +18,7 @@
 
 package org.killbill.billing.osgi.api.config;
 
-import java.io.File;
-
-public interface PluginConfig {
-
-    public String getPluginName();
-
-    public PluginType getPluginType();
-
-    public String getVersion();
-
-    public String getPluginVersionnedName();
-
-    /**
-     * @return root directory of the deployed plugin
-     */
-    public File getPluginVersionRoot();
-
-    public PluginLanguage getPluginLanguage();
+public enum PluginLanguage {
+    JAVA,
+    RUBY
 }
