@@ -36,4 +36,6 @@ public interface PluginConfig extends Comparable<PluginConfig> {
     public PluginLanguage getPluginLanguage();
 
     public boolean isSelectedForStart();
+
+    public boolean isDisabled();
 }
