@@ -18,7 +18,7 @@ package org.killbill.billing.osgi.api.config;
 
 import java.io.File;
 
-public interface PluginConfig {
+public interface PluginConfig extends Comparable<PluginConfig> {
 
     public String getPluginName();
 
@@ -34,4 +34,6 @@ public interface PluginConfig {
     public File getPluginVersionRoot();
 
     public PluginLanguage getPluginLanguage();
+
+    public boolean isSelectedForStart();
 }
