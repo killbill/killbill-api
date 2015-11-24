@@ -37,8 +37,9 @@ public interface KillbillNodesApi extends KillbillApi {
      * The api will trigger a command that will be issued on all active cluster nodes
      *
      * @param nodeCommand the command to be triggered across all killbill nodes
+     * @param localNodeOnly the command should only triggered on the node where it applied
      */
-    public void triggerNodeCommand(NodeCommand nodeCommand);
+    public void triggerNodeCommand(NodeCommand nodeCommand, boolean localNodeOnly);
 
     /**
      * The api is used to notify core killbill system about changes in the plugins (new installed plugin, started, stopped,..)
