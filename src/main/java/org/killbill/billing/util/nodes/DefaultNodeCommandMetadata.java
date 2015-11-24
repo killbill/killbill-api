@@ -16,15 +16,23 @@
  * under the License.
  */
 
-package org.killbill.billing.osgi.api;
+package org.killbill.billing.util.nodes;
 
-public enum PluginStateChange {
-    /**
-     * The new version is used to indicate that a new version of a given plugin has been installed on the filesystem (and ACTIVE link points to it).
-     */
-    NEW_VERSION,
-    /**
-     * The plugin was disabled
-     */
-    DISABLED
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class DefaultNodeCommandMetadata implements NodeCommandMetadata {
+
+    private final List<NodeCommandProperty> properties;
+
+    @JsonCreator
+    public DefaultNodeCommandMetadata(@JsonProperty("properties") final List<NodeCommandProperty> properties) {
+        this.properties = properties;
+    }
+    @Override
+    public List<NodeCommandProperty> getProperties() {
+        return properties;
+    }
 }

@@ -23,22 +23,21 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PluginNodeCommandMetadata implements NodeCommandMetadata {
+public class PluginNodeCommandMetadata extends DefaultNodeCommandMetadata implements NodeCommandMetadata {
 
     public final static String PLUGIN_NAME = "pluginName";
     public final static String PLUGIN_VERSION = "pluginVersion";
 
     private final String pluginName;
     private final String pluginVersion;
-    private final List<NodeCommandProperty> properties;
 
     @JsonCreator
     public PluginNodeCommandMetadata(@JsonProperty(PLUGIN_NAME) final String pluginName,
                                      @JsonProperty(PLUGIN_VERSION) final String pluginVersion,
                                      @JsonProperty("properties") final List<NodeCommandProperty> properties) {
+        super(properties);
         this.pluginName = pluginName;
         this.pluginVersion = pluginVersion;
-        this.properties = properties;
     }
 
     public String getPluginName() {
@@ -49,8 +48,4 @@ public class PluginNodeCommandMetadata implements NodeCommandMetadata {
         return pluginVersion;
     }
 
-    @Override
-    public List<NodeCommandProperty> getProperties() {
-        return properties;
-    }
 }
