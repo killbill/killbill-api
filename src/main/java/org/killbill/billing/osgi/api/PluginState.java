@@ -19,7 +19,6 @@
 package org.killbill.billing.osgi.api;
 
 public enum PluginState {
-    INSTALLED,
     STOPPED,
     RUNNING
 }
