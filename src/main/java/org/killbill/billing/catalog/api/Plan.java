@@ -42,11 +42,6 @@ public interface Plan {
     public String getName();
 
     /**
-     * @return whether the {@code Plan} has been retired
-     */
-    public boolean isRetired();
-
-    /**
      * @return an iterator through the {@code PlanPhase}
      */
     public Iterator<PlanPhase> getInitialPhaseIterator();
