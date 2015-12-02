@@ -16,7 +16,7 @@
 
 package org.killbill.billing.catalog.api;
 
-import java.util.List;
+import java.util.Date;
 
 import org.joda.time.DateTime;
 
@@ -29,6 +29,13 @@ public interface Catalog {
      * @return the catalogName
      */
     public String getCatalogName();
+
+    /**
+     * @param requestedDate the requestedDate
+     * @return the effective for the {@code StandaloneCatalog} matching that requestedDate
+     * @throws CatalogApiException
+     */
+    public Date getStandaloneCatalogEffectiveDate(final DateTime requestedDate) throws CatalogApiException;
 
     /**
      * @param requestedDate specifies the state of the catalog for that date
@@ -52,6 +59,13 @@ public interface Catalog {
     public Plan[] getPlans(DateTime requestedDate) throws CatalogApiException;
 
     /**
+     * @param requestedDate specifies the state of the catalog for that date
+     * @return the {@code PriceListSet} for that requestedDate
+     * @throws CatalogApiException
+     */
+    PriceListSet getPriceLists(final DateTime requestedDate) throws CatalogApiException;
+
+    /**
      * @param name          the unique name of the plan
      * @param requestedDate specifies the state of the catalog for that date
      * @return the {@code Plan}
@@ -69,7 +83,7 @@ public interface Catalog {
      * @throws CatalogApiException if {@code Plan} does not exist
      */
     public Plan createOrFindPlan(String productName, BillingPeriod billingPeriod, String priceListName, PlanPhasePriceOverridesWithCallContext overrides,
-                         DateTime requestedDate) throws CatalogApiException;
+                                 DateTime requestedDate) throws CatalogApiException;
 
     /**
      * @param name                  the unique name of the plan
@@ -90,7 +104,7 @@ public interface Catalog {
      * @throws CatalogApiException if {@code Plan} does not exist
      */
     public Plan createOrFindPlan(String productName, BillingPeriod billingPeriod, String priceListName, PlanPhasePriceOverridesWithCallContext overrides,
-                         DateTime requestedDate, DateTime subscriptionStartDate) throws CatalogApiException;
+                                 DateTime requestedDate, DateTime subscriptionStartDate) throws CatalogApiException;
 
     /**
      * @param name          the unique name for the {@code Product}

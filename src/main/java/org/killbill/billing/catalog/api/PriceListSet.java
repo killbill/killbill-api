@@ -16,6 +16,8 @@
 
 package org.killbill.billing.catalog.api;
 
+import java.util.List;
+
 public interface PriceListSet {
 
     public static final String DEFAULT_PRICELIST_NAME = "DEFAULT";
@@ -27,5 +29,11 @@ public interface PriceListSet {
      * @return the {@code Plan}
      */
     public Plan getPlanListFrom(String priceListName, Product product, BillingPeriod period);
+
+    /**
+     *
+     * @return all the price {@code PriceList}
+     */
+    public List<PriceList> getAllPriceLists();
 
 }
