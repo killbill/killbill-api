@@ -52,4 +52,10 @@ public interface PluginInfo {
      */
     public Set<PluginServiceInfo> getServices();
 
+    /**
+     *
+     * @return true if the version associated to that plugin is the one to be used when we start (without specifying the version)
+     */
+    public boolean isSelectedForStart();
+
 }
