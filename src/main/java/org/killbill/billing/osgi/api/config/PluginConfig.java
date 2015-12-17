@@ -20,6 +20,16 @@ import java.io.File;
 
 public interface PluginConfig extends Comparable<PluginConfig> {
 
+    /**
+     * The key that was used at installation time (when installed through KPM)
+     * This is also the key from the official KB plugin repo (https://github.com/killbill/killbill-cloud/blob/master/kpm/lib/kpm/plugins_directory.yml)
+     */
+    public String getPluginKey();
+
+    /**
+     *
+     * @return the killbill plugin name (as seen on the filesystem)
+     */
     public String getPluginName();
 
     public PluginType getPluginType();

@@ -33,9 +33,10 @@ public interface PluginsInfoApi extends KillbillApi {
      * Notify OSGI component that a new plugin was installed (downloaded) on the file system.
      *
      * @param newState       the state (currently only {@code NEW_VERSION} is allowed
-     * @param pluginName     the name of the plugin
+     * @param pluginKey      the plugin key (used during install/uninstall time)
+     * @param pluginName     the name of the plugin (as seen of the filesystem)
      * @param pluginVersion  the version of the plugin
      * @param pluginLanguage the language (JAVA or RUBY)
      */
-    public void notifyOfStateChanged(PluginStateChange newState, String pluginName, String pluginVersion, PluginLanguage pluginLanguage);
+    public void notifyOfStateChanged(PluginStateChange newState, String pluginKey, String pluginName, String pluginVersion, PluginLanguage pluginLanguage);
 }
