@@ -160,4 +160,11 @@ public interface MutableAccountData extends AccountData {
      */
     public void setIsNotifiedForInvoices(boolean isNotifiedForInvoices);
 
+    /**
+     * Sets the UUID of the default parentAccountId
+     *
+     * @param parentAccountId
+     */
+    public void setParentAccountId(UUID parentAccountId);
+
 }
