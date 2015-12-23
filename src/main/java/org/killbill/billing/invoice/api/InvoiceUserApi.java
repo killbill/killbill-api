@@ -292,4 +292,16 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context   the callcontext
      */
     public void consumeExstingCBAOnAccountWithUnpaidInvoices(final UUID accountId, final CallContext context);
+
+    /**
+     * Get all invoices for a given parent account and date range.
+     *
+     * @param parentAccountId parent account id
+     * @param startDate start date that want to filter
+     * @param endDate end date that want to filter
+     * @param context the tenant context
+     * @return the invoice list for that parent account and/or date range
+     */
+    public List<Invoice> getInvoicesByParentAccount(UUID parentAccountId, LocalDate startDate, LocalDate endDate,
+                                                    TenantContext context) throws InvoiceApiException;
 }

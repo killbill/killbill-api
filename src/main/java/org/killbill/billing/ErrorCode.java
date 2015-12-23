@@ -194,6 +194,7 @@ public enum ErrorCode {
     INVOICE_ITEM_ADJUSTMENT_AMOUNT_INVALID(4020, "Invoice adjustment amount %s should be lower than %s"),
     INVOICE_ITEM_ADJUSTMENT_ITEM_INVALID(4021, "Invoice item %s cannot be adjusted"),
     INVOICE_ITEM_TYPE_INVALID(4022, "Invalid invoice item type %s"),
+    INVOICE_INVALID_DATE_RANGE(4023, "Date range is invalid. Start Date: %s; End Date: %s"),
 
     /*
      *
