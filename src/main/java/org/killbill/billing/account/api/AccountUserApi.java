@@ -150,8 +150,8 @@ public interface AccountUserApi extends KillbillApi {
     /**
      * @param parentAccountId the parent account unique id
      * @param context   the user context
-     * @return the list of child accounts for that parent account id
+     * @return the list of children accounts for that parent account id
      */
-    public List<Account> getChildAccounts(UUID parentAccountId, TenantContext context) throws AccountApiException;
+    public List<Account> getChildrenAccounts(UUID parentAccountId, TenantContext context) throws AccountApiException;
 
 }
