@@ -134,4 +134,10 @@ public interface AccountData {
      * @return the UUID of the parent Account
      */
     public UUID getParentAccountId();
+
+    /**
+     * @return whether or not the child account payment is delegated to Parent
+     */
+    public Boolean isPaymentDelegatedToParent();
+
 }
