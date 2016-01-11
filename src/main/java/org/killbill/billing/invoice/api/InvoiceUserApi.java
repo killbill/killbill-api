@@ -25,7 +25,6 @@ import java.util.UUID;
 import org.joda.time.LocalDate;
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.account.api.AccountApiException;
-import org.killbill.billing.catalog.api.BillingPeriod;
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.api.TagApiException;
@@ -293,15 +292,4 @@ public interface InvoiceUserApi extends KillbillApi {
      */
     public void consumeExstingCBAOnAccountWithUnpaidInvoices(final UUID accountId, final CallContext context);
 
-    /**
-     * Get all invoices for a given parent account and date range.
-     *
-     * @param parentAccountId parent account id
-     * @param startDate start date that want to filter
-     * @param endDate end date that want to filter
-     * @param context the tenant context
-     * @return the invoice list for that parent account and/or date range
-     */
-    public List<Invoice> getInvoicesByParentAccount(UUID parentAccountId, LocalDate startDate, LocalDate endDate,
-                                                    TenantContext context) throws InvoiceApiException;
 }
