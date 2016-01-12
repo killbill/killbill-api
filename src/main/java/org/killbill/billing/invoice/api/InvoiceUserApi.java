@@ -25,7 +25,6 @@ import java.util.UUID;
 import org.joda.time.LocalDate;
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.account.api.AccountApiException;
-import org.killbill.billing.catalog.api.BillingPeriod;
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.api.TagApiException;
@@ -292,4 +291,5 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context   the callcontext
      */
     public void consumeExstingCBAOnAccountWithUnpaidInvoices(final UUID accountId, final CallContext context);
+
 }
