@@ -139,4 +139,9 @@ public interface Invoice extends Entity {
      * @return true if this is a migration invoice
      */
     boolean isMigrationInvoice();
+
+    /**
+     * @return the current status of the invoice
+     */
+    InvoiceStatus getStatus();
 }
