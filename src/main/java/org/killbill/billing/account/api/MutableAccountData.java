@@ -172,6 +172,6 @@ public interface MutableAccountData extends AccountData {
      *
      * @param isPaymentDelegatedToParent
      */
-    public void setIsPaymentDelegatedToParent(boolean isPaymentDelegatedToParent);
+    public void setIsPaymentDelegatedToParent(Boolean isPaymentDelegatedToParent);
 
 }
