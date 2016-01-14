@@ -292,4 +292,13 @@ public interface InvoiceUserApi extends KillbillApi {
      */
     public void consumeExstingCBAOnAccountWithUnpaidInvoices(final UUID accountId, final CallContext context);
 
+    /**
+     * Move the invoice status form DRAFT to COMMITTED
+     *
+     * @param invoiceId invoive id
+     * @param context the tenant context
+     * @throws InvoiceApiException
+     */
+    public void invoiceStatusTransition(UUID accountId, UUID invoiceId, CallContext context) throws InvoiceApiException;
+
 }
