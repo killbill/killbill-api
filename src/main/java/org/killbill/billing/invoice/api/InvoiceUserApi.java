@@ -181,12 +181,13 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param accountId     account id
      * @param effectiveDate the effective date for newly created invoices (in the account timezone)
      * @param charges       the charges
+     * @param autoCommit    the flag to indicate if the invoice is set to COMMITTED or DRAFT and events are sent
      * @param context       the call context
      * @return the external charges invoice items
      * @throws InvoiceApiException
      */
     @RequiresPermissions(ACCOUNT_CAN_CHARGE)
-    public List<InvoiceItem> insertExternalCharges(UUID accountId, LocalDate effectiveDate, Iterable<InvoiceItem> charges, CallContext context) throws InvoiceApiException;
+    public List<InvoiceItem> insertExternalCharges(UUID accountId, LocalDate effectiveDate, Iterable<InvoiceItem> charges, boolean autoCommit, CallContext context) throws InvoiceApiException;
 
     /**
      * Retrieve a credit by id.
@@ -205,13 +206,14 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param amount        the credit amount
      * @param effectiveDate the day to grant the credit, in the account timezone
      * @param currency      the credit currency
+     * @param autoCommit    the flag to indicate if the invoice is set to COMMITTED or DRAFT and events are sent
      * @param context       the call context
      * @return the credit invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(ACCOUNT_CAN_CREDIT)
-    public InvoiceItem insertCredit(UUID accountId, BigDecimal amount, LocalDate effectiveDate,
-                                    Currency currency, CallContext context) throws InvoiceApiException;
+    public InvoiceItem insertCredit(UUID accountId, BigDecimal amount, LocalDate effectiveDate, Currency currency,
+                                    boolean autoCommit, CallContext context) throws InvoiceApiException;
 
     /**
      * Add a credit to an invoice. This can be used to adjust invoices.
