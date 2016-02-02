@@ -16,6 +16,8 @@
 
 package org.killbill.billing;
 
+import org.killbill.billing.invoice.api.InvoiceStatus;
+
 public enum ErrorCode {
 
     /*
@@ -194,6 +196,8 @@ public enum ErrorCode {
     INVOICE_ITEM_ADJUSTMENT_AMOUNT_INVALID(4020, "Invoice adjustment amount %s should be lower than %s"),
     INVOICE_ITEM_ADJUSTMENT_ITEM_INVALID(4021, "Invoice item %s cannot be adjusted"),
     INVOICE_ITEM_TYPE_INVALID(4022, "Invalid invoice item type %s"),
+    INVOICE_INVALID_STATUS(4023, "The invoice status %s is invalid for invoice id %s. Current status is %s"),
+    INVOICE_ALREADY_COMMITTED(4023, "Cannot add credit or external charge for invoice id %s because it is already in " + InvoiceStatus.COMMITTED + " status"),
 
     /*
      *
