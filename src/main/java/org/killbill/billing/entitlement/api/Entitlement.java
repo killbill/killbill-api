@@ -63,6 +63,8 @@ public interface Entitlement extends Entity {
      * Possible states of an <code>Entitlement</code>
      */
     public enum EntitlementState {
+        /* The entitlement was created in the future */
+        PENDING,
         /* The entitlement was created in that initial state */
         ACTIVE,
         /* The system blocked the entitlement */
