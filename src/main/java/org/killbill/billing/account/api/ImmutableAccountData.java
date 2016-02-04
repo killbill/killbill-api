@@ -35,4 +35,8 @@ public interface ImmutableAccountData {
     Currency getCurrency();
 
     DateTimeZone getTimeZone();
+
+    UUID getParentAccountId();
+
+    Boolean isPaymentDelegatedToParent();
 }
