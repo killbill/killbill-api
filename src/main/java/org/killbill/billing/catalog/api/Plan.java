@@ -37,6 +37,12 @@ public interface Plan {
     public Product getProduct();
 
     /**
+     *
+     * @return the {@PriceList} in which that {@code Plan} is defined
+     */
+   public PriceList getPriceList();
+
+    /**
      * @return the name of the {@code Plan}
      */
     public String getName();
