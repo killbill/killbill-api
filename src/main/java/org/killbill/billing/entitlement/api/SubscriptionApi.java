@@ -19,8 +19,8 @@ package org.killbill.billing.entitlement.api;
 import java.util.List;
 import java.util.UUID;
 
-import org.joda.time.LocalDate;
 import org.killbill.billing.KillbillApi;
+import org.killbill.billing.OrderingType;
 import org.killbill.billing.payment.api.PluginProperty;
 import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
@@ -34,6 +34,13 @@ import static org.killbill.billing.security.Permission.ENTITLEMENT_CAN_PAUSE_RES
  * API to manage the retrieval of <code>Subscription</code> information.
  */
 public interface SubscriptionApi extends KillbillApi {
+
+    int PAST_EVENTS = 0x1;
+    int PRESENT_EVENTS = 0x2;
+    int FUTURE_EVENTS = 0x4;
+    int PAST_OR_PRESENT_EVENTS = (PAST_EVENTS | PRESENT_EVENTS);
+    int FUTURE_OR_PRESENT_EVENTS = (PRESENT_EVENTS | FUTURE_EVENTS);
+    int ALL_EVENTS = (PAST_OR_PRESENT_EVENTS | FUTURE_OR_PRESENT_EVENTS);
 
     /**
      * Retrieves a <code>Subscription</code> For the entitlementId
@@ -136,7 +143,20 @@ public interface SubscriptionApi extends KillbillApi {
      * @throws EntitlementApiException if the entitlement was not in <tt>ACTIVE</tt> state
      */
     @RequiresPermissions(ENTITLEMENT_CAN_PAUSE_RESUME)
-    public void addBlockingState(BlockingState blockingState, final Iterable<PluginProperty> properties, final CallContext context)
+    public void addBlockingState(BlockingState blockingState, Iterable<PluginProperty> properties, CallContext context)
+            throws EntitlementApiException;
+
+    /**
+     *
+     * @param accountId
+     * @param typeFilter
+     * @param svcsFilter
+     * @param orderingType
+     * @param timeFilter
+     * @param context
+     * @return
+     */
+    public Iterable<BlockingState> getBlockingStates(UUID accountId, List<BlockingStateType> typeFilter, List<String> svcsFilter, OrderingType orderingType, int timeFilter, TenantContext context)
             throws EntitlementApiException;
 
 }
