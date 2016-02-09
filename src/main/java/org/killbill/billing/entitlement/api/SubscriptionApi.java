@@ -148,13 +148,15 @@ public interface SubscriptionApi extends KillbillApi {
 
     /**
      *
-     * @param accountId
-     * @param typeFilter
-     * @param svcsFilter
-     * @param orderingType
-     * @param timeFilter
-     * @param context
-     * @return
+     * @param accountId     the account id
+     * @param typeFilter    the list of <code>BlockingStateType</code> filters. All types are returned if null or empty.
+     * @param svcsFilter    the list of service filters. All services are returned if null or empty.
+     * @param orderingType  the ordering direction, that is <code>ASCENDING</code> or <code>DESCENDING</code>
+     * @param timeFilter    the filtering types constructed as a bitwise operation
+     * @param context       the user context
+     *
+     * @throws EntitlementApiException if the account is invalid.
+     * @return the ordered list of  <code>BlockingState</code>
      */
     public Iterable<BlockingState> getBlockingStates(UUID accountId, List<BlockingStateType> typeFilter, List<String> svcsFilter, OrderingType orderingType, int timeFilter, TenantContext context)
             throws EntitlementApiException;
