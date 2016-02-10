@@ -207,12 +207,13 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param effectiveDate the day to grant the credit, in the account timezone
      * @param currency      the credit currency
      * @param context       the call context
+     * @param description   the item description
      * @return the credit invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(ACCOUNT_CAN_CREDIT)
     public InvoiceItem insertCredit(UUID accountId, BigDecimal amount, LocalDate effectiveDate,
-                                    Currency currency, CallContext context) throws InvoiceApiException;
+                                    Currency currency, String description, CallContext context) throws InvoiceApiException;
 
     /**
      * Add a credit to an invoice. This can be used to adjust invoices.
@@ -222,13 +223,14 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param amount        the credit amount
      * @param effectiveDate the day to grant the credit, in the account timezone
      * @param currency      the credit currency
+     * @param description   the item description
      * @param context       the call context
      * @return the credit invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_CREDIT)
     public InvoiceItem insertCreditForInvoice(UUID accountId, UUID invoiceId, BigDecimal amount, LocalDate effectiveDate,
-                                              Currency currency, CallContext context) throws InvoiceApiException;
+                                              Currency currency, String description, CallContext context) throws InvoiceApiException;
 
     /**
      * Adjust fully a given invoice item.
@@ -237,12 +239,14 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param invoiceId     invoice id
      * @param invoiceItemId invoice item id
      * @param effectiveDate the effective date for this adjustment invoice item (in the account timezone)
+     * @param description   the item description
      * @param context       the call context
      * @return the adjustment invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_ITEM_ADJUST)
-    public InvoiceItem insertInvoiceItemAdjustment(UUID accountId, UUID invoiceId, UUID invoiceItemId, LocalDate effectiveDate, CallContext context) throws InvoiceApiException;
+    public InvoiceItem insertInvoiceItemAdjustment(UUID accountId, UUID invoiceId, UUID invoiceItemId, LocalDate effectiveDate,
+                                                   String description, CallContext context) throws InvoiceApiException;
 
     /**
      * Adjust partially a given invoice item.
@@ -253,13 +257,14 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param effectiveDate the effective date for this adjustment invoice item (in the account timezone)
      * @param amount        the adjustment amount
      * @param currency      adjustment currency
+     * @param description   the item description
      * @param context       the call context
      * @return the adjustment invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_ITEM_ADJUST)
     public InvoiceItem insertInvoiceItemAdjustment(UUID accountId, UUID invoiceId, UUID invoiceItemId, LocalDate effectiveDate,
-                                                   BigDecimal amount, Currency currency, CallContext context) throws InvoiceApiException;
+                                                   BigDecimal amount, Currency currency, String description, CallContext context) throws InvoiceApiException;
 
     /**
      * Delete a CBA item.
