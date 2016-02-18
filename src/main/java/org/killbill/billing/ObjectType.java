@@ -36,6 +36,5 @@ public enum ObjectType {
     TAG,
     TAG_DEFINITION,
     TENANT,
-    TENANT_KVS,
-    INVOICE_PARENT_CHILD;
+    TENANT_KVS;
 }
