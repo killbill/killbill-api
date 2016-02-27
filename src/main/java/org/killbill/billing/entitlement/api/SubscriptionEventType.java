@@ -20,7 +20,7 @@ import org.killbill.billing.ObjectType;
 
 public enum SubscriptionEventType {
     /* Start the entitlement. We have a single START event today, which is in subscription_events */
-    START_ENTITLEMENT(ObjectType.SUBSCRIPTION_EVENT),
+    START_ENTITLEMENT(ObjectType.BLOCKING_STATES),
     /* Start the billing  */
     START_BILLING(ObjectType.SUBSCRIPTION_EVENT),
     /* Pause entitlement. User has no access to the resource until resumed/stopped */
