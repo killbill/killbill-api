@@ -49,7 +49,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context   the tenant context
      * @return all invoices
      */
-    public List<Invoice> getInvoicesByAccount(UUID accountId, TenantContext context);
+    public List<Invoice> getInvoicesByAccount(UUID accountId, boolean includesMigrated, TenantContext context);
 
     /**
      * Find invoices from a given day, for a given account.
@@ -294,7 +294,19 @@ public interface InvoiceUserApi extends KillbillApi {
      * Rebalance CBA for account which have credit and unpaid invoices-- only needed if system is configured to not rebalance automatically.
      *
      * @param accountId account id
-     * @param context   the callcontext
+     * @param context   the call context
      */
     public void consumeExstingCBAOnAccountWithUnpaidInvoices(final UUID accountId, final CallContext context);
+
+    /**
+     * @param accountId  account id
+     * @param targetDate maximum billing event day to consider (in the account timezone)
+     * @param items      items to be placed on the migration invoice
+     * @param context    call call context
+     * @return The UUID of the created invoice
+     */
+    @RequiresPermissions(INVOICE_CAN_TRIGGER_INVOICE)
+    public UUID createMigrationInvoice(UUID accountId, LocalDate targetDate, Iterable<InvoiceItem> items, CallContext context);
+
+
 }
