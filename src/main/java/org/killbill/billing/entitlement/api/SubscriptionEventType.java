@@ -19,7 +19,7 @@ package org.killbill.billing.entitlement.api;
 import org.killbill.billing.ObjectType;
 
 public enum SubscriptionEventType {
-    /* Start the entitlement. We have a single START event today, which is in subscription_events */
+    /* Start the entitlement */
     START_ENTITLEMENT(ObjectType.BLOCKING_STATES),
     /* Start the billing  */
     START_BILLING(ObjectType.SUBSCRIPTION_EVENT),
