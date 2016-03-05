@@ -299,14 +299,14 @@ public interface InvoiceUserApi extends KillbillApi {
     public void consumeExstingCBAOnAccountWithUnpaidInvoices(final UUID accountId, final CallContext context);
 
     /**
-     * @param accountId  account id
-     * @param targetDate maximum billing event day to consider (in the account timezone)
-     * @param items      items to be placed on the migration invoice
-     * @param context    call call context
+     * @param accountId   account id
+     * @param invoiceDate maximum billing event day to consider (in the account timezone)
+     * @param items       items to be placed on the migration invoice
+     * @param context     call call context
      * @return The UUID of the created invoice
      */
     @RequiresPermissions(INVOICE_CAN_TRIGGER_INVOICE)
-    public UUID createMigrationInvoice(UUID accountId, LocalDate targetDate, Iterable<InvoiceItem> items, CallContext context);
+    public UUID createMigrationInvoice(UUID accountId, LocalDate invoiceDate, Iterable<InvoiceItem> items, CallContext context);
 
 
 }
