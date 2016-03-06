@@ -1,3 +1,6 @@
+0.33
+    Add trackingId for SubscriptionUsageRecord to support usage API idempotency
+
 0.32
     Add support for pluginKey
 

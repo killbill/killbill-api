@@ -312,6 +312,13 @@ public enum ErrorCode {
     SECURITY_ROLE_ALREADY_EXISTS(40004, "The role %s already exists"),
     SECURITY_INVALID_PERMISSIONS(40005, "The permission %s is invalid"),
 
+    /*
+     *
+     * Range 50000: USAGES
+     *
+     */
+    USAGE_RECORD_TRACKING_ID_ALREADY_EXISTS(50000, "A usage record with tracking ID %s already exists"),
+
     __UNKNOWN_ERROR_CODE(-1, "Unknown ErrorCode");
 
     private final int code;
