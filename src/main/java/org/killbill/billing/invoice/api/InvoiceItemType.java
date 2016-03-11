@@ -37,5 +37,7 @@ public enum InvoiceItemType {
     // Usage item
     USAGE,
     // Tax item
-    TAX
+    TAX,
+    // Parent summary item
+    PARENT_SUMMARY
 }
