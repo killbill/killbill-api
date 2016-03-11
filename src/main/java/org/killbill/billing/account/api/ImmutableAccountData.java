@@ -1,7 +1,7 @@
 /*
  * Copyright 2010-2013 Ning, Inc.
- * Copyright 2015 Groupon, Inc
- * Copyright 2015 The Billing Project, LLC
+ * Copyright 2015-2016 Groupon, Inc
+ * Copyright 2015-2016 The Billing Project, LLC
  *
  * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
@@ -20,6 +20,7 @@ package org.killbill.billing.account.api;
 
 import java.util.UUID;
 
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.killbill.billing.catalog.api.Currency;
 
@@ -34,9 +35,22 @@ public interface ImmutableAccountData {
 
     Currency getCurrency();
 
+    /**
+     * @return the account timezone, as specified at creation time
+     */
     DateTimeZone getTimeZone();
 
     UUID getParentAccountId();
 
     Boolean isPaymentDelegatedToParent();
+
+    /**
+     * @return the account timezone used by the system for dates manipulation (ignoring changes like DST)
+     */
+    DateTimeZone getFixedOffsetTimeZone();
+
+    /**
+     * @return the account reference time
+     */
+    DateTime getReferenceTime();
 }

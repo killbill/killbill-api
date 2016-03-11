@@ -20,17 +20,27 @@ import java.util.List;
 import java.util.UUID;
 
 import org.killbill.billing.KillbillApi;
+import org.killbill.billing.OrderingType;
+import org.killbill.billing.payment.api.PluginProperty;
 import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.entity.Pagination;
 
 import static org.killbill.billing.security.Permission.ENTITLEMENT_CAN_CREATE;
+import static org.killbill.billing.security.Permission.ENTITLEMENT_CAN_PAUSE_RESUME;
 
 /**
  * API to manage the retrieval of <code>Subscription</code> information.
  */
 public interface SubscriptionApi extends KillbillApi {
+
+    int PAST_EVENTS = 0x1;
+    int PRESENT_EVENTS = 0x2;
+    int FUTURE_EVENTS = 0x4;
+    int PAST_OR_PRESENT_EVENTS = (PAST_EVENTS | PRESENT_EVENTS);
+    int FUTURE_OR_PRESENT_EVENTS = (PRESENT_EVENTS | FUTURE_EVENTS);
+    int ALL_EVENTS = (PAST_OR_PRESENT_EVENTS | FUTURE_OR_PRESENT_EVENTS);
 
     /**
      * Retrieves a <code>Subscription</code> For the entitlementId
@@ -60,7 +70,7 @@ public interface SubscriptionApi extends KillbillApi {
      * @param context        : the call context
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
-    public void updateExternalKey(UUID bundleId, String newExternalKey, CallContext context);
+    public void updateExternalKey(UUID bundleId, String newExternalKey, CallContext context) throws EntitlementApiException;
 
     /**
      * Retrieves all the <code>SubscriptionBundle</code> for a given account and matching an external key.
@@ -121,4 +131,34 @@ public interface SubscriptionApi extends KillbillApi {
      * @return the list of <code>SubscriptionBundle</code> matching this search key for that tenant
      */
     public Pagination<SubscriptionBundle> searchSubscriptionBundles(String searchKey, Long offset, Long limit, TenantContext context);
+
+    /**
+     * Add a <code>BlockingState</code>
+     * <p/>
+     * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
+     *
+     * @param blockingState the blockingState to be added
+     * @param properties    plugin specific properties
+     * @param context       the context
+     * @throws EntitlementApiException if the entitlement was not in <tt>ACTIVE</tt> state
+     */
+    @RequiresPermissions(ENTITLEMENT_CAN_PAUSE_RESUME)
+    public void addBlockingState(BlockingState blockingState, Iterable<PluginProperty> properties, CallContext context)
+            throws EntitlementApiException;
+
+    /**
+     *
+     * @param accountId     the account id
+     * @param typeFilter    the list of <code>BlockingStateType</code> filters. All types are returned if null or empty.
+     * @param svcsFilter    the list of service filters. All services are returned if null or empty.
+     * @param orderingType  the ordering direction, that is <code>ASCENDING</code> or <code>DESCENDING</code>
+     * @param timeFilter    the filtering types constructed as a bitwise operation
+     * @param context       the user context
+     *
+     * @throws EntitlementApiException if the account is invalid.
+     * @return the ordered list of  <code>BlockingState</code>
+     */
+    public Iterable<BlockingState> getBlockingStates(UUID accountId, List<BlockingStateType> typeFilter, List<String> svcsFilter, OrderingType orderingType, int timeFilter, TenantContext context)
+            throws EntitlementApiException;
+
 }

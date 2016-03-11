@@ -76,6 +76,9 @@ public enum ErrorCode {
     /* Transfer */
     SUB_TRANSFER_INVALID_EFF_DATE(1106, "Invalid effective date for transfer: %s"),
 
+    /* Transfer */
+    SUB_BLOCKING_STATE_INVALID_ARG(1107, "Invalid arguments for adding a blocking state : %s"),
+
     /*
     *
     * Range 2000 : CATALOG

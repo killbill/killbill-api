@@ -63,6 +63,8 @@ public interface Entitlement extends Entity {
      * Possible states of an <code>Entitlement</code>
      */
     public enum EntitlementState {
+        /* The entitlement was created in the future */
+        PENDING,
         /* The entitlement was created in that initial state */
         ACTIVE,
         /* The system blocked the entitlement */
@@ -284,33 +286,4 @@ public interface Entitlement extends Entity {
                                                        final BillingActionPolicy billingPolicy, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
-    /**
-     * Pauses an <code>Entitlement</code> until it gets resumed.
-     * After this operation, the existing object becomes stale.
-     * <p/>
-     * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
-     *
-     * @param serviceName   the service name of who is blocking
-     * @param effectiveDate the date at which the entitlement should be paused
-     * @param context       the context
-     * @return the new <code>Entitlement</code> after the operation was performed
-     * @throws EntitlementApiException if the entitlement was not in <tt>ACTIVE</tt> state
-    public Entitlement block(String serviceName, final LocalDate effectiveDate, final CallContext context)
-    throws EntitlementApiException;
-     */
-
-    /**
-     * Resumes an <code>Entitlement</code> that was paused
-     * After this operation, the existing object becomes stale.
-     * <p/>
-     * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
-     *
-     * @param serviceName   the service name of who is blocking
-     * @param effectiveDate the date at which the entitlement should be resumed
-     * @param context       the context
-     * @return the new <code>Entitlement</code> after the operation was performed
-     * @throws EntitlementApiException
-    public Entitlement unblock(String serviceName, final LocalDate effectiveDate, final CallContext context)
-    throws EntitlementApiException;
-     */
 }
