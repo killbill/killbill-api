@@ -96,6 +96,8 @@ public enum ErrorCode {
     CAT_PRICE_VALUE_NULL_FOR_CURRENCY(2011, "The value for the currency '%s' is NULL. This plan cannot be bought in this currency."),
     CAT_NULL_PRICE_LIST_NAME(2012, "Price list name was null"),
     CAT_PRICE_LIST_NOT_FOUND(2013, "Could not find a pricelist with name '%s'"),
+    CAT_UNDEFINED_DURATION(2014, "Duration is not unlimited or invalid '%s'"),
+
     /*
      * Plans
      */
@@ -122,10 +124,11 @@ public enum ErrorCode {
      * Billing Alignment
      */
     CAT_INVALID_BILLING_ALIGNMENT(2060, "Invalid billing alignment '%s'"),
+
     /*
      * Overdue
      */
-    CAT_NO_SUCH_OVEDUE_STATE(2070, "No such overdue state '%s'"),
+    CAT_NO_SUCH_OVERDUE_STATE(2070, "No such overdue state '%s'"),
     CAT_MISSING_CLEAR_STATE(2071, "Missing a clear state"),
 
     CAT_NOT_TOP_UP_BLOCK(2075, "Block for phase %s defines a TOP_UP property for a non TOP_UP block"),
