@@ -32,6 +32,8 @@ public interface TenantKV extends Entity {
         CATALOG(false),
         // Overdue Configuration Key
         OVERDUE_CONFIG(true),
+        // Per Tenant Configuration Key
+        PER_TENANT_CONFIG(true),
         // Invoice Translation Key Prefix
         INVOICE_TRANSLATION_(true),
         // Catalog Translation Key Prefix
