@@ -220,7 +220,7 @@ public enum ErrorCode {
      * Range 5000: Overdue system
      *
      */
-    OVERDUE_CAT_ERROR_ENCOUNTERED(5001, "Catalog error encountered on Overdueable: id='%s', type='%s'"),
+    OVERDUE_CAT_ERROR_ENCOUNTERED(5001, "Catalog error encountered for account: id='%s'"),
     OVERDUE_NO_REEVALUATION_INTERVAL(5003, "No valid reevaluation interval for state (name: %s)"),
 
     OVERDUE_INVALID_FOR_TENANT(5010, "Invalid overdue config for tenant : %s"),
