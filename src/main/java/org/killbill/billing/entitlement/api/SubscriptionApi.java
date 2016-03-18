@@ -19,6 +19,7 @@ package org.killbill.billing.entitlement.api;
 import java.util.List;
 import java.util.UUID;
 
+import org.joda.time.LocalDate;
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.OrderingType;
 import org.killbill.billing.payment.api.PluginProperty;
@@ -138,12 +139,13 @@ public interface SubscriptionApi extends KillbillApi {
      * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
      *
      * @param blockingState the blockingState to be added
+     * @param effectiveDate the date in the account time zone at which the operation should be effective, if null this is interpreted to be immediate
      * @param properties    plugin specific properties
      * @param context       the context
      * @throws EntitlementApiException if the entitlement was not in <tt>ACTIVE</tt> state
      */
     @RequiresPermissions(ENTITLEMENT_CAN_PAUSE_RESUME)
-    public void addBlockingState(BlockingState blockingState, Iterable<PluginProperty> properties, CallContext context)
+    public void addBlockingState(BlockingState blockingState, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
     /**
