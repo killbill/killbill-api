@@ -25,15 +25,22 @@ public class SubscriptionUsageRecord {
 
     private final UUID subscriptionId;
 
+    private final String trackingId;
+
     private final List<UnitUsageRecord> unitUsageRecord;
 
-    public SubscriptionUsageRecord(final UUID subscriptionId, final List<UnitUsageRecord> unitUsageRecord) {
+    public SubscriptionUsageRecord(final UUID subscriptionId, final String trackingId, final List<UnitUsageRecord> unitUsageRecord) {
         this.subscriptionId = subscriptionId;
+        this.trackingId = trackingId;
         this.unitUsageRecord = unitUsageRecord;
     }
 
     public UUID getSubscriptionId() {
         return subscriptionId;
+    }
+
+    public String getTrackingId() {
+        return trackingId;
     }
 
     public List<UnitUsageRecord> getUnitUsageRecord() {

@@ -37,7 +37,7 @@ public interface UsageUserApi extends KillbillApi {
      * @param context tenant context
      */
     @RequiresPermissions(USAGE_CAN_RECORD)
-    public void recordRolledUpUsage(SubscriptionUsageRecord usage, CallContext context);
+    public void recordRolledUpUsage(SubscriptionUsageRecord usage, CallContext context) throws UsageApiException;
 
     /**
      * Get usage information for a given subscription.
