@@ -200,6 +200,7 @@ public enum ErrorCode {
     INVOICE_ITEM_ADJUSTMENT_AMOUNT_INVALID(4020, "Invoice adjustment amount %s should be lower than %s"),
     INVOICE_ITEM_ADJUSTMENT_ITEM_INVALID(4021, "Invoice item %s cannot be adjusted"),
     INVOICE_ITEM_TYPE_INVALID(4022, "Invalid invoice item type %s"),
+    INVOICE_ITEMS_ADJUSTMENT_MISSING(4023, "Missing invoice item adjustements during payment refund"),
 
     /*
      *
