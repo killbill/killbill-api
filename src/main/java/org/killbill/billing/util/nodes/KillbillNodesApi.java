@@ -34,6 +34,12 @@ public interface KillbillNodesApi extends KillbillApi {
     public Iterable<NodeInfo> getNodesInfo();
 
     /**
+     *
+     * @return the current {@code NodeInfo}
+     */
+    public NodeInfo getCurrentNodeInfo();
+
+    /**
      * The api will trigger a command that will be issued on all active cluster nodes
      *
      * @param nodeCommand the command to be triggered across all killbill nodes
