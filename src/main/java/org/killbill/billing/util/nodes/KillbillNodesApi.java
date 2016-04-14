@@ -1,7 +1,7 @@
 /*
- * Copyright 2010-2013 Ning, Inc.
- * Copyright 2015 Groupon, Inc
- * Copyright 2015 The Billing Project, LLC
+ * Copyright 2010-2014 Ning, Inc.
+ * Copyright 2014-2016 Groupon, Inc
+ * Copyright 2014-2016 The Billing Project, LLC
  *
  * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
@@ -48,9 +48,10 @@ public interface KillbillNodesApi extends KillbillApi {
     public void triggerNodeCommand(NodeCommand nodeCommand, boolean localNodeOnly);
 
     /**
-     * The api is used to notify core killbill system about changes in the plugins (new installed plugin, started, stopped,..)
+     * The api is used to notify core killbill system about changes in the plugins (new installed plugin, started, stopped, ...)
      *
-     * @param plugin the info associated to the plugin
+     * @param plugin        the info associated to the changed plugin
+     * @param latestPlugins the info associated to all plugins
      */
-    public void notifyPluginChanged(PluginInfo plugin);
+    public void notifyPluginChanged(PluginInfo plugin, Iterable<PluginInfo> latestPlugins);
 }
