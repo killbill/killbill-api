@@ -255,6 +255,8 @@ public enum ErrorCode {
     PAYMENT_PLUGIN_GET_PAYMENT_INFO(7102, "Failed to retrieve payment plugin info for payment %s: %s"),
     PAYMENT_PLUGIN_SEARCH_PAYMENT_METHODS(7103, "Error while searching payment methods in plugin %s for search key %s"),
     PAYMENT_PLUGIN_SEARCH_PAYMENTS(7105, "Error while searching payments in plugin %s for search key %s"),
+    PAYMENT_PLUGIN_API_ABORTED(7106, "Control plugin aborted call: %s"),
+
     PAYMENT_PLUGIN_EXCEPTION(7199, "Plugin exception %s"),
 
     /*
@@ -263,7 +265,7 @@ public enum ErrorCode {
     */
     ENT_ALREADY_BLOCKED(8001, "The blockable entity %s is already blocked"),
     ENT_INVALID_REQUESTED_DATE(8002, "Requested date %s for entitlement operation is invalid"),
-    ENT_PLUGIN_API_ABORTED(8003, "Entitlement plugin aborted call"),
+    ENT_PLUGIN_API_ABORTED(8003, "Entitlement plugin aborted call: %s"),
 
     /*
    *
