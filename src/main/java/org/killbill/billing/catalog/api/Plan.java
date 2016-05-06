@@ -75,7 +75,7 @@ public interface Plan {
     /**
      * @return the date for which existing subscriptions become effective with that {@code Plan}
      */
-    public Date getEffectiveDateForExistingSubscriptons();
+    public Date getEffectiveDateForExistingSubscriptions();
 
     /**
      * @param name the name of the {@code PlanPhase}

@@ -98,6 +98,8 @@ public enum ErrorCode {
     CAT_PRICE_VALUE_NULL_FOR_CURRENCY(2011, "The value for the currency '%s' is NULL. This plan cannot be bought in this currency."),
     CAT_NULL_PRICE_LIST_NAME(2012, "Price list name was null"),
     CAT_PRICE_LIST_NOT_FOUND(2013, "Could not find a pricelist with name '%s'"),
+    CAT_UNDEFINED_DURATION(2014, "Duration is not unlimited or invalid '%s'"),
+
     /*
      * Plans
      */
@@ -124,10 +126,11 @@ public enum ErrorCode {
      * Billing Alignment
      */
     CAT_INVALID_BILLING_ALIGNMENT(2060, "Invalid billing alignment '%s'"),
+
     /*
      * Overdue
      */
-    CAT_NO_SUCH_OVEDUE_STATE(2070, "No such overdue state '%s'"),
+    CAT_NO_SUCH_OVERDUE_STATE(2070, "No such overdue state '%s'"),
     CAT_MISSING_CLEAR_STATE(2071, "Missing a clear state"),
 
     CAT_NOT_TOP_UP_BLOCK(2075, "Block for phase %s defines a TOP_UP property for a non TOP_UP block"),
@@ -200,7 +203,8 @@ public enum ErrorCode {
     INVOICE_ITEM_ADJUSTMENT_ITEM_INVALID(4021, "Invoice item %s cannot be adjusted"),
     INVOICE_ITEM_TYPE_INVALID(4022, "Invalid invoice item type %s"),
     INVOICE_INVALID_STATUS(4023, "The invoice status %s is invalid for invoice id %s. Current status is %s"),
-    INVOICE_ALREADY_COMMITTED(4023, "Cannot add credit or external charge for invoice id %s because it is already in " + InvoiceStatus.COMMITTED + " status"),
+    INVOICE_ALREADY_COMMITTED(4024, "Cannot add credit or external charge for invoice id %s because it is already in " + InvoiceStatus.COMMITTED + " status"),
+    INVOICE_ITEMS_ADJUSTMENT_MISSING(4025, "Missing invoice item adjustements during payment refund"),
 
     /*
      *
@@ -221,7 +225,7 @@ public enum ErrorCode {
      * Range 5000: Overdue system
      *
      */
-    OVERDUE_CAT_ERROR_ENCOUNTERED(5001, "Catalog error encountered on Overdueable: id='%s', type='%s'"),
+    OVERDUE_CAT_ERROR_ENCOUNTERED(5001, "Catalog error encountered for account: id='%s'"),
     OVERDUE_NO_REEVALUATION_INTERVAL(5003, "No valid reevaluation interval for state (name: %s)"),
 
     OVERDUE_INVALID_FOR_TENANT(5010, "Invalid overdue config for tenant : %s"),
@@ -262,6 +266,8 @@ public enum ErrorCode {
     PAYMENT_PLUGIN_GET_PAYMENT_INFO(7102, "Failed to retrieve payment plugin info for payment %s: %s"),
     PAYMENT_PLUGIN_SEARCH_PAYMENT_METHODS(7103, "Error while searching payment methods in plugin %s for search key %s"),
     PAYMENT_PLUGIN_SEARCH_PAYMENTS(7105, "Error while searching payments in plugin %s for search key %s"),
+    PAYMENT_PLUGIN_API_ABORTED(7106, "Control plugin aborted call: %s"),
+
     PAYMENT_PLUGIN_EXCEPTION(7199, "Plugin exception %s"),
 
     /*
@@ -270,7 +276,7 @@ public enum ErrorCode {
     */
     ENT_ALREADY_BLOCKED(8001, "The blockable entity %s is already blocked"),
     ENT_INVALID_REQUESTED_DATE(8002, "Requested date %s for entitlement operation is invalid"),
-    ENT_PLUGIN_API_ABORTED(8003, "Entitlement plugin aborted call"),
+    ENT_PLUGIN_API_ABORTED(8003, "Entitlement plugin aborted call: %s"),
 
     /*
    *
@@ -315,6 +321,13 @@ public enum ErrorCode {
     SECURITY_INVALID_ROLE(40003, "The role %s does not exist or has been inactivated"),
     SECURITY_ROLE_ALREADY_EXISTS(40004, "The role %s already exists"),
     SECURITY_INVALID_PERMISSIONS(40005, "The permission %s is invalid"),
+
+    /*
+     *
+     * Range 50000: USAGES
+     *
+     */
+    USAGE_RECORD_TRACKING_ID_ALREADY_EXISTS(50000, "A usage record with tracking ID %s already exists"),
 
     __UNKNOWN_ERROR_CODE(-1, "Unknown ErrorCode");
 
