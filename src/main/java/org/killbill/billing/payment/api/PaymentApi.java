@@ -320,6 +320,33 @@ public interface PaymentApi extends KillbillApi {
     public Payment createChargebackWithPaymentControl(Account account, UUID paymentId, BigDecimal amount, Currency currency, String paymentTransactionExternalKey, final PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
 
     /**
+     * Reverse a chargeback
+     *
+     * @param account                       the account
+     * @param paymentId                     the payment id
+     * @param paymentTransactionExternalKey the external key of the chargeback to reverse
+     * @param context                       the call context
+     * @return the payment
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
+    public Payment createChargebackReversal(Account account, UUID paymentId, String paymentTransactionExternalKey, CallContext context) throws PaymentApiException;
+
+    /**
+     * Reverse a chargeback
+     *
+     * @param account                       the account
+     * @param paymentId                     the payment id
+     * @param paymentTransactionExternalKey the external key of the chargeback to reverse
+     * @param paymentOptions                options to control payment behavior
+     * @param context                       the call context
+     * @return the payment
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
+    public Payment createChargebackReversalWithPaymentControl(Account account, UUID paymentId, String paymentTransactionExternalKey, PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
+
+    /**
      * Transition a currently PENDING transaction into either a SUCCESS or a FAILURE
      *
      * @param account                    the account
