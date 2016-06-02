@@ -298,11 +298,12 @@ public interface Entitlement extends Entity {
 
     /**
      *
-     * @param bcd     the new BCD for that subscription
-     * @param context the context
+     * @param bcd               the new BCD for that subscription
+     * @param effectiveFromDate date after which that BCD change becomes active
+     * @param context           the context
      * @throws EntitlementApiException
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
-    public void updateBCD(final int bcd, final CallContext context) throws EntitlementApiException;
+    public void updateBCD(final int bcd, final LocalDate effectiveFromDate, final CallContext context) throws EntitlementApiException;
 
 }
