@@ -205,6 +205,7 @@ public enum ErrorCode {
     INVOICE_INVALID_STATUS(4023, "The invoice status %s is invalid for invoice id %s. Current status is %s"),
     INVOICE_ALREADY_COMMITTED(4024, "Cannot add credit or external charge for invoice id %s because it is already in " + InvoiceStatus.COMMITTED + " status"),
     INVOICE_ITEMS_ADJUSTMENT_MISSING(4025, "Missing invoice item adjustements during payment refund"),
+    INVOICE_MISSING_PARENT_INVOICE(4026, "Missing parent invoice for invoice id %s"),
 
     /*
      *
