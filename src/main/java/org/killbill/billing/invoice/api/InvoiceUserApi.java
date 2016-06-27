@@ -316,4 +316,13 @@ public interface InvoiceUserApi extends KillbillApi {
      */
     @RequiresPermissions(INVOICE_CAN_TRIGGER_INVOICE)
     public UUID createMigrationInvoice(UUID accountId, LocalDate invoiceDate, Iterable<InvoiceItem> items, CallContext context);
+
+    /**
+     * Move a given child credit to the parent level
+     *
+     * @param childAccountId child account id
+     * @param context the tenant context
+     * @throws InvoiceApiException
+     */
+    public void transferChildCreditToParent(UUID childAccountId, CallContext context) throws InvoiceApiException;
 }
