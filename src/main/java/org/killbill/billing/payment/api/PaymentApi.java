@@ -365,7 +365,7 @@ public interface PaymentApi extends KillbillApi {
      * @return the payment
      * @throws PaymentApiException
      */
-    public Payment getPayment(UUID paymentId, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
+    public Payment getPayment(UUID paymentId, boolean withPluginInfo, boolean withAttempts, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
     /**

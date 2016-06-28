@@ -84,4 +84,9 @@ public interface Payment extends Entity {
      * @return the list of attempts on that payment
      */
     List<PaymentTransaction> getTransactions();
+
+    /**
+     * @return the next Scheduled payment attempt
+     */
+    PaymentAttempt getNextScheduledPaymentAttempt();
 }

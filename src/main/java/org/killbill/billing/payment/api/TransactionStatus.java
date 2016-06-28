@@ -30,5 +30,7 @@ public enum TransactionStatus {
     /* The payment transaction did not go through, and plugin knows for sure that operation was not even attenpted (for e.g: connection error to gateway) */
     PLUGIN_FAILURE,
     /* Payment Subsystem is off */
-    PAYMENT_SYSTEM_OFF;
+    PAYMENT_SYSTEM_OFF,
+    /* Payment Scheduled when last Payment failed */
+    SCHEDULED;
 }
