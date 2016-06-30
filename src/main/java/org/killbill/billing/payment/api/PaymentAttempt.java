@@ -19,39 +19,63 @@ package org.killbill.billing.payment.api;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import org.joda.time.DateTime;
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.util.entity.Entity;
 
 public interface PaymentAttempt extends Entity {
 
     /**
-     * @return the id of the payment.
+     * @return the id of the account.
      */
-    UUID getPaymentId();
+    UUID getAccountId();
 
     /**
-     * @return the type of transaction
+     * @return the id of the payment method.
+     */
+    UUID getPaymentMethodId();
+
+    /**
+     * @return the external key of the payment.
+     */
+    String getPaymentExternalKey();
+
+    /**
+     * @return the id of the transaction.
+     */
+    UUID getTransactionId();
+
+    /**
+     * @return the external key of the transaction.
+     */
+    String getTransactionExternalKey();
+
+    /**
+     * @return the type of the transaction.
      */
     TransactionType getTransactionType();
 
     /**
-     * @return the amount
+     * @return the amount.
      */
     BigDecimal getAmount();
 
     /**
-     * @return the currency associated with that payment
+     * @return the currency.
      */
     Currency getCurrency();
 
     /**
-     * @return the status for that transaction
+     * @return the name of the plugin.
      */
-    TransactionStatus getTransactionStatus();
+    String getPluginName();
 
     /**
-     * @return the effective date of the payment
+     * @return the properties of the plugin.
      */
-    DateTime getEffectiveDate();
+    byte[] getPluginProperties();
+
+    /**
+     * @return the name of the state.
+     */
+    String getStateName();
 }
