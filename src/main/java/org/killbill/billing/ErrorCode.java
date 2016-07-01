@@ -154,6 +154,7 @@ public enum ErrorCode {
     ACCOUNT_CREATION_FAILED(3006, "Account creation failed."),
     ACCOUNT_UPDATE_FAILED(3007, "Account update failed."),
     ACCOUNT_DOES_NOT_EXIST_FOR_RECORD_ID(3008, "Account does not exist for recordId %s"),
+    ACCOUNT_DOES_NOT_HAVE_PARENT_ACCOUNT(3009, "The Account %s does not have a Parent Account associated"),
 
     ACCOUNT_EMAIL_ALREADY_EXISTS(3500, "Account email already exists %s"),
 
@@ -205,6 +206,8 @@ public enum ErrorCode {
     INVOICE_INVALID_STATUS(4023, "The invoice status %s is invalid for invoice id %s. Current status is %s"),
     INVOICE_ALREADY_COMMITTED(4024, "Cannot add credit or external charge for invoice id %s because it is already in " + InvoiceStatus.COMMITTED + " status"),
     INVOICE_ITEMS_ADJUSTMENT_MISSING(4025, "Missing invoice item adjustements during payment refund"),
+    INVOICE_MISSING_PARENT_INVOICE(4026, "Missing parent invoice for invoice id %s"),
+    CHILD_ACCOUNT_MISSING_CREDIT(4027, "Child account %s does not have credit"),
 
     /*
      *
