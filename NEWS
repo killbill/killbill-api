@@ -1,3 +1,6 @@
+0.35
+    0.33.1 merge for 0.17.x
+
 0.34
     Add EntitlementState.PENDING
     Remove requestedDate from SubscriptionEvent
