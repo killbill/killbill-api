@@ -35,6 +35,7 @@ import org.killbill.billing.util.entity.Entity;
 
 import static org.killbill.billing.security.Permission.ENTITLEMENT_CAN_CHANGE_PLAN;
 import static org.killbill.billing.security.Permission.ENTITLEMENT_CAN_CANCEL;
+import static org.killbill.billing.security.Permission.ENTITLEMENT_CAN_CREATE;
 
 /**
  * An Entitlement is created using the <code>EntitlementApi</code>
@@ -146,6 +147,15 @@ public interface Entitlement extends Entity {
      * @return the last active ProductCategory
      */
     public ProductCategory getLastActiveProductCategory();
+
+    /**
+     * The billCycleDay should be interpreted in the account timezone.
+     * The billCycleDay is used to determine when to bill a specific subscription
+     * <p/>
+     *
+     * @return the billCycleDay for that subscription
+     */
+    public Integer getBillCycleDayLocal();
 
     /**
      * Cancels the <code>Entitlement</code> at the specified date.
@@ -285,5 +295,15 @@ public interface Entitlement extends Entity {
     public Entitlement changePlanOverrideBillingPolicy(final String productName, final BillingPeriod billingPeriod, final String priceList, final List<PlanPhasePriceOverride> overrides, final LocalDate effectiveDate,
                                                        final BillingActionPolicy billingPolicy, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
+
+    /**
+     *
+     * @param bcd               the new BCD for that subscription
+     * @param effectiveFromDate date after which that BCD change becomes active
+     * @param context           the context
+     * @throws EntitlementApiException
+     */
+    @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
+    public void updateBCD(final int bcd, final LocalDate effectiveFromDate, final CallContext context) throws EntitlementApiException;
 
 }

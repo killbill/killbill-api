@@ -58,7 +58,7 @@ public enum ErrorCode {
     SUB_RECREATE_BAD_STATE(1041, "Subscription %s is in state %s: Failed to recreate"),
 
     /* Un-cancellation */
-    SUB_UNCANCEL_BAD_STATE(1070, "Subscription %s was not in a cancelled state: Failed to uncancel plan"),
+    SUB_UNCANCEL_BAD_STATE(1070, "Subscription (billing) %s is not in pending cancelled state: Failed to uncancel plan"),
 
     /* Fetch */
     SUB_GET_NO_BUNDLE_FOR_SUBSCRIPTION(1080, "Could not find a bundle for subscription %s"),
@@ -277,6 +277,7 @@ public enum ErrorCode {
     ENT_ALREADY_BLOCKED(8001, "The blockable entity %s is already blocked"),
     ENT_INVALID_REQUESTED_DATE(8002, "Requested date %s for entitlement operation is invalid"),
     ENT_PLUGIN_API_ABORTED(8003, "Entitlement plugin aborted call: %s"),
+    ENT_UNCANCEL_BAD_STATE(8004, "Subscription (entitlement) %s was not previously cancelled or is not in a pending cancelled state: Failed to uncancel plan"),
 
     /*
    *

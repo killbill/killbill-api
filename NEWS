@@ -1,5 +1,39 @@
+0.35
+    0.33.1 merge for 0.17.x
+
 0.34
+    Add EntitlementState.PENDING
+    Remove requestedDate from SubscriptionEvent
+    Add Plan.getPriceList
+    Add ErrorCode.SUB_BLOCKING_STATE_INVALID_ARG
+    Remove Entitlement.block and Entitlement.unblock
+    Add SubscriptionApi.addBlockingState
+    Add SubscriptionApi.getBlockingStates
+    Add description for credit and external charge APIs
+    Add ImmutableAccountData.getFixedOffsetTimeZone and ImmutableAccountData.getReferenceTime
+    Switch to LocalDate in DryRunArguments
+    Replace effectiveDate with entitlementEffectiveDate, billingEffectiveDate in subscription create apis
+    Add isMigrated parameter for subscription creation
+    Add includesMigrated parameter to InvoiceUserApi.getInvoicesByAccount
+    Add InvoiceUserApi.createMigrationInvoice
+    Add Duration.addToLocalDate
     Add trackingId for SubscriptionUsageRecord to support usage API idempotency
+    Add ErrorCode.CAT_UNDEFINED_DURATION
+    Rename ErrorCode.CAT_NO_SUCH_OVEDUE_STATE to ErrorCode.CAT_NO_SUCH_OVERDUE_STATE
+    Add TenantKey.PER_TENANT_CONFIG
+    Remove EntitlementApi.setBlockingState and EntitlementApi.getBlockingStatesForServiceAndType
+    Add OverdueApi.getOverdueStateFor
+    Add ErrorCode.INVOICE_ITEMS_ADJUSTMENT_MISSING
+    Add KillbillNodesApi.getCurrentNodeInfo
+    Rename Plan.getEffectiveDateForExistingSubscriptons to Plan.getEffectiveDateForExistingSubscriptions
+    Add new BillingPeriods
+    Add OSGIKillbill.getAdminPaymentApi
+    Add PaymentApi.createChargebackReversal and PaymentApi.createChargebackReversalWithPaymentControl
+    Add Entitlement.getBillCycleDayLocal and Entitlement.updateBCD
+    Add ErrorCode.ENT_UNCANCEL_BAD_STATE
+
+0.33.1
+    Introduce TenantKey.PLUGIN_PAYMENT_STATE_MACHINE_
 
 0.33
     Add new ErrorCode
