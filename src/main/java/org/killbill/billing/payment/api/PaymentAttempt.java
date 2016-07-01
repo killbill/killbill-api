@@ -17,6 +17,7 @@
 package org.killbill.billing.payment.api;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 import org.killbill.billing.catalog.api.Currency;
@@ -72,7 +73,7 @@ public interface PaymentAttempt extends Entity {
     /**
      * @return the properties of the plugin.
      */
-    byte[] getPluginProperties();
+    List<PluginProperty> getPluginProperties();
 
     /**
      * @return the name of the state.
