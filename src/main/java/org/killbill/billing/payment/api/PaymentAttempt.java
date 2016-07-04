@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+import org.joda.time.DateTime;
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.util.entity.Entity;
 
@@ -56,6 +57,16 @@ public interface PaymentAttempt extends Entity {
     TransactionType getTransactionType();
 
     /**
+     * @return the effective date.
+     */
+    DateTime getEffectiveDate();
+
+    /**
+     * @return the name of the state.
+     */
+    String getStateName();
+
+    /**
      * @return the amount.
      */
     BigDecimal getAmount();
@@ -75,8 +86,5 @@ public interface PaymentAttempt extends Entity {
      */
     List<PluginProperty> getPluginProperties();
 
-    /**
-     * @return the name of the state.
-     */
-    String getStateName();
+
 }
