@@ -123,6 +123,17 @@ public interface Catalog {
     public PriceList findPriceList(String name, DateTime requestedDate) throws CatalogApiException;
 
     /**
+     *
+     * @param planName                  the unique name of the plan
+     * @param requestedDate             specifies the state of the catalog for that date
+     * @param subscriptionStartDate     the startDate of the subscription
+     * @return
+     */
+    public PriceList findPriceListForPlan(final String planName,
+                                          final DateTime requestedDate,
+                                          final DateTime subscriptionStartDate) throws CatalogApiException;
+
+    /**
      * @param name                  the unique name for the {@code PlanPhase}
      * @param requestedDate         specifies the state of the catalog for that date
      * @param subscriptionStartDate the startDate of the subscription
