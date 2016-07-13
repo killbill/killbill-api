@@ -1,3 +1,6 @@
+0.38
+     Modify catalog apis to avoid circular dependencies
+
 0.37
     Add new ErrorCodes (PAYMENT_METHOD_DIFFERENT_ACCOUNT_ID, PAYMENT_DIFFERENT_ACCOUNT_ID, PAYMENT_TRANSACTION_DIFFERENT_ACCOUNT_ID)
 
