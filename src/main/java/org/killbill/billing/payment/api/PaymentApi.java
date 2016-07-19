@@ -584,7 +584,7 @@ public interface PaymentApi extends KillbillApi {
      */
     @RequiresPermissions(PAYMENT_METHOD_CAN_DELETE)
 
-    public void deletePaymentMethod(Account account, UUID paymentMethodId, boolean deleteDefaultPaymentMethodWithAutoPayOff, Iterable<PluginProperty> properties, CallContext context)
+    public void deletePaymentMethod(Account account, UUID paymentMethodId, boolean deleteDefaultPaymentMethodWithAutoPayOff, boolean forceDefaultPaymentMethodDeletion, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**
