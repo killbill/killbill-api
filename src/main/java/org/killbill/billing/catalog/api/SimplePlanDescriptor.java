@@ -28,17 +28,10 @@ public interface SimplePlanDescriptor {
     String getPlanId();
 
     /**
-     * Allows to group different plans together (e.g similar plans with different currencies)
-     *
-     * @return the group ID for the plan. If not provided, equals to {@code getPlanId}.
+     * 
+     * @return
      */
-    String getPlanGroupId();
-
-    /**
-     *
-     * @return the user friendly name of the plan (or the key in the catalog translation resource)
-     */
-    String getPlanName();
+    String getProductName();
 
     /**
      *
