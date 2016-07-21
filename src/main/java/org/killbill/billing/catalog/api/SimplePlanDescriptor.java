@@ -28,8 +28,8 @@ public interface SimplePlanDescriptor {
     String getPlanId();
 
     /**
-     * 
-     * @return
+     *
+     * @return the name {@Product} associated to this {@Plan}
      */
     String getProductName();
 
@@ -60,5 +60,5 @@ public interface SimplePlanDescriptor {
      *
      * @return thr trial period. Set to NO_BILLING_PERIOD if not trial.
      */
-    BillingPeriod getTrialPeriod();
+    TimeUnit getTrialTimeUnit();
 }

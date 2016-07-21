@@ -24,7 +24,7 @@ import org.joda.time.DateTime;
 /**
  * The interface {@code Plan}
  */
-public interface Plan {
+public interface Plan extends CatalogEntity {
 
     /**
      * @return an array of {@code PlanPhase}
@@ -41,11 +41,6 @@ public interface Plan {
      * @return the name of the {@PriceList} in which that {@code Plan} is defined
      */
    public String getPriceListName();
-
-    /**
-     * @return the name of the {@code Plan}
-     */
-    public String getName();
 
     /**
      * @return an iterator through the {@code PlanPhase}
