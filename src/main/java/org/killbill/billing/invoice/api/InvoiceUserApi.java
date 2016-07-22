@@ -325,4 +325,14 @@ public interface InvoiceUserApi extends KillbillApi {
      * @throws InvoiceApiException
      */
     public void transferChildCreditToParent(UUID childAccountId, CallContext context) throws InvoiceApiException;
+
+    /**
+     * Retrieve invoice items details associated to Parent SUMMARY invoice item
+     *
+     * @param parentInvoiceId the parent invoice id
+     * @param context the tenant context
+     * @return a list of invoice items associated with a parent invoice
+     * @throws InvoiceApiException if any unexpected error occurs
+     */
+    List<InvoiceItem> getInvoiceItemsByParentInvoice(UUID parentInvoiceId, final TenantContext context) throws InvoiceApiException;
 }
