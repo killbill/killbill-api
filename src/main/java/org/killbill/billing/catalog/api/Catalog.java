@@ -74,15 +74,13 @@ public interface Catalog {
     public Plan findPlan(String name, DateTime requestedDate) throws CatalogApiException;
 
     /**
-     * @param productName   the unique name for the {@code Product}
-     * @param billingPeriod the unique name for the {@code BillingPeriod}
-     * @param priceListName the unique name for the {@code PriceList}
+     * @param spec          the specification for the {@code Plan} to be used
      * @param overrides     the price override for each phase and for a specific currency
      * @param requestedDate specifies the state of the catalog for that date
      * @return the {@code Plan}
      * @throws CatalogApiException if {@code Plan} does not exist
      */
-    public Plan createOrFindPlan(String productName, BillingPeriod billingPeriod, String priceListName, PlanPhasePriceOverridesWithCallContext overrides,
+    public Plan createOrFindPlan(PlanSpecifier spec, PlanPhasePriceOverridesWithCallContext overrides,
                                  DateTime requestedDate) throws CatalogApiException;
 
     /**
@@ -95,15 +93,13 @@ public interface Catalog {
     public Plan findPlan(String name, DateTime requestedDate, DateTime subscriptionStartDate) throws CatalogApiException;
 
     /**
-     * @param productName   the unique name for the {@code Product}
-     * @param billingPeriod the unique name for the {@code BillingPeriod}
-     * @param priceListName the unique name for the {@code PriceList}
+     * @param spec          the specification for the {@code Plan} to be used
      * @param overrides     the price override for each phase and for a specific currency
      * @param requestedDate specifies the state of the catalog for that date
      * @return the {@code Plan}
      * @throws CatalogApiException if {@code Plan} does not exist
      */
-    public Plan createOrFindPlan(String productName, BillingPeriod billingPeriod, String priceListName, PlanPhasePriceOverridesWithCallContext overrides,
+    public Plan createOrFindPlan(PlanSpecifier spec, PlanPhasePriceOverridesWithCallContext overrides,
                                  DateTime requestedDate, DateTime subscriptionStartDate) throws CatalogApiException;
 
     /**

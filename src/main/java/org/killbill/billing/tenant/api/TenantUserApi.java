@@ -43,6 +43,9 @@ public interface TenantUserApi extends KillbillApi {
     @RequiresPermissions(TENANT_KEYS_CAN_ADD)
     public void addTenantKeyValue(final String key, final String value, final CallContext context) throws TenantApiException;
 
+    @RequiresPermissions(TENANT_KEYS_CAN_ADD)
+    public void updateTenantKeyValue(final String key, final String value, final CallContext context) throws TenantApiException;
+
     @RequiresPermissions(TENANT_KEYS_CAN_DELETE)
     public void deleteTenantKey(final String key, final CallContext context) throws TenantApiException;
 }

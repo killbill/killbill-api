@@ -21,7 +21,7 @@ package org.killbill.billing.catalog.api;
  *
  * @see org.killbill.billing.catalog.api.Plan
  */
-public interface PlanPhase {
+public interface PlanPhase extends CatalogEntity {
 
     /**
      * @return the {@code Fixed} section
@@ -37,11 +37,6 @@ public interface PlanPhase {
      * @return the {@code Usage} section
      */
     public Usage[] getUsages();
-
-    /**
-     * @return the unique name for that {@code Phase}
-     */
-    public String getName();
 
     /**
      * @return the duration of that {@code PlanPhase}

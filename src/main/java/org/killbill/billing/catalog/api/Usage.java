@@ -16,12 +16,8 @@
 
 package org.killbill.billing.catalog.api;
 
-public interface Usage {
+public interface Usage extends CatalogEntity {
 
-    /**
-     * @return the name of the usage section
-     */
-    public String getName();
 
     /**
      * @return the {@code BillingMode}

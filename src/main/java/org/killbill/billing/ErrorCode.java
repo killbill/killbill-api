@@ -122,10 +122,13 @@ public enum ErrorCode {
     CAT_NO_CATALOG_FOR_GIVEN_DATE(2050, "There is no catalog version that applies for the given date '%s'"),
     CAT_CATALOG_NAME_MISMATCH(2052, "The catalog name '%s' does not match the name of the catalog we are trying to add '%s'"),
     CAT_CATALOG_RECURRING_MODE_MISMATCH(2053, "The catalog recurring billing mode '%s' does not match the one of the catalog we are trying to add '%s'"),
+
     /*
-     * Billing Alignment
+     * Catalog Update (SimplePlan)
      */
-    CAT_INVALID_BILLING_ALIGNMENT(2060, "Invalid billing alignment '%s'"),
+    CAT_INVALID_SIMPLE_PLAN_DESCRIPTOR(2060, "Invalid simple plan descriptor '%s'"),
+    CAT_FAILED_SIMPLE_PLAN_VALIDATION(2060, "Failed to validate simple Plan '%s' against descriptor '%s'"),
+
 
     /*
      * Overdue

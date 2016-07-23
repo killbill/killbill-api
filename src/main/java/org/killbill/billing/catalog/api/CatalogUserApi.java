@@ -16,6 +16,7 @@
 
 package org.killbill.billing.catalog.api;
 
+import org.joda.time.DateTime;
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
@@ -53,4 +54,18 @@ public interface CatalogUserApi extends KillbillApi {
      */
     @RequiresPermissions(CATALOG_CAN_UPLOAD)
     void uploadCatalog(String catalogXML, CallContext context) throws CatalogApiException;
+
+    /**
+     *
+     * Allows to add plan definition in existing per-tenant catalog. The simplicity of the api
+     * limits the types of plans that can be added (recurring evergreen plans defined for one currency
+     * with or without a trial)
+     *
+     * @param planDescriptor
+     * @param requestedDate
+     * @param context
+     * @throws CatalogApiException
+     */
+    @RequiresPermissions(CATALOG_CAN_UPLOAD)
+    void addSimplePlan(SimplePlanDescriptor planDescriptor, DateTime requestedDate, CallContext context) throws CatalogApiException;
 }
