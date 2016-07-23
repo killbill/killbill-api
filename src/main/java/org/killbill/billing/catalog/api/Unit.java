@@ -16,8 +16,6 @@
 
 package org.killbill.billing.catalog.api;
 
-public interface Unit {
-
-    public abstract String getName();
+public interface Unit extends CatalogEntity {
 
 }
