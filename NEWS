@@ -1,3 +1,7 @@
+0.40
+    Add HA invoice apis
+    Catalog modification for ability to dynamically add simple plans
+
 0.39
     Updated PaymentApi methods with new attribute "withAttempts"
 
