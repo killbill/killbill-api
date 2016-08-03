@@ -18,6 +18,7 @@
 package org.killbill.billing.catalog.api;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public interface SimplePlanDescriptor {
 
@@ -32,6 +33,19 @@ public interface SimplePlanDescriptor {
      * @return the name {@Product} associated to this {@Plan}
      */
     String getProductName();
+
+
+    /**
+     *
+     * @return the product category
+     */
+    ProductCategory getProductCategory();
+
+    /**
+     *
+     * @return the list of BASE plans that have the AO configured as available
+     */
+    List<String> getAvailableBaseProducts();
 
     /**
      *
@@ -54,7 +68,7 @@ public interface SimplePlanDescriptor {
     /**
      * @return the length of the trial. Set to 0 if not trial.
      */
-    int getTrialLength();
+    Integer getTrialLength();
 
     /**
      *
