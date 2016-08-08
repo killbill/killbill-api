@@ -35,4 +35,6 @@ public interface OverdueCondition {
     public PaymentResponse [] getResponseForLastFailedPaymentIn();
 
     public ControlTagType getControlTagType();
+
+    public ControlTagType getExclusionControlTagType();
 }
