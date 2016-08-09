@@ -56,7 +56,16 @@ public interface CatalogUserApi extends KillbillApi {
     void uploadCatalog(String catalogXML, CallContext context) throws CatalogApiException;
 
     /**
+     * Creates a per-tenant default template catalog
      *
+     * @param effectiveDate  the effective date for this catalog
+     * @param callContext    the user context
+     * @throws CatalogApiException
+     */
+    @RequiresPermissions(CATALOG_CAN_UPLOAD)
+    void createDefaultEmptyCatalog(final DateTime effectiveDate, final CallContext callContext) throws CatalogApiException;
+
+    /**
      * Allows to add plan definition in existing per-tenant catalog. The simplicity of the api
      * limits the types of plans that can be added (recurring evergreen plans defined for one currency
      * with or without a trial)
