@@ -287,6 +287,28 @@ public interface PaymentApi extends KillbillApi {
                                 Iterable<PluginProperty> properties, PaymentOptions paymentOptions, CallContext context)
             throws PaymentApiException;
 
+    /**
+     * Cancel scheduled future payment retry
+     *
+     * @param paymentTransactionExternalKey       the key identifying the transaction
+     * @param context                             the call context
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
+    public void cancelScheduledPaymentTransaction(String paymentTransactionExternalKey, CallContext context)
+            throws PaymentApiException;
+
+    /**
+     * Cancel scheduled future payment retry
+     *
+     * @param paymentTransactionId       the id identifying the transaction
+     * @param context                    the call context
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
+    public void cancelScheduledPaymentTransaction(UUID paymentTransactionId, CallContext context)
+            throws PaymentApiException;
+
 
     /**
      * Record a chargeback
