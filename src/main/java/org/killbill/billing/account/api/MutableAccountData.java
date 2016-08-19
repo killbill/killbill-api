@@ -147,6 +147,13 @@ public interface MutableAccountData extends AccountData {
     public void setPhone(String phone);
 
     /**
+     * Sets the account notes
+     *
+     * @param notes
+     */
+    public void setNotes(String notes);
+
+    /**
      * Sets whether the account has been migrated or not
      *
      * @param isMigrated
