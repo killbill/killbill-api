@@ -21,10 +21,10 @@ import java.util.UUID;
 
 import org.joda.time.LocalDate;
 import org.killbill.billing.catalog.api.BillingActionPolicy;
-import org.killbill.billing.catalog.api.BillingPeriod;
 import org.killbill.billing.catalog.api.Plan;
 import org.killbill.billing.catalog.api.PlanPhase;
 import org.killbill.billing.catalog.api.PlanPhasePriceOverride;
+import org.killbill.billing.catalog.api.PlanSpecifier;
 import org.killbill.billing.catalog.api.PriceList;
 import org.killbill.billing.catalog.api.Product;
 import org.killbill.billing.catalog.api.ProductCategory;
@@ -33,8 +33,8 @@ import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.entity.Entity;
 
-import static org.killbill.billing.security.Permission.ENTITLEMENT_CAN_CHANGE_PLAN;
 import static org.killbill.billing.security.Permission.ENTITLEMENT_CAN_CANCEL;
+import static org.killbill.billing.security.Permission.ENTITLEMENT_CAN_CHANGE_PLAN;
 import static org.killbill.billing.security.Permission.ENTITLEMENT_CAN_CREATE;
 
 /**
@@ -241,17 +241,15 @@ public interface Entitlement extends Entity {
      * <p/>
      * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
      *
-     * @param productName   the new product name
-     * @param billingPeriod the new billing period
-     * @param priceList     the new priceList
-     * @param overrides     the price override for each phase and for a specific currency
-     * @param properties    plugin specific properties
-     * @param context       the context
+     * @param spec       the product specification for the change
+     * @param overrides  the price override for each phase and for a specific currency
+     * @param properties plugin specific properties
+     * @param context    the context
      * @return the new <code>Entitlement</code> after the change was performed
      * @throws EntitlementApiException if change failed
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CHANGE_PLAN)
-    public Entitlement changePlan(final String productName, final BillingPeriod billingPeriod, final String priceList, final List<PlanPhasePriceOverride> overrides, final Iterable<PluginProperty> properties, final CallContext context)
+    public Entitlement changePlan(final PlanSpecifier spec, final List<PlanPhasePriceOverride> overrides, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -260,9 +258,7 @@ public interface Entitlement extends Entity {
      * <p/>
      * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
      *
-     * @param productName   the new product name
-     * @param billingPeriod the new billing period
-     * @param priceList     the new priceList
+     * @param spec          the product specification for the change
      * @param overrides     the price override for each phase and for a specific currency
      * @param effectiveDate the date at which the entitlement should be changed
      * @param properties    plugin specific properties
@@ -271,7 +267,7 @@ public interface Entitlement extends Entity {
      * @throws EntitlementApiException if change failed
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CHANGE_PLAN)
-    public Entitlement changePlanWithDate(final String productName, final BillingPeriod billingPeriod, final String priceList, final List<PlanPhasePriceOverride> overrides, final LocalDate effectiveDate, final Iterable<PluginProperty> properties, final CallContext context)
+    public Entitlement changePlanWithDate(final PlanSpecifier spec, final List<PlanPhasePriceOverride> overrides, final LocalDate effectiveDate, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -280,9 +276,7 @@ public interface Entitlement extends Entity {
      * <p/>
      * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
      *
-     * @param productName   the new product name
-     * @param billingPeriod the new billing period
-     * @param priceList     the new priceList
+     * @param spec          the product specification for the change
      * @param overrides     the price override for each phase and for a specific currency
      * @param effectiveDate the date at which the entitlement should be changed
      * @param billingPolicy the override billing policy
@@ -292,12 +286,11 @@ public interface Entitlement extends Entity {
      * @throws EntitlementApiException if change failed
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CHANGE_PLAN)
-    public Entitlement changePlanOverrideBillingPolicy(final String productName, final BillingPeriod billingPeriod, final String priceList, final List<PlanPhasePriceOverride> overrides, final LocalDate effectiveDate,
+    public Entitlement changePlanOverrideBillingPolicy(final PlanSpecifier spec, final List<PlanPhasePriceOverride> overrides, final LocalDate effectiveDate,
                                                        final BillingActionPolicy billingPolicy, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
     /**
-     *
      * @param bcd               the new BCD for that subscription
      * @param effectiveFromDate date after which that BCD change becomes active
      * @param context           the context

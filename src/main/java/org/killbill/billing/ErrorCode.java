@@ -100,10 +100,13 @@ public enum ErrorCode {
     CAT_PRICE_LIST_NOT_FOUND(2013, "Could not find a pricelist with name '%s'"),
     CAT_UNDEFINED_DURATION(2014, "Duration is not unlimited or invalid '%s'"),
 
+    /* Billing Period*/
+    CAT_NULL_BILLING_PERIOD(2015, "Billing period name was null"),
+
     /*
      * Plans
      */
-    CAT_PLAN_NOT_FOUND(2020, "Could not find a plan matching: (product: '%s', billing period: '%s', pricelist '%s')"),
+    CAT_PLAN_NOT_FOUND(2020, "Could not find a plan matching spec: (plan: '%s', product: '%s', billing period: '%s', pricelist '%s')"),
     CAT_NO_SUCH_PLAN(2021, "Could not find any plans named '%s'"),
 
     /*
