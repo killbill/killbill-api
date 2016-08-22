@@ -1,3 +1,6 @@
+0.43
+    Add new payment apis to cancel scheduled future payment retry
+
 0.42
     Catalog api changes (SimplePlan) and Overdue tag rework
 
