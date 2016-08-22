@@ -140,4 +140,8 @@ public interface AccountData {
      */
     public Boolean isPaymentDelegatedToParent();
 
+    /**
+     * @return the notes for that account
+     */
+    public String getNotes();
 }
