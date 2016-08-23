@@ -91,6 +91,8 @@ public enum ErrorCode {
     CAT_ILLEGAL_CHANGE_REQUEST(2001, "Attempting to change plan from (product: '%s', billing period: '%s', " +
                                      "pricelist '%s') to (product: '%s', billing period: '%s', pricelist '%s'). This transition is not allowed by catalog rules"),
 
+    CAT_MULTIPLE_MATCHING_PLANS_FOR_PRICELIST(2002, "There are multiple plans defined in pricelist '%s' for product: '%s' and billing period: '%s'. Use the planName instead of the non deterministic triplet {product, billing period, pricelist}"),
+
     /*Attempt to reference a price that is not present - should only happen if it is a currency not available in the catalog */
     CAT_NO_PRICE_FOR_CURRENCY(2010, "This price does not have a value for the currency '%s'."),
 

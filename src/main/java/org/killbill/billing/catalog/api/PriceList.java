@@ -18,7 +18,7 @@ package org.killbill.billing.catalog.api;
 
 public interface PriceList  extends CatalogEntity {
 
-    public abstract Plan findPlan(Product product, BillingPeriod period);
+    public Plan[] findPlans(Product product, BillingPeriod period);
 
     public Plan[] getPlans();
 }
