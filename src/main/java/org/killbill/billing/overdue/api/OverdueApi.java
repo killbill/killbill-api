@@ -52,4 +52,12 @@ public interface OverdueApi extends KillbillApi {
      * @throws OverdueApiException
      */
     public OverdueState getOverdueStateFor(UUID accountId, TenantContext context) throws OverdueApiException;
+
+    /**
+     *
+     * @param overdueConfig          new overdue config
+     * @param callContext            the context
+     * @throws OverdueApiException
+     */
+    public void uploadOverdueConfig(final OverdueConfig overdueConfig, final CallContext callContext) throws OverdueApiException;
 }
