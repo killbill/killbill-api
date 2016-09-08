@@ -52,6 +52,7 @@ public enum ErrorCode {
     SUB_CHANGE_FUTURE_CANCELLED(1022, "Subscription %s is future cancelled: Failed to change plan"),
     SUB_CHANGE_INVALID(1023, "Invalid change plan for subscription %s"),
     SUB_CHANGE_DRY_RUN_NOT_BP(1024, "Change DryRun API is only available for BP"),
+    SUB_CHANGE_AO_MAX_PLAN_ALLOWED_BY_BUNDLE(1025, "Can't change Plan to AddOn %s, the number of Subscriptions allowed by this Plan and Bundle has reached its limit"),
 
     /* Cancellation */
     SUB_CANCEL_BAD_STATE(1031, "Subscription %s is in state %s: Failed to cancel"),
