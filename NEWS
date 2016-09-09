@@ -1,3 +1,6 @@
+0.47
+    New ErrorCode added to manage the limitation of plans allowed per bundle
+
 0.46
     Add api to upload overdue config
 
