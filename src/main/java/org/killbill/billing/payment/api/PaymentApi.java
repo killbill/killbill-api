@@ -646,4 +646,13 @@ public interface PaymentApi extends KillbillApi {
     @RequiresPermissions(PAYMENT_METHOD_CAN_UPDATE)
     public List<PaymentMethod> refreshPaymentMethods(Account account, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
+
+    /**
+     * @param paymentTransactionId the payment transaction id
+     * @param context         the call context
+     * @return the payment transaction
+     * @throws PaymentApiException
+     */
+    public PaymentTransaction getPaymentTransactionById(final UUID paymentTransactionId, final TenantContext context)
+            throws PaymentApiException;
 }
