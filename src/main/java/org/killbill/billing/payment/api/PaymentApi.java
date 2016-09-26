@@ -648,11 +648,10 @@ public interface PaymentApi extends KillbillApi {
             throws PaymentApiException;
 
     /**
-     * @param paymentTransactionId the payment transaction id
+     * @param transactionId the payment transaction id
      * @param context         the call context
      * @return the payment transaction
      * @throws PaymentApiException
      */
-    public PaymentTransaction getPaymentTransactionById(final UUID paymentTransactionId, final TenantContext context)
-            throws PaymentApiException;
-}
+    public Payment getPaymentByTransactionId(final UUID transactionId, final boolean withPluginInfo, final boolean withAttempts, final Iterable<PluginProperty> properties, final TenantContext context) throws PaymentApiException;
+    }
