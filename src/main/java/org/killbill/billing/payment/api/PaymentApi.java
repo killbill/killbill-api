@@ -429,6 +429,14 @@ public interface PaymentApi extends KillbillApi {
             throws PaymentApiException;
 
     /**
+     * @param transactionId the payment transaction id
+     * @param context         the call context
+     * @return the payment
+     * @throws PaymentApiException
+     */
+    public Payment getPaymentByTransactionId(final UUID transactionId, final boolean withPluginInfo, final boolean withAttempts, final Iterable<PluginProperty> properties, final TenantContext context) throws PaymentApiException;
+    
+    /**
      * Find all payments across all plugins
      *
      * @param offset         the offset of the first result
