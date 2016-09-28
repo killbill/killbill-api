@@ -1,3 +1,6 @@
+0.48
+    Fix payment api to allow retrieving payment transaction tags
+
 0.47
     New ErrorCode added to manage the limitation of plans allowed per bundle
 
