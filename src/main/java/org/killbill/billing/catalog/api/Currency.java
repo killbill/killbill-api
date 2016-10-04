@@ -202,4 +202,13 @@ public enum Currency {
     public static Currency getDefaultCurrency() {
         return Currency.USD;
     }
+
+    public static Currency fromCode(final String currencyCode) {
+        for (final Currency currency : Currency.values()) {
+            if (currency.toString() == currencyCode) {
+                return currency;
+            }
+        }
+        return getDefaultCurrency();
+    }
 }
