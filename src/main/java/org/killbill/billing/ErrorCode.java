@@ -26,6 +26,7 @@ public enum ErrorCode {
     NOT_IMPLEMENTED(1, "Api not implemented yet"),
     CURRENCY_INVALID(3, "Invalid currency %s, expected %s"),
     UNEXPECTED_ERROR(4, "%s"),
+    EXTERNAL_KEY_LIMIT_EXCEEDED(5, "External key exceeded 255 characters"),
     /*
      *
      * Range 1000 : SUBSCRIPTIONS
