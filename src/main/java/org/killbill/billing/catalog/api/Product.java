@@ -16,6 +16,8 @@
 
 package org.killbill.billing.catalog.api;
 
+import java.util.Collection;
+
 /**
  * The interface {@code Product}
  */
@@ -24,12 +26,12 @@ public interface Product extends CatalogEntity {
     /**
      * @return an array of other {@code Product} that can be purchased with that one
      */
-    public Product[] getAvailable();
+    public Collection<Product> getAvailable();
 
     /**
      * @return an array of other {@code Product} that are already included within this one
      */
-    public Product[] getIncluded();
+    public Collection<Product> getIncluded();
 
     /**
      * @return the {@code ProductCategory} associated with that {@code Product}

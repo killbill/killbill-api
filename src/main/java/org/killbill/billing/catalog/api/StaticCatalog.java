@@ -16,6 +16,7 @@
 
 package org.killbill.billing.catalog.api;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public interface StaticCatalog {
      * @return an array of supported {@code Product}
      * @throws CatalogApiException
      */
-    public Product[] getCurrentProducts() throws CatalogApiException;
+    public Collection<Product> getCurrentProducts() throws CatalogApiException;
 
     /**
      * @return an array of supported {@code Unit}
@@ -63,7 +64,7 @@ public interface StaticCatalog {
      * @return an array of supported {@code Plan}
      * @throws CatalogApiException
      */
-    public Plan[] getCurrentPlans() throws CatalogApiException;
+    public Collection<Plan> getCurrentPlans() throws CatalogApiException;
 
     /**
      * @param spec          the specification for the {@code Plan} to be used

@@ -16,6 +16,7 @@
 
 package org.killbill.billing.catalog.api;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.joda.time.DateTime;
@@ -49,14 +50,14 @@ public interface Catalog {
      * @return an array of available {@code Product}s
      * @throws CatalogApiException
      */
-    public Product[] getProducts(DateTime requestedDate) throws CatalogApiException;
+    public Collection<Product> getProducts(DateTime requestedDate) throws CatalogApiException;
 
     /**
      * @param requestedDate specifies the state of the catalog for that date
      * @return an array of available {@code Plan}s
      * @throws CatalogApiException
      */
-    public Plan[] getPlans(DateTime requestedDate) throws CatalogApiException;
+    public Collection<Plan> getPlans(DateTime requestedDate) throws CatalogApiException;
 
     /**
      * @param requestedDate specifies the state of the catalog for that date
