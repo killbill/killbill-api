@@ -19,6 +19,7 @@
 package org.killbill.billing.catalog.api;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public interface PlanPhasePriceOverride {
 
@@ -51,5 +52,12 @@ public interface PlanPhasePriceOverride {
      * @return the recurring price for that currency
      */
     public BigDecimal getRecurringPrice();
+
+    /**
+     *
+     * @return the usage overrides for the phase
+     */
+    public List<UsagePriceOverride> getUsagePriceOverrides();
+
 
 }
