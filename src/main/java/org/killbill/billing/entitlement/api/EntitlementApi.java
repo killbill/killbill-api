@@ -80,6 +80,21 @@ public interface EntitlementApi extends KillbillApi {
             throws EntitlementApiException;
 
     /**
+     * Create multiple new entitlements with addOn entitlements for that account.
+     * <p/>
+     *
+     * @param accountId     the account id
+     * @param baseEntitlementWithAddOnsSpecifier     a list of baseEntitlementWithAddOns specifier
+     * @param properties     plugin specific properties
+     * @param context       the context
+     * @return the list of common bundles created
+     * @throws EntitlementApiException if the system fail to create the List of <code>Entitlement</code>.
+     */
+    @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
+    List<Entitlement> createBaseEntitlementsWithAddOns(UUID accountId, Iterable<BaseEntitlementWithAddOnsSpecifier> baseEntitlementWithAddOnsSpecifier, Iterable<PluginProperty> properties, CallContext context)
+            throws EntitlementApiException;
+
+    /**
      * Adds an ADD_ON entitlement to previously created entitlement.
      * <p/>
      * The <code>PlanPhaseSpecifier<code/> should refer to a <code>ProductCategory.ADD_ON</code>.
