@@ -21,5 +21,4 @@ public interface BlockPriceOverride {
      * @return the recurring {@code InternationalPrice} for that {@code Block} section.
      */
     public BigDecimal getPrice();
-
 }

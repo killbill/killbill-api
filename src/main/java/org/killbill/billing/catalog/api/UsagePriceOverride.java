@@ -21,5 +21,4 @@ public interface UsagePriceOverride {
      * @return the {@code Tier Override} associated with that usage section
      */
     public List<TierPriceOverride> getTierPriceOverrides();
-
 }

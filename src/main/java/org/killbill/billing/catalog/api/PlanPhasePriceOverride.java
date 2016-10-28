@@ -58,6 +58,4 @@ public interface PlanPhasePriceOverride {
      * @return the usage overrides for the phase
      */
     public List<UsagePriceOverride> getUsagePriceOverrides();
-
-
 }
