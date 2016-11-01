@@ -2,9 +2,6 @@ package org.killbill.billing.catalog.api;
 
 import java.math.BigDecimal;
 
-/**
- * Created by sruthipendyala on 10/17/16.
- */
 public interface BlockPriceOverride {
 
     /**
