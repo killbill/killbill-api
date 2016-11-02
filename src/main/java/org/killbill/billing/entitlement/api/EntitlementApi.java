@@ -48,14 +48,16 @@ public interface EntitlementApi extends KillbillApi {
      * @param spec          the product specification for that new entitlement
      * @param externalKey   the external key for that entitlement-- which must be unique in the system
      * @param overrides     the price override for each phase and for a specific currency
-     * @param effectiveDate the date at which the entitlement should start
+     * @param entitlementEffectiveDate the date at which the entitlement should start. if this is null this is assumed now
+     * @param billingEffectiveDate  the date at which the billing for the subscription should start. if this is null this is assumed now
+     * @param isMigrated     whether this subscription comes from a different system (migrated into Kill Bill)
      * @param properties     plugin specific properties
      * @param context       the context
      * @return a new entitlement
      * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>.
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
-    public Entitlement createBaseEntitlement(UUID accountId, PlanPhaseSpecifier spec, String externalKey, List<PlanPhasePriceOverride> overrides, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
+    public Entitlement createBaseEntitlement(UUID accountId, PlanPhaseSpecifier spec, String externalKey, List<PlanPhasePriceOverride> overrides, LocalDate entitlementEffectiveDate,  LocalDate billingEffectiveDate, boolean isMigrated, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -64,15 +66,17 @@ public interface EntitlementApi extends KillbillApi {
      *
      * @param accountId     the account id
      * @param externalKey   the bundle external key
-     * @param effectiveDate the date at which the entitlement should start
+     * @param entitlementEffectiveDate the date at which the entitlement should start. if this is null this is assumed now
+     * @param billingEffectiveDate  the date at which the billing for the subscription should start. if this is null this is assumed now
      * @param entitlementSpecifier     a list of entitlement specifier
+     * @param isMigrated     whether this subscription comes from a different system (migrated into Kill Bill)
      * @param properties     plugin specific properties
      * @param context       the context
      * @return the common bundle created
      * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>.
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
-    Entitlement createBaseEntitlementWithAddOns(UUID accountId, String externalKey, Iterable<EntitlementSpecifier> entitlementSpecifier, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
+    Entitlement createBaseEntitlementWithAddOns(UUID accountId, String externalKey, Iterable<EntitlementSpecifier> entitlementSpecifier, LocalDate entitlementEffectiveDate,  LocalDate billingEffectiveDate, boolean isMigrated, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -85,14 +89,16 @@ public interface EntitlementApi extends KillbillApi {
      * @param bundleId      the id of the bundle
      * @param spec          the product specification for that new entitlement
      * @param overrides     the price override for each phase and for a specific currency
-     * @param effectiveDate the date at which the entitlement should start
+     * @param entitlementEffectiveDate the date at which the entitlement should start. if this is null this is assumed now
+     * @param billingEffectiveDate  the date at which the billing for the subscription should start. if this is null this is assumed now
+     * @param isMigrated     whether this subscription comes from a different system (migrated into Kill Bill)
      * @param properties     plugin specific properties
      * @param context       the context
      * @return a new entitlement
      * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
-    public Entitlement addEntitlement(UUID bundleId, PlanPhaseSpecifier spec, List<PlanPhasePriceOverride> overrides, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
+    public Entitlement addEntitlement(UUID bundleId, PlanPhaseSpecifier spec, List<PlanPhasePriceOverride> overrides, LocalDate entitlementEffectiveDate,  LocalDate billingEffectiveDate, boolean isMigrated, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -134,34 +140,6 @@ public interface EntitlementApi extends KillbillApi {
     public void resume(UUID bundleId, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
-    /**
-     * Will add a blocking event for the specified service associated with the base entitlement.
-     *
-     * @param bundleId          the id of the bundle
-     * @param stateName         the name of the state
-     * @param serviceName       the name of the service
-     * @param effectiveDate     the date at which the operation should occur
-     * @param blockBilling      whether this event should block billing
-     * @param blockEntitlement  whether this event should block entitlement
-     * @param blockChange       whether this event should block any change
-     * @param properties        plugin specific properties
-     * @param context           the context
-     *
-     * @throws EntitlementApiException if the system fail to find the base <code>Entitlement</code>
-     */
-     @RequiresPermissions(ENTITLEMENT_CAN_PAUSE_RESUME)
-     public void setBlockingState(UUID bundleId, String stateName, String serviceName, LocalDate effectiveDate, boolean blockBilling, boolean blockEntitlement, boolean blockChange, Iterable<PluginProperty> properties, CallContext context)
-             throws EntitlementApiException;
-
-    /**
-     *
-     * @param blockableId     the id of the blockable (account/bundle/subscription)
-     * @param type            the type
-     * @param serviceName     the name of the service
-     * @param context         the context
-     * @return
-     */
-    public Iterable<BlockingState> getBlockingStatesForServiceAndType(UUID blockableId, BlockingStateType type, String serviceName, TenantContext context);
 
     /**
      * Retrieves an <code>Entitlement</code> using its id.

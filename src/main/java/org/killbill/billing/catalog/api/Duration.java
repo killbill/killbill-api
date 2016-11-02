@@ -17,6 +17,7 @@
 package org.killbill.billing.catalog.api;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.joda.time.Period;
 
 public interface Duration {
@@ -33,9 +34,15 @@ public interface Duration {
 
     /**
      * @param dateTime the date to add to that duration
-     * @return the joda {@code Period}
+     * @return the joda {@code DateTime}
      */
-    public DateTime addToDateTime(DateTime dateTime);
+    public DateTime addToDateTime(DateTime dateTime) throws CatalogApiException;
+
+    /**
+     * @param localDate the date to add to that duration
+     * @return the joda {@code LocalDate}
+     */
+    public LocalDate addToLocalDate(LocalDate localDate) throws CatalogApiException;
 
     public Period toJodaPeriod();
 }

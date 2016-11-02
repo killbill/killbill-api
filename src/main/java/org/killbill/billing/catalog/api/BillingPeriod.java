@@ -1,7 +1,9 @@
 /*
- * Copyright 2010-2013 Ning, Inc.
+ * Copyright 2010-2014 Ning, Inc.
+ * Copyright 2014-2016 Groupon, Inc
+ * Copyright 2014-2016 The Billing Project, LLC
  *
- * Ning licenses this file to you under the Apache License, version 2.0
+ * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
  * License.  You may obtain a copy of the License at:
  *
@@ -16,24 +18,31 @@
 
 package org.killbill.billing.catalog.api;
 
+import org.joda.time.Period;
+
 /**
  * The {@code BillingPeriod} supported in the system
  */
 public enum BillingPeriod {
-    MONTHLY(1),
-    QUARTERLY(3),
-    BIANNUAL(6),
-    ANNUAL(12),
-    BIENNIAL(24),
-    NO_BILLING_PERIOD(0);
 
-    private final int numberOfMonths;
+    DAILY(Period.days(1)),
+    WEEKLY(Period.weeks(1)),
+    BIWEEKLY(Period.weeks(2)),
+    THIRTY_DAYS(Period.days(30)),
+    MONTHLY(Period.months(1)),
+    QUARTERLY(Period.months(3)),
+    BIANNUAL(Period.months(6)),
+    ANNUAL(Period.years(1)),
+    BIENNIAL(Period.years(2)),
+    NO_BILLING_PERIOD(Period.ZERO);
 
-    BillingPeriod(final int numberOfMonths) {
-        this.numberOfMonths = numberOfMonths;
+    private final Period period;
+
+    BillingPeriod(final Period period) {
+        this.period = period;
     }
 
-    public int getNumberOfMonths() {
-        return numberOfMonths;
+    public Period getPeriod() {
+        return period;
     }
 }

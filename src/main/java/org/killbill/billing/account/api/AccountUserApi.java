@@ -127,7 +127,7 @@ public interface AccountUserApi extends KillbillApi {
     /**
      * @param accountId the account unique id
      * @param context   the user context
-     * @return the laist of emails configured for that account
+     * @return the list of emails configured for that account
      */
     public List<AccountEmail> getEmails(UUID accountId, TenantContext context);
 
@@ -146,4 +146,12 @@ public interface AccountUserApi extends KillbillApi {
      */
     @RequiresPermissions(ACCOUNT_CAN_DELETE_EMAILS)
     public void removeEmail(UUID accountId, AccountEmail email, CallContext context);
+
+    /**
+     * @param parentAccountId the parent account unique id
+     * @param context   the user context
+     * @return the list of children accounts for that parent account id
+     */
+    public List<Account> getChildrenAccounts(UUID parentAccountId, TenantContext context) throws AccountApiException;
+
 }

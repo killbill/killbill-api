@@ -24,7 +24,7 @@ import org.joda.time.DateTime;
 /**
  * The interface {@code Plan}
  */
-public interface Plan {
+public interface Plan extends CatalogEntity {
 
     /**
      * @return an array of {@code PlanPhase}
@@ -37,9 +37,10 @@ public interface Plan {
     public Product getProduct();
 
     /**
-     * @return the name of the {@code Plan}
+     *
+     * @return the name of the {@PriceList} in which that {@code Plan} is defined
      */
-    public String getName();
+   public String getPriceListName();
 
     /**
      * @return an iterator through the {@code PlanPhase}
@@ -69,7 +70,7 @@ public interface Plan {
     /**
      * @return the date for which existing subscriptions become effective with that {@code Plan}
      */
-    public Date getEffectiveDateForExistingSubscriptons();
+    public Date getEffectiveDateForExistingSubscriptions();
 
     /**
      * @param name the name of the {@code PlanPhase}

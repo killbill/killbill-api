@@ -16,11 +16,11 @@
 
 package org.killbill.billing.catalog.api;
 
-public interface PriceList {
+import java.util.Collection;
 
-    public abstract String getName();
+public interface PriceList extends CatalogEntity {
 
-    public abstract Plan findPlan(Product product, BillingPeriod period);
+    public Collection<Plan> findPlans(Product product, BillingPeriod period);
 
-    public Plan[] getPlans();
+    public Collection<Plan> getPlans();
 }

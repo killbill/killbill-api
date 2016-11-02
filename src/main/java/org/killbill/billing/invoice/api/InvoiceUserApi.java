@@ -25,7 +25,6 @@ import java.util.UUID;
 import org.joda.time.LocalDate;
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.account.api.AccountApiException;
-import org.killbill.billing.catalog.api.BillingPeriod;
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.api.TagApiException;
@@ -49,7 +48,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context   the tenant context
      * @return all invoices
      */
-    public List<Invoice> getInvoicesByAccount(UUID accountId, TenantContext context);
+    public List<Invoice> getInvoicesByAccount(UUID accountId, boolean includesMigrated, TenantContext context);
 
     /**
      * Find invoices from a given day, for a given account.
@@ -182,12 +181,13 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param accountId     account id
      * @param effectiveDate the effective date for newly created invoices (in the account timezone)
      * @param charges       the charges
+     * @param autoCommit    the flag to indicate if the invoice is set to COMMITTED or DRAFT and events are sent
      * @param context       the call context
      * @return the external charges invoice items
      * @throws InvoiceApiException
      */
     @RequiresPermissions(ACCOUNT_CAN_CHARGE)
-    public List<InvoiceItem> insertExternalCharges(UUID accountId, LocalDate effectiveDate, Iterable<InvoiceItem> charges, CallContext context) throws InvoiceApiException;
+    public List<InvoiceItem> insertExternalCharges(UUID accountId, LocalDate effectiveDate, Iterable<InvoiceItem> charges, boolean autoCommit, CallContext context) throws InvoiceApiException;
 
     /**
      * Retrieve a credit by id.
@@ -206,13 +206,15 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param amount        the credit amount
      * @param effectiveDate the day to grant the credit, in the account timezone
      * @param currency      the credit currency
+     * @param autoCommit    the flag to indicate if the invoice is set to COMMITTED or DRAFT and events are sent
      * @param context       the call context
+     * @param description   the item description
      * @return the credit invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(ACCOUNT_CAN_CREDIT)
-    public InvoiceItem insertCredit(UUID accountId, BigDecimal amount, LocalDate effectiveDate,
-                                    Currency currency, CallContext context) throws InvoiceApiException;
+    public InvoiceItem insertCredit(UUID accountId, BigDecimal amount, LocalDate effectiveDate, Currency currency,
+                                    boolean autoCommit, String description, CallContext context) throws InvoiceApiException;
 
     /**
      * Add a credit to an invoice. This can be used to adjust invoices.
@@ -222,13 +224,14 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param amount        the credit amount
      * @param effectiveDate the day to grant the credit, in the account timezone
      * @param currency      the credit currency
+     * @param description   the item description
      * @param context       the call context
      * @return the credit invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_CREDIT)
     public InvoiceItem insertCreditForInvoice(UUID accountId, UUID invoiceId, BigDecimal amount, LocalDate effectiveDate,
-                                              Currency currency, CallContext context) throws InvoiceApiException;
+                                              Currency currency, String description, CallContext context) throws InvoiceApiException;
 
     /**
      * Adjust fully a given invoice item.
@@ -237,12 +240,14 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param invoiceId     invoice id
      * @param invoiceItemId invoice item id
      * @param effectiveDate the effective date for this adjustment invoice item (in the account timezone)
+     * @param description   the item description
      * @param context       the call context
      * @return the adjustment invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_ITEM_ADJUST)
-    public InvoiceItem insertInvoiceItemAdjustment(UUID accountId, UUID invoiceId, UUID invoiceItemId, LocalDate effectiveDate, CallContext context) throws InvoiceApiException;
+    public InvoiceItem insertInvoiceItemAdjustment(UUID accountId, UUID invoiceId, UUID invoiceItemId, LocalDate effectiveDate,
+                                                   String description, CallContext context) throws InvoiceApiException;
 
     /**
      * Adjust partially a given invoice item.
@@ -253,13 +258,14 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param effectiveDate the effective date for this adjustment invoice item (in the account timezone)
      * @param amount        the adjustment amount
      * @param currency      adjustment currency
+     * @param description   the item description
      * @param context       the call context
      * @return the adjustment invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_ITEM_ADJUST)
     public InvoiceItem insertInvoiceItemAdjustment(UUID accountId, UUID invoiceId, UUID invoiceItemId, LocalDate effectiveDate,
-                                                   BigDecimal amount, Currency currency, CallContext context) throws InvoiceApiException;
+                                                   BigDecimal amount, Currency currency, String description, CallContext context) throws InvoiceApiException;
 
     /**
      * Delete a CBA item.
@@ -289,7 +295,44 @@ public interface InvoiceUserApi extends KillbillApi {
      * Rebalance CBA for account which have credit and unpaid invoices-- only needed if system is configured to not rebalance automatically.
      *
      * @param accountId account id
-     * @param context   the callcontext
+     * @param context   the call context
      */
     public void consumeExstingCBAOnAccountWithUnpaidInvoices(final UUID accountId, final CallContext context);
+
+    /**
+     * Move the invoice status from DRAFT to COMMITTED
+     *
+     * @param invoiceId invoice id
+     * @param context the tenant context
+     * @throws InvoiceApiException
+     */
+    public void commitInvoice(UUID invoiceId, CallContext context) throws InvoiceApiException;
+
+    /** @param accountId   account id
+     * @param invoiceDate maximum billing event day to consider (in the account timezone)
+     * @param items       items to be placed on the migration invoice
+     * @param context     call call context
+     * @return The UUID of the created invoice
+     */
+    @RequiresPermissions(INVOICE_CAN_TRIGGER_INVOICE)
+    public UUID createMigrationInvoice(UUID accountId, LocalDate invoiceDate, Iterable<InvoiceItem> items, CallContext context);
+
+    /**
+     * Move a given child credit to the parent level
+     *
+     * @param childAccountId child account id
+     * @param context the tenant context
+     * @throws InvoiceApiException
+     */
+    public void transferChildCreditToParent(UUID childAccountId, CallContext context) throws InvoiceApiException;
+
+    /**
+     * Retrieve invoice items details associated to Parent SUMMARY invoice item
+     *
+     * @param parentInvoiceId the parent invoice id
+     * @param context the tenant context
+     * @return a list of invoice items associated with a parent invoice
+     * @throws InvoiceApiException if any unexpected error occurs
+     */
+    List<InvoiceItem> getInvoiceItemsByParentInvoice(UUID parentInvoiceId, final TenantContext context) throws InvoiceApiException;
 }

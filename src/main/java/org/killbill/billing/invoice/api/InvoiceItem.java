@@ -32,6 +32,11 @@ public interface InvoiceItem extends Entity {
     UUID getAccountId();
 
     /**
+     * @return the child account id if this item is part of a parent invoice
+     */
+    UUID getChildAccountId();
+
+    /**
      * @return the service period start date for that item, in the account timezone
      */
     LocalDate getStartDate();

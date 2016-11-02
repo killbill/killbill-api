@@ -1,7 +1,9 @@
 /*
  * Copyright 2010-2013 Ning, Inc.
+ * Copyright 2016 Groupon, Inc
+ * Copyright 2016 The Billing Project, LLC
  *
- * Ning licenses this file to you under the Apache License, version 2.0
+ * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
  * License.  You may obtain a copy of the License at:
  *
@@ -16,15 +18,17 @@
 
 package org.killbill.billing.catalog.api;
 
-import java.util.List;
+import org.joda.time.DateTime;
 
-public interface PriceListSet {
+public interface MutableStaticCatalog extends StaticCatalog {
 
-    public static final String DEFAULT_PRICELIST_NAME = "DEFAULT";
+    public void addCurrency(Currency currency) throws CatalogApiException;
 
-    /**
-     * @return all the price {@code PriceList}
-     */
-    public List<PriceList> getAllPriceLists();
+    public void addProduct(Product product) throws CatalogApiException;
+
+    public void addPlan(Plan plan) throws CatalogApiException;
+
+    public void addPriceList(PriceList priceList) throws CatalogApiException;
+
 
 }

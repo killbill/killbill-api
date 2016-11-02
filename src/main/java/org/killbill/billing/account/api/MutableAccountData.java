@@ -147,6 +147,13 @@ public interface MutableAccountData extends AccountData {
     public void setPhone(String phone);
 
     /**
+     * Sets the account notes
+     *
+     * @param notes
+     */
+    public void setNotes(String notes);
+
+    /**
      * Sets whether the account has been migrated or not
      *
      * @param isMigrated
@@ -159,5 +166,19 @@ public interface MutableAccountData extends AccountData {
      * @param isNotifiedForInvoices
      */
     public void setIsNotifiedForInvoices(boolean isNotifiedForInvoices);
+
+    /**
+     * Sets the UUID of the default parentAccountId
+     *
+     * @param parentAccountId
+     */
+    public void setParentAccountId(UUID parentAccountId);
+
+    /**
+     * Sets whether or not the child account payment is delegated to Parent
+     *
+     * @param isPaymentDelegatedToParent
+     */
+    public void setIsPaymentDelegatedToParent(boolean isPaymentDelegatedToParent);
 
 }

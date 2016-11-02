@@ -287,6 +287,28 @@ public interface PaymentApi extends KillbillApi {
                                 Iterable<PluginProperty> properties, PaymentOptions paymentOptions, CallContext context)
             throws PaymentApiException;
 
+    /**
+     * Cancel scheduled future payment retry
+     *
+     * @param paymentTransactionExternalKey       the key identifying the transaction
+     * @param context                             the call context
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
+    public void cancelScheduledPaymentTransaction(String paymentTransactionExternalKey, CallContext context)
+            throws PaymentApiException;
+
+    /**
+     * Cancel scheduled future payment retry
+     *
+     * @param paymentTransactionId       the id identifying the transaction
+     * @param context                    the call context
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
+    public void cancelScheduledPaymentTransaction(UUID paymentTransactionId, CallContext context)
+            throws PaymentApiException;
+
 
     /**
      * Record a chargeback
@@ -318,6 +340,33 @@ public interface PaymentApi extends KillbillApi {
      */
     @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
     public Payment createChargebackWithPaymentControl(Account account, UUID paymentId, BigDecimal amount, Currency currency, String paymentTransactionExternalKey, final PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
+
+    /**
+     * Reverse a chargeback
+     *
+     * @param account                       the account
+     * @param paymentId                     the payment id
+     * @param paymentTransactionExternalKey the external key of the chargeback to reverse
+     * @param context                       the call context
+     * @return the payment
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
+    public Payment createChargebackReversal(Account account, UUID paymentId, String paymentTransactionExternalKey, CallContext context) throws PaymentApiException;
+
+    /**
+     * Reverse a chargeback
+     *
+     * @param account                       the account
+     * @param paymentId                     the payment id
+     * @param paymentTransactionExternalKey the external key of the chargeback to reverse
+     * @param paymentOptions                options to control payment behavior
+     * @param context                       the call context
+     * @return the payment
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
+    public Payment createChargebackReversalWithPaymentControl(Account account, UUID paymentId, String paymentTransactionExternalKey, PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
 
     /**
      * Transition a currently PENDING transaction into either a SUCCESS or a FAILURE
@@ -354,7 +403,7 @@ public interface PaymentApi extends KillbillApi {
      * @return the list of payments on this account
      * @throws PaymentApiException
      */
-    public List<Payment> getAccountPayments(UUID accountId, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
+    public List<Payment> getAccountPayments(UUID accountId, boolean withPluginInfo, boolean withAttempts, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
     /**
@@ -365,7 +414,7 @@ public interface PaymentApi extends KillbillApi {
      * @return the payment
      * @throws PaymentApiException
      */
-    public Payment getPayment(UUID paymentId, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
+    public Payment getPayment(UUID paymentId, boolean withPluginInfo, boolean withAttempts, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
     /**
@@ -376,9 +425,17 @@ public interface PaymentApi extends KillbillApi {
      * @return the payment
      * @throws PaymentApiException
      */
-    public Payment getPaymentByExternalKey(String paymentExternalKey, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
+    public Payment getPaymentByExternalKey(String paymentExternalKey, boolean withPluginInfo, boolean withAttempts, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
+    /**
+     * @param transactionId the payment transaction id
+     * @param context         the call context
+     * @return the payment
+     * @throws PaymentApiException
+     */
+    public Payment getPaymentByTransactionId(final UUID transactionId, final boolean withPluginInfo, final boolean withAttempts, final Iterable<PluginProperty> properties, final TenantContext context) throws PaymentApiException;
+    
     /**
      * Find all payments across all plugins
      *
@@ -389,7 +446,7 @@ public interface PaymentApi extends KillbillApi {
      * @param context        the user context
      * @return the list of payments for that tenant
      */
-    public Pagination<Payment> getPayments(Long offset, Long limit, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context);
+    public Pagination<Payment> getPayments(Long offset, Long limit, boolean withPluginInfo, boolean withAttempts, Iterable<PluginProperty> properties, TenantContext context);
 
     /**
      * Find all payments in a given plugin
@@ -403,7 +460,7 @@ public interface PaymentApi extends KillbillApi {
      * @return the list of payments for that tenant
      * @throws PaymentApiException
      */
-    public Pagination<Payment> getPayments(Long offset, Long limit, String pluginName, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
+    public Pagination<Payment> getPayments(Long offset, Long limit, String pluginName, boolean withPluginInfo, boolean withAttempts, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
 
     /**
      * Find all payments matching the search key across all plugins
@@ -419,7 +476,7 @@ public interface PaymentApi extends KillbillApi {
      * @param context        the user context
      * @return the list of payments matching this search key for that tenant
      */
-    public Pagination<Payment> searchPayments(String searchKey, Long offset, Long limit, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context);
+    public Pagination<Payment> searchPayments(String searchKey, Long offset, Long limit, boolean withPluginInfo, boolean withAttempts, Iterable<PluginProperty> properties, TenantContext context);
 
     /**
      * Find all payments matching the search key in a given plugin
@@ -437,7 +494,7 @@ public interface PaymentApi extends KillbillApi {
      * @return the list of payments matching this search key for that tenant
      * @throws PaymentApiException
      */
-    public Pagination<Payment> searchPayments(String searchKey, Long offset, Long limit, String pluginName, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
+    public Pagination<Payment> searchPayments(String searchKey, Long offset, Long limit, String pluginName, boolean withPluginInfo, boolean withAttempts, Iterable<PluginProperty> properties, TenantContext context) throws PaymentApiException;
 
     /**
      * @param account                  the account
@@ -557,7 +614,7 @@ public interface PaymentApi extends KillbillApi {
      */
     @RequiresPermissions(PAYMENT_METHOD_CAN_DELETE)
 
-    public void deletePaymentMethod(Account account, UUID paymentMethodId, boolean deleteDefaultPaymentMethodWithAutoPayOff, Iterable<PluginProperty> properties, CallContext context)
+    public void deletePaymentMethod(Account account, UUID paymentMethodId, boolean deleteDefaultPaymentMethodWithAutoPayOff, boolean forceDefaultPaymentMethodDeletion, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
     /**

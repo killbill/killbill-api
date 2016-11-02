@@ -18,7 +18,10 @@
 
 package org.killbill.billing.overdue.api;
 
+import java.util.UUID;
+
 import org.killbill.billing.KillbillApi;
+import org.killbill.billing.account.api.ImmutableAccountData;
 import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
@@ -40,4 +43,21 @@ public interface OverdueApi extends KillbillApi {
      */
     @RequiresPermissions(OVERDUE_CAN_UPLOAD)
     void uploadOverdueConfig(String overdueXML, CallContext context) throws OverdueApiException;
+
+    /**
+     *
+     * @param accountId the account Id
+     * @param context   the context
+     * @return
+     * @throws OverdueApiException
+     */
+    public OverdueState getOverdueStateFor(UUID accountId, TenantContext context) throws OverdueApiException;
+
+    /**
+     *
+     * @param overdueConfig          new overdue config
+     * @param callContext            the context
+     * @throws OverdueApiException
+     */
+    public void uploadOverdueConfig(final OverdueConfig overdueConfig, final CallContext callContext) throws OverdueApiException;
 }

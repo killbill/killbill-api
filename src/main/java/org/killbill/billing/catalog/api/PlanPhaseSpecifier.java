@@ -16,54 +16,26 @@
 
 package org.killbill.billing.catalog.api;
 
-// TODO should be interface ?
-
 /**
  * The class {@code PlanPhaseSpecifier} specifies the attributes of a {@code PlanPhase}
  */
-public class PlanPhaseSpecifier {
+public class PlanPhaseSpecifier extends PlanSpecifier {
 
+    // The phaseType is used for if/when we need to skipe phases
     private final PhaseType phaseType;
-    private final String productName;
-    private final ProductCategory productCategory;
-    private final BillingPeriod billingPeriod;
-    private final String priceListName;
 
-    public PlanPhaseSpecifier(final String productName, final ProductCategory productCategory, final BillingPeriod billingPeriod,
-                              final String priceListName, final PhaseType phaseType) {
+    public PlanPhaseSpecifier(final String productName,
+                              final BillingPeriod billingPeriod,
+                              final String priceListName,
+                              final PhaseType phaseType) {
+        super(productName, billingPeriod, priceListName);
         this.phaseType = phaseType;
-        this.productName = productName;
-        this.productCategory = productCategory;
-        this.billingPeriod = billingPeriod;
-        this.priceListName = priceListName;
     }
 
-    /**
-     * @return the {@code Product} name
-     */
-    public String getProductName() {
-        return productName;
-    }
-
-    /**
-     * @return the {@code ProductCategory}
-     */
-    public ProductCategory getProductCategory() {
-        return productCategory;
-    }
-
-    /**
-     * @return the {@code BillingPeriod}
-     */
-    public BillingPeriod getBillingPeriod() {
-        return billingPeriod;
-    }
-
-    /**
-     * @return the name of the {@code PriceList}
-     */
-    public String getPriceListName() {
-        return priceListName;
+    public PlanPhaseSpecifier(final String planName,
+                              final PhaseType phaseType) {
+        super(planName);
+        this.phaseType = phaseType;
     }
 
     /**
@@ -71,12 +43,5 @@ public class PlanPhaseSpecifier {
      */
     public PhaseType getPhaseType() {
         return phaseType;
-    }
-
-    /**
-     * @return the {@code PlanSpecifier}
-     */
-    public PlanSpecifier toPlanSpecifier() {
-        return new PlanSpecifier(productName, productCategory, billingPeriod, priceListName);
     }
 }

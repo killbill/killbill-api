@@ -32,10 +32,10 @@ public enum InvoiceItemType {
     CREDIT_ADJ,
     // Invoice item adjustment (by itself or triggered by a refund)
     ITEM_ADJ,
-    // Refund adjustment (against a posted payment), used when adjusting invoices
-    REFUND_ADJ,
     // Usage item
     USAGE,
     // Tax item
-    TAX
+    TAX,
+    // Parent summary item
+    PARENT_SUMMARY
 }

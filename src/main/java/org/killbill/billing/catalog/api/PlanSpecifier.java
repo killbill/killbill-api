@@ -16,34 +16,53 @@
 
 package org.killbill.billing.catalog.api;
 
-// TODO should be interface?
 
 /**
  * The class {@code PlanSpecifier} specifies the attributes of a {@code Plan}
  */
 public class PlanSpecifier {
 
+    // User can either specify the unique planName or a mix of {productName, billingPeriod, priceListName}
+    private final String planName;
+
     private final String productName;
-    private final ProductCategory productCategory;
     private final BillingPeriod billingPeriod;
     private final String priceListName;
 
-    public PlanSpecifier(final String productName, final ProductCategory productCategory, final BillingPeriod billingPeriod,
+    public PlanSpecifier(final String productName,
+                         final BillingPeriod billingPeriod,
                          final String priceListName) {
         super();
+        this.planName = null;
         this.productName = productName;
-        this.productCategory = productCategory;
         this.billingPeriod = billingPeriod;
         this.priceListName = priceListName;
     }
 
+    public PlanSpecifier(final String planName) {
+        super();
+        this.planName = planName;
+        this.productName = null;
+        this.billingPeriod = null;
+        this.priceListName = null;
+    }
+
     public PlanSpecifier(final PlanPhaseSpecifier planPhase) {
         super();
+        this.planName = planPhase.getPlanName();
         this.productName = planPhase.getProductName();
-        this.productCategory = planPhase.getProductCategory();
         this.billingPeriod = planPhase.getBillingPeriod();
         this.priceListName = planPhase.getPriceListName();
     }
+
+    /**
+     *
+     * @return the name of the Plan
+     */
+    public String getPlanName() {
+        return planName;
+    }
+
 
     /**
      * @return the name of the product
@@ -52,12 +71,6 @@ public class PlanSpecifier {
         return productName;
     }
 
-    /**
-     * @return the {@code ProductCategory}
-     */
-    public ProductCategory getProductCategory() {
-        return productCategory;
-    }
 
     /**
      * @return the {@code BillingPeriod}

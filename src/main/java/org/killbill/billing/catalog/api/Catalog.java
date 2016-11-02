@@ -16,6 +16,7 @@
 
 package org.killbill.billing.catalog.api;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.joda.time.DateTime;
@@ -49,14 +50,14 @@ public interface Catalog {
      * @return an array of available {@code Product}s
      * @throws CatalogApiException
      */
-    public Product[] getProducts(DateTime requestedDate) throws CatalogApiException;
+    public Collection<Product> getProducts(DateTime requestedDate) throws CatalogApiException;
 
     /**
      * @param requestedDate specifies the state of the catalog for that date
      * @return an array of available {@code Plan}s
      * @throws CatalogApiException
      */
-    public Plan[] getPlans(DateTime requestedDate) throws CatalogApiException;
+    public Collection<Plan> getPlans(DateTime requestedDate) throws CatalogApiException;
 
     /**
      * @param requestedDate specifies the state of the catalog for that date
@@ -74,15 +75,13 @@ public interface Catalog {
     public Plan findPlan(String name, DateTime requestedDate) throws CatalogApiException;
 
     /**
-     * @param productName   the unique name for the {@code Product}
-     * @param billingPeriod the unique name for the {@code BillingPeriod}
-     * @param priceListName the unique name for the {@code PriceList}
+     * @param spec          the specification for the {@code Plan} to be used
      * @param overrides     the price override for each phase and for a specific currency
      * @param requestedDate specifies the state of the catalog for that date
      * @return the {@code Plan}
      * @throws CatalogApiException if {@code Plan} does not exist
      */
-    public Plan createOrFindPlan(String productName, BillingPeriod billingPeriod, String priceListName, PlanPhasePriceOverridesWithCallContext overrides,
+    public Plan createOrFindPlan(PlanSpecifier spec, PlanPhasePriceOverridesWithCallContext overrides,
                                  DateTime requestedDate) throws CatalogApiException;
 
     /**
@@ -95,15 +94,13 @@ public interface Catalog {
     public Plan findPlan(String name, DateTime requestedDate, DateTime subscriptionStartDate) throws CatalogApiException;
 
     /**
-     * @param productName   the unique name for the {@code Product}
-     * @param billingPeriod the unique name for the {@code BillingPeriod}
-     * @param priceListName the unique name for the {@code PriceList}
+     * @param spec          the specification for the {@code Plan} to be used
      * @param overrides     the price override for each phase and for a specific currency
      * @param requestedDate specifies the state of the catalog for that date
      * @return the {@code Plan}
      * @throws CatalogApiException if {@code Plan} does not exist
      */
-    public Plan createOrFindPlan(String productName, BillingPeriod billingPeriod, String priceListName, PlanPhasePriceOverridesWithCallContext overrides,
+    public Plan createOrFindPlan(PlanSpecifier spec, PlanPhasePriceOverridesWithCallContext overrides,
                                  DateTime requestedDate, DateTime subscriptionStartDate) throws CatalogApiException;
 
     /**
@@ -121,6 +118,17 @@ public interface Catalog {
      * @throws CatalogApiException if the {@code PlanPhase} does not exist
      */
     public PriceList findPriceList(String name, DateTime requestedDate) throws CatalogApiException;
+
+    /**
+     *
+     * @param planName                  the unique name of the plan
+     * @param requestedDate             specifies the state of the catalog for that date
+     * @param subscriptionStartDate     the startDate of the subscription
+     * @return
+     */
+    public PriceList findPriceListForPlan(final String planName,
+                                          final DateTime requestedDate,
+                                          final DateTime subscriptionStartDate) throws CatalogApiException;
 
     /**
      * @param name                  the unique name for the {@code PlanPhase}

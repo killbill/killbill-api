@@ -129,4 +129,19 @@ public interface AccountData {
      * @return whether or not that account will receive invoice notifications
      */
     public Boolean isNotifiedForInvoices();
+
+    /**
+     * @return the UUID of the parent Account
+     */
+    public UUID getParentAccountId();
+
+    /**
+     * @return whether or not the child account payment is delegated to Parent
+     */
+    public Boolean isPaymentDelegatedToParent();
+
+    /**
+     * @return the notes for that account
+     */
+    public String getNotes();
 }

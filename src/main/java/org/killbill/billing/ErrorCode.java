@@ -16,6 +16,8 @@
 
 package org.killbill.billing;
 
+import org.killbill.billing.invoice.api.InvoiceStatus;
+
 public enum ErrorCode {
 
     /*
@@ -24,6 +26,7 @@ public enum ErrorCode {
     NOT_IMPLEMENTED(1, "Api not implemented yet"),
     CURRENCY_INVALID(3, "Invalid currency %s, expected %s"),
     UNEXPECTED_ERROR(4, "%s"),
+    EXTERNAL_KEY_LIMIT_EXCEEDED(5, "External key exceeded 255 characters"),
     /*
      *
      * Range 1000 : SUBSCRIPTIONS
@@ -42,6 +45,7 @@ public enum ErrorCode {
     SUB_CREATE_AO_BP_NON_ACTIVE(1017, "Can't create AddOn %s for non active Base Plan"),
     SUB_CREATE_AO_ALREADY_INCLUDED(1018, "Can't create AddOn %s for BasePlan %s (Already included)"),
     SUB_CREATE_AO_NOT_AVAILABLE(1019, "Can't create AddOn %s for BasePlan %s (Not available)"),
+    SUB_CREATE_AO_MAX_PLAN_ALLOWED_BY_BUNDLE(1025, "Can't create AddOn %s, the number of Subscriptions allowed by this Plan and Bundle has reached its limit"),
     SUB_CREATE_INVALID_ENTITLEMENT_SPECIFIER(1020, "Invalid entitlement specifier"),
 
     /* Change plan */
@@ -49,6 +53,7 @@ public enum ErrorCode {
     SUB_CHANGE_FUTURE_CANCELLED(1022, "Subscription %s is future cancelled: Failed to change plan"),
     SUB_CHANGE_INVALID(1023, "Invalid change plan for subscription %s"),
     SUB_CHANGE_DRY_RUN_NOT_BP(1024, "Change DryRun API is only available for BP"),
+    SUB_CHANGE_AO_MAX_PLAN_ALLOWED_BY_BUNDLE(1025, "Can't change Plan to AddOn %s, the number of Subscriptions allowed by this Plan and Bundle has reached its limit"),
 
     /* Cancellation */
     SUB_CANCEL_BAD_STATE(1031, "Subscription %s is in state %s: Failed to cancel"),
@@ -56,7 +61,7 @@ public enum ErrorCode {
     SUB_RECREATE_BAD_STATE(1041, "Subscription %s is in state %s: Failed to recreate"),
 
     /* Un-cancellation */
-    SUB_UNCANCEL_BAD_STATE(1070, "Subscription %s was not in a cancelled state: Failed to uncancel plan"),
+    SUB_UNCANCEL_BAD_STATE(1070, "Subscription (billing) %s is not in pending cancelled state: Failed to uncancel plan"),
 
     /* Fetch */
     SUB_GET_NO_BUNDLE_FOR_SUBSCRIPTION(1080, "Could not find a bundle for subscription %s"),
@@ -74,6 +79,9 @@ public enum ErrorCode {
     /* Transfer */
     SUB_TRANSFER_INVALID_EFF_DATE(1106, "Invalid effective date for transfer: %s"),
 
+    /* Transfer */
+    SUB_BLOCKING_STATE_INVALID_ARG(1107, "Invalid arguments for adding a blocking state : %s"),
+
     /*
     *
     * Range 2000 : CATALOG
@@ -86,6 +94,8 @@ public enum ErrorCode {
     CAT_ILLEGAL_CHANGE_REQUEST(2001, "Attempting to change plan from (product: '%s', billing period: '%s', " +
                                      "pricelist '%s') to (product: '%s', billing period: '%s', pricelist '%s'). This transition is not allowed by catalog rules"),
 
+    CAT_MULTIPLE_MATCHING_PLANS_FOR_PRICELIST(2002, "There are multiple plans defined in pricelist '%s' for product: '%s' and billing period: '%s'. Use the planName instead of the non deterministic triplet {product, billing period, pricelist}"),
+
     /*Attempt to reference a price that is not present - should only happen if it is a currency not available in the catalog */
     CAT_NO_PRICE_FOR_CURRENCY(2010, "This price does not have a value for the currency '%s'."),
 
@@ -93,10 +103,15 @@ public enum ErrorCode {
     CAT_PRICE_VALUE_NULL_FOR_CURRENCY(2011, "The value for the currency '%s' is NULL. This plan cannot be bought in this currency."),
     CAT_NULL_PRICE_LIST_NAME(2012, "Price list name was null"),
     CAT_PRICE_LIST_NOT_FOUND(2013, "Could not find a pricelist with name '%s'"),
+    CAT_UNDEFINED_DURATION(2014, "Duration is not unlimited or invalid '%s'"),
+
+    /* Billing Period*/
+    CAT_NULL_BILLING_PERIOD(2015, "Billing period name was null"),
+
     /*
      * Plans
      */
-    CAT_PLAN_NOT_FOUND(2020, "Could not find a plan matching: (product: '%s', billing period: '%s', pricelist '%s')"),
+    CAT_PLAN_NOT_FOUND(2020, "Could not find a plan matching spec: (plan: '%s', product: '%s', billing period: '%s', pricelist '%s')"),
     CAT_NO_SUCH_PLAN(2021, "Could not find any plans named '%s'"),
 
     /*
@@ -115,14 +130,18 @@ public enum ErrorCode {
     CAT_NO_CATALOG_FOR_GIVEN_DATE(2050, "There is no catalog version that applies for the given date '%s'"),
     CAT_CATALOG_NAME_MISMATCH(2052, "The catalog name '%s' does not match the name of the catalog we are trying to add '%s'"),
     CAT_CATALOG_RECURRING_MODE_MISMATCH(2053, "The catalog recurring billing mode '%s' does not match the one of the catalog we are trying to add '%s'"),
+
     /*
-     * Billing Alignment
+     * Catalog Update (SimplePlan)
      */
-    CAT_INVALID_BILLING_ALIGNMENT(2060, "Invalid billing alignment '%s'"),
+    CAT_INVALID_SIMPLE_PLAN_DESCRIPTOR(2060, "Invalid simple plan descriptor '%s'"),
+    CAT_FAILED_SIMPLE_PLAN_VALIDATION(2060, "Failed to validate simple Plan '%s' against descriptor '%s'"),
+
+
     /*
      * Overdue
      */
-    CAT_NO_SUCH_OVEDUE_STATE(2070, "No such overdue state '%s'"),
+    CAT_NO_SUCH_OVERDUE_STATE(2070, "No such overdue state '%s'"),
     CAT_MISSING_CLEAR_STATE(2071, "Missing a clear state"),
 
     CAT_NOT_TOP_UP_BLOCK(2075, "Block for phase %s defines a TOP_UP property for a non TOP_UP block"),
@@ -146,6 +165,7 @@ public enum ErrorCode {
     ACCOUNT_CREATION_FAILED(3006, "Account creation failed."),
     ACCOUNT_UPDATE_FAILED(3007, "Account update failed."),
     ACCOUNT_DOES_NOT_EXIST_FOR_RECORD_ID(3008, "Account does not exist for recordId %s"),
+    ACCOUNT_DOES_NOT_HAVE_PARENT_ACCOUNT(3009, "The Account %s does not have a Parent Account associated"),
 
     ACCOUNT_EMAIL_ALREADY_EXISTS(3500, "Account email already exists %s"),
 
@@ -194,6 +214,11 @@ public enum ErrorCode {
     INVOICE_ITEM_ADJUSTMENT_AMOUNT_INVALID(4020, "Invoice adjustment amount %s should be lower than %s"),
     INVOICE_ITEM_ADJUSTMENT_ITEM_INVALID(4021, "Invoice item %s cannot be adjusted"),
     INVOICE_ITEM_TYPE_INVALID(4022, "Invalid invoice item type %s"),
+    INVOICE_INVALID_STATUS(4023, "The invoice status %s is invalid for invoice id %s. Current status is %s"),
+    INVOICE_ALREADY_COMMITTED(4024, "Cannot add credit or external charge for invoice id %s because it is already in " + InvoiceStatus.COMMITTED + " status"),
+    INVOICE_ITEMS_ADJUSTMENT_MISSING(4025, "Missing invoice item adjustements during payment refund"),
+    INVOICE_MISSING_PARENT_INVOICE(4026, "Missing parent invoice for invoice id %s"),
+    CHILD_ACCOUNT_MISSING_CREDIT(4027, "Child account %s does not have credit"),
 
     /*
      *
@@ -214,7 +239,7 @@ public enum ErrorCode {
      * Range 5000: Overdue system
      *
      */
-    OVERDUE_CAT_ERROR_ENCOUNTERED(5001, "Catalog error encountered on Overdueable: id='%s', type='%s'"),
+    OVERDUE_CAT_ERROR_ENCOUNTERED(5001, "Catalog error encountered for account: id='%s'"),
     OVERDUE_NO_REEVALUATION_INTERVAL(5003, "No valid reevaluation interval for state (name: %s)"),
 
     OVERDUE_INVALID_FOR_TENANT(5010, "Invalid overdue config for tenant : %s"),
@@ -249,7 +274,9 @@ public enum ErrorCode {
     PAYMENT_ACTIVE_TRANSACTION_KEY_EXISTS(7030, "Successful transaction with external key %s already exists"),
     PAYMENT_INVALID_PARAMETER(7031, "Invalid parameter %s: %s"),
     PAYMENT_INVALID_OPERATION(7032, "Invalid payment transition %s from state %s"),
-    PAYMENT_DIFFERENT_ACCOUNT_ID(7033, "Payment method %s has a different account id"),
+    PAYMENT_METHOD_DIFFERENT_ACCOUNT_ID(7033, "Payment method %s has a different account id"),
+    PAYMENT_DIFFERENT_ACCOUNT_ID(7034, "Payment %s has a different account id"),
+    PAYMENT_TRANSACTION_DIFFERENT_ACCOUNT_ID(7035, "Payment transaction %s has a different account id"),
 
     PAYMENT_PLUGIN_TIMEOUT(7100, "Plugin timeout for account %s: %s"),
     PAYMENT_PLUGIN_GET_PAYMENT_INFO(7102, "Failed to retrieve payment plugin info for payment %s: %s"),
@@ -266,6 +293,7 @@ public enum ErrorCode {
     ENT_ALREADY_BLOCKED(8001, "The blockable entity %s is already blocked"),
     ENT_INVALID_REQUESTED_DATE(8002, "Requested date %s for entitlement operation is invalid"),
     ENT_PLUGIN_API_ABORTED(8003, "Entitlement plugin aborted call: %s"),
+    ENT_UNCANCEL_BAD_STATE(8004, "Subscription (entitlement) %s was not previously cancelled or is not in a pending cancelled state: Failed to uncancel plan"),
 
     /*
    *
@@ -310,6 +338,13 @@ public enum ErrorCode {
     SECURITY_INVALID_ROLE(40003, "The role %s does not exist or has been inactivated"),
     SECURITY_ROLE_ALREADY_EXISTS(40004, "The role %s already exists"),
     SECURITY_INVALID_PERMISSIONS(40005, "The permission %s is invalid"),
+
+    /*
+     *
+     * Range 50000: USAGES
+     *
+     */
+    USAGE_RECORD_TRACKING_ID_ALREADY_EXISTS(50000, "A usage record with tracking ID %s already exists"),
 
     __UNKNOWN_ERROR_CODE(-1, "Unknown ErrorCode");
 

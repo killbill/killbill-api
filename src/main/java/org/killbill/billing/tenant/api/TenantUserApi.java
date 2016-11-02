@@ -17,6 +17,7 @@
 package org.killbill.billing.tenant.api;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.killbill.billing.KillbillApi;
@@ -39,9 +40,13 @@ public interface TenantUserApi extends KillbillApi {
 
     public List<String> getTenantValuesForKey(final String key, final TenantContext context) throws TenantApiException;
 
+    public Map<String, List<String>> searchTenantKeyValues(String searchKey, TenantContext context) throws TenantApiException;
 
     @RequiresPermissions(TENANT_KEYS_CAN_ADD)
     public void addTenantKeyValue(final String key, final String value, final CallContext context) throws TenantApiException;
+
+    @RequiresPermissions(TENANT_KEYS_CAN_ADD)
+    public void updateTenantKeyValue(final String key, final String value, final CallContext context) throws TenantApiException;
 
     @RequiresPermissions(TENANT_KEYS_CAN_DELETE)
     public void deleteTenantKey(final String key, final CallContext context) throws TenantApiException;
