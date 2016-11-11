@@ -61,22 +61,18 @@ public interface EntitlementApi extends KillbillApi {
             throws EntitlementApiException;
 
     /**
-     * Create a new base entitlement and addOn entitlements for that account.
+     * Create multiple new entitlements with addOn entitlements for that account.
      * <p/>
      *
      * @param accountId     the account id
-     * @param externalKey   the bundle external key
-     * @param entitlementEffectiveDate the date at which the entitlement should start. if this is null this is assumed now
-     * @param billingEffectiveDate  the date at which the billing for the subscription should start. if this is null this is assumed now
-     * @param entitlementSpecifier     a list of entitlement specifier
-     * @param isMigrated     whether this subscription comes from a different system (migrated into Kill Bill)
+     * @param baseEntitlementWithAddOnsSpecifier     a list of baseEntitlementWithAddOns specifier
      * @param properties     plugin specific properties
      * @param context       the context
-     * @return the common bundle created
-     * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>.
+     * @return the list of common bundles created
+     * @throws EntitlementApiException if the system fail to create the List of <code>Entitlement</code>.
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
-    Entitlement createBaseEntitlementWithAddOns(UUID accountId, String externalKey, Iterable<EntitlementSpecifier> entitlementSpecifier, LocalDate entitlementEffectiveDate,  LocalDate billingEffectiveDate, boolean isMigrated, Iterable<PluginProperty> properties, CallContext context)
+    List<Entitlement> createBaseEntitlementsWithAddOns(UUID accountId, Iterable<BaseEntitlementWithAddOnsSpecifier> baseEntitlementWithAddOnsSpecifier, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
     /**
