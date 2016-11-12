@@ -22,6 +22,11 @@ package org.killbill.billing.catalog.api;
  */
 public enum BillingActionPolicy {
     /**
+     * The cancellation or {@code Plan} change effectiveDate will occur at the start of the current invoiced service
+     * period and that will trigger a full credit.
+     */
+    START_OF_TERM,
+    /**
      * The cancellation or {@code Plan} change effectiveDate will occur at the end of the current invoiced service
      * period, and that will not trigger any proration and credit.
      */
