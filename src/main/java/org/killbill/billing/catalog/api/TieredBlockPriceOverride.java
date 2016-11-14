@@ -18,44 +18,9 @@
 
 package org.killbill.billing.catalog.api;
 
-import java.math.BigDecimal;
-import java.util.List;
-
-public interface PlanPhasePriceOverride {
-
+public interface TieredBlockPriceOverride extends BlockPriceOverride {
     /**
-     *
-     * @return the name of the phase
+     * @return the max used usage to consider this tiered block.
      */
-    public String getPhaseName();
-
-    /**
-     *
-     * @return the planPhase specifier
-     */
-    public PlanPhaseSpecifier getPlanPhaseSpecifier();
-
-    /**
-     *
-     * @return the currency
-     */
-    public Currency getCurrency();
-
-    /**
-     *
-     * @return the fixed price for that currency
-     */
-    public BigDecimal getFixedPrice();
-
-    /**
-     *
-     * @return the recurring price for that currency
-     */
-    public BigDecimal getRecurringPrice();
-
-    /**
-     *
-     * @return the usage overrides for the phase
-     */
-    public List<UsagePriceOverride> getUsagePriceOverrides();
+    public Double getMax();
 }
