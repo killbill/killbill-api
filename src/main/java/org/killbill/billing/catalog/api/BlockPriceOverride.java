@@ -33,7 +33,13 @@ public interface BlockPriceOverride {
     public Double getSize();
 
     /**
-     * @return the recurring {@code InternationalPrice} for that {@code Block} section.
+     * @return the price for that currency
      */
     public BigDecimal getPrice();
+
+    /**
+     *
+     * @return the currency
+     */
+    public Currency getCurrency();
 }
