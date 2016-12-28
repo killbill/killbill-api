@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlEnum;
 @XmlEnum
 public enum TimeUnit {
     DAYS,
+    WEEKS,
     MONTHS,
     YEARS,
     UNLIMITED
