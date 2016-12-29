@@ -1,3 +1,6 @@
+0.50.1
+    Add TimeUnit.WEEKS
+
 0.50
     shopping cart API
     Add START_OF_TERM BillingActionPolicy
