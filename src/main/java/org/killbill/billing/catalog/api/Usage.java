@@ -30,6 +30,12 @@ public interface Usage extends CatalogEntity {
     public UsageType getUsageType();
 
     /**
+     *
+     * @return the {@code TierBlockPolicy}
+     */
+    public TierBlockPolicy getTierBlockPolicy();
+
+    /**
      * @return @return the {@code BillingPeriod}
      */
     public BillingPeriod getBillingPeriod();
