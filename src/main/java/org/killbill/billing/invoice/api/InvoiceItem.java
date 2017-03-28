@@ -60,9 +60,15 @@ public interface InvoiceItem extends Entity {
 
     String getPlanName();
 
+    String getPrettyPlanName();
+
     String getPhaseName();
 
+    String getPrettyPhaseName();
+
     String getUsageName();
+
+    String getPrettyUsageName();
 
     BigDecimal getRate();
 

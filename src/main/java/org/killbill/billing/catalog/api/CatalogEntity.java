@@ -24,4 +24,14 @@ public interface CatalogEntity {
      * @return the name of the {@code CatalogEntity}
      */
     public String getName();
+
+
+    /**
+     * @return the pretty name of the {@code CatalogEntity}
+     *
+     * If not specified, this default to the name of the {@code CatalogEntity}
+     */
+    public String getPrettyName();
+
+
 }
