@@ -40,10 +40,6 @@ public interface ImmutableAccountData {
      */
     DateTimeZone getTimeZone();
 
-    UUID getParentAccountId();
-
-    Boolean isPaymentDelegatedToParent();
-
     /**
      * @return the account timezone used by the system for dates manipulation (ignoring changes like DST)
      */
