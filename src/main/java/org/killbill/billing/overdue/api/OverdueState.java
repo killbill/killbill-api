@@ -19,6 +19,7 @@
 package org.killbill.billing.overdue.api;
 
 import org.joda.time.Period;
+import org.killbill.billing.catalog.api.Duration;
 
 public interface OverdueState {
 
@@ -71,7 +72,7 @@ public interface OverdueState {
      * @return the period of time for the system to reevaluate the state after it entered in the given state
      * @throws OverdueApiException
      */
-    public Period getAutoReevaluationInterval() throws OverdueApiException;
+    public Duration getAutoReevaluationInterval() throws OverdueApiException;
 
     /**
      *
