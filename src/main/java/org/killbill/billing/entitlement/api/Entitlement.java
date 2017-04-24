@@ -40,10 +40,29 @@ import static org.killbill.billing.security.Permission.ENTITLEMENT_CAN_CREATE;
 /**
  * An Entitlement is created using the <code>EntitlementApi</code>
  * <p/>
- * It contains all the catalog information and current state that answers the entitlement question.
+ * It contains apis to return entitlement state (i.e information about whether the user can access the service purchased through the subscription), and also
+ * apis to modify the state of the subscription (upgrade, downgrade, cancellation).
  * <p/>
- * The users of that API will control all the entitlement behavior when making changes such as the effectiveDate, catalog info,...
- * By default the system will use system wide policies to control the billing aspect, but specific APIs also allow to override those.
+ *
+ * The apis <code>cancelEntitlement</code> and <code>changePlan</code> are relying on either dates and/or policies to achieve correct result.
+ *
+ * The dates provided are <code>LocalDate</code> and they are interpreted by the system using the the account timezone:
+ *
+ * Example: Let's assume for instance a point in time set to 2017-04-24:00.00.01.000Z, and a user that makes a <code>changePlan</code> api call by
+ * specifying an effective date of 2017-04-24 for an account with a UTC-8 TZ. In the account timezone, the clock shows 2017-04-23:16.00.01.000(-8), and
+ * so the change will be effective in the future, any time during the 24 hours period that starts at 2017-04-24:00.00.00.000(-8), with no specific guarantee
+ * about the time.
+ *
+ * In order to ensure that the api call happens immediately (as the call returns), one can pass a null effective date.
+ *
+ * The policies provide an easy way to achieve desired results without having to do any date computation. However, when using the <code>IMMEDIATE</code> policy,
+ * it is interesting to notice that the policy will be converted into an effective date and so the same principle discussed earlier with interpreting the date into
+ * the account timezone will occur, resulting in the operation to not necessarily happen immediately (as the call returns) but instead within the 24 hours window.
+ * The result will be correct in the sense that the service will move to the new Plan on the right day, and if necessary billing pro-ration will show the correct amount.
+ *
+ * In the case of <code>PENDING</code> subscriptions, that is for which the (billing and/or entitlement) effective start date are in the future, providing an <code>IMMEDIATE</code>
+ * policy or a null effective date will default to the effective start date of the subscription.
+ *
  * <p/>
  *
  * @see org.killbill.billing.entitlement.api.EntitlementApi
@@ -162,14 +181,17 @@ public interface Entitlement extends Entity {
      * After this operation, the existing object becomes stale.
      * <p/>
      * <p/>
-     * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
      *
      * @param effectiveDate                the date at which the entitlement should be cancelled
-     * @param overrideBillingEffectiveDate use effectiveDate for billing cancellation date as well
+     * @param overrideBillingEffectiveDate use effectiveDate for billing cancellation date as well, instead of relying on default catalog policies.
      * @param properties                   plugin specific properties
      * @param context                      the context
      * @return the new <code>Entitlement</code> after the cancellation was performed
      * @throws EntitlementApiException if cancellation failed
+     *
+     * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
+     *
+     *
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CANCEL)
     public Entitlement cancelEntitlementWithDate(final LocalDate effectiveDate, final boolean overrideBillingEffectiveDate, final Iterable<PluginProperty> properties, final CallContext context)
@@ -179,7 +201,9 @@ public interface Entitlement extends Entity {
      * Cancel the <code>Entitlement</code> with a policy.
      * After this operation, the existing object becomes stale.
      *
-     * @param policy     the policy that is used by the system to calculate the cancellation date
+     * The billing effective date will be computed from the default catalog policies.
+     *
+     * @param policy     the policy that is used by the system to calculate the entitlement cancellation date
      * @param properties plugin specific properties
      * @param context    the context
      * @return the new <code>Entitlement</code> after the cancellation was performed
@@ -193,10 +217,10 @@ public interface Entitlement extends Entity {
      * Cancels the <code>Entitlement</code> at the specified date
      * After this operation, the existing object becomes stale.
      * <p/>
-     * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
+     *
      *
      * @param effectiveDate the date at which the entitlement should be cancelled
-     * @param billingPolicy the billingPolicy
+     * @param billingPolicy the billingPolicy that should be use to compute the billing cancellation date
      * @param properties    plugin specific properties
      * @param context       the context
      * @return the new <code>Entitlement</code> after the cancellation was performed
@@ -223,6 +247,7 @@ public interface Entitlement extends Entity {
 
     /**
      * Removes a pending future cancellation on an entitlement.
+     *
      * <p/>
      * The call will only succeed if the entitlement has been cancelled previously and if the effectiveDate of the cancellation
      * did not occur yet. In such a case it will remove both the cancellation event at the entitlement and billing level-- regardless
@@ -239,7 +264,7 @@ public interface Entitlement extends Entity {
      * Change <code>Entitlement</code> plan using default policy.
      * After this operation, the existing object becomes stale.
      * <p/>
-     * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
+     *
      *
      * @param spec       the product specification for the change
      * @param overrides  the price override for each phase and for a specific currency
@@ -256,11 +281,11 @@ public interface Entitlement extends Entity {
      * Change <code>Entitlement</code> plan at the specified date.
      * After this operation, the existing object becomes stale.
      * <p/>
-     * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
+     *
      *
      * @param spec          the product specification for the change
      * @param overrides     the price override for each phase and for a specific currency
-     * @param effectiveDate the date at which the entitlement should be changed
+     * @param effectiveDate the effective date at which the entitlement and billing should be changed
      * @param properties    plugin specific properties
      * @param context       the context
      * @return the new <code>Entitlement</code> after the change was performed
@@ -278,8 +303,8 @@ public interface Entitlement extends Entity {
      *
      * @param spec          the product specification for the change
      * @param overrides     the price override for each phase and for a specific currency
-     * @param effectiveDate the date at which the entitlement should be changed
-     * @param billingPolicy the override billing policy
+     * @param effectiveDate unused (reserved for future use)
+     * @param billingPolicy the overriden billing policy that will determine effective date for the changePlan operation.
      * @param properties    plugin specific properties
      * @param context       the context
      * @return the new <code>Entitlement</code> after the change was performed
