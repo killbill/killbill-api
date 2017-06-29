@@ -22,6 +22,7 @@ import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 
+import static org.killbill.billing.security.Permission.CATALOG_CAN_DELETE;
 import static org.killbill.billing.security.Permission.CATALOG_CAN_UPLOAD;
 
 /**
@@ -77,4 +78,14 @@ public interface CatalogUserApi extends KillbillApi {
      */
     @RequiresPermissions(CATALOG_CAN_UPLOAD)
     void addSimplePlan(SimplePlanDescriptor planDescriptor, DateTime requestedDate, CallContext context) throws CatalogApiException;
+
+
+    /**
+     * Delete a per-tenant catalog  (should be used with caution)
+     *
+     * @param callContext    the user context
+     * @throws CatalogApiException
+     */
+    @RequiresPermissions(CATALOG_CAN_DELETE)
+    void deleteCatalog(CallContext callContext) throws CatalogApiException;
 }
