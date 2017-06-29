@@ -113,7 +113,13 @@ public enum Permission {
     /*
      * Administrator that can update state (to correct data associated to bugs, ...)
      */
-    ADMIN_CAN_FIX_DATA("admin", "update");
+    ADMIN_CAN_FIX_DATA("admin", "update"),
+
+
+    /*
+     * TestResource is provided by the system
+     */
+    TEST_AVAILABLE("test", "*");
 
     private final String group;
     private final String value;
