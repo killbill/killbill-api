@@ -512,14 +512,15 @@ public interface PaymentApi extends KillbillApi {
             throws PaymentApiException;
 
     /**
-     * @param accountId      the account id
-     * @param withPluginInfo whether we want to retrieve the plugin info for that payment method
-     * @param properties     plugin specific properties
-     * @param context        the call context
+     * @param accountId         the account id
+     * @param includedInactive  returns the payment method even if this is not active
+     * @param withPluginInfo    whether we want to retrieve the plugin info for that payment method
+     * @param properties        plugin specific properties
+     * @param context           the call context
      * @return the list of payment methods
      * @throws PaymentApiException
      */
-    public List<PaymentMethod> getAccountPaymentMethods(UUID accountId, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
+    public List<PaymentMethod> getAccountPaymentMethods(UUID accountId, boolean includedInactive, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
     /**
