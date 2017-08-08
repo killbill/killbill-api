@@ -149,4 +149,9 @@ public interface Invoice extends Entity {
      * @return true if this is a parent invoice
      */
     boolean isParentInvoice();
+
+    /**
+     * @return the parent accountId or null
+     */
+    UUID getParentAccountId();
 }
