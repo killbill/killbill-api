@@ -156,7 +156,7 @@ public interface Invoice extends Entity {
     UUID getParentAccountId();
 
     /**
-     * @return the parent accountId or null
+     * @return the parent invoiceId or null
      */
     UUID getParentInvoiceId();
 }
