@@ -205,7 +205,7 @@ public enum Currency {
 
     public static Currency fromCode(final String currencyCode) {
         for (final Currency currency : Currency.values()) {
-            if (currency.toString() == currencyCode) {
+            if (currency.toString().equals(currencyCode)) {
                 return currency;
             }
         }
