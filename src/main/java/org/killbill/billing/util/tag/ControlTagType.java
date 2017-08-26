@@ -32,7 +32,8 @@ public enum ControlTagType {
     MANUAL_PAY(new UUID(0, 5), "Indicates that Killbill doesn't process payments for that account (external payments only)", true, false, Collections.<ObjectType>singletonList(ObjectType.ACCOUNT)),
     TEST(new UUID(0, 6), "Indicates that this is a test account", false, false, Collections.<ObjectType>singletonList(org.killbill.billing.ObjectType.ACCOUNT)),
     PARTNER(new UUID(0, 7), "Indicates that this is a partner account", false, false, Collections.<ObjectType>singletonList(org.killbill.billing.ObjectType.ACCOUNT)),
-    AUTO_INVOICING_DRAFT(new UUID(0, 8), "Generate account invoices in DRAFT mode.", false, false, Collections.<ObjectType>singletonList(org.killbill.billing.ObjectType.ACCOUNT));
+    AUTO_INVOICING_DRAFT(new UUID(0, 8), "Generate account invoices in DRAFT mode.", false, false, Collections.<ObjectType>singletonList(org.killbill.billing.ObjectType.ACCOUNT)),
+    AUTO_INVOICING_REUSE_DRAFT(new UUID(0, 9), "Use existing draft invoice if exists.", false, false, Collections.<ObjectType>singletonList(org.killbill.billing.ObjectType.ACCOUNT));
 
     private final UUID id;
     private final String description;
