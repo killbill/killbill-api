@@ -1,6 +1,9 @@
 0.51.1
     Initial version against 0.19.x branch
 
+0.50.2
+    Fix comparing currency code
+
 0.50.1
     Add TimeUnit.WEEKS
 
