@@ -1,3 +1,6 @@
+0.50.2
+    Fix comparing currency code
+
 0.50.1
     Add TimeUnit.WEEKS
 
