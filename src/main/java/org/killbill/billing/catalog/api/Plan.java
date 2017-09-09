@@ -27,6 +27,11 @@ import org.joda.time.DateTime;
 public interface Plan extends CatalogEntity {
 
     /**
+     * @return the recurring billing mode for this catalog
+     */
+    public BillingMode getRecurringBillingMode();
+
+    /**
      * @return an array of {@code PlanPhase}
      */
     public PlanPhase[] getInitialPhases();
