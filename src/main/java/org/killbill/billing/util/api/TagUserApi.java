@@ -43,6 +43,13 @@ public interface TagUserApi extends KillbillApi {
     public List<TagDefinition> getTagDefinitions(TenantContext context);
 
     /**
+     * @param context           The tenant context
+     * @param includeSystemTags Whether to include system tags
+     * @return the list of all available tag definitions
+     */
+    public List<TagDefinition> getTagDefinitions(TenantContext context, boolean includeSystemTags);
+
+    /**
      * @param definitionName Identifies the definition.
      * @param description    Describes the use of the definition.
      * @param context        The call context, for auditing purposes
