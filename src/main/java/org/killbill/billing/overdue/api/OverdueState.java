@@ -74,11 +74,5 @@ public interface OverdueState {
      */
     public Duration getAutoReevaluationInterval() throws OverdueApiException;
 
-    /**
-     *
-     * @return the email notification details
-     */
-    public EmailNotification getEmailNotification();
-
 
 }
