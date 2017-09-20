@@ -512,6 +512,25 @@ public interface PaymentApi extends KillbillApi {
             throws PaymentApiException;
 
     /**
+     *
+     * @param account                  the account
+     * @param paymentMethodExternalKey the external key
+     * @param pluginName               the plugin name
+     * @param setDefault               whether this should be set as a default payment method
+     * @param paymentMethodInfo        the details for the payment method
+     * @param properties               plugin specific properties
+     * @param paymentOptions           options to control payment behavior
+     * @param context                  the call context
+     * @return the uuid of the payment method
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_METHOD_CAN_CREATE)
+    public UUID addPaymentMethodWithPaymentControl(Account account, String paymentMethodExternalKey, String pluginName, boolean setDefault, PaymentMethodPlugin paymentMethodInfo, Iterable<PluginProperty> properties, PaymentOptions paymentOptions, CallContext context)
+            throws PaymentApiException;
+
+
+
+    /**
      * @param accountId         the account id
      * @param includedInactive  returns the payment method even if this is not active
      * @param withPluginInfo    whether we want to retrieve the plugin info for that payment method
