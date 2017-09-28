@@ -1,3 +1,9 @@
+0.51.2
+    Remove StaticCatalog#getRecurringBillingMode
+    Implement proper api to specify a targetPhase when changing Plan.
+    payment: Add PaymentApi#addPaymentMethodWithPaymentControl to allow an an overwrite of pluginName during addPaymentMethod operation
+    util: introduce QueueRetryException
+
 0.51.1
     Initial version against 0.19.x branch
 
