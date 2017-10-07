@@ -51,13 +51,14 @@ public interface EntitlementApi extends KillbillApi {
      * @param entitlementEffectiveDate the date at which the entitlement should start. if this is null this is assumed now
      * @param billingEffectiveDate  the date at which the billing for the subscription should start. if this is null this is assumed now
      * @param isMigrated     whether this subscription comes from a different system (migrated into Kill Bill)
+     * @param renameCancelledBundleIfExist rename bundle external key associated to other bundles with same key where subscriptions were cancelled
      * @param properties     plugin specific properties
      * @param context       the context
      * @return a new entitlement
      * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>.
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
-    public Entitlement createBaseEntitlement(UUID accountId, PlanPhaseSpecifier spec, String externalKey, List<PlanPhasePriceOverride> overrides, LocalDate entitlementEffectiveDate,  LocalDate billingEffectiveDate, boolean isMigrated, Iterable<PluginProperty> properties, CallContext context)
+    public Entitlement createBaseEntitlement(UUID accountId, PlanPhaseSpecifier spec, String externalKey, List<PlanPhasePriceOverride> overrides, LocalDate entitlementEffectiveDate,  LocalDate billingEffectiveDate, boolean isMigrated, boolean renameCancelledBundleIfExist, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -66,13 +67,14 @@ public interface EntitlementApi extends KillbillApi {
      *
      * @param accountId     the account id
      * @param baseEntitlementWithAddOnsSpecifier     a list of baseEntitlementWithAddOns specifier
+     * @param renameCancelledBundleIfExist rename bundle external key associated to other bundles with same key where subscriptions were cancelled
      * @param properties     plugin specific properties
      * @param context       the context
      * @return the list of common bundles created
      * @throws EntitlementApiException if the system fail to create the List of <code>Entitlement</code>.
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
-    List<Entitlement> createBaseEntitlementsWithAddOns(UUID accountId, Iterable<BaseEntitlementWithAddOnsSpecifier> baseEntitlementWithAddOnsSpecifier, Iterable<PluginProperty> properties, CallContext context)
+    List<Entitlement> createBaseEntitlementsWithAddOns(UUID accountId, Iterable<BaseEntitlementWithAddOnsSpecifier> baseEntitlementWithAddOnsSpecifier, boolean renameCancelledBundleIfExist, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
     /**
