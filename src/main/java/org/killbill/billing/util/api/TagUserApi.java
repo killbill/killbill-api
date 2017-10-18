@@ -18,6 +18,7 @@ package org.killbill.billing.util.api;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.killbill.billing.KillbillApi;
@@ -50,7 +51,7 @@ public interface TagUserApi extends KillbillApi {
      * @throws TagDefinitionApiException
      */
     @RequiresPermissions(TAG_CAN_CREATE_TAG_DEFINITION)
-    public TagDefinition createTagDefinition(String definitionName, String description, CallContext context) throws TagDefinitionApiException;
+    public TagDefinition createTagDefinition(String definitionName, String description, Set<ObjectType> applicableObjectTypes, CallContext context) throws TagDefinitionApiException;
 
     /**
      * @param tagDefinitionId The UUID for that tagDefinition
