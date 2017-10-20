@@ -135,6 +135,10 @@ public interface SecurityApi extends KillbillApi {
     @RequiresPermissions(USER_CAN_CREATE)
     public void addRoleDefinition(String role, List<String> permissions, CallContext context) throws SecurityApiException;
 
+
+    @RequiresPermissions(USER_CAN_CREATE)
+    public void updateRoleDefinition(String role, List<String> permissions, CallContext context) throws SecurityApiException;
+
     /**
      * Retrieves the list of permissions associated to that role  in the Shiro store (JDBCRealm)
      * @param role           the role name
