@@ -1,3 +1,8 @@
+0.51.3
+    entitlement: Add parameter when creating bundle to allow reusing key that is not active
+    Enhance TagUserApi#createTagDefinition to add list of applicable types
+    Add SecurityApi#updateRoleDefinition
+
 0.51.2
     Remove StaticCatalog#getRecurringBillingMode
     Implement proper api to specify a targetPhase when changing Plan.
