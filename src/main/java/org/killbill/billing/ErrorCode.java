@@ -62,6 +62,7 @@ public enum ErrorCode {
 
     /* Un-cancellation */
     SUB_UNCANCEL_BAD_STATE(1070, "Subscription (billing) %s is not in pending cancelled state: Failed to uncancel plan"),
+    SUB_UNDO_CHANGE_BAD_STATE(1071, "Subscription (billing) %s does not have a pending change plan: Failed to undo change plan"),
 
     /* Fetch */
     SUB_GET_NO_BUNDLE_FOR_SUBSCRIPTION(1080, "Could not find a bundle for subscription %s"),

@@ -279,6 +279,16 @@ public interface Entitlement extends Entity {
             throws EntitlementApiException;
 
     /**
+     *
+     * @param properties plugin specific properties
+     * @param context    the context
+     * @throws EntitlementApiException
+     */
+    @RequiresPermissions(ENTITLEMENT_CAN_CHANGE_PLAN)
+    public void undoChangePlan(final Iterable<PluginProperty> properties, final CallContext context)
+            throws EntitlementApiException;
+
+    /**
      * Change <code>Entitlement</code> plan at the specified date.
      * After this operation, the existing object becomes stale.
      * <p/>
