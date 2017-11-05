@@ -38,6 +38,7 @@ public enum Permission {
      * Custom fields
      */
     CUSTOM_FIELDS_CAN_ADD("custom_field", "add"),
+    CUSTOM_FIELDS_CAN_UPDATE("custom_field", "update"),
     CUSTOM_FIELDS_CAN_DELETE("custom_field", "delete"),
 
     /*

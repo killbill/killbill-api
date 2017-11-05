@@ -301,6 +301,8 @@ public enum ErrorCode {
    * Range 9000: Custom Fields
    */
     CUSTOM_FIELD_ALREADY_EXISTS(9000, "The custom field %s already exists"),
+    CUSTOM_FIELD_DOES_NOT_EXISTS_FOR_ID(9001, "The custom field does not exists for id %s"),
+    CUSTOM_FIELD_INVALID_UPDATE(9002, "Failed to update custom field %s: Invalid value %s for field %s"),
 
     /*
      *

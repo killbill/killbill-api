@@ -29,6 +29,7 @@ import org.killbill.billing.util.entity.Pagination;
 
 import static org.killbill.billing.security.Permission.CUSTOM_FIELDS_CAN_ADD;
 import static org.killbill.billing.security.Permission.CUSTOM_FIELDS_CAN_DELETE;
+import static org.killbill.billing.security.Permission.CUSTOM_FIELDS_CAN_UPDATE;
 
 public interface CustomFieldUserApi extends KillbillApi {
 
@@ -58,6 +59,15 @@ public interface CustomFieldUserApi extends KillbillApi {
      */
     @RequiresPermissions(CUSTOM_FIELDS_CAN_ADD)
     void addCustomFields(List<CustomField> fields, CallContext context) throws CustomFieldApiException;
+
+    /**
+     * @param fields  the list of fields to add
+     * @param context the call context
+     * @throws CustomFieldApiException
+     */
+    @RequiresPermissions(CUSTOM_FIELDS_CAN_UPDATE)
+    void updateCustomFields(List<CustomField> fields, CallContext context) throws CustomFieldApiException;
+
 
     /**
      * @param fields
