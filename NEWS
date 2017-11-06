@@ -1,3 +1,7 @@
+0.51.4
+    Add Entitlement#undoChangePlan api
+    Add api CustomFieldUserApi#updateCustomFields
+
 0.51.3
     entitlement: Add parameter when creating bundle to allow reusing key that is not active
     Enhance TagUserApi#createTagDefinition to add list of applicable types
