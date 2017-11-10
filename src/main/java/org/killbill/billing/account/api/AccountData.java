@@ -18,8 +18,10 @@ package org.killbill.billing.account.api;
 
 import java.util.UUID;
 
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.killbill.billing.catalog.api.Currency;
+
 
 /**
  * The interface <code>AccountData</code> specifies all the fields on the <code>Account</code>.
@@ -69,6 +71,11 @@ public interface AccountData {
      * @return the UUID of the current default paymentMethod
      */
     public UUID getPaymentMethodId();
+
+    /**
+     * @return the referenceTime for that account
+     */
+    public DateTime getReferenceTime();
 
     /**
      * @return the timezone for that account
