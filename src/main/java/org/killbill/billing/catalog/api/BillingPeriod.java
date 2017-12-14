@@ -29,6 +29,8 @@ public enum BillingPeriod {
     WEEKLY(Period.weeks(1)),
     BIWEEKLY(Period.weeks(2)),
     THIRTY_DAYS(Period.days(30)),
+    SIXTY_DAYS(Period.days(60)),
+    NINETY_DAYS(Period.days(90)),
     MONTHLY(Period.months(1)),
     QUARTERLY(Period.months(3)),
     BIANNUAL(Period.months(6)),
