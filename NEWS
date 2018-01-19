@@ -1,3 +1,6 @@
+0.51.8
+    Add BillingPeriod.BIMESTRIAL and BillingPeriod.TRIANNUAL
+
 0.51.7
     Add BillingPeriod.SIXTY_DAYS and BillingPeriod.NINETY_DAYS
 
