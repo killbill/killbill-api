@@ -74,6 +74,10 @@ public interface InvoiceItem extends Entity {
 
     UUID getLinkedItemId();
 
+    Integer getQuantity();
+
+    String getItemDetails();
+
     /**
      * Items match if they correspond to the same subscription for the same catalog plan and same start / end dates
      *
