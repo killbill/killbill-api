@@ -1,3 +1,6 @@
+0.51.9
+    make Pagination offer a close method
+
 0.51.8
     Add BillingPeriod.BIMESTRIAL and BillingPeriod.TRIANNUAL
 
