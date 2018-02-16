@@ -220,6 +220,7 @@ public enum ErrorCode {
     INVOICE_ITEMS_ADJUSTMENT_MISSING(4025, "Missing invoice item adjustements during payment refund"),
     INVOICE_MISSING_PARENT_INVOICE(4026, "Missing parent invoice for invoice id %s"),
     CHILD_ACCOUNT_MISSING_CREDIT(4027, "Child account %s does not have credit"),
+    CAN_NOT_VOID_INVOICE_THAT_IS_PAID(4028, "Invoice %s can not be voided. Invoice is paid or partially paid."),
 
     /*
      *
