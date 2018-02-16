@@ -48,7 +48,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context   the tenant context
      * @return all invoices
      */
-    public List<Invoice> getInvoicesByAccount(UUID accountId, boolean includesMigrated, TenantContext context);
+    public List<Invoice> getInvoicesByAccount(UUID accountId, boolean includesMigrated, boolean includeVoidedInvoices, TenantContext context);
 
     /**
      * Find invoices from a given day, for a given account.
@@ -58,7 +58,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context   the tenant context
      * @return a list of invoices
      */
-    public List<Invoice> getInvoicesByAccount(UUID accountId, LocalDate fromDate, TenantContext context);
+    public List<Invoice> getInvoicesByAccount(UUID accountId, LocalDate fromDate, boolean includeVoidedInvoices, TenantContext context);
 
     /**
      * @param context the user context
@@ -335,4 +335,13 @@ public interface InvoiceUserApi extends KillbillApi {
      * @throws InvoiceApiException if any unexpected error occurs
      */
     List<InvoiceItem> getInvoiceItemsByParentInvoice(UUID parentInvoiceId, final TenantContext context) throws InvoiceApiException;
+
+    /**
+     * Move the invoice status from DRAFT or COMMITTED to VOID
+     *
+     * @param invoiceId invoice id
+     * @param context the tenant context
+     * @throws InvoiceApiException
+     */
+    public void voidInvoice(UUID invoiceId, CallContext context) throws InvoiceApiException;
 }
