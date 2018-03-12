@@ -261,7 +261,7 @@ public enum ErrorCode {
     PAYMENT_REFUND_AMOUNT_NEGATIVE_OR_NULL(7001, "Refund on payment %s not allowed with amount %s"),
     PAYMENT_GET_PAYMENT_METHODS(7004, "Failed to retrieve payment method for account %s : %s"),
     PAYMENT_ADD_PAYMENT_METHOD(7005, "Failed to add payment method for account %s : %s"),
-    PAYMENT_REFRESH_PAYMENT_METHOD(7006, "Failed to resfresh payment methods for account %s : %s"),
+    PAYMENT_REFRESH_PAYMENT_METHOD(7006, "Failed to refresh payment methods for account %s : %s"),
     PAYMENT_DEL_PAYMENT_METHOD(7007, "Failed to delete payment method for account %s : %s"),
     PAYMENT_UPD_PAYMENT_METHOD(7008, "Failed to update payment method for account %s : %s"),
     PAYMENT_CREATE_PAYMENT(7009, "Failed to create payment for account %s : %s"),
