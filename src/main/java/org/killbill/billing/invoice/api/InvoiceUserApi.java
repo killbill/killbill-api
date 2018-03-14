@@ -1,7 +1,9 @@
 /*
  * Copyright 2010-2013 Ning, Inc.
+ * Copyright 2014-2018 Groupon, Inc
+ * Copyright 2014-2018 The Billing Project, LLC
  *
- * Ning licenses this file to you under the Apache License, version 2.0
+ * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
  * License.  You may obtain a copy of the License at:
  *
@@ -209,12 +211,13 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param autoCommit    the flag to indicate if the invoice is set to COMMITTED or DRAFT and events are sent
      * @param context       the call context
      * @param description   the item description
+     * @param itemDetails   the item details
      * @return the credit invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(ACCOUNT_CAN_CREDIT)
     public InvoiceItem insertCredit(UUID accountId, BigDecimal amount, LocalDate effectiveDate, Currency currency,
-                                    boolean autoCommit, String description, CallContext context) throws InvoiceApiException;
+                                    boolean autoCommit, String description, String itemDetails, CallContext context) throws InvoiceApiException;
 
     /**
      * Add a credit to an invoice. This can be used to adjust invoices.
@@ -225,13 +228,14 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param effectiveDate the day to grant the credit, in the account timezone
      * @param currency      the credit currency
      * @param description   the item description
+     * @param itemDetails   the item details
      * @param context       the call context
      * @return the credit invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_CREDIT)
     public InvoiceItem insertCreditForInvoice(UUID accountId, UUID invoiceId, BigDecimal amount, LocalDate effectiveDate,
-                                              Currency currency, String description, CallContext context) throws InvoiceApiException;
+                                              Currency currency, String description, String itemDetails, CallContext context) throws InvoiceApiException;
 
     /**
      * Adjust fully a given invoice item.
@@ -241,13 +245,14 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param invoiceItemId invoice item id
      * @param effectiveDate the effective date for this adjustment invoice item (in the account timezone)
      * @param description   the item description
+     * @param itemDetails   the item details
      * @param context       the call context
      * @return the adjustment invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_ITEM_ADJUST)
     public InvoiceItem insertInvoiceItemAdjustment(UUID accountId, UUID invoiceId, UUID invoiceItemId, LocalDate effectiveDate,
-                                                   String description, CallContext context) throws InvoiceApiException;
+                                                   String description, String itemDetails, CallContext context) throws InvoiceApiException;
 
     /**
      * Adjust partially a given invoice item.
@@ -259,13 +264,14 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param amount        the adjustment amount
      * @param currency      adjustment currency
      * @param description   the item description
+     * @param itemDetails   the item details
      * @param context       the call context
      * @return the adjustment invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_ITEM_ADJUST)
     public InvoiceItem insertInvoiceItemAdjustment(UUID accountId, UUID invoiceId, UUID invoiceItemId, LocalDate effectiveDate,
-                                                   BigDecimal amount, Currency currency, String description, CallContext context) throws InvoiceApiException;
+                                                   BigDecimal amount, Currency currency, String description, String itemDetails, CallContext context) throws InvoiceApiException;
 
     /**
      * Delete a CBA item.
