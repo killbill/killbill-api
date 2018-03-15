@@ -1,3 +1,7 @@
+0.51.12
+    Fix typo in PAYMENT_REFRESH_PAYMENT_METHOD message
+    Pass itemDetails to insertCredit, insertCreditForInvoice and insertInvoiceItemAdjustment APIs
+
 0.51.11
     Add void invoice API
 
