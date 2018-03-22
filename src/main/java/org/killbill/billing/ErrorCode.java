@@ -221,6 +221,7 @@ public enum ErrorCode {
     INVOICE_MISSING_PARENT_INVOICE(4026, "Missing parent invoice for invoice id %s"),
     CHILD_ACCOUNT_MISSING_CREDIT(4027, "Child account %s does not have credit"),
     CAN_NOT_VOID_INVOICE_THAT_IS_PAID(4028, "Invoice %s can not be voided. Invoice is paid or partially paid."),
+    INVOICE_PLUGIN_API_ABORTED(4029, "Invoice plugin aborted call: %s"),
 
     /*
      *
