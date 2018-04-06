@@ -221,6 +221,7 @@ public enum ErrorCode {
     INVOICE_MISSING_PARENT_INVOICE(4026, "Missing parent invoice for invoice id %s"),
     CHILD_ACCOUNT_MISSING_CREDIT(4027, "Child account %s does not have credit"),
     CAN_NOT_VOID_INVOICE_THAT_IS_PAID(4028, "Invoice %s can not be voided. Invoice is paid or partially paid."),
+    INVOICE_PLUGIN_API_ABORTED(4029, "Invoice plugin aborted call: %s"),
 
     /*
      *
@@ -261,7 +262,7 @@ public enum ErrorCode {
     PAYMENT_REFUND_AMOUNT_NEGATIVE_OR_NULL(7001, "Refund on payment %s not allowed with amount %s"),
     PAYMENT_GET_PAYMENT_METHODS(7004, "Failed to retrieve payment method for account %s : %s"),
     PAYMENT_ADD_PAYMENT_METHOD(7005, "Failed to add payment method for account %s : %s"),
-    PAYMENT_REFRESH_PAYMENT_METHOD(7006, "Failed to resfresh payment methods for account %s : %s"),
+    PAYMENT_REFRESH_PAYMENT_METHOD(7006, "Failed to refresh payment methods for account %s : %s"),
     PAYMENT_DEL_PAYMENT_METHOD(7007, "Failed to delete payment method for account %s : %s"),
     PAYMENT_UPD_PAYMENT_METHOD(7008, "Failed to update payment method for account %s : %s"),
     PAYMENT_CREATE_PAYMENT(7009, "Failed to create payment for account %s : %s"),
