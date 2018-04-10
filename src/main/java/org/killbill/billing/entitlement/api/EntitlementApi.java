@@ -78,9 +78,9 @@ public interface EntitlementApi extends KillbillApi {
             throws EntitlementApiException;
 
     /**
-     * Adds an ADD_ON entitlement to previously created entitlement.
+     * Adds an ADD_ON|STANDALONE entitlement to previously created entitlement.
      * <p/>
-     * The <code>PlanPhaseSpecifier<code/> should refer to a <code>ProductCategory.ADD_ON</code>.
+     * The <code>PlanPhaseSpecifier<code/> should refer to a <code>ProductCategory.ADD_ON or ProductCategory.STANDALONE</code>.
      * The new entitlement will be bundled using the externalKey that was specified when creating the
      * base entitlement.
      *
@@ -97,30 +97,6 @@ public interface EntitlementApi extends KillbillApi {
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
     public Entitlement addEntitlement(UUID bundleId, PlanPhaseSpecifier spec, List<PlanPhasePriceOverride> overrides, LocalDate entitlementEffectiveDate,  LocalDate billingEffectiveDate, boolean isMigrated, Iterable<PluginProperty> properties, CallContext context)
-            throws EntitlementApiException;
-
-
-    /**
-     * Adds an STANDALONE entitlement to previously created entitlement.
-     * <p/>
-     * The <code>PlanPhaseSpecifier<code/> should refer to a <code>ProductCategory.STANDALONE</code>.
-     * The new entitlement will be bundled using the externalKey that was specified when creating the
-     * base entitlement.
-     *
-     * @param bundleId      the id of the bundle
-     * @param accountId     the account id
-     * @param spec          the product specification for that new entitlement
-     * @param overrides     the price override for each phase and for a specific currency
-     * @param entitlementEffectiveDate the date at which the entitlement should start. if this is null this is assumed now
-     * @param billingEffectiveDate  the date at which the billing for the subscription should start. if this is null this is assumed now
-     * @param isMigrated     whether this subscription comes from a different system (migrated into Kill Bill)
-     * @param properties     plugin specific properties
-     * @param context       the context
-     * @return a new entitlement
-     * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>
-     */
-    @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
-    public Entitlement addEntitlement(UUID bundleId, UUID accountId, PlanPhaseSpecifier spec, List<PlanPhasePriceOverride> overrides, LocalDate entitlementEffectiveDate,  LocalDate billingEffectiveDate, boolean isMigrated, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
     /**
