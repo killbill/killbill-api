@@ -78,9 +78,9 @@ public interface EntitlementApi extends KillbillApi {
             throws EntitlementApiException;
 
     /**
-     * Adds an ADD_ON entitlement to previously created entitlement.
+     * Adds an ADD_ON|STANDALONE entitlement to previously created entitlement.
      * <p/>
-     * The <code>PlanPhaseSpecifier<code/> should refer to a <code>ProductCategory.ADD_ON</code>.
+     * The <code>PlanPhaseSpecifier<code/> should refer to a <code>ProductCategory.ADD_ON or ProductCategory.STANDALONE</code>.
      * The new entitlement will be bundled using the externalKey that was specified when creating the
      * base entitlement.
      *
