@@ -47,6 +47,13 @@ public interface Catalog {
 
     /**
      * @param requestedDate specifies the state of the catalog for that date
+     * @return an array of available {@code Unit}s
+     * @throws CatalogApiException
+     */
+    public Unit[] getUnits(DateTime requestedDate) throws CatalogApiException;
+
+    /**
+     * @param requestedDate specifies the state of the catalog for that date
      * @return an array of available {@code Product}s
      * @throws CatalogApiException
      */
