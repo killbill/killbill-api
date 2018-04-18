@@ -1,3 +1,6 @@
+0.51.15
+    New method to get all audit logs for an account
+
 0.51.14
     catalog: add getUnits method to Catalog interface
 
