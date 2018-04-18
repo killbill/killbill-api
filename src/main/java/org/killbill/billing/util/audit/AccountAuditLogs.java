@@ -52,4 +52,6 @@ public interface AccountAuditLogs {
     public List<AuditLog> getAuditLogsForCustomField(UUID customFieldId);
 
     public AccountAuditLogsForObjectType getAuditLogs(ObjectType objectType);
+
+    public List<AuditLog> getAuditLogs();
 }
