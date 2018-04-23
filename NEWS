@@ -1,3 +1,6 @@
+0.51.16
+    Change EntitlementApi to return UUID only
+
 0.51.15
     New method to get all audit logs for an account
 
