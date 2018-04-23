@@ -21,6 +21,8 @@ import java.util.UUID;
 
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.security.RequiresPermissions;
+import org.killbill.billing.util.api.AuditLevel;
+import org.killbill.billing.util.audit.AuditLogWithHistory;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.entity.Pagination;
@@ -153,5 +155,15 @@ public interface AccountUserApi extends KillbillApi {
      * @return the list of children accounts for that parent account id
      */
     public List<Account> getChildrenAccounts(UUID parentAccountId, TenantContext context) throws AccountApiException;
+
+    /**
+     * Get all the audit entries with history for a given account.
+     *
+     * @param accountId   the object id
+     * @param auditLevel audit level (verbosity)
+     * @param context    the tenant context
+     * @return all audit entries with history for that object
+     */
+    List<AuditLogWithHistory> getAuditLogsWithHistoryForId(UUID accountId, AuditLevel auditLevel, TenantContext context) throws AccountApiException;
 
 }
