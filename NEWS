@@ -1,3 +1,6 @@
+0.51.17
+    New API to retrieve history info from any objects
+
 0.51.16
     Change EntitlementApi to return UUID only
 
