@@ -1,3 +1,6 @@
+0.51.18
+    Add InvoiceItem#getProductName and InvoiceItem#getPrettyProductName apis
+
 0.51.17
     New API to retrieve history info from any objects
 

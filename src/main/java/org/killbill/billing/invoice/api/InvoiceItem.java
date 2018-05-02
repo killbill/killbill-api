@@ -58,6 +58,10 @@ public interface InvoiceItem extends Entity {
 
     UUID getSubscriptionId();
 
+    String getProductName();
+
+    String getPrettyProductName();
+
     String getPlanName();
 
     String getPrettyPlanName();
