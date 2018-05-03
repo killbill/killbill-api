@@ -174,23 +174,21 @@ public interface TagUserApi extends KillbillApi {
     /**
      * Get all the audit entries with history for a given tag.
      *
-     * @param accountId     the account id
      * @param tagId         the custom field id
      * @param auditLevel    audit level (verbosity)
      * @param context       the tenant context
      * @return all audit entries with history for a tag
      */
-    List<AuditLogWithHistory> getTagAuditLogsWithHistoryForId(UUID accountId, UUID tagId, AuditLevel auditLevel, TenantContext context);
+    List<AuditLogWithHistory> getTagAuditLogsWithHistoryForId(UUID tagId, AuditLevel auditLevel, TenantContext context);
 
     /**
      * Get all the audit entries with history for a given tag definition.
      *
-     * @param accountId         the account id
      * @param tagDefinitionId   the custom field id
      * @param auditLevel        audit level (verbosity)
      * @param context           the tenant context
      * @return all audit entries with history for a tag definition
      */
-    List<AuditLogWithHistory> getTagDefinitionAuditLogsWithHistoryForId(UUID accountId, UUID tagDefinitionId, AuditLevel auditLevel, TenantContext context);
+    List<AuditLogWithHistory> getTagDefinitionAuditLogsWithHistoryForId(UUID tagDefinitionId, AuditLevel auditLevel, TenantContext context);
 
 }

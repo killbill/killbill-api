@@ -698,46 +698,42 @@ public interface PaymentApi extends KillbillApi {
     /**
      * Get all the audit entries with history for a given payment.
      *
-     * @param accountId      the account id
      * @param paymentId     the payment id
      * @param auditLevel    audit level (verbosity)
      * @param context       the tenant context
      * @return all audit entries with history for a payment
      */
-    List<AuditLogWithHistory> getPaymentAuditLogsWithHistoryForId(UUID accountId, UUID paymentId, AuditLevel auditLevel, TenantContext context);
+    List<AuditLogWithHistory> getPaymentAuditLogsWithHistoryForId(UUID paymentId, AuditLevel auditLevel, TenantContext context);
 
     /**
      * Get all the audit entries with history for a given payment method.
      *
-     * @param accountId         the account id
      * @param paymentMethodId   the payment method id
      * @param auditLevel        audit level (verbosity)
      * @param context           the tenant context
      * @return all audit entries with history for a payment method
      */
-    List<AuditLogWithHistory> getPaymentMethodAuditLogsWithHistoryForId(UUID accountId, UUID paymentMethodId, AuditLevel auditLevel, TenantContext context);
+    List<AuditLogWithHistory> getPaymentMethodAuditLogsWithHistoryForId(UUID paymentMethodId, AuditLevel auditLevel, TenantContext context);
 
     /**
      * Get all the audit entries with history for a given payment attempt.
      *
-     * @param accountId         the account id
      * @param paymentAttemptId  the payment attempt id
      * @param auditLevel        audit level (verbosity)
      * @param context           the tenant context
      * @return all audit entries with history for a payment attempt
      */
-    List<AuditLogWithHistory> getPaymentAttemptAuditLogsWithHistoryForId(UUID accountId, UUID paymentAttemptId, AuditLevel auditLevel, TenantContext context);
+    List<AuditLogWithHistory> getPaymentAttemptAuditLogsWithHistoryForId(UUID paymentAttemptId, AuditLevel auditLevel, TenantContext context);
 
     /**
      * Get all the audit entries with history for a given payment transaction.
      *
-     * @param accountId             the account id
      * @param paymentTransactionId  the payment transaction id
      * @param auditLevel            audit level (verbosity)
      * @param context               the tenant context
      * @return all audit entries with history for a payment transaction
      */
-    List<AuditLogWithHistory> getPaymentTransactionAuditLogsWithHistoryForId(UUID accountId, UUID paymentTransactionId, AuditLevel auditLevel, TenantContext context);
+    List<AuditLogWithHistory> getPaymentTransactionAuditLogsWithHistoryForId(UUID paymentTransactionId, AuditLevel auditLevel, TenantContext context);
 
 
 }
