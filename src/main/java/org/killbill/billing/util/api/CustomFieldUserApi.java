@@ -21,7 +21,9 @@ import java.util.UUID;
 
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.ObjectType;
+import org.killbill.billing.account.api.AccountApiException;
 import org.killbill.billing.security.RequiresPermissions;
+import org.killbill.billing.util.audit.AuditLogWithHistory;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.customfield.CustomField;
@@ -99,4 +101,16 @@ public interface CustomFieldUserApi extends KillbillApi {
      * @return the list of custom fields associated with that account
      */
     List<CustomField> getCustomFieldsForAccount(UUID accountId, TenantContext context);
+
+    /**
+     * Get all the audit entries with history for a given custom field.
+     *
+     * @param accountId     the account id
+    *  @param customFieldId the custom field id
+     * @param auditLevel    audit level (verbosity)
+     * @param context       the tenant context
+     * @return all audit entries with history for a custom field
+     */
+    List<AuditLogWithHistory> getCustomFieldAuditLogsWithHistoryForId(UUID accountId, UUID customFieldId, AuditLevel auditLevel, TenantContext context);
+
 }
