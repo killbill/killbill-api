@@ -106,9 +106,9 @@ public interface CustomFieldUserApi extends KillbillApi {
      *
      * @param customFieldId the custom field id
      * @param auditLevel    audit level (verbosity)
-     * @param context   the call context
+     * @param context       the tenant context
      * @return all audit entries with history for a custom field
      */
-    List<AuditLogWithHistory> getCustomFieldAuditLogsWithHistoryForId(UUID customFieldId, AuditLevel auditLevel, CallContext context);
+    List<AuditLogWithHistory> getCustomFieldAuditLogsWithHistoryForId(UUID customFieldId, AuditLevel auditLevel, TenantContext context);
 
 }
