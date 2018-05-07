@@ -24,6 +24,7 @@ import java.util.UUID;
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.ObjectType;
 import org.killbill.billing.security.RequiresPermissions;
+import org.killbill.billing.util.audit.AuditLogWithHistory;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.entity.Pagination;
@@ -169,4 +170,25 @@ public interface TagUserApi extends KillbillApi {
      * @return A list of tags for that given account
      */
     public List<Tag> getTagsForAccount(UUID accountId, boolean includedDeleted, TenantContext context);
+
+    /**
+     * Get all the audit entries with history for a given tag.
+     *
+     * @param tagId         the custom field id
+     * @param auditLevel    audit level (verbosity)
+     * @param context       the tenant context
+     * @return all audit entries with history for a tag
+     */
+    List<AuditLogWithHistory> getTagAuditLogsWithHistoryForId(UUID tagId, AuditLevel auditLevel, TenantContext context);
+
+    /**
+     * Get all the audit entries with history for a given tag definition.
+     *
+     * @param tagDefinitionId   the custom field id
+     * @param auditLevel        audit level (verbosity)
+     * @param context           the tenant context
+     * @return all audit entries with history for a tag definition
+     */
+    List<AuditLogWithHistory> getTagDefinitionAuditLogsWithHistoryForId(UUID tagDefinitionId, AuditLevel auditLevel, TenantContext context);
+
 }

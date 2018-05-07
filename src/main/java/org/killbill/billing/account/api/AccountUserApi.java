@@ -159,11 +159,21 @@ public interface AccountUserApi extends KillbillApi {
     /**
      * Get all the audit entries with history for a given account.
      *
-     * @param accountId   the object id
+     * @param accountId   the account id
      * @param auditLevel audit level (verbosity)
      * @param context    the tenant context
-     * @return all audit entries with history for that object
+     * @return all audit entries with history for an account
      */
     List<AuditLogWithHistory> getAuditLogsWithHistoryForId(UUID accountId, AuditLevel auditLevel, TenantContext context) throws AccountApiException;
+
+    /**
+     * Get all the audit entries with history for a given account email.
+     *
+     * @param accountEmailId   the account email id
+     * @param auditLevel audit level (verbosity)
+     * @param context    the tenant context
+     * @return all audit entries with history for an account email
+     */
+    List<AuditLogWithHistory> getEmailAuditLogsWithHistoryForId(UUID accountEmailId, AuditLevel auditLevel, TenantContext context) throws AccountApiException;
 
 }
