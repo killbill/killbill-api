@@ -1,3 +1,6 @@
+0.51.20
+    New API to retrieve history info from any objects
+
 0.51.19
     Tweak ErrorCode message for TAG_DEFINITION_XX and remove unused ObjectType.REFUND
 
