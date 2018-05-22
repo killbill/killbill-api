@@ -143,19 +143,31 @@ public interface Catalog {
      * @return the {@code PlanPhase}
      * @throws CatalogApiException if the {@code PlanPhase} does not exist
      */
-    public PlanPhase findPhase(String name, DateTime requestedDate, DateTime subscriptionStartDate) throws CatalogApiException;
+    public PlanPhase findPhase(String name,
+                               DateTime requestedDate,
+                               DateTime subscriptionStartDate) throws CatalogApiException;
 
     // TODO : should they be private APIs
 
     public PlanChangeResult planChange(PlanPhaseSpecifier from,
-                                       PlanSpecifier to, DateTime requestedDate) throws CatalogApiException;
+                                       PlanSpecifier to,
+                                       DateTime requestedDate,
+                                       DateTime subscriptionStartDate) throws CatalogApiException;
 
-    public BillingActionPolicy planCancelPolicy(PlanPhaseSpecifier planPhase, DateTime requestedDate) throws CatalogApiException;
+    public BillingActionPolicy planCancelPolicy(PlanPhaseSpecifier planPhase,
+                                                DateTime requestedDate,
+                                                DateTime subscriptionStartDate) throws CatalogApiException;
 
-    public PlanAlignmentCreate planCreateAlignment(PlanSpecifier specifier, DateTime requestedDate) throws CatalogApiException;
+    public PlanAlignmentCreate planCreateAlignment(PlanSpecifier specifier,
+                                                   DateTime requestedDate,
+                                                   DateTime subscriptionStartDate) throws CatalogApiException;
 
-    public BillingAlignment billingAlignment(PlanPhaseSpecifier planPhase, DateTime requestedDate) throws CatalogApiException;
+    public BillingAlignment billingAlignment(PlanPhaseSpecifier planPhase,
+                                             DateTime requestedDate,
+                                             DateTime subscriptionStartDate) throws CatalogApiException;
 
     public PlanAlignmentChange planChangeAlignment(PlanPhaseSpecifier from,
-                                                   PlanSpecifier to, DateTime requestedDate) throws CatalogApiException;
+                                                   PlanSpecifier to,
+                                                   DateTime requestedDate,
+                                                   DateTime subscriptionStartDate) throws CatalogApiException;
 }
