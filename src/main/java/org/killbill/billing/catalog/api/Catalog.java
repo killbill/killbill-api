@@ -1,7 +1,9 @@
 /*
  * Copyright 2010-2013 Ning, Inc.
+ * Copyright 2014-2018 Groupon, Inc
+ * Copyright 2014-2018 The Billing Project, LLC
  *
- * Ning licenses this file to you under the Apache License, version 2.0
+ * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
  * License.  You may obtain a copy of the License at:
  *
@@ -34,42 +36,42 @@ public interface Catalog {
     /**
      * @param requestedDate the requestedDate
      * @return the effective for the {@code StandaloneCatalog} matching that requestedDate
-     * @throws CatalogApiException
+     * @throws CatalogApiException if no catalog can be found for that date
      */
     public Date getStandaloneCatalogEffectiveDate(final DateTime requestedDate) throws CatalogApiException;
 
     /**
      * @param requestedDate specifies the state of the catalog for that date
      * @return an array of available {@code Currency}s
-     * @throws CatalogApiException
+     * @throws CatalogApiException if no catalog can be found for that date
      */
     public Currency[] getSupportedCurrencies(DateTime requestedDate) throws CatalogApiException;
 
     /**
      * @param requestedDate specifies the state of the catalog for that date
      * @return an array of available {@code Unit}s
-     * @throws CatalogApiException
+     * @throws CatalogApiException if no catalog can be found for that date
      */
     public Unit[] getUnits(DateTime requestedDate) throws CatalogApiException;
 
     /**
      * @param requestedDate specifies the state of the catalog for that date
      * @return an array of available {@code Product}s
-     * @throws CatalogApiException
+     * @throws CatalogApiException if no catalog can be found for that date
      */
     public Collection<Product> getProducts(DateTime requestedDate) throws CatalogApiException;
 
     /**
      * @param requestedDate specifies the state of the catalog for that date
      * @return an array of available {@code Plan}s
-     * @throws CatalogApiException
+     * @throws CatalogApiException if no catalog can be found for that date
      */
     public Collection<Plan> getPlans(DateTime requestedDate) throws CatalogApiException;
 
     /**
      * @param requestedDate specifies the state of the catalog for that date
      * @return the {@code PriceListSet} for that requestedDate
-     * @throws CatalogApiException
+     * @throws CatalogApiException if no catalog can be found for that date
      */
     PriceListSet getPriceLists(final DateTime requestedDate) throws CatalogApiException;
 
@@ -77,7 +79,7 @@ public interface Catalog {
      * @param name          the unique name of the plan
      * @param requestedDate specifies the state of the catalog for that date
      * @return the {@code Plan}
-     * @throws CatalogApiException if {@code Plan} does not exist
+     * @throws CatalogApiException if no catalog can be found for that date or if the {@code Plan} does not exist
      */
     public Plan findPlan(String name, DateTime requestedDate) throws CatalogApiException;
 
@@ -86,9 +88,10 @@ public interface Catalog {
      * @param overrides     the price override for each phase and for a specific currency
      * @param requestedDate specifies the state of the catalog for that date
      * @return the {@code Plan}
-     * @throws CatalogApiException if {@code Plan} does not exist
+     * @throws CatalogApiException if no catalog can be found for that date or if the {@code Plan} cannot be found nor created
      */
-    public Plan createOrFindPlan(PlanSpecifier spec, PlanPhasePriceOverridesWithCallContext overrides,
+    public Plan createOrFindPlan(PlanSpecifier spec,
+                                 PlanPhasePriceOverridesWithCallContext overrides,
                                  DateTime requestedDate) throws CatalogApiException;
 
     /**
@@ -96,42 +99,38 @@ public interface Catalog {
      * @param requestedDate         specifies the state of the catalog for that date
      * @param subscriptionStartDate the startDate of the subscription
      * @return the {@code Plan}
-     * @throws CatalogApiException if {@code Plan} does not exist
+     * @throws CatalogApiException if no catalog can be found for that date or if the {@code Plan} does not exist
      */
-    public Plan findPlan(String name, DateTime requestedDate, DateTime subscriptionStartDate) throws CatalogApiException;
+    public Plan findPlan(String name,
+                         DateTime requestedDate,
+                         DateTime subscriptionStartDate) throws CatalogApiException;
 
     /**
      * @param spec          the specification for the {@code Plan} to be used
      * @param overrides     the price override for each phase and for a specific currency
      * @param requestedDate specifies the state of the catalog for that date
      * @return the {@code Plan}
-     * @throws CatalogApiException if {@code Plan} does not exist
+     * @throws CatalogApiException if no catalog can be found for that date or if the {@code Plan} cannot be found nor created
      */
-    public Plan createOrFindPlan(PlanSpecifier spec, PlanPhasePriceOverridesWithCallContext overrides,
-                                 DateTime requestedDate, DateTime subscriptionStartDate) throws CatalogApiException;
+    public Plan createOrFindPlan(PlanSpecifier spec,
+                                 PlanPhasePriceOverridesWithCallContext overrides,
+                                 DateTime requestedDate,
+                                 DateTime subscriptionStartDate) throws CatalogApiException;
 
     /**
      * @param name          the unique name for the {@code Product}
      * @param requestedDate specifies the state of the catalog for that date
      * @return the {@code Product}
-     * @throws CatalogApiException if {@code Product} does not exist
+     * @throws CatalogApiException if no catalog can be found for that date or if the {@code Product} does not exist
      */
-    public Product findProduct(String name, DateTime requestedDate) throws CatalogApiException;
+    public Product findProduct(String name,
+                               DateTime requestedDate) throws CatalogApiException;
 
     /**
-     * @param name          the unique name for the {@code PlanPhase}
+     * @param planName      the unique name of the plan
      * @param requestedDate specifies the state of the catalog for that date
-     * @return the {@code PlanPhase}
-     * @throws CatalogApiException if the {@code PlanPhase} does not exist
-     */
-    public PriceList findPriceList(String name, DateTime requestedDate) throws CatalogApiException;
-
-    /**
-     *
-     * @param planName                  the unique name of the plan
-     * @param requestedDate             specifies the state of the catalog for that date
-     * @param subscriptionStartDate     the startDate of the subscription
-     * @return
+     * @return the {@code PriceList}
+     * @throws CatalogApiException if no catalog can be found for that date or if the {@code PriceList} does not exist
      */
     public PriceList findPriceListForPlan(final String planName,
                                           final DateTime requestedDate,
@@ -144,25 +143,31 @@ public interface Catalog {
      * @return the {@code PlanPhase}
      * @throws CatalogApiException if the {@code PlanPhase} does not exist
      */
-    public PlanPhase findPhase(String name, DateTime requestedDate, DateTime subscriptionStartDate) throws CatalogApiException;
+    public PlanPhase findPhase(String name,
+                               DateTime requestedDate,
+                               DateTime subscriptionStartDate) throws CatalogApiException;
 
     // TODO : should they be private APIs
 
-    public BillingActionPolicy planChangePolicy(PlanPhaseSpecifier from,
-                                                PlanSpecifier to, DateTime requestedDate) throws CatalogApiException;
-
     public PlanChangeResult planChange(PlanPhaseSpecifier from,
-                                       PlanSpecifier to, DateTime requestedDate) throws CatalogApiException;
+                                       PlanSpecifier to,
+                                       DateTime requestedDate,
+                                       DateTime subscriptionStartDate) throws CatalogApiException;
 
-    public BillingActionPolicy planCancelPolicy(PlanPhaseSpecifier planPhase, DateTime requestedDate) throws CatalogApiException;
+    public BillingActionPolicy planCancelPolicy(PlanPhaseSpecifier planPhase,
+                                                DateTime requestedDate,
+                                                DateTime subscriptionStartDate) throws CatalogApiException;
 
-    public PlanAlignmentCreate planCreateAlignment(PlanSpecifier specifier, DateTime requestedDate) throws CatalogApiException;
+    public PlanAlignmentCreate planCreateAlignment(PlanSpecifier specifier,
+                                                   DateTime requestedDate,
+                                                   DateTime subscriptionStartDate) throws CatalogApiException;
 
-    public BillingAlignment billingAlignment(PlanPhaseSpecifier planPhase, DateTime requestedDate) throws CatalogApiException;
+    public BillingAlignment billingAlignment(PlanPhaseSpecifier planPhase,
+                                             DateTime requestedDate,
+                                             DateTime subscriptionStartDate) throws CatalogApiException;
 
     public PlanAlignmentChange planChangeAlignment(PlanPhaseSpecifier from,
-                                                   PlanSpecifier to, DateTime requestedDate) throws CatalogApiException;
-
-    public boolean canCreatePlan(PlanSpecifier specifier, DateTime requestedDate) throws CatalogApiException;
-
+                                                   PlanSpecifier to,
+                                                   DateTime requestedDate,
+                                                   DateTime subscriptionStartDate) throws CatalogApiException;
 }
