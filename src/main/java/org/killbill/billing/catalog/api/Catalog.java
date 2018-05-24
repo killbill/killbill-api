@@ -165,9 +165,4 @@ public interface Catalog {
     public BillingAlignment billingAlignment(PlanPhaseSpecifier planPhase,
                                              DateTime requestedDate,
                                              DateTime subscriptionStartDate) throws CatalogApiException;
-
-    public PlanAlignmentChange planChangeAlignment(PlanPhaseSpecifier from,
-                                                   PlanSpecifier to,
-                                                   DateTime requestedDate,
-                                                   DateTime subscriptionStartDate) throws CatalogApiException;
 }

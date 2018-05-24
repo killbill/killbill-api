@@ -110,9 +110,6 @@ public interface StaticCatalog {
 
     public BillingAlignment billingAlignment(PlanPhaseSpecifier planPhase) throws CatalogApiException;
 
-    public PlanAlignmentChange planChangeAlignment(PlanPhaseSpecifier from,
-                                                   PlanSpecifier to) throws CatalogApiException;
-
     public List<Listing> getAvailableBasePlanListings() throws CatalogApiException;
 
     public List<Listing> getAvailableAddOnListings(String baseProductName, String priceListName) throws CatalogApiException;
