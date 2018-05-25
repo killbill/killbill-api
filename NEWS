@@ -1,3 +1,6 @@
+0.51.22
+    catalog: remove superfluous planChangeAlignment API
+
 0.51.21
     catalog: add missing subscriptionStartDate in APIs and remove deprecated APIs
 
