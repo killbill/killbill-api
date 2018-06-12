@@ -1,5 +1,4 @@
 /*
- * Copyright 2010-2013 Ning, Inc.
  * Copyright 2014-2018 Groupon, Inc
  * Copyright 2014-2018 The Billing Project, LLC
  *
@@ -16,7 +15,7 @@
  * under the License.
  */
 
-package org.killbill.billing.invoice.api;
+package org.killbill.billing.payment.api;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -27,9 +26,7 @@ import org.joda.time.DateTime;
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.account.api.Account;
 import org.killbill.billing.catalog.api.Currency;
-import org.killbill.billing.payment.api.PaymentApiException;
-import org.killbill.billing.payment.api.PaymentOptions;
-import org.killbill.billing.payment.api.PluginProperty;
+import org.killbill.billing.invoice.api.InvoicePayment;
 import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
