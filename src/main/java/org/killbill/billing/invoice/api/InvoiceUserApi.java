@@ -28,6 +28,7 @@ import org.joda.time.LocalDate;
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.account.api.AccountApiException;
 import org.killbill.billing.catalog.api.Currency;
+import org.killbill.billing.payment.api.PluginProperty;
 import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.api.TagApiException;
 import org.killbill.billing.util.callcontext.CallContext;
@@ -189,7 +190,23 @@ public interface InvoiceUserApi extends KillbillApi {
      * @throws InvoiceApiException
      */
     @RequiresPermissions(ACCOUNT_CAN_CHARGE)
-    public List<InvoiceItem> insertExternalCharges(UUID accountId, LocalDate effectiveDate, Iterable<InvoiceItem> charges, boolean autoCommit, CallContext context) throws InvoiceApiException;
+    public List<InvoiceItem> insertExternalCharges(UUID accountId, LocalDate effectiveDate, Iterable<InvoiceItem> charges, boolean autoCommit, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
+
+
+    /**
+     * Add one or multiple tax items to one invoice.
+     *
+     * @param accountId     account id
+     * @param effectiveDate the effective date for newly created invoice (in the account timezone)
+     * @param taxes         the tax items
+     * @param autoCommit    the flag to indicate if the invoice is set to COMMITTED or DRAFT and events are sent
+     * @param context       the call context
+     * @return the tax invoice items
+     * @throws InvoiceApiException
+     */
+    @RequiresPermissions(ACCOUNT_CAN_CHARGE)
+    public List<InvoiceItem> insertTaxItems(UUID accountId, LocalDate effectiveDate, Iterable<InvoiceItem> taxes, boolean autoCommit, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
+
 
     /**
      * Retrieve a credit by id.
@@ -212,12 +229,13 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context       the call context
      * @param description   the item description
      * @param itemDetails   the item details
+     * @param properties    the plugin specific properties
      * @return the credit invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(ACCOUNT_CAN_CREDIT)
     public InvoiceItem insertCredit(UUID accountId, BigDecimal amount, LocalDate effectiveDate, Currency currency,
-                                    boolean autoCommit, String description, String itemDetails, CallContext context) throws InvoiceApiException;
+                                    boolean autoCommit, String description, String itemDetails, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
 
     /**
      * Add a credit to an invoice. This can be used to adjust invoices.
@@ -229,13 +247,14 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param currency      the credit currency
      * @param description   the item description
      * @param itemDetails   the item details
+     * @param properties    the plugin specific properties
      * @param context       the call context
      * @return the credit invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_CREDIT)
     public InvoiceItem insertCreditForInvoice(UUID accountId, UUID invoiceId, BigDecimal amount, LocalDate effectiveDate,
-                                              Currency currency, String description, String itemDetails, CallContext context) throws InvoiceApiException;
+                                              Currency currency, String description, String itemDetails, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
 
     /**
      * Adjust fully a given invoice item.
@@ -246,13 +265,14 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param effectiveDate the effective date for this adjustment invoice item (in the account timezone)
      * @param description   the item description
      * @param itemDetails   the item details
+     * @param properties    the plugin specific properties
      * @param context       the call context
      * @return the adjustment invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_ITEM_ADJUST)
     public InvoiceItem insertInvoiceItemAdjustment(UUID accountId, UUID invoiceId, UUID invoiceItemId, LocalDate effectiveDate,
-                                                   String description, String itemDetails, CallContext context) throws InvoiceApiException;
+                                                   String description, String itemDetails, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
 
     /**
      * Adjust partially a given invoice item.
@@ -265,13 +285,14 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param currency      adjustment currency
      * @param description   the item description
      * @param itemDetails   the item details
+     * @param properties    the plugin specific properties
      * @param context       the call context
      * @return the adjustment invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_ITEM_ADJUST)
     public InvoiceItem insertInvoiceItemAdjustment(UUID accountId, UUID invoiceId, UUID invoiceItemId, LocalDate effectiveDate,
-                                                   BigDecimal amount, Currency currency, String description, String itemDetails, CallContext context) throws InvoiceApiException;
+                                                   BigDecimal amount, Currency currency, String description, String itemDetails, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
 
     /**
      * Delete a CBA item.

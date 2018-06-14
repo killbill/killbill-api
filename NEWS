@@ -1,3 +1,18 @@
+0.51.23
+    Add new invoice api to allow recording tax items -- outside of the invoice plugin
+
+0.51.22
+    catalog: remove superfluous planChangeAlignment API
+
+0.51.21
+    catalog: add missing subscriptionStartDate in APIs and remove deprecated APIs
+
+0.51.20
+    New API to retrieve history info from any objects
+
+0.51.19
+    Tweak ErrorCode message for TAG_DEFINITION_XX and remove unused ObjectType.REFUND
+
 0.51.18
     Add InvoiceItem#getProductName and InvoiceItem#getPrettyProductName apis
 
@@ -254,7 +269,7 @@
     catalog: Add optional priceList filter when retrieving available ADD_ONs.
 
 0.10.1
-    Modify invoice api to trigger dryRun invoice to it also supports adding subscription info (CREATE, CHANGE, CANCEL) 
+    Modify invoice api to trigger dryRun invoice to it also supports adding subscription info (CREATE, CHANGE, CANCEL)
 
 0.9.11
     Update PaymentOptions api

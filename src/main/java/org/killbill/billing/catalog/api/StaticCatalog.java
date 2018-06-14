@@ -1,7 +1,9 @@
 /*
  * Copyright 2010-2013 Ning, Inc.
+ * Copyright 2014-2018 Groupon, Inc
+ * Copyright 2014-2018 The Billing Project, LLC
  *
- * Ning licenses this file to you under the Apache License, version 2.0
+ * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
  * License.  You may obtain a copy of the License at:
  *
@@ -62,8 +64,8 @@ public interface StaticCatalog {
     public Collection<Plan> getCurrentPlans() throws CatalogApiException;
 
     /**
-     * @param spec          the specification for the {@code Plan} to be used
-     * @param overrides     the price override for each phase and for a specific currency
+     * @param spec      the specification for the {@code Plan} to be used
+     * @param overrides the price override for each phase and for a specific currency
      * @return the {@code Plan}
      * @throws CatalogApiException if not such {@code Plan} can be found
      */
@@ -99,9 +101,6 @@ public interface StaticCatalog {
 
     // TODO private APIs ?
 
-    public BillingActionPolicy planChangePolicy(PlanPhaseSpecifier from,
-                                                PlanSpecifier to) throws CatalogApiException;
-
     public PlanChangeResult planChange(PlanPhaseSpecifier from,
                                        PlanSpecifier to) throws CatalogApiException;
 
@@ -111,15 +110,7 @@ public interface StaticCatalog {
 
     public BillingAlignment billingAlignment(PlanPhaseSpecifier planPhase) throws CatalogApiException;
 
-    public PlanAlignmentChange planChangeAlignment(PlanPhaseSpecifier from,
-                                                   PlanSpecifier to) throws CatalogApiException;
-
-    public boolean canCreatePlan(PlanSpecifier specifier) throws CatalogApiException;
-
     public List<Listing> getAvailableBasePlanListings() throws CatalogApiException;
 
     public List<Listing> getAvailableAddOnListings(String baseProductName, String priceListName) throws CatalogApiException;
-
-    boolean compliesWithLimits(String phaseName, String unit, double value) throws CatalogApiException;
-
 }
