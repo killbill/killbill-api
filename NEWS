@@ -1,3 +1,6 @@
+0.51.24
+    Modify getUserRoles signature; to throw SecurityApiException
+
 0.51.23
     Add new invoice api to allow recording tax items -- outside of the invoice plugin
 
