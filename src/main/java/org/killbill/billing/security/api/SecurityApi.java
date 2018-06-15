@@ -119,9 +119,10 @@ public interface SecurityApi extends KillbillApi {
      *
      * @param username      the username
      * @param tenantContext dummy context
-     * @return
+     * @return roles for a specific user
+     * @throws SecurityApiException
      */
-    public List<String> getUserRoles(String username, final TenantContext tenantContext);
+    public List<String> getUserRoles(String username, final TenantContext tenantContext) throws SecurityApiException;
 
     /**
      * Add a role definition  in the Shiro store (JDBCRealm)
