@@ -129,6 +129,15 @@ public interface InvoiceUserApi extends KillbillApi {
     public Invoice getInvoiceByNumber(Integer number, TenantContext context) throws InvoiceApiException;
 
     /**
+     *
+     * @param invoiceItemId invoice item id
+     * @param context  the tenant context
+     * @return
+     * @throws InvoiceApiException
+     */
+    public Invoice getInvoiceByInvoiceItem(UUID invoiceItemId, TenantContext context) throws InvoiceApiException;
+
+    /**
      * Find unpaid invoices for a given account, up to a given day.
      *
      * @param accountId account id
