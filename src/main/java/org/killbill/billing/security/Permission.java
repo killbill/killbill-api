@@ -70,7 +70,6 @@ public enum Permission {
     PAYMENT_CAN_TRIGGER_PAYMENT("payment", "trigger"),
     PAYMENT_CAN_REFUND("payment", "refund"),
     PAYMENT_CAN_CHARGEBACK("payment", "chargeback"),
-    PAYMENT_CAN_CREATE_EXTERNAL_PAYMENT("payment", "external_payment"),
 
     /**
      * Payment methods
@@ -87,10 +86,6 @@ public enum Permission {
     TAG_CAN_ADD("tag", "add"),
     TAG_CAN_DELETE("tag", "delete"),
 
-    /*
-     * Tenants
-     */
-    TENANT_CAN_VIEW("tenant", "view"),
     TENANT_CAN_CREATE("tenant", "create"),
 
     /**
@@ -104,11 +99,6 @@ public enum Permission {
      */
     USAGE_CAN_RECORD("usage", "record"),
 
-
-    /*
-     * Users (authentication, authorization)
-    */
-    USER_CAN_VIEW("user", "view"),
     USER_CAN_CREATE("user", "create"),
 
 
