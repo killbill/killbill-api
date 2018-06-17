@@ -55,18 +55,18 @@ public interface InvoicePaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public InvoicePayment createPurchaseForInvoice(Account account,
-                                                   UUID invoiceId,
-                                                   UUID paymentMethodId,
-                                                   UUID paymentId,
-                                                   BigDecimal amount,
-                                                   Currency currency,
-                                                   DateTime effectiveDate,
-                                                   String paymentExternalKey,
-                                                   String paymentTransactionExternalKey,
-                                                   Iterable<PluginProperty> properties,
-                                                   PaymentOptions paymentOptions,
-                                                   CallContext context) throws PaymentApiException;
+    public InvoicePayment createPurchaseForInvoicePayment(Account account,
+                                                          UUID invoiceId,
+                                                          UUID paymentMethodId,
+                                                          UUID paymentId,
+                                                          BigDecimal amount,
+                                                          Currency currency,
+                                                          DateTime effectiveDate,
+                                                          String paymentExternalKey,
+                                                          String paymentTransactionExternalKey,
+                                                          Iterable<PluginProperty> properties,
+                                                          PaymentOptions paymentOptions,
+                                                          CallContext context) throws PaymentApiException;
 
     /**
      * Refund a previously captured payment and allow to go through registered routing  plugins
@@ -86,17 +86,17 @@ public interface InvoicePaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_REFUND)
-    public InvoicePayment createRefundForInvoice(boolean isAdjusted,
-                                                 Map<UUID, BigDecimal> adjustments,
-                                                 Account account,
-                                                 UUID paymentId,
-                                                 BigDecimal amount,
-                                                 Currency currency,
-                                                 DateTime effectiveDate,
-                                                 String paymentTransactionExternalKey,
-                                                 Iterable<PluginProperty> properties,
-                                                 PaymentOptions paymentOptions,
-                                                 CallContext context) throws PaymentApiException;
+    public InvoicePayment createRefundForInvoicePayment(boolean isAdjusted,
+                                                        Map<UUID, BigDecimal> adjustments,
+                                                        Account account,
+                                                        UUID paymentId,
+                                                        BigDecimal amount,
+                                                        Currency currency,
+                                                        DateTime effectiveDate,
+                                                        String paymentTransactionExternalKey,
+                                                        Iterable<PluginProperty> properties,
+                                                        PaymentOptions paymentOptions,
+                                                        CallContext context) throws PaymentApiException;
 
     /**
      * Credit a payment method for a given invoice and allow to go through registered routing  plugins
@@ -121,20 +121,20 @@ public interface InvoicePaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public InvoicePayment createCreditForInvoice(boolean isAdjusted,
-                                                 Map<UUID, BigDecimal> adjustments,
-                                                 Account account,
-                                                 UUID originalPaymentId,
-                                                 UUID paymentMethodId,
-                                                 UUID paymentId,
-                                                 BigDecimal amount,
-                                                 Currency currency,
-                                                 DateTime effectiveDate,
-                                                 String paymentExternalKey,
-                                                 String paymentTransactionExternalKey,
-                                                 Iterable<PluginProperty> properties,
-                                                 PaymentOptions paymentOptions,
-                                                 CallContext context) throws PaymentApiException;
+    public InvoicePayment createCreditForInvoicePayment(boolean isAdjusted,
+                                                        Map<UUID, BigDecimal> adjustments,
+                                                        Account account,
+                                                        UUID originalPaymentId,
+                                                        UUID paymentMethodId,
+                                                        UUID paymentId,
+                                                        BigDecimal amount,
+                                                        Currency currency,
+                                                        DateTime effectiveDate,
+                                                        String paymentExternalKey,
+                                                        String paymentTransactionExternalKey,
+                                                        Iterable<PluginProperty> properties,
+                                                        PaymentOptions paymentOptions,
+                                                        CallContext context) throws PaymentApiException;
 
     public List<InvoicePayment> getInvoicePayments(UUID paymentId, TenantContext context);
 
