@@ -23,7 +23,7 @@ import org.killbill.billing.catalog.api.CatalogUserApi;
 import org.killbill.billing.currency.api.CurrencyConversionApi;
 import org.killbill.billing.entitlement.api.EntitlementApi;
 import org.killbill.billing.entitlement.api.SubscriptionApi;
-import org.killbill.billing.invoice.api.InvoicePaymentApi;
+import org.killbill.billing.payment.api.InvoicePaymentApi;
 import org.killbill.billing.invoice.api.InvoiceUserApi;
 import org.killbill.billing.osgi.api.config.PluginConfigServiceApi;
 import org.killbill.billing.overdue.api.OverdueApi;
