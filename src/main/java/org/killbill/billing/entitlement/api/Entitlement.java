@@ -92,7 +92,7 @@ public interface Entitlement extends Entity {
         BLOCKED,
         /* The user cancelled the entitlement */
         CANCELLED,
-        /* The entitlement expired (FIXEDTERM use case) */
+        /* The entitlement has expired (FIXEDTERM use case) */
         EXPIRED
     }
 
