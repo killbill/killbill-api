@@ -91,7 +91,9 @@ public interface Entitlement extends Entity {
         /* The system blocked the entitlement */
         BLOCKED,
         /* The user cancelled the entitlement */
-        CANCELLED
+        CANCELLED,
+        /* The entitlement expired (FIXEDTERM use case) */
+        EXPIRED
     }
 
     /**
