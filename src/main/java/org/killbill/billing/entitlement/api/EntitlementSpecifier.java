@@ -31,6 +31,12 @@ public interface EntitlementSpecifier {
     PlanPhaseSpecifier getPlanPhaseSpecifier();
 
     /**
+     *
+     * @return the BCD associated with the entitlement
+     */
+    Integer getBillCycleDay();
+
+    /**
      * @return the price override definition for the plan
      */
     List<PlanPhasePriceOverride> getOverrides();
