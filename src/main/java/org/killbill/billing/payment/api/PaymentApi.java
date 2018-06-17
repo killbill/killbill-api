@@ -37,8 +37,8 @@ import static org.killbill.billing.security.Permission.PAYMENT_CAN_CHARGEBACK;
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_REFUND;
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_TRIGGER_PAYMENT;
 import static org.killbill.billing.security.Permission.PAYMENT_METHOD_CAN_CREATE;
-import static org.killbill.billing.security.Permission.PAYMENT_METHOD_CAN_UPDATE;
 import static org.killbill.billing.security.Permission.PAYMENT_METHOD_CAN_DELETE;
+import static org.killbill.billing.security.Permission.PAYMENT_METHOD_CAN_UPDATE;
 
 public interface PaymentApi extends KillbillApi {
 
@@ -454,7 +454,15 @@ public interface PaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     public Payment getPaymentByTransactionId(final UUID transactionId, final boolean withPluginInfo, final boolean withAttempts, final Iterable<PluginProperty> properties, final TenantContext context) throws PaymentApiException;
-    
+
+    /**
+     * @param transactionExternalKey the payment transaction external key
+     * @param context                the call context
+     * @return the payment
+     * @throws PaymentApiException
+     */
+    public Payment getPaymentByTransactionExternalKey(final String transactionExternalKey, final boolean withPluginInfo, final boolean withAttempts, final Iterable<PluginProperty> properties, final TenantContext context) throws PaymentApiException;
+
     /**
      * Find all payments across all plugins
      *
