@@ -1,3 +1,15 @@
+0.51.25
+    Update InvoicePaymentApi
+    Add new dryRun invoice endpoint with its own permission
+    Add new api to fetch an invoice from a given invoice item id
+    Add new EntitlementState#EXPIRED
+    Add Healthcheck service
+    Add getPaymentByTransactionExternalKey API
+    Add ability to specify BCD when creating subscription or changing plan
+
+0.51.24
+    Modify getUserRoles signature; to throw SecurityApiException
+
 0.51.23
     Add new invoice api to allow recording tax items -- outside of the invoice plugin
 

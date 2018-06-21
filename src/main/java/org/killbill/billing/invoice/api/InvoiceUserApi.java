@@ -39,6 +39,7 @@ import static org.killbill.billing.security.Permission.ACCOUNT_CAN_CHARGE;
 import static org.killbill.billing.security.Permission.ACCOUNT_CAN_CREDIT;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_CREDIT;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_DELETE_CBA;
+import static org.killbill.billing.security.Permission.INVOICE_CAN_DRY_RUN_INVOICE;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_ITEM_ADJUST;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_TRIGGER_INVOICE;
 
@@ -128,6 +129,15 @@ public interface InvoiceUserApi extends KillbillApi {
     public Invoice getInvoiceByNumber(Integer number, TenantContext context) throws InvoiceApiException;
 
     /**
+     *
+     * @param invoiceItemId invoice item id
+     * @param context  the tenant context
+     * @return
+     * @throws InvoiceApiException
+     */
+    public Invoice getInvoiceByInvoiceItem(UUID invoiceItemId, TenantContext context) throws InvoiceApiException;
+
+    /**
      * Find unpaid invoices for a given account, up to a given day.
      *
      * @param accountId account id
@@ -142,13 +152,27 @@ public interface InvoiceUserApi extends KillbillApi {
      *
      * @param accountId       account id
      * @param targetDate      the target day, in the account timezone
-     * @param dryRunArguments dry run arguments
      * @param context         the call context
      * @return the invoice generated
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_TRIGGER_INVOICE)
-    public Invoice triggerInvoiceGeneration(UUID accountId, LocalDate targetDate, DryRunArguments dryRunArguments, CallContext context) throws InvoiceApiException;
+    public Invoice triggerInvoiceGeneration(UUID accountId, LocalDate targetDate, CallContext context) throws InvoiceApiException;
+
+
+    /**
+     * Trigger an invoice for a given account and a given day.
+     *
+     * @param accountId       account id
+     * @param targetDate      the target day, in the account timezone
+     * @param dryRunArguments dry run arguments
+     * @param context         the call context
+     * @return the invoice generated
+     * @throws InvoiceApiException
+     */
+    @RequiresPermissions(INVOICE_CAN_DRY_RUN_INVOICE)
+    public Invoice triggerDryRunInvoiceGeneration(UUID accountId, LocalDate targetDate, DryRunArguments dryRunArguments, CallContext context) throws InvoiceApiException;
+
 
     /**
      * Mark an invoice as written off.
@@ -324,7 +348,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param accountId account id
      * @param context   the call context
      */
-    public void consumeExstingCBAOnAccountWithUnpaidInvoices(final UUID accountId, final CallContext context);
+    public void consumeExistingCBAOnAccountWithUnpaidInvoices(final UUID accountId, final CallContext context);
 
     /**
      * Move the invoice status from DRAFT to COMMITTED
