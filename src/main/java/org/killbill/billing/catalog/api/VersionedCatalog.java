@@ -23,6 +23,4 @@ import java.util.List;
 public interface VersionedCatalog<CatalogType> extends StaticCatalog, Catalog {
 
     public List<CatalogType> getVersions();
-
-    public void add(CatalogType catalog);
 }
