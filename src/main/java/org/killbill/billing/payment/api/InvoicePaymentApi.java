@@ -31,6 +31,7 @@ import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 
+import static org.killbill.billing.security.Permission.PAYMENT_CAN_CHARGEBACK;
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_REFUND;
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_TRIGGER_PAYMENT;
 
@@ -135,6 +136,54 @@ public interface InvoicePaymentApi extends KillbillApi {
                                                         Iterable<PluginProperty> properties,
                                                         PaymentOptions paymentOptions,
                                                         CallContext context) throws PaymentApiException;
+
+    /**
+     * Record a chargeback and allow to go through registered routing plugins
+     *
+     * @param account                       the account
+     * @param paymentId                     the payment id
+     * @param effectiveDate                 the effectiveDate of the payment operation
+     * @param amount                        the amount to refund
+     * @param currency                      the amount currency
+     * @param paymentTransactionExternalKey the payment transaction external key
+     * @param properties                    plugin specific properties
+     * @param paymentOptions                options to control payment behavior
+     * @param context                       the call context
+     * @return the payment
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
+    public InvoicePayment createChargebackForInvoicePayment(Account account,
+                                                            UUID paymentId,
+                                                            BigDecimal amount,
+                                                            Currency currency,
+                                                            DateTime effectiveDate,
+                                                            String paymentTransactionExternalKey,
+                                                            Iterable<PluginProperty> properties,
+                                                            PaymentOptions paymentOptions,
+                                                            CallContext context) throws PaymentApiException;
+
+    /**
+     * Reverse a chargeback and allow to go through registered routing plugins
+     *
+     * @param account                       the account
+     * @param paymentId                     the payment id
+     * @param effectiveDate                 the effectiveDate of the payment operation
+     * @param paymentTransactionExternalKey the payment transaction external key
+     * @param properties                    plugin specific properties
+     * @param paymentOptions                options to control payment behavior
+     * @param context                       the call context
+     * @return the payment
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
+    public InvoicePayment createChargebackReversalForInvoicePayment(Account account,
+                                                                    UUID paymentId,
+                                                                    DateTime effectiveDate,
+                                                                    String paymentTransactionExternalKey,
+                                                                    Iterable<PluginProperty> properties,
+                                                                    PaymentOptions paymentOptions,
+                                                                    CallContext context) throws PaymentApiException;
 
     public List<InvoicePayment> getInvoicePayments(UUID paymentId, TenantContext context);
 
