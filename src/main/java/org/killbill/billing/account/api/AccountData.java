@@ -133,11 +133,6 @@ public interface AccountData {
     public Boolean isMigrated();
 
     /**
-     * @return whether or not that account will receive invoice notifications
-     */
-    public Boolean isNotifiedForInvoices();
-
-    /**
      * @return the UUID of the parent Account
      */
     public UUID getParentAccountId();
