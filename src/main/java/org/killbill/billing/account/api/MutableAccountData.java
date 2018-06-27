@@ -168,13 +168,6 @@ public interface MutableAccountData extends AccountData {
     public void setIsMigrated(boolean isMigrated);
 
     /**
-     * Sets whether or not the account should receive notification on future invoices
-     *
-     * @param isNotifiedForInvoices
-     */
-    public void setIsNotifiedForInvoices(boolean isNotifiedForInvoices);
-
-    /**
      * Sets the UUID of the default parentAccountId
      *
      * @param parentAccountId
