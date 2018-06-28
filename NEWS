@@ -1,3 +1,6 @@
+0.51.27
+    Cleanup unused Account#isNotifiedForInvoices field
+
 0.51.26
     Add missing chargeback APIs in InvoicePaymentApi
     Catalog API changes for killbill/killbill#1009
