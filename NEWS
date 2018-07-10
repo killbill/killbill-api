@@ -1,3 +1,98 @@
+0.51.27
+    Cleanup unused Account#isNotifiedForInvoices field
+
+0.51.26
+    Add missing chargeback APIs in InvoicePaymentApi
+    Catalog API changes for killbill/killbill#1009
+
+0.51.25
+    Update InvoicePaymentApi
+    Add new dryRun invoice endpoint with its own permission
+    Add new api to fetch an invoice from a given invoice item id
+    Add new EntitlementState#EXPIRED
+    Add Healthcheck service
+    Add getPaymentByTransactionExternalKey API
+    Add ability to specify BCD when creating subscription or changing plan
+
+0.51.24
+    Modify getUserRoles signature; to throw SecurityApiException
+
+0.51.23
+    Add new invoice api to allow recording tax items -- outside of the invoice plugin
+
+0.51.22
+    catalog: remove superfluous planChangeAlignment API
+
+0.51.21
+    catalog: add missing subscriptionStartDate in APIs and remove deprecated APIs
+
+0.51.20
+    New API to retrieve history info from any objects
+
+0.51.19
+    Tweak ErrorCode message for TAG_DEFINITION_XX and remove unused ObjectType.REFUND
+
+0.51.18
+    Add InvoiceItem#getProductName and InvoiceItem#getPrettyProductName apis
+
+0.51.17
+    New API to retrieve history info from any objects
+
+0.51.16
+    Change EntitlementApi to return UUID only
+
+0.51.15
+    New method to get all audit logs for an account
+
+0.51.14
+    catalog: add getUnits method to Catalog interface
+
+0.51.13
+    ErrorCode: add INVOICE_PLUGIN_API_ABORTED
+
+0.51.12
+    Fix typo in PAYMENT_REFRESH_PAYMENT_METHOD message
+    Pass itemDetails to insertCredit, insertCreditForInvoice and insertInvoiceItemAdjustment APIs
+
+0.51.11
+    Add void invoice API
+
+0.51.10
+    Add usage details in items
+
+0.51.9
+    make Pagination offer a close method
+
+0.51.8
+    Add BillingPeriod.BIMESTRIAL and BillingPeriod.TRIANNUAL
+
+0.51.7
+    Add BillingPeriod.SIXTY_DAYS and BillingPeriod.NINETY_DAYS
+
+0.51.6
+    Add missing effective_date for payment operations
+
+0.51.5
+    Add Account#referenceTime
+
+0.51.4
+    Add Entitlement#undoChangePlan api
+    Add api CustomFieldUserApi#updateCustomFields
+
+0.51.3
+    entitlement: Add parameter when creating bundle to allow reusing key that is not active
+    Enhance TagUserApi#createTagDefinition to add list of applicable types
+    Add SecurityApi#updateRoleDefinition
+
+0.51.2
+    Remove StaticCatalog#getRecurringBillingMode
+    Implement proper api to specify a targetPhase when changing Plan.
+    payment: Add PaymentApi#addPaymentMethodWithPaymentControl to allow an an overwrite of pluginName during addPaymentMethod operation
+    util: introduce QueueRetryException
+
+0.51.1
+    Initial version against 0.19.x branch
+
 0.50.2
     Fix comparing currency code
 
@@ -193,7 +288,7 @@
     catalog: Add optional priceList filter when retrieving available ADD_ONs.
 
 0.10.1
-    Modify invoice api to trigger dryRun invoice to it also supports adding subscription info (CREATE, CHANGE, CANCEL) 
+    Modify invoice api to trigger dryRun invoice to it also supports adding subscription info (CREATE, CHANGE, CANCEL)
 
 0.9.11
     Update PaymentOptions api

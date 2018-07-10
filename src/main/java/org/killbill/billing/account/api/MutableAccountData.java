@@ -18,6 +18,7 @@ package org.killbill.billing.account.api;
 
 import java.util.UUID;
 
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.killbill.billing.catalog.api.Currency;
 
@@ -75,6 +76,12 @@ public interface MutableAccountData extends AccountData {
      * @param paymentMethodId
      */
     public void setPaymentMethodId(UUID paymentMethodId);
+
+    /**
+     * Sets the account referenceTime
+     * @param referenceTime
+     */
+    public void setReferenceTime(DateTime referenceTime);
 
     /**
      * Sets the account timezone
@@ -159,13 +166,6 @@ public interface MutableAccountData extends AccountData {
      * @param isMigrated
      */
     public void setIsMigrated(boolean isMigrated);
-
-    /**
-     * Sets whether or not the account should receive notification on future invoices
-     *
-     * @param isNotifiedForInvoices
-     */
-    public void setIsNotifiedForInvoices(boolean isNotifiedForInvoices);
 
     /**
      * Sets the UUID of the default parentAccountId

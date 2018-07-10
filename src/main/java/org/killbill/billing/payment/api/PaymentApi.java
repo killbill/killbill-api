@@ -22,10 +22,13 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+import org.joda.time.DateTime;
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.account.api.Account;
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.security.RequiresPermissions;
+import org.killbill.billing.util.api.AuditLevel;
+import org.killbill.billing.util.audit.AuditLogWithHistory;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.entity.Pagination;
@@ -34,8 +37,8 @@ import static org.killbill.billing.security.Permission.PAYMENT_CAN_CHARGEBACK;
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_REFUND;
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_TRIGGER_PAYMENT;
 import static org.killbill.billing.security.Permission.PAYMENT_METHOD_CAN_CREATE;
-import static org.killbill.billing.security.Permission.PAYMENT_METHOD_CAN_UPDATE;
 import static org.killbill.billing.security.Permission.PAYMENT_METHOD_CAN_DELETE;
+import static org.killbill.billing.security.Permission.PAYMENT_METHOD_CAN_UPDATE;
 
 public interface PaymentApi extends KillbillApi {
 
@@ -47,6 +50,7 @@ public interface PaymentApi extends KillbillApi {
      * @param paymentId                     the payment id (non-null for multi-steps flows, such as 3D Secure)
      * @param amount                              the amount to pay
      * @param currency                            the amount currency
+     * @param effectiveDate                 the effectiveDate of the payment operation
      * @param paymentExternalKey            the payment external key
      * @param paymentTransactionExternalKey the payment transaction external key
      * @param properties                          plugin specific properties
@@ -55,7 +59,7 @@ public interface PaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public Payment createAuthorization(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency,
+    public Payment createAuthorization(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency, DateTime effectiveDate,
                                        String paymentExternalKey, String paymentTransactionExternalKey,
                                        Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
@@ -69,6 +73,7 @@ public interface PaymentApi extends KillbillApi {
      * @param paymentId                     the payment id (non-null for multi-steps flows, such as 3D Secure)
      * @param amount                              the amount to pay
      * @param currency                            the amount currency
+     * @param effectiveDate                 the effectiveDate of the payment operation
      * @param paymentExternalKey            the payment external key
      * @param paymentTransactionExternalKey the payment transaction external key
      * @param properties                          plugin specific properties
@@ -78,7 +83,7 @@ public interface PaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public Payment createAuthorizationWithPaymentControl(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency,
+    public Payment createAuthorizationWithPaymentControl(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency, DateTime effectiveDate,
                                        String paymentExternalKey, String paymentTransactionExternalKey,
                                        Iterable<PluginProperty> properties, PaymentOptions paymentOptions, CallContext context)
             throws PaymentApiException;
@@ -89,6 +94,7 @@ public interface PaymentApi extends KillbillApi {
      * @param account                             the account
      * @param amount                              the amount to pay
      * @param currency                            the amount currency
+     * @param effectiveDate                 the effectiveDate of the payment operation
      * @param paymentTransactionExternalKey       the payment transaction external key
      * @param properties                          plugin specific properties
      * @param context                             the call context
@@ -96,7 +102,7 @@ public interface PaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public Payment createCapture(Account account, UUID paymentId, BigDecimal amount, Currency currency,
+    public Payment createCapture(Account account, UUID paymentId, BigDecimal amount, Currency currency, DateTime effectiveDate,
                                  String paymentTransactionExternalKey, Iterable<PluginProperty> properties,
                                  CallContext context)
             throws PaymentApiException;
@@ -107,6 +113,7 @@ public interface PaymentApi extends KillbillApi {
      * @param account                             the account
      * @param amount                              the amount to pay
      * @param currency                            the amount currency
+     * @param effectiveDate                 the effectiveDate of the payment operation
      * @param paymentTransactionExternalKey       the payment transaction external key
      * @param properties                          plugin specific properties
      * @param paymentOptions                      options to control payment behavior
@@ -115,7 +122,7 @@ public interface PaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public Payment createCaptureWithPaymentControl(Account account, UUID paymentId, BigDecimal amount, Currency currency,
+    public Payment createCaptureWithPaymentControl(Account account, UUID paymentId, BigDecimal amount, Currency currency, DateTime effectiveDate,
                                  String paymentTransactionExternalKey, Iterable<PluginProperty> properties,
                                  PaymentOptions paymentOptions, CallContext context)
             throws PaymentApiException;
@@ -129,6 +136,7 @@ public interface PaymentApi extends KillbillApi {
      * @param paymentId                     the payment id (non-null for multi-steps flows, such as 3D Secure)
      * @param amount                              the amount to pay
      * @param currency                            the amount currency
+     * @param effectiveDate                 the effectiveDate of the payment operation
      * @param paymentExternalKey            the payment external key
      * @param paymentTransactionExternalKey the payment transaction external key
      * @param properties                          plugin specific properties
@@ -137,7 +145,7 @@ public interface PaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public Payment createPurchase(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency,
+    public Payment createPurchase(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency, DateTime effectiveDate,
                                         String paymentExternalKey, String paymentTransactionExternalKey,
                                         Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
@@ -150,6 +158,7 @@ public interface PaymentApi extends KillbillApi {
      * @param paymentId                     the payment id (non-null for multi-steps flows, such as 3D Secure)
      * @param amount                              the amount to pay
      * @param currency                            the amount currency
+     * @param effectiveDate                 the effectiveDate of the payment operation
      * @param paymentExternalKey            the payment external key
      * @param paymentTransactionExternalKey the payment transaction external key
      * @param properties                          plugin specific properties
@@ -159,7 +168,7 @@ public interface PaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public Payment createPurchaseWithPaymentControl(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency,
+    public Payment createPurchaseWithPaymentControl(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency, DateTime effectiveDate,
                                                           String paymentExternalKey, String paymentTransactionExternalKey,
                                                           Iterable<PluginProperty> properties, PaymentOptions paymentOptions, CallContext context)
             throws PaymentApiException;
@@ -169,6 +178,7 @@ public interface PaymentApi extends KillbillApi {
      *
      * @param account                             the account
      * @param paymentId                     the payment id
+     * @param effectiveDate                 the effectiveDate of the payment operation
      * @param paymentTransactionExternalKey the payment transaction external key
      * @param properties                          plugin specific properties
      * @param context                             the call context
@@ -176,7 +186,7 @@ public interface PaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public Payment createVoid(Account account, UUID paymentId, String paymentTransactionExternalKey, Iterable<PluginProperty> properties,
+    public Payment createVoid(Account account, UUID paymentId, DateTime effectiveDate, String paymentTransactionExternalKey, Iterable<PluginProperty> properties,
                               CallContext context)
             throws PaymentApiException;
 
@@ -186,6 +196,7 @@ public interface PaymentApi extends KillbillApi {
      *
      * @param account                             the account
      * @param paymentId                     the payment id
+     * @param effectiveDate                 the effectiveDate of the payment operation
      * @param paymentTransactionExternalKey the payment transaction external key
      * @param properties                          plugin specific properties
      * @param paymentOptions                      options to control payment behavior
@@ -194,7 +205,7 @@ public interface PaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public Payment createVoidWithPaymentControl(Account account, UUID paymentId, String paymentTransactionExternalKey, Iterable<PluginProperty> properties,
+    public Payment createVoidWithPaymentControl(Account account, UUID paymentId, DateTime effectiveDate, String paymentTransactionExternalKey, Iterable<PluginProperty> properties,
                                                 PaymentOptions paymentOptions, CallContext context)
             throws PaymentApiException;
 
@@ -205,6 +216,7 @@ public interface PaymentApi extends KillbillApi {
      *
      * @param account                             the account
      * @param paymentId                     the payment id
+     * @param effectiveDate                 the effectiveDate of the payment operation
      * @param amount                              the amount to refund
      * @param currency                            the amount currency
      * @param paymentTransactionExternalKey the payment transaction external key
@@ -214,7 +226,7 @@ public interface PaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_REFUND)
-    public Payment createRefund(Account account, UUID paymentId, BigDecimal amount, Currency currency,
+    public Payment createRefund(Account account, UUID paymentId, BigDecimal amount, Currency currency, DateTime effectiveDate,
                                       String paymentTransactionExternalKey, Iterable<PluginProperty> properties,
                                       CallContext context)
             throws PaymentApiException;
@@ -224,6 +236,7 @@ public interface PaymentApi extends KillbillApi {
      *
      * @param account                             the account
      * @param paymentId                     the payment id
+     * @param effectiveDate                 the effectiveDate of the payment operation
      * @param amount                              the amount to refund
      * @param currency                            the amount currency
      * @param paymentTransactionExternalKey the payment transaction external key
@@ -234,7 +247,7 @@ public interface PaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_REFUND)
-    public Payment createRefundWithPaymentControl(Account account, UUID paymentId, BigDecimal amount, Currency currency,
+    public Payment createRefundWithPaymentControl(Account account, UUID paymentId, BigDecimal amount, Currency currency, DateTime effectiveDate,
                                                         String paymentTransactionExternalKey, Iterable<PluginProperty> properties,
                                                         PaymentOptions paymentOptions, CallContext context)
             throws PaymentApiException;
@@ -247,6 +260,7 @@ public interface PaymentApi extends KillbillApi {
      * @param account                             the account
      * @param paymentMethodId                     the payment method id to use
      * @param paymentId                     the payment id (non-null for multi-steps flows)
+     * @param effectiveDate                 the effectiveDate of the payment operation
      * @param amount                              the amount to credit
      * @param currency                            the amount currency
      * @param paymentExternalKey            the payment external key
@@ -257,7 +271,7 @@ public interface PaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public Payment createCredit(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency,
+    public Payment createCredit(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency, DateTime effectiveDate,
                                 String paymentExternalKey, String paymentTransactionExternalKey,
                                 Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
@@ -273,6 +287,7 @@ public interface PaymentApi extends KillbillApi {
      * @param paymentId                     the payment id (non-null for multi-steps flows)
      * @param amount                              the amount to credit
      * @param currency                            the amount currency
+     * @param effectiveDate                 the effectiveDate of the payment operation
      * @param paymentExternalKey            the payment external key
      * @param paymentTransactionExternalKey the payment transaction external key
      * @param properties                          plugin specific properties
@@ -282,7 +297,7 @@ public interface PaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_TRIGGER_PAYMENT)
-    public Payment createCreditWithPaymentControl(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency,
+    public Payment createCreditWithPaymentControl(Account account, UUID paymentMethodId, UUID paymentId, BigDecimal amount, Currency currency, DateTime effectiveDate,
                                 String paymentExternalKey, String paymentTransactionExternalKey,
                                 Iterable<PluginProperty> properties, PaymentOptions paymentOptions, CallContext context)
             throws PaymentApiException;
@@ -318,12 +333,13 @@ public interface PaymentApi extends KillbillApi {
      * @param paymentTransactionExternalKey the chargeback external key
      * @param amount                              the amount to chargeback
      * @param currency                            the amount currency
+     * @param effectiveDate                 the effectiveDate of the payment operation
      * @param context                             the call context
      * @return the payment
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
-    public Payment createChargeback(Account account, UUID paymentId, BigDecimal amount, Currency currency, String paymentTransactionExternalKey, CallContext context) throws PaymentApiException;
+    public Payment createChargeback(Account account, UUID paymentId, BigDecimal amount, Currency currency, DateTime effectiveDate, String paymentTransactionExternalKey, CallContext context) throws PaymentApiException;
 
     /**
      * Record a chargeback
@@ -333,32 +349,35 @@ public interface PaymentApi extends KillbillApi {
      * @param paymentTransactionExternalKey the chargeback external key
      * @param amount                              the amount to chargeback
      * @param currency                            the amount currency
+     * @param effectiveDate                 the effectiveDate of the payment operation
      * @param paymentOptions                      options to control payment behavior
      * @param context                             the call context
      * @return the payment
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
-    public Payment createChargebackWithPaymentControl(Account account, UUID paymentId, BigDecimal amount, Currency currency, String paymentTransactionExternalKey, final PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
+    public Payment createChargebackWithPaymentControl(Account account, UUID paymentId, BigDecimal amount, Currency currency, DateTime effectiveDate, String paymentTransactionExternalKey, final PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
 
     /**
      * Reverse a chargeback
      *
      * @param account                       the account
      * @param paymentId                     the payment id
+     * @param effectiveDate                 the effectiveDate of the payment operation
      * @param paymentTransactionExternalKey the external key of the chargeback to reverse
      * @param context                       the call context
      * @return the payment
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
-    public Payment createChargebackReversal(Account account, UUID paymentId, String paymentTransactionExternalKey, CallContext context) throws PaymentApiException;
+    public Payment createChargebackReversal(Account account, UUID paymentId, DateTime effectiveDate, String paymentTransactionExternalKey, CallContext context) throws PaymentApiException;
 
     /**
      * Reverse a chargeback
      *
      * @param account                       the account
      * @param paymentId                     the payment id
+     * @param effectiveDate                 the effectiveDate of the payment operation
      * @param paymentTransactionExternalKey the external key of the chargeback to reverse
      * @param paymentOptions                options to control payment behavior
      * @param context                       the call context
@@ -366,7 +385,7 @@ public interface PaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_CAN_CHARGEBACK)
-    public Payment createChargebackReversalWithPaymentControl(Account account, UUID paymentId, String paymentTransactionExternalKey, PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
+    public Payment createChargebackReversalWithPaymentControl(Account account, UUID paymentId, DateTime effectiveDate, String paymentTransactionExternalKey, PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
 
     /**
      * Transition a currently PENDING transaction into either a SUCCESS or a FAILURE
@@ -435,7 +454,15 @@ public interface PaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     public Payment getPaymentByTransactionId(final UUID transactionId, final boolean withPluginInfo, final boolean withAttempts, final Iterable<PluginProperty> properties, final TenantContext context) throws PaymentApiException;
-    
+
+    /**
+     * @param transactionExternalKey the payment transaction external key
+     * @param context                the call context
+     * @return the payment
+     * @throws PaymentApiException
+     */
+    public Payment getPaymentByTransactionExternalKey(final String transactionExternalKey, final boolean withPluginInfo, final boolean withAttempts, final Iterable<PluginProperty> properties, final TenantContext context) throws PaymentApiException;
+
     /**
      * Find all payments across all plugins
      *
@@ -512,14 +539,34 @@ public interface PaymentApi extends KillbillApi {
             throws PaymentApiException;
 
     /**
-     * @param accountId      the account id
-     * @param withPluginInfo whether we want to retrieve the plugin info for that payment method
-     * @param properties     plugin specific properties
-     * @param context        the call context
+     *
+     * @param account                  the account
+     * @param paymentMethodExternalKey the external key
+     * @param pluginName               the plugin name
+     * @param setDefault               whether this should be set as a default payment method
+     * @param paymentMethodInfo        the details for the payment method
+     * @param properties               plugin specific properties
+     * @param paymentOptions           options to control payment behavior
+     * @param context                  the call context
+     * @return the uuid of the payment method
+     * @throws PaymentApiException
+     */
+    @RequiresPermissions(PAYMENT_METHOD_CAN_CREATE)
+    public UUID addPaymentMethodWithPaymentControl(Account account, String paymentMethodExternalKey, String pluginName, boolean setDefault, PaymentMethodPlugin paymentMethodInfo, Iterable<PluginProperty> properties, PaymentOptions paymentOptions, CallContext context)
+            throws PaymentApiException;
+
+
+
+    /**
+     * @param accountId         the account id
+     * @param includedInactive  returns the payment method even if this is not active
+     * @param withPluginInfo    whether we want to retrieve the plugin info for that payment method
+     * @param properties        plugin specific properties
+     * @param context           the call context
      * @return the list of payment methods
      * @throws PaymentApiException
      */
-    public List<PaymentMethod> getAccountPaymentMethods(UUID accountId, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
+    public List<PaymentMethod> getAccountPaymentMethods(UUID accountId, boolean includedInactive, boolean withPluginInfo, Iterable<PluginProperty> properties, TenantContext context)
             throws PaymentApiException;
 
     /**
@@ -654,4 +701,47 @@ public interface PaymentApi extends KillbillApi {
     @RequiresPermissions(PAYMENT_METHOD_CAN_UPDATE)
     public List<PaymentMethod> refreshPaymentMethods(Account account, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
+
+
+    /**
+     * Get all the audit entries with history for a given payment.
+     *
+     * @param paymentId     the payment id
+     * @param auditLevel    audit level (verbosity)
+     * @param context       the tenant context
+     * @return all audit entries with history for a payment
+     */
+    List<AuditLogWithHistory> getPaymentAuditLogsWithHistoryForId(UUID paymentId, AuditLevel auditLevel, TenantContext context);
+
+    /**
+     * Get all the audit entries with history for a given payment method.
+     *
+     * @param paymentMethodId   the payment method id
+     * @param auditLevel        audit level (verbosity)
+     * @param context           the tenant context
+     * @return all audit entries with history for a payment method
+     */
+    List<AuditLogWithHistory> getPaymentMethodAuditLogsWithHistoryForId(UUID paymentMethodId, AuditLevel auditLevel, TenantContext context);
+
+    /**
+     * Get all the audit entries with history for a given payment attempt.
+     *
+     * @param paymentAttemptId  the payment attempt id
+     * @param auditLevel        audit level (verbosity)
+     * @param context           the tenant context
+     * @return all audit entries with history for a payment attempt
+     */
+    List<AuditLogWithHistory> getPaymentAttemptAuditLogsWithHistoryForId(UUID paymentAttemptId, AuditLevel auditLevel, TenantContext context);
+
+    /**
+     * Get all the audit entries with history for a given payment transaction.
+     *
+     * @param paymentTransactionId  the payment transaction id
+     * @param auditLevel            audit level (verbosity)
+     * @param context               the tenant context
+     * @return all audit entries with history for a payment transaction
+     */
+    List<AuditLogWithHistory> getPaymentTransactionAuditLogsWithHistoryForId(UUID paymentTransactionId, AuditLevel auditLevel, TenantContext context);
+
+
 }

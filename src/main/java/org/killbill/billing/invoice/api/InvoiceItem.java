@@ -58,15 +58,29 @@ public interface InvoiceItem extends Entity {
 
     UUID getSubscriptionId();
 
+    String getProductName();
+
+    String getPrettyProductName();
+
     String getPlanName();
+
+    String getPrettyPlanName();
 
     String getPhaseName();
 
+    String getPrettyPhaseName();
+
     String getUsageName();
+
+    String getPrettyUsageName();
 
     BigDecimal getRate();
 
     UUID getLinkedItemId();
+
+    Integer getQuantity();
+
+    String getItemDetails();
 
     /**
      * Items match if they correspond to the same subscription for the same catalog plan and same start / end dates

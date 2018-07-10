@@ -32,11 +32,13 @@ public enum Permission {
      * Catalog
      */
     CATALOG_CAN_UPLOAD("catalog", "config_upload"),
+    CATALOG_CAN_DELETE("catalog", "delete"),
 
     /**
      * Custom fields
      */
     CUSTOM_FIELDS_CAN_ADD("custom_field", "add"),
+    CUSTOM_FIELDS_CAN_UPDATE("custom_field", "update"),
     CUSTOM_FIELDS_CAN_DELETE("custom_field", "delete"),
 
     /*
@@ -52,10 +54,10 @@ public enum Permission {
      * Invoice
      */
     INVOICE_CAN_CREDIT("invoice", "credit"),
-    INVOICE_CAN_ADJUST("invoice", "adjust"),
     INVOICE_CAN_ITEM_ADJUST("invoice", "item_adjust"),
     INVOICE_CAN_DELETE_CBA("invoice", "delete_cba"),
     INVOICE_CAN_TRIGGER_INVOICE("invoice", "trigger"),
+    INVOICE_CAN_DRY_RUN_INVOICE("invoice", "dry_run"),
 
     /*
      * Overdue
@@ -68,7 +70,6 @@ public enum Permission {
     PAYMENT_CAN_TRIGGER_PAYMENT("payment", "trigger"),
     PAYMENT_CAN_REFUND("payment", "refund"),
     PAYMENT_CAN_CHARGEBACK("payment", "chargeback"),
-    PAYMENT_CAN_CREATE_EXTERNAL_PAYMENT("payment", "external_payment"),
 
     /**
      * Payment methods
@@ -85,10 +86,6 @@ public enum Permission {
     TAG_CAN_ADD("tag", "add"),
     TAG_CAN_DELETE("tag", "delete"),
 
-    /*
-     * Tenants
-     */
-    TENANT_CAN_VIEW("tenant", "view"),
     TENANT_CAN_CREATE("tenant", "create"),
 
     /**
@@ -102,11 +99,6 @@ public enum Permission {
      */
     USAGE_CAN_RECORD("usage", "record"),
 
-
-    /*
-     * Users (authentication, authorization)
-    */
-    USER_CAN_VIEW("user", "view"),
     USER_CAN_CREATE("user", "create"),
 
 
@@ -114,6 +106,7 @@ public enum Permission {
      * Administrator that can update state (to correct data associated to bugs, ...)
      */
     ADMIN_CAN_FIX_DATA("admin", "update");
+
 
     private final String group;
     private final String value;

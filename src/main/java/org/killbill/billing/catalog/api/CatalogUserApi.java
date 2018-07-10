@@ -22,6 +22,7 @@ import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 
+import static org.killbill.billing.security.Permission.CATALOG_CAN_DELETE;
 import static org.killbill.billing.security.Permission.CATALOG_CAN_UPLOAD;
 
 /**
@@ -32,11 +33,12 @@ public interface CatalogUserApi extends KillbillApi {
     /**
      * Retrieves the multi versioned catalog.
      *
-     * @param catalogName the name of the catalog
-     * @param context     the user context that specifies the tenant information
+     * @param catalogName        the name of the catalog
+     * @param catalogDateVersion optional date filter to retrieve a specific version
+     * @param context            the user context that specifies the tenant information
      * @return the {@code Catalog}
      */
-    Catalog getCatalog(String catalogName, TenantContext context) throws CatalogApiException;
+    VersionedCatalog<? extends StaticCatalog> getCatalog(String catalogName, DateTime catalogDateVersion, TenantContext context) throws CatalogApiException;
 
     /**
      * Retrieves the current catalog
@@ -58,8 +60,8 @@ public interface CatalogUserApi extends KillbillApi {
     /**
      * Creates a per-tenant default template catalog
      *
-     * @param effectiveDate  the effective date for this catalog
-     * @param callContext    the user context
+     * @param effectiveDate the effective date for this catalog
+     * @param callContext   the user context
      * @throws CatalogApiException
      */
     @RequiresPermissions(CATALOG_CAN_UPLOAD)
@@ -77,4 +79,13 @@ public interface CatalogUserApi extends KillbillApi {
      */
     @RequiresPermissions(CATALOG_CAN_UPLOAD)
     void addSimplePlan(SimplePlanDescriptor planDescriptor, DateTime requestedDate, CallContext context) throws CatalogApiException;
+
+    /**
+     * Delete a per-tenant catalog  (should be used with caution)
+     *
+     * @param callContext the user context
+     * @throws CatalogApiException
+     */
+    @RequiresPermissions(CATALOG_CAN_DELETE)
+    void deleteCatalog(CallContext callContext) throws CatalogApiException;
 }

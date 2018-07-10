@@ -1,7 +1,8 @@
 /*
- * Copyright 2010-2013 Ning, Inc.
+ * Copyright 2014-2018 Groupon, Inc
+ * Copyright 2014-2018 The Billing Project, LLC
  *
- * Ning licenses this file to you under the Apache License, version 2.0
+ * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
  * License.  You may obtain a copy of the License at:
  *
@@ -14,12 +15,12 @@
  * under the License.
  */
 
-package org.killbill.billing.payment.api;
+package org.killbill.billing.catalog.api;
 
-public enum RefundStatus {
-    CREATED,
-    PLUGIN_COMPLETED,
-    PENDING,
-    COMPLETED,
-    PLUGIN_ERRORED
+import java.util.List;
+
+// Static catalog API methods must operate on the latest ("current") version
+public interface VersionedCatalog<CatalogType> extends StaticCatalog, Catalog {
+
+    public List<CatalogType> getVersions();
 }

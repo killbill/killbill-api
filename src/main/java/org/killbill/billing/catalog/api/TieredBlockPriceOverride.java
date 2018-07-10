@@ -1,7 +1,9 @@
 /*
  * Copyright 2010-2013 Ning, Inc.
+ * Copyright 2015 Groupon, Inc
+ * Copyright 2015 The Billing Project, LLC
  *
- * Ning licenses this file to you under the Apache License, version 2.0
+ * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
  * License.  You may obtain a copy of the License at:
  *
@@ -14,17 +16,11 @@
  * under the License.
  */
 
-package org.killbill.billing.invoice.api;
+package org.killbill.billing.catalog.api;
 
-import java.util.List;
-import java.util.UUID;
-
-import org.killbill.billing.KillbillApi;
-import org.killbill.billing.util.callcontext.TenantContext;
-
-public interface InvoicePaymentApi extends KillbillApi {
-
-    public List<InvoicePayment> getInvoicePayments(UUID paymentId, TenantContext context);
-
-    public List<InvoicePayment> getInvoicePaymentsByAccount(UUID accountId, TenantContext context);
+public interface TieredBlockPriceOverride extends BlockPriceOverride {
+    /**
+     * @return the max used usage to consider this tiered block.
+     */
+    public Double getMax();
 }

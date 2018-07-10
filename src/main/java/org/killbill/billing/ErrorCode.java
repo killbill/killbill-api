@@ -62,6 +62,7 @@ public enum ErrorCode {
 
     /* Un-cancellation */
     SUB_UNCANCEL_BAD_STATE(1070, "Subscription (billing) %s is not in pending cancelled state: Failed to uncancel plan"),
+    SUB_UNDO_CHANGE_BAD_STATE(1071, "Subscription (billing) %s does not have a pending change plan: Failed to undo change plan"),
 
     /* Fetch */
     SUB_GET_NO_BUNDLE_FOR_SUBSCRIPTION(1080, "Could not find a bundle for subscription %s"),
@@ -175,9 +176,9 @@ public enum ErrorCode {
     *
     */
     TAG_DEFINITION_CONFLICTS_WITH_CONTROL_TAG(3900, "The tag definition name conflicts with a reserved %s"),
-    TAG_DEFINITION_ALREADY_EXISTS(3901, "The tag definition name already exists %s"),
-    TAG_DEFINITION_DOES_NOT_EXIST(3902, "The tag definition id does not exist %s"),
-    TAG_DEFINITION_IN_USE(3903, "The tag definition name is currently in use %s"),
+    TAG_DEFINITION_ALREADY_EXISTS(3901, "The tag definition %s already exists "),
+    TAG_DEFINITION_DOES_NOT_EXIST(3902, "The tag definition %s does not exist"),
+    TAG_DEFINITION_IN_USE(3903, "The tag definition %s is currently in use"),
     TAG_DEFINITION_HAS_UPPERCASE(3904, "The tag definition name must be in lowercase %s"),
 
     /*
@@ -219,6 +220,8 @@ public enum ErrorCode {
     INVOICE_ITEMS_ADJUSTMENT_MISSING(4025, "Missing invoice item adjustements during payment refund"),
     INVOICE_MISSING_PARENT_INVOICE(4026, "Missing parent invoice for invoice id %s"),
     CHILD_ACCOUNT_MISSING_CREDIT(4027, "Child account %s does not have credit"),
+    CAN_NOT_VOID_INVOICE_THAT_IS_PAID(4028, "Invoice %s can not be voided. Invoice is paid or partially paid."),
+    INVOICE_PLUGIN_API_ABORTED(4029, "Invoice plugin aborted call: %s"),
 
     /*
      *
@@ -259,7 +262,7 @@ public enum ErrorCode {
     PAYMENT_REFUND_AMOUNT_NEGATIVE_OR_NULL(7001, "Refund on payment %s not allowed with amount %s"),
     PAYMENT_GET_PAYMENT_METHODS(7004, "Failed to retrieve payment method for account %s : %s"),
     PAYMENT_ADD_PAYMENT_METHOD(7005, "Failed to add payment method for account %s : %s"),
-    PAYMENT_REFRESH_PAYMENT_METHOD(7006, "Failed to resfresh payment methods for account %s : %s"),
+    PAYMENT_REFRESH_PAYMENT_METHOD(7006, "Failed to refresh payment methods for account %s : %s"),
     PAYMENT_DEL_PAYMENT_METHOD(7007, "Failed to delete payment method for account %s : %s"),
     PAYMENT_UPD_PAYMENT_METHOD(7008, "Failed to update payment method for account %s : %s"),
     PAYMENT_CREATE_PAYMENT(7009, "Failed to create payment for account %s : %s"),
@@ -300,6 +303,8 @@ public enum ErrorCode {
    * Range 9000: Custom Fields
    */
     CUSTOM_FIELD_ALREADY_EXISTS(9000, "The custom field %s already exists"),
+    CUSTOM_FIELD_DOES_NOT_EXISTS_FOR_ID(9001, "The custom field does not exists for id %s"),
+    CUSTOM_FIELD_INVALID_UPDATE(9002, "Failed to update custom field %s: Invalid value %s for field %s"),
 
     /*
      *

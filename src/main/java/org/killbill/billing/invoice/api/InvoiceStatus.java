@@ -21,6 +21,7 @@ package org.killbill.billing.invoice.api;
 public enum InvoiceStatus {
 
     DRAFT,
-    COMMITTED
+    COMMITTED,
+    VOID
 
 }

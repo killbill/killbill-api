@@ -21,8 +21,15 @@ package org.killbill.billing.catalog.api;
  */
 public class PlanPhaseSpecifier extends PlanSpecifier {
 
-    // The phaseType is used for if/when we need to skipe phases
+    // The phaseType is used for operations that create subscriptions or change Plan to specify
+    // the initial phase on which subscription should be
     private final PhaseType phaseType;
+
+    public PlanPhaseSpecifier(final String productName,
+                              final BillingPeriod billingPeriod,
+                              final String priceListName) {
+        this(productName, billingPeriod, priceListName, null);
+    }
 
     public PlanPhaseSpecifier(final String productName,
                               final BillingPeriod billingPeriod,
@@ -30,6 +37,10 @@ public class PlanPhaseSpecifier extends PlanSpecifier {
                               final PhaseType phaseType) {
         super(productName, billingPeriod, priceListName);
         this.phaseType = phaseType;
+    }
+
+    public PlanPhaseSpecifier(final String planName) {
+        this(planName, null);
     }
 
     public PlanPhaseSpecifier(final String planName,

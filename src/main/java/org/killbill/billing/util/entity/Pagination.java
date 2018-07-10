@@ -1,7 +1,7 @@
 /*
  * Copyright 2010-2014 Ning, Inc.
- * Copyright 2014-2016 Groupon, Inc
- * Copyright 2014-2016 The Billing Project, LLC
+ * Copyright 2014-2018 Groupon, Inc
+ * Copyright 2014-2018 The Billing Project, LLC
  *
  * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
@@ -18,6 +18,8 @@
 
 package org.killbill.billing.util.entity;
 
+import java.io.Closeable;
+
 /**
  * Represents a page, i.e. a subset, of records
  *
@@ -26,7 +28,7 @@ package org.killbill.billing.util.entity;
  *
  * @param <T> type of record, usually an Entity
  */
-public interface Pagination<T> extends Iterable<T> {
+public interface Pagination<T> extends Iterable<T>, Closeable {
 
     /**
      * @return offset from which these records are returned

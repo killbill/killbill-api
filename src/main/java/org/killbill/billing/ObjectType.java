@@ -32,7 +32,6 @@ public enum ObjectType {
     SERVICE_BROADCAST,
     PAYMENT_ATTEMPT,
     PAYMENT_METHOD,
-    REFUND,
     TAG,
     TAG_DEFINITION,
     TENANT,

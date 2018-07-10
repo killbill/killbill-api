@@ -1,7 +1,7 @@
 /*
  * Copyright 2010-2013 Ning, Inc.
- * Copyright 2016 Groupon, Inc
- * Copyright 2016 The Billing Project, LLC
+ * Copyright 2015 Groupon, Inc
+ * Copyright 2015 The Billing Project, LLC
  *
  * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
@@ -18,20 +18,28 @@
 
 package org.killbill.billing.catalog.api;
 
-public interface CatalogEntity {
+import java.math.BigDecimal;
+
+public interface BlockPriceOverride {
 
     /**
-     * @return the name of the {@code CatalogEntity}
+     * @return the unit for that {@code Block} section.
      */
-    public String getName();
-
+    public String getUnitName();
 
     /**
-     * @return the pretty name of the {@code CatalogEntity}
+     * @return the size of the block
+     */
+    public Double getSize();
+
+    /**
+     * @return the price for that currency
+     */
+    public BigDecimal getPrice();
+
+    /**
      *
-     * If not specified, this default to the name of the {@code CatalogEntity}
+     * @return the currency
      */
-    public String getPrettyName();
-
-
+    public Currency getCurrency();
 }

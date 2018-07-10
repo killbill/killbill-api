@@ -1,7 +1,6 @@
 /*
- * Copyright 2010-2013 Ning, Inc.
- * Copyright 2016 Groupon, Inc
- * Copyright 2016 The Billing Project, LLC
+ * Copyright 2014-2018 Groupon, Inc
+ * Copyright 2014-2018 The Billing Project, LLC
  *
  * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
@@ -16,22 +15,11 @@
  * under the License.
  */
 
-package org.killbill.billing.catalog.api;
+package org.killbill.billing.util.audit;
 
-public interface CatalogEntity {
+import org.killbill.billing.util.entity.Entity;
 
-    /**
-     * @return the name of the {@code CatalogEntity}
-     */
-    public String getName();
+public interface AuditLogWithHistory<E extends Entity> extends AuditLog {
 
-
-    /**
-     * @return the pretty name of the {@code CatalogEntity}
-     *
-     * If not specified, this default to the name of the {@code CatalogEntity}
-     */
-    public String getPrettyName();
-
-
+    public E getEntity();
 }

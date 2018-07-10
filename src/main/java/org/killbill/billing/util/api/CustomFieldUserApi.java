@@ -22,6 +22,7 @@ import java.util.UUID;
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.ObjectType;
 import org.killbill.billing.security.RequiresPermissions;
+import org.killbill.billing.util.audit.AuditLogWithHistory;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.customfield.CustomField;
@@ -29,6 +30,7 @@ import org.killbill.billing.util.entity.Pagination;
 
 import static org.killbill.billing.security.Permission.CUSTOM_FIELDS_CAN_ADD;
 import static org.killbill.billing.security.Permission.CUSTOM_FIELDS_CAN_DELETE;
+import static org.killbill.billing.security.Permission.CUSTOM_FIELDS_CAN_UPDATE;
 
 public interface CustomFieldUserApi extends KillbillApi {
 
@@ -60,6 +62,15 @@ public interface CustomFieldUserApi extends KillbillApi {
     void addCustomFields(List<CustomField> fields, CallContext context) throws CustomFieldApiException;
 
     /**
+     * @param fields  the list of fields to add
+     * @param context the call context
+     * @throws CustomFieldApiException
+     */
+    @RequiresPermissions(CUSTOM_FIELDS_CAN_UPDATE)
+    void updateCustomFields(List<CustomField> fields, CallContext context) throws CustomFieldApiException;
+
+
+    /**
      * @param fields
      * @param context
      * @throws CustomFieldApiException
@@ -89,4 +100,15 @@ public interface CustomFieldUserApi extends KillbillApi {
      * @return the list of custom fields associated with that account
      */
     List<CustomField> getCustomFieldsForAccount(UUID accountId, TenantContext context);
+
+    /**
+     * Get all the audit entries with history for a given custom field.
+     *
+     * @param customFieldId the custom field id
+     * @param auditLevel    audit level (verbosity)
+     * @param context       the tenant context
+     * @return all audit entries with history for a custom field
+     */
+    List<AuditLogWithHistory> getCustomFieldAuditLogsWithHistoryForId(UUID customFieldId, AuditLevel auditLevel, TenantContext context);
+
 }

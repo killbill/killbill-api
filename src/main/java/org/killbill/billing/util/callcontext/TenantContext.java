@@ -23,5 +23,7 @@ import java.util.UUID;
  */
 public interface TenantContext {
 
+    public UUID getAccountId();
+
     public UUID getTenantId();
 }

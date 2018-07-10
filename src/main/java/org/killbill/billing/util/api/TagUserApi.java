@@ -18,11 +18,13 @@ package org.killbill.billing.util.api;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.ObjectType;
 import org.killbill.billing.security.RequiresPermissions;
+import org.killbill.billing.util.audit.AuditLogWithHistory;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.entity.Pagination;
@@ -50,7 +52,7 @@ public interface TagUserApi extends KillbillApi {
      * @throws TagDefinitionApiException
      */
     @RequiresPermissions(TAG_CAN_CREATE_TAG_DEFINITION)
-    public TagDefinition createTagDefinition(String definitionName, String description, CallContext context) throws TagDefinitionApiException;
+    public TagDefinition createTagDefinition(String definitionName, String description, Set<ObjectType> applicableObjectTypes, CallContext context) throws TagDefinitionApiException;
 
     /**
      * @param tagDefinitionId The UUID for that tagDefinition
@@ -168,4 +170,25 @@ public interface TagUserApi extends KillbillApi {
      * @return A list of tags for that given account
      */
     public List<Tag> getTagsForAccount(UUID accountId, boolean includedDeleted, TenantContext context);
+
+    /**
+     * Get all the audit entries with history for a given tag.
+     *
+     * @param tagId         the custom field id
+     * @param auditLevel    audit level (verbosity)
+     * @param context       the tenant context
+     * @return all audit entries with history for a tag
+     */
+    List<AuditLogWithHistory> getTagAuditLogsWithHistoryForId(UUID tagId, AuditLevel auditLevel, TenantContext context);
+
+    /**
+     * Get all the audit entries with history for a given tag definition.
+     *
+     * @param tagDefinitionId   the custom field id
+     * @param auditLevel        audit level (verbosity)
+     * @param context           the tenant context
+     * @return all audit entries with history for a tag definition
+     */
+    List<AuditLogWithHistory> getTagDefinitionAuditLogsWithHistoryForId(UUID tagDefinitionId, AuditLevel auditLevel, TenantContext context);
+
 }
