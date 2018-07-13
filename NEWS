@@ -1,3 +1,6 @@
+0.52.0
+    Update pom.xml to 0.52.x
+
 0.51.27
     Cleanup unused Account#isNotifiedForInvoices field
 
