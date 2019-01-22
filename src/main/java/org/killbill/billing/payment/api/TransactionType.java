@@ -23,5 +23,6 @@ public enum TransactionType {
     CREDIT,
     PURCHASE,
     REFUND,
-    VOID
+    VOID,
+    SECOND_CHARGEBACK
 }
