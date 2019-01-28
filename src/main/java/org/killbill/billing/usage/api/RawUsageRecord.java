@@ -1,7 +1,6 @@
 /*
- * Copyright 2010-2013 Ning, Inc.
- * Copyright 2015 Groupon, Inc
- * Copyright 2015 The Billing Project, LLC
+ * Copyright 2014-2019 Groupon, Inc
+ * Copyright 2014-2019 The Billing Project, LLC
  *
  * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
@@ -16,16 +15,21 @@
  * under the License.
  */
 
-package org.killbill.billing.osgi.api.config;
+package org.killbill.billing.usage.api;
 
-public enum PluginType {
-    PAYMENT,
-    NOTIFICATION,
-    INVOICE,
-    CURRENCY,
-    PAYMENT_CONTROL,
-    CATALOG,
-    ENTITLEMENT,
-    USAGE,
-    __UNKNOWN__
+import java.util.UUID;
+
+import org.joda.time.LocalDate;
+
+public interface RawUsageRecord {
+
+    UUID getSubscriptionId();
+
+    LocalDate getDate();
+
+    String getUnitType();
+
+    Long getAmount();
+
+    String getTrackingId();
 }
