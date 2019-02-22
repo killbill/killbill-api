@@ -30,7 +30,9 @@ import org.killbill.billing.account.api.AccountApiException;
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.payment.api.PluginProperty;
 import org.killbill.billing.security.RequiresPermissions;
+import org.killbill.billing.util.api.AuditLevel;
 import org.killbill.billing.util.api.TagApiException;
+import org.killbill.billing.util.audit.AuditLogWithHistory;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.entity.Pagination;
@@ -395,4 +397,35 @@ public interface InvoiceUserApi extends KillbillApi {
      * @throws InvoiceApiException
      */
     public void voidInvoice(UUID invoiceId, CallContext context) throws InvoiceApiException;
+
+    /**
+     * Get all the audit entries with history for a given invoice.
+     *
+     * @param invoiceId         the invoice id
+     * @param auditLevel        audit level (verbosity)
+     * @param context           the tenant context
+     * @return all audit entries with history for an invoice
+     */
+    List<AuditLogWithHistory> getInvoiceAuditLogsWithHistoryForId(UUID invoiceId, AuditLevel auditLevel, TenantContext context);
+
+    /**
+     * Get all the audit entries with history for a given invoice item.
+     *
+     * @param invoiceItemId      the invoice item id
+     * @param auditLevel        audit level (verbosity)
+     * @param context           the tenant context
+     * @return all audit entries with history for an invoice item
+     */
+    List<AuditLogWithHistory> getInvoiceItemAuditLogsWithHistoryForId(UUID invoiceItemId, AuditLevel auditLevel, TenantContext context);
+
+    /**
+     * Get all the audit entries with history for a given invoice payment.
+     *
+     * @param invoicePaymentId   the invoice payment id
+     * @param auditLevel        audit level (verbosity)
+     * @param context           the tenant context
+     * @return all audit entries with history for an invoice payment
+     */
+    List<AuditLogWithHistory> getInvoicePaymentAuditLogsWithHistoryForId(UUID invoicePaymentId, AuditLevel auditLevel, TenantContext context);
+
 }
