@@ -38,6 +38,17 @@ import static org.killbill.billing.security.Permission.PAYMENT_CAN_TRIGGER_PAYME
 public interface InvoicePaymentApi extends KillbillApi {
 
     /**
+     *
+     * @param invoicePaymentId the id of the invoice payment
+     * @param context the call context
+     * @return the invoice payment.
+     * @throws PaymentApiException
+     */
+    public InvoicePayment getInvoicePayment(UUID invoicePaymentId, TenantContext context)
+            throws PaymentApiException;
+
+
+    /**
      * Combine an authorize and capture payment for a given invoice and allow to go through registered routing plugins
      *
      * @param account                       the account

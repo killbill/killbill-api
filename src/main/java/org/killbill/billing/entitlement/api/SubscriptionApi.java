@@ -24,6 +24,8 @@ import org.killbill.billing.KillbillApi;
 import org.killbill.billing.OrderingType;
 import org.killbill.billing.payment.api.PluginProperty;
 import org.killbill.billing.security.RequiresPermissions;
+import org.killbill.billing.util.api.AuditLevel;
+import org.killbill.billing.util.audit.AuditLogWithHistory;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.entity.Pagination;
@@ -162,5 +164,46 @@ public interface SubscriptionApi extends KillbillApi {
      */
     public Iterable<BlockingState> getBlockingStates(UUID accountId, List<BlockingStateType> typeFilter, List<String> svcsFilter, OrderingType orderingType, int timeFilter, TenantContext context)
             throws EntitlementApiException;
+
+
+    /**
+     * Get all the audit entries with history for a given bundle.
+     *
+     * @param bundleId          the bundleId id
+     * @param auditLevel        audit level (verbosity)
+     * @param context           the tenant context
+     * @return all audit entries with history for a bundle
+     */
+    List<AuditLogWithHistory> getSubscriptionBundleAuditLogsWithHistoryForId(UUID bundleId, AuditLevel auditLevel, TenantContext context);
+
+    /**
+     * Get all the audit entries with history for a given subscription.
+     *
+     * @param entitlementId      the entitlementId id
+     * @param auditLevel        audit level (verbosity)
+     * @param context           the tenant context
+     * @return all audit entries with history for a subscription
+     */
+    List<AuditLogWithHistory> getSubscriptionAuditLogsWithHistoryForId(UUID entitlementId, AuditLevel auditLevel, TenantContext context);
+
+    /**
+     * Get all the audit entries with history for a given subscription event.
+     *
+     * @param EventId           the subscription event id
+     * @param auditLevel        audit level (verbosity)
+     * @param context           the tenant context
+     * @return all audit entries with history for a subscription event
+     */
+    List<AuditLogWithHistory> getSubscriptionEventAuditLogsWithHistoryForId(UUID EventId, AuditLevel auditLevel, TenantContext context);
+
+    /**
+     * Get all the audit entries with history for a given blocking state.
+     *
+     * @param blockingId        the blocking id
+     * @param auditLevel        audit level (verbosity)
+     * @param context           the tenant context
+     * @return all audit entries with history for a blocking state
+     */
+    List<AuditLogWithHistory> getBlockingStateAuditLogsWithHistoryForId(UUID blockingId, AuditLevel auditLevel, TenantContext context);
 
 }
