@@ -148,11 +148,9 @@ public interface Catalog {
                                DateTime subscriptionStartDate) throws CatalogApiException;
 
     // TODO : should they be private APIs
-
     public PlanChangeResult planChange(PlanPhaseSpecifier from,
                                        PlanSpecifier to,
-                                       DateTime requestedDate,
-                                       DateTime subscriptionStartDate) throws CatalogApiException;
+                                       DateTime requestedDate) throws CatalogApiException;
 
     public BillingActionPolicy planCancelPolicy(PlanPhaseSpecifier planPhase,
                                                 DateTime requestedDate,
