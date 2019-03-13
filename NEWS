@@ -1,3 +1,6 @@
+0.53.4
+    Add Catalog#getNextPlanVersion api 
+
 0.53.3
     Remove unused parameter for Catalog#planChange
 
