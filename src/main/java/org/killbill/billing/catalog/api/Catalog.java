@@ -147,6 +147,14 @@ public interface Catalog {
                                DateTime requestedDate,
                                DateTime subscriptionStartDate) throws CatalogApiException;
 
+    /**
+     *
+     * @param curPlan the current Plan
+     * @return        the same Plan in the next upcoming catalog version or null if does not exist
+     * @throws CatalogApiException
+     */
+    public Plan getNextPlanVersion(final Plan curPlan);
+
     // TODO : should they be private APIs
     public PlanChangeResult planChange(PlanPhaseSpecifier from,
                                        PlanSpecifier to,

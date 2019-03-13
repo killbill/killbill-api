@@ -35,9 +35,8 @@ public interface StaticCatalog {
 
     /**
      * @return the date at which this version of {@code Catalog} becomes effective
-     * @throws CatalogApiException
      */
-    public Date getEffectiveDate() throws CatalogApiException;
+    public Date getEffectiveDate();
 
     /**
      * @return an array of supported {@code Currency}
