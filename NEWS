@@ -1,3 +1,6 @@
+0.53.5
+    Make SecurityApi#getCurrentUserPermissions return Set<String>
+
 0.53.4
     Add Catalog#getNextPlanVersion api 
 

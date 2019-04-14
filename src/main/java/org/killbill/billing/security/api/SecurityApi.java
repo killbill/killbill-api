@@ -1,7 +1,9 @@
 /*
  * Copyright 2010-2013 Ning, Inc.
+ * Copyright 2014-2019 Groupon, Inc
+ * Copyright 2014-2019 The Billing Project, LLC
  *
- * Ning licenses this file to you under the Apache License, version 2.0
+ * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
  * License.  You may obtain a copy of the License at:
  *
@@ -57,7 +59,7 @@ public interface SecurityApi extends KillbillApi {
      * @param context tenant context
      * @return the set of permissions for the current user
      */
-    Set<Permission> getCurrentUserPermissions(TenantContext context);
+    Set<String> getCurrentUserPermissions(TenantContext context);
 
     /**
      * Check the current user has the set of permissions.
