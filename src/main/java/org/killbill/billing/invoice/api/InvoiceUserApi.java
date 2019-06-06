@@ -248,39 +248,17 @@ public interface InvoiceUserApi extends KillbillApi {
      * Add a credit to an account.
      *
      * @param accountId     account id
-     * @param amount        the credit amount
      * @param effectiveDate the day to grant the credit, in the account timezone
-     * @param currency      the credit currency
+     * @param creditItems   the list of credits to add
      * @param autoCommit    the flag to indicate if the invoice is set to COMMITTED or DRAFT and events are sent
      * @param context       the call context
-     * @param description   the item description
-     * @param itemDetails   the item details
      * @param properties    the plugin specific properties
      * @return the credit invoice item
      * @throws InvoiceApiException
      */
     @RequiresPermissions(ACCOUNT_CAN_CREDIT)
-    public InvoiceItem insertCredit(UUID accountId, BigDecimal amount, LocalDate effectiveDate, Currency currency,
-                                    boolean autoCommit, String description, String itemDetails, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
+    public InvoiceItem insertCredits(UUID accountId, LocalDate effectiveDate, Iterable<InvoiceItem> creditItems, boolean autoCommit, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
 
-    /**
-     * Add a credit to an invoice. This can be used to adjust invoices.
-     *
-     * @param accountId     account id
-     * @param invoiceId     invoice id
-     * @param amount        the credit amount
-     * @param effectiveDate the day to grant the credit, in the account timezone
-     * @param currency      the credit currency
-     * @param description   the item description
-     * @param itemDetails   the item details
-     * @param properties    the plugin specific properties
-     * @param context       the call context
-     * @return the credit invoice item
-     * @throws InvoiceApiException
-     */
-    @RequiresPermissions(INVOICE_CAN_CREDIT)
-    public InvoiceItem insertCreditForInvoice(UUID accountId, UUID invoiceId, BigDecimal amount, LocalDate effectiveDate,
-                                              Currency currency, String description, String itemDetails, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
 
     /**
      * Adjust fully a given invoice item.
