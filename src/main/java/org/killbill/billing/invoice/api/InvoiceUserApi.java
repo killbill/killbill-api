@@ -249,7 +249,7 @@ public interface InvoiceUserApi extends KillbillApi {
      *
      * @param accountId     account id
      * @param effectiveDate the day to grant the credit, in the account timezone
-     * @param creditItem    the credit to add
+     * @param creditItems   the list of credits to add
      * @param autoCommit    the flag to indicate if the invoice is set to COMMITTED or DRAFT and events are sent
      * @param context       the call context
      * @param properties    the plugin specific properties
@@ -257,22 +257,8 @@ public interface InvoiceUserApi extends KillbillApi {
      * @throws InvoiceApiException
      */
     @RequiresPermissions(ACCOUNT_CAN_CREDIT)
-    public InvoiceItem insertCredit(UUID accountId, LocalDate effectiveDate, InvoiceItem creditItem, boolean autoCommit, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
+    public InvoiceItem insertCredit(UUID accountId, LocalDate effectiveDate, Iterable<InvoiceItem> creditItems, boolean autoCommit, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
 
-    /**
-     * Add a credit to an invoice. This can be used to adjust invoices.
-     *
-     * @param accountId     account id
-     * @param invoiceId     invoice id
-     * @param effectiveDate the day to grant the credit, in the account timezone
-     * @param creditItem    the credit to add
-     * @param properties    the plugin specific properties
-     * @param context       the call context
-     * @return the credit invoice item
-     * @throws InvoiceApiException
-     */
-    @RequiresPermissions(INVOICE_CAN_CREDIT)
-    public InvoiceItem insertCreditForInvoice(UUID accountId, UUID invoiceId, LocalDate effectiveDate, InvoiceItem creditItem, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
 
     /**
      * Adjust fully a given invoice item.
