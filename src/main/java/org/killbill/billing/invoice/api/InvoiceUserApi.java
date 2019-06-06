@@ -257,7 +257,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @throws InvoiceApiException
      */
     @RequiresPermissions(ACCOUNT_CAN_CREDIT)
-    public InvoiceItem insertCredit(UUID accountId, LocalDate effectiveDate, Iterable<InvoiceItem> creditItems, boolean autoCommit, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
+    public InvoiceItem insertCredits(UUID accountId, LocalDate effectiveDate, Iterable<InvoiceItem> creditItems, boolean autoCommit, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
 
 
     /**
