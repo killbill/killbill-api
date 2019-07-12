@@ -28,9 +28,9 @@ public interface BaseEntitlementWithAddOnsSpecifier {
     public UUID getBundleId();
 
     /**
-     * @return the external key
+     * @return the bundle external key
      */
-    String getExternalKey();
+    String getBundleExternalKey();
 
     /**
      * @return the list of entitlement specifiers

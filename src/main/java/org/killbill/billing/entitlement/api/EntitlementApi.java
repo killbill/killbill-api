@@ -44,7 +44,7 @@ public interface EntitlementApi extends KillbillApi {
      *
      * @param accountId                    the account id
      * @param spec                         the product specification for that new entitlement
-     * @param externalKey                  the external key for that entitlement-- which must be unique in the system
+     * @param bundleExternalKey            the bundle external key
      * @param entitlementEffectiveDate     the date at which the entitlement should start. if this is null this is assumed now
      * @param billingEffectiveDate         the date at which the billing for the subscription should start. if this is null this is assumed now
      * @param isMigrated                   whether this subscription comes from a different system (migrated into Kill Bill)
@@ -55,7 +55,7 @@ public interface EntitlementApi extends KillbillApi {
      * @throws EntitlementApiException if the system fail to create the <code>Entitlement</code>.
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
-    public UUID createBaseEntitlement(UUID accountId, EntitlementSpecifier spec, String externalKey, LocalDate entitlementEffectiveDate, LocalDate billingEffectiveDate, boolean isMigrated, boolean renameCancelledBundleIfExist, Iterable<PluginProperty> properties, CallContext context)
+    public UUID createBaseEntitlement(UUID accountId, EntitlementSpecifier spec, String bundleExternalKey, LocalDate entitlementEffectiveDate, LocalDate billingEffectiveDate, boolean isMigrated, boolean renameCancelledBundleIfExist, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -78,7 +78,7 @@ public interface EntitlementApi extends KillbillApi {
      * Adds an ADD_ON|STANDALONE entitlement to previously created entitlement.
      * <p/>
      * The <code>PlanPhaseSpecifier<code/> should refer to a <code>ProductCategory.ADD_ON or ProductCategory.STANDALONE</code>.
-     * The new entitlement will be bundled using the externalKey that was specified when creating the
+     * The new entitlement will be bundled using the bundleExternalKey that was specified when creating the
      * base entitlement.
      *
      * @param bundleId                 the id of the bundle
@@ -158,13 +158,13 @@ public interface EntitlementApi extends KillbillApi {
     /**
      * Retrieves all the <code>Entitlement</code> for a given account and matching an external key.
      *
-     * @param accountId   the account id
-     * @param externalKey the external key
-     * @param context     the context
-     * @return a list of entitlements
+     * @param accountId         the account id
+     * @param bundleExternalKey the bundle external key
+     * @param context           the context
+     * @return                  a list of entitlements
      * @throws EntitlementApiException if the account does not exist
      */
-    public List<Entitlement> getAllEntitlementsForAccountIdAndExternalKey(UUID accountId, String externalKey, TenantContext context)
+    public List<Entitlement> getAllEntitlementsForAccountIdAndBundleExternalKey(UUID accountId, String bundleExternalKey, TenantContext context)
             throws EntitlementApiException;
 
     /**
@@ -185,17 +185,17 @@ public interface EntitlementApi extends KillbillApi {
      * The <code>Entitlement</code> on the source account will be cancelled at effective date and the <code>Entitlement</code>
      * on the destination account will be created at the effectiveDate.
      *
-     * @param sourceAccountId the unique id for the account on which the bundle will be transferred For
-     * @param destAccountId   the unique id for the account on which the bundle will be transferred to
-     * @param externalKey     the externalKey for the bundle
-     * @param effectiveDate   the date at which this transfer should occur
-     * @param properties      plugin specific properties
-     * @param context         the user context
+     * @param sourceAccountId    the unique id for the account on which the bundle will be transferred For
+     * @param destAccountId      the unique id for the account on which the bundle will be transferred to
+     * @param bundleExternalKey  the bundleExternalKey for the bundle
+     * @param effectiveDate      the date at which this transfer should occur
+     * @param properties         plugin specific properties
+     * @param context            the user context
      * @return the id of the newly created bundle for the destination account
      * @throws EntitlementApiException if the system could not transfer the entitlements
      */
     @RequiresPermissions(ENTITLEMENT_CAN_TRANSFER)
-    public UUID transferEntitlements(final UUID sourceAccountId, final UUID destAccountId, final String externalKey, final LocalDate effectiveDate,
+    public UUID transferEntitlements(final UUID sourceAccountId, final UUID destAccountId, final String bundleExternalKey, final LocalDate effectiveDate,
                                      Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
@@ -208,18 +208,18 @@ public interface EntitlementApi extends KillbillApi {
      * on the destination account will be created at the effectiveDate. The <tt>billingPolicy</tt> will be used to override
      * the default billing behavior for the cancellation of the subscriptions on the source account.
      *
-     * @param sourceAccountId the unique id for the account on which the bundle will be transferred For
-     * @param destAccountId   the unique id for the account on which the bundle will be transferred to
-     * @param externalKey     the externalKey for the bundle
-     * @param effectiveDate   the date at which this transfer should occur
-     * @param billingPolicy   the override billing policy
-     * @param properties      plugin specific properties
-     * @param context         the user context
+     * @param sourceAccountId   the unique id for the account on which the bundle will be transferred For
+     * @param destAccountId     the unique id for the account on which the bundle will be transferred to
+     * @param bundleExternalKey the bundleExternalKey for the bundle
+     * @param effectiveDate     the date at which this transfer should occur
+     * @param billingPolicy     the override billing policy
+     * @param properties        plugin specific properties
+     * @param context           the user context
      * @return the id of the newly created base entitlement for the destination account
      * @throws EntitlementApiException if the system could not transfer the entitlements
      */
     @RequiresPermissions(ENTITLEMENT_CAN_TRANSFER)
-    public UUID transferEntitlementsOverrideBillingPolicy(final UUID sourceAccountId, final UUID destAccountId, final String externalKey, final LocalDate effectiveDate,
+    public UUID transferEntitlementsOverrideBillingPolicy(final UUID sourceAccountId, final UUID destAccountId, final String bundleExternalKey, final LocalDate effectiveDate,
                                                           final BillingActionPolicy billingPolicy, Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
