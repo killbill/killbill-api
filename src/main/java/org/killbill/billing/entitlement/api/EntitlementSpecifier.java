@@ -38,7 +38,7 @@ public interface EntitlementSpecifier {
 
     /**
      *
-     * @return the subscription externalKey
+     * @return the entitlement externalKey
      */
     String getExternalKey();
 

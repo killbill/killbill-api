@@ -187,7 +187,7 @@ public interface EntitlementApi extends KillbillApi {
      *
      * @param sourceAccountId    the unique id for the account on which the bundle will be transferred For
      * @param destAccountId      the unique id for the account on which the bundle will be transferred to
-     * @param bundleExternalKey  the bundleExternalKey for the bundle
+     * @param bundleExternalKey  the bundle external key for the bundle
      * @param effectiveDate      the date at which this transfer should occur
      * @param properties         plugin specific properties
      * @param context            the user context
@@ -210,7 +210,7 @@ public interface EntitlementApi extends KillbillApi {
      *
      * @param sourceAccountId   the unique id for the account on which the bundle will be transferred For
      * @param destAccountId     the unique id for the account on which the bundle will be transferred to
-     * @param bundleExternalKey the bundleExternalKey for the bundle
+     * @param bundleExternalKey the bundle external Key for the bundle
      * @param effectiveDate     the date at which this transfer should occur
      * @param billingPolicy     the override billing policy
      * @param properties        plugin specific properties
