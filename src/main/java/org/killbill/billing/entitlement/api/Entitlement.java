@@ -109,19 +109,25 @@ public interface Entitlement extends Entity {
     public UUID getBaseEntitlementId();
 
     /**
+     *
+     * @return external key
+     */
+    public String getExternalKey();
+
+    /**
      * @return the unique Id of the SubscriptionBundle
      */
     public UUID getBundleId();
 
     /**
+     * @return the bundle external key associated with this entitlement
+     */
+    public String getBundleExternalKey();
+
+    /**
      * @return the account id
      */
     public UUID getAccountId();
-
-    /**
-     * @return the external key that was supplied when creating the base entitlement
-     */
-    public String getExternalKey();
 
     /**
      * @return the state of the entitlement

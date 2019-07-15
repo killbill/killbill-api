@@ -67,9 +67,10 @@ public enum ErrorCode {
     /* Fetch */
     SUB_GET_NO_BUNDLE_FOR_SUBSCRIPTION(1080, "Could not find a bundle for subscription %s"),
     SUB_GET_INVALID_BUNDLE_ID(1081, "Could not find a bundle matching id %s"),
-    SUB_INVALID_SUBSCRIPTION_ID(1082, "Unknown subscription %s"),
-    SUB_GET_INVALID_BUNDLE_KEY(1083, "Could not find a bundle matching key %s"),
-    SUB_GET_NO_SUCH_BASE_SUBSCRIPTION(1084, "Could not find base subscription for bundle %s"),
+    SUB_INVALID_SUBSCRIPTION_ID(1082, "Unknown subscription matching id %s"),
+    SUB_INVALID_SUBSCRIPTION_EXTERNAL_KEY(1083, "Unknown subscription matching key %s"),
+    SUB_GET_INVALID_BUNDLE_KEY(1084, "Could not find a bundle matching key %s"),
+    SUB_GET_NO_SUCH_BASE_SUBSCRIPTION(1085, "Could not find base subscription for bundle %s"),
 
     SUB_NO_ACTIVE_SUBSCRIPTIONS(1099, "No active subscriptions on bundle %s"),
 

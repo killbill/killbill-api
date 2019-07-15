@@ -46,7 +46,7 @@ public interface SubscriptionApi extends KillbillApi {
     int ALL_EVENTS = (PAST_OR_PRESENT_EVENTS | FUTURE_OR_PRESENT_EVENTS);
 
     /**
-     * Retrieves a <code>Subscription</code> For the entitlementId
+     * Retrieves a <code>Subscription</code> for the entitlement id
      *
      * @param entitlementId the id of the entitlement associated with the subscription
      * @param context       the context
@@ -54,6 +54,16 @@ public interface SubscriptionApi extends KillbillApi {
      * @throws SubscriptionApiException if it odes not exist
      */
     Subscription getSubscriptionForEntitlementId(UUID entitlementId, TenantContext context) throws SubscriptionApiException;
+
+    /**
+     *  Retrieves a <code>Subscription</code> for a given external key
+     *
+     * @param externalKey the external key for the subscription
+     * @param context
+     * @return
+     * @throws SubscriptionApiException
+     */
+    Subscription getSubscriptionForExternalKey(String externalKey, TenantContext context) throws SubscriptionApiException;
 
     /**
      * Retrieves all the <code>Subscription</code> attached to the base entitlement.
