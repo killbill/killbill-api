@@ -45,6 +45,12 @@ public interface Invoice extends Entity {
     List<InvoiceItem> getInvoiceItems();
 
     /**
+     *
+     * @return the list of usage tracking ids associated with this invoice
+     */
+    List<String> getTrackingIds();
+
+    /**
      * @param clazz the filter class for the items
      * @param <T>   a InvoiceItem type
      * @return the list of invoice ietms on that invoice for that type
