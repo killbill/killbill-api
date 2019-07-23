@@ -34,7 +34,7 @@ public interface Invoice extends Entity {
     boolean addInvoiceItem(InvoiceItem item);
 
     /**
-     * @param items the list of ietms to add
+     * @param items the list of items to add
      * @return true is successful
      */
     boolean addInvoiceItems(Collection<InvoiceItem> items);
@@ -49,6 +49,12 @@ public interface Invoice extends Entity {
      * @return the list of usage tracking ids associated with this invoice
      */
     List<String> getTrackingIds();
+
+    /**
+     * @param trackingIds the list of trackingIds
+     * @return true is successful
+     */
+    boolean addTrackingIds(Collection<String> trackingIds);
 
     /**
      * @param clazz the filter class for the items
