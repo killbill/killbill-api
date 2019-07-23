@@ -1,3 +1,6 @@
+0.53.10
+    Add Invoice#addTrackingIds
+
 0.53.9
     Add ability to return trackingIds from invoice
 
