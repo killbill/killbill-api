@@ -22,8 +22,11 @@ import org.killbill.billing.catalog.api.BillingPeriod;
 import org.killbill.billing.catalog.api.PriceList;
 import org.killbill.billing.catalog.api.Product;
 import org.killbill.billing.catalog.api.ProductCategory;
+import org.killbill.billing.catalog.api.StaticCatalog;
 
 public interface Case {
+
+    public StaticCatalog getCatalog();
 
     public Product getProduct();
 

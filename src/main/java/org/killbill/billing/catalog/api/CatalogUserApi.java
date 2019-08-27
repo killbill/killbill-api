@@ -38,7 +38,7 @@ public interface CatalogUserApi extends KillbillApi {
      * @param context            the user context that specifies the tenant information
      * @return the {@code Catalog}
      */
-    VersionedCatalog<? extends StaticCatalog> getCatalog(String catalogName, DateTime catalogDateVersion, TenantContext context) throws CatalogApiException;
+    Catalog getCatalog(String catalogName, DateTime catalogDateVersion, TenantContext context) throws CatalogApiException;
 
     /**
      * Retrieves the current catalog

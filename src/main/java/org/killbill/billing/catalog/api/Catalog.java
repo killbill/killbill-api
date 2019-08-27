@@ -20,6 +20,7 @@ package org.killbill.billing.catalog.api;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.joda.time.DateTime;
 
@@ -94,28 +95,6 @@ public interface Catalog {
                                  PlanPhasePriceOverridesWithCallContext overrides,
                                  DateTime requestedDate) throws CatalogApiException;
 
-    /**
-     * @param name                  the unique name of the plan
-     * @param requestedDate         specifies the state of the catalog for that date
-     * @param subscriptionStartDate the startDate of the subscription
-     * @return the {@code Plan}
-     * @throws CatalogApiException if no catalog can be found for that date or if the {@code Plan} does not exist
-     */
-    public Plan findPlan(String name,
-                         DateTime requestedDate,
-                         DateTime subscriptionStartDate) throws CatalogApiException;
-
-    /**
-     * @param spec          the specification for the {@code Plan} to be used
-     * @param overrides     the price override for each phase and for a specific currency
-     * @param requestedDate specifies the state of the catalog for that date
-     * @return the {@code Plan}
-     * @throws CatalogApiException if no catalog can be found for that date or if the {@code Plan} cannot be found nor created
-     */
-    public Plan createOrFindPlan(PlanSpecifier spec,
-                                 PlanPhasePriceOverridesWithCallContext overrides,
-                                 DateTime requestedDate,
-                                 DateTime subscriptionStartDate) throws CatalogApiException;
 
     /**
      * @param name          the unique name for the {@code Product}
@@ -126,49 +105,6 @@ public interface Catalog {
     public Product findProduct(String name,
                                DateTime requestedDate) throws CatalogApiException;
 
-    /**
-     * @param planName      the unique name of the plan
-     * @param requestedDate specifies the state of the catalog for that date
-     * @return the {@code PriceList}
-     * @throws CatalogApiException if no catalog can be found for that date or if the {@code PriceList} does not exist
-     */
-    public PriceList findPriceListForPlan(final String planName,
-                                          final DateTime requestedDate,
-                                          final DateTime subscriptionStartDate) throws CatalogApiException;
 
-    /**
-     * @param name                  the unique name for the {@code PlanPhase}
-     * @param requestedDate         specifies the state of the catalog for that date
-     * @param subscriptionStartDate the startDate of the subscription
-     * @return the {@code PlanPhase}
-     * @throws CatalogApiException if the {@code PlanPhase} does not exist
-     */
-    public PlanPhase findPhase(String name,
-                               DateTime requestedDate,
-                               DateTime subscriptionStartDate) throws CatalogApiException;
-
-    /**
-     *
-     * @param curPlan the current Plan
-     * @return        the same Plan in the next upcoming catalog version or null if does not exist
-     * @throws CatalogApiException
-     */
-    public Plan getNextPlanVersion(final Plan curPlan);
-
-    // TODO : should they be private APIs
-    public PlanChangeResult planChange(PlanPhaseSpecifier from,
-                                       PlanSpecifier to,
-                                       DateTime requestedDate) throws CatalogApiException;
-
-    public BillingActionPolicy planCancelPolicy(PlanPhaseSpecifier planPhase,
-                                                DateTime requestedDate,
-                                                DateTime subscriptionStartDate) throws CatalogApiException;
-
-    public PlanAlignmentCreate planCreateAlignment(PlanSpecifier specifier,
-                                                   DateTime requestedDate,
-                                                   DateTime subscriptionStartDate) throws CatalogApiException;
-
-    public BillingAlignment billingAlignment(PlanPhaseSpecifier planPhase,
-                                             DateTime requestedDate,
-                                             DateTime subscriptionStartDate) throws CatalogApiException;
+    public List<StaticCatalog> getVersions();
 }

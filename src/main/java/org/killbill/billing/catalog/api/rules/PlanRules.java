@@ -18,7 +18,18 @@
 
 package org.killbill.billing.catalog.api.rules;
 
+import org.killbill.billing.catalog.api.BillingActionPolicy;
+import org.killbill.billing.catalog.api.BillingAlignment;
+import org.killbill.billing.catalog.api.CatalogApiException;
+import org.killbill.billing.catalog.api.PlanAlignmentCreate;
+import org.killbill.billing.catalog.api.PlanChangeResult;
+import org.killbill.billing.catalog.api.PlanPhaseSpecifier;
+import org.killbill.billing.catalog.api.PlanSpecifier;
+import org.killbill.billing.catalog.api.StaticCatalog;
+
 public interface PlanRules {
+
+    public StaticCatalog getCatalog();
 
     public Iterable<CaseChangePlanPolicy> getCaseChangePlanPolicy();
 
@@ -31,4 +42,14 @@ public interface PlanRules {
     public Iterable<CaseBillingAlignment> getCaseBillingAlignment();
 
     public Iterable<CasePriceList> getCasePriceList();
- }
+
+    // TODO_CATALOG Debatable whether this is really public -- at the same time we already export the models PlanChangeResult, ..
+    public PlanAlignmentCreate getPlanCreateAlignment(final PlanSpecifier specifier) throws CatalogApiException;
+
+    public BillingActionPolicy getPlanCancelPolicy(final PlanPhaseSpecifier planPhase) throws CatalogApiException;
+
+    public BillingAlignment getBillingAlignment(final PlanPhaseSpecifier planPhase) throws CatalogApiException;
+
+    public PlanChangeResult getPlanChangeResult(final PlanPhaseSpecifier from, final PlanSpecifier to) throws CatalogApiException;
+
+}

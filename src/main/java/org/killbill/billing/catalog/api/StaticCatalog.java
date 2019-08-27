@@ -22,6 +22,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import org.killbill.billing.catalog.api.rules.PlanRules;
+
 /**
  * The interface {@code StaticCatalog} gives the view of that {@code Catalog} at a given time.
  * This represents a specific version of the {@code Catalog}
@@ -70,6 +72,7 @@ public interface StaticCatalog {
      */
     public Plan createOrFindCurrentPlan(PlanSpecifier spec, PlanPhasePriceOverridesWithCallContext overrides) throws CatalogApiException;
 
+    // TODO_CATALOG All these exceptions are a result of having our DefaultVersionedCatalog implementation implement both StaticCatalog and Catalog (and are needed for the Catalog case)
     /**
      * @param name the name of the {@Plan}
      * @return the {@code Plan}
@@ -91,6 +94,9 @@ public interface StaticCatalog {
      */
     public PlanPhase findCurrentPhase(String name) throws CatalogApiException;
 
+
+    public PriceListSet getPriceLists() throws CatalogApiException;
+
     /**
      * @param name the name of the {@code PriceList}
      * @return the {@code PriceList}
@@ -98,18 +104,10 @@ public interface StaticCatalog {
      */
     public PriceList findCurrentPricelist(String name) throws CatalogApiException;
 
-    // TODO private APIs ?
-
-    public PlanChangeResult planChange(PlanPhaseSpecifier from,
-                                       PlanSpecifier to) throws CatalogApiException;
-
-    public BillingActionPolicy planCancelPolicy(PlanPhaseSpecifier planPhase) throws CatalogApiException;
-
-    public PlanAlignmentCreate planCreateAlignment(PlanSpecifier specifier) throws CatalogApiException;
-
-    public BillingAlignment billingAlignment(PlanPhaseSpecifier planPhase) throws CatalogApiException;
-
     public List<Listing> getAvailableBasePlanListings() throws CatalogApiException;
 
     public List<Listing> getAvailableAddOnListings(String baseProductName, String priceListName) throws CatalogApiException;
+
+    public PlanRules getPlanRules() throws CatalogApiException;
+
 }

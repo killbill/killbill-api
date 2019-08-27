@@ -22,6 +22,8 @@ public interface PriceListSet {
 
     public static final String DEFAULT_PRICELIST_NAME = "DEFAULT";
 
+    public StaticCatalog getCatalog();
+
     /**
      * @return all the price {@code PriceList}
      */
