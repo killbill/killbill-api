@@ -44,25 +44,25 @@ public interface StaticCatalog {
      * @return an array of supported {@code Currency}
      * @throws CatalogApiException
      */
-    public Currency[] getCurrentSupportedCurrencies() throws CatalogApiException;
+    public Currency[] getSupportedCurrencies() throws CatalogApiException;
 
     /**
      * @return an array of supported {@code Product}
      * @throws CatalogApiException
      */
-    public Collection<Product> getCurrentProducts() throws CatalogApiException;
+    public Collection<Product> getProducts() throws CatalogApiException;
 
     /**
      * @return an array of supported {@code Unit}
      * @throws CatalogApiException
      */
-    public Unit[] getCurrentUnits() throws CatalogApiException;
+    public Unit[] getUnits() throws CatalogApiException;
 
     /**
      * @return an array of supported {@code Plan}
      * @throws CatalogApiException
      */
-    public Collection<Plan> getCurrentPlans() throws CatalogApiException;
+    public Collection<Plan> getPlans() throws CatalogApiException;
 
     /**
      * @param spec      the specification for the {@code Plan} to be used
@@ -70,7 +70,7 @@ public interface StaticCatalog {
      * @return the {@code Plan}
      * @throws CatalogApiException if not such {@code Plan} can be found
      */
-    public Plan createOrFindCurrentPlan(PlanSpecifier spec, PlanPhasePriceOverridesWithCallContext overrides) throws CatalogApiException;
+    public Plan createOrFindPlan(PlanSpecifier spec, PlanPhasePriceOverridesWithCallContext overrides) throws CatalogApiException;
 
     // TODO_CATALOG All these exceptions are a result of having our DefaultVersionedCatalog implementation implement both StaticCatalog and Catalog (and are needed for the Catalog case)
     /**
@@ -78,21 +78,21 @@ public interface StaticCatalog {
      * @return the {@code Plan}
      * @throws CatalogApiException if not such {@code Plan} can be found
      */
-    public Plan findCurrentPlan(String name) throws CatalogApiException;
+    public Plan findPlan(String name) throws CatalogApiException;
 
     /**
      * @param name the name of the {@code Product}
      * @return the {@code Product}
      * @throws CatalogApiException if no such {@code Product} exists
      */
-    public Product findCurrentProduct(String name) throws CatalogApiException;
+    public Product findProduct(String name) throws CatalogApiException;
 
     /**
      * @param name the name of the {@code PlanPhase}
      * @return the {@code PlanPhase}
      * @throws CatalogApiException if no such {@code PlanPhase} exists
      */
-    public PlanPhase findCurrentPhase(String name) throws CatalogApiException;
+    public PlanPhase findPhase(String name) throws CatalogApiException;
 
 
     public PriceListSet getPriceLists() throws CatalogApiException;
@@ -102,12 +102,29 @@ public interface StaticCatalog {
      * @return the {@code PriceList}
      * @throws CatalogApiException if no such {@code PriceList} exists
      */
-    public PriceList findCurrentPricelist(String name) throws CatalogApiException;
+    public PriceList findPriceList(String name) throws CatalogApiException;
 
+    /**
+     *
+     * @return All existing BASE {@code Plan}
+     * @throws CatalogApiException
+     */
     public List<Listing> getAvailableBasePlanListings() throws CatalogApiException;
 
+    /**
+     *
+     * @param baseProductName the base {@code Plan}
+     * @param priceListName the base {@code PriceList}
+     * @return All existing ADD_ON {@code Plan}
+     * @throws CatalogApiException
+     */
     public List<Listing> getAvailableAddOnListings(String baseProductName, String priceListName) throws CatalogApiException;
 
+    /**
+     *
+     * @return All the catalog rules
+     * @throws CatalogApiException
+     */
     public PlanRules getPlanRules() throws CatalogApiException;
 
 }
