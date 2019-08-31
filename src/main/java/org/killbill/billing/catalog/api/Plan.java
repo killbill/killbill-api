@@ -50,9 +50,9 @@ public interface Plan extends CatalogEntity {
 
     /**
      *
-     * @return the name of the {@PriceList} in which that {@code Plan} is defined
+     * @return the {@PriceList} in which that {@code Plan} is defined
      */
-   public String getPriceListName();
+   public PriceList getPriceList();
 
     /**
      * @return an iterator through the {@code PlanPhase}
