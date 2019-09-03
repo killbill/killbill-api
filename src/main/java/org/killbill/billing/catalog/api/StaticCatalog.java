@@ -42,27 +42,30 @@ public interface StaticCatalog {
 
     /**
      * @return an array of supported {@code Currency}
-     * @throws CatalogApiException
      */
-    public Currency[] getSupportedCurrencies() throws CatalogApiException;
+    public Currency[] getSupportedCurrencies();
 
     /**
      * @return an array of supported {@code Product}
-     * @throws CatalogApiException
      */
-    public Collection<Product> getProducts() throws CatalogApiException;
+    public Collection<Product> getProducts();
 
     /**
      * @return an array of supported {@code Unit}
-     * @throws CatalogApiException
      */
-    public Unit[] getUnits() throws CatalogApiException;
+    public Unit[] getUnits();
 
     /**
      * @return an array of supported {@code Plan}
-     * @throws CatalogApiException
      */
-    public Collection<Plan> getPlans() throws CatalogApiException;
+    public Collection<Plan> getPlans();
+
+    /**
+     *
+     * @return All the catalog rules
+     */
+    public PlanRules getPlanRules();
+
 
     /**
      * @param spec      the specification for the {@code Plan} to be used
@@ -100,31 +103,21 @@ public interface StaticCatalog {
     /**
      * @param name the name of the {@code PriceList}
      * @return the {@code PriceList}
-     * @throws CatalogApiException if no such {@code PriceList} exists
      */
-    public PriceList findPriceList(String name) throws CatalogApiException;
+    public PriceList findPriceList(String name);
 
     /**
      *
      * @return All existing BASE {@code Plan}
-     * @throws CatalogApiException
      */
-    public List<Listing> getAvailableBasePlanListings() throws CatalogApiException;
+    public List<Listing> getAvailableBasePlanListings();
 
     /**
      *
      * @param baseProductName the base {@code Plan}
      * @param priceListName the base {@code PriceList}
      * @return All existing ADD_ON {@code Plan}
-     * @throws CatalogApiException
      */
-    public List<Listing> getAvailableAddOnListings(String baseProductName, String priceListName) throws CatalogApiException;
-
-    /**
-     *
-     * @return All the catalog rules
-     * @throws CatalogApiException
-     */
-    public PlanRules getPlanRules() throws CatalogApiException;
+    public List<Listing> getAvailableAddOnListings(String baseProductName, String priceListName);
 
 }
