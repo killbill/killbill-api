@@ -23,6 +23,8 @@ package org.killbill.billing.catalog.api;
  */
 public interface PlanPhase extends CatalogEntity {
 
+    public StaticCatalog getCatalog();
+
     /**
      * @return the {@code Fixed} section
      */

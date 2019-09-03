@@ -20,6 +20,8 @@ import java.util.Collection;
 
 public interface PriceList extends CatalogEntity {
 
+    public StaticCatalog getCatalog();
+
     public Collection<Plan> findPlans(Product product, BillingPeriod period);
 
     public Collection<Plan> getPlans();
