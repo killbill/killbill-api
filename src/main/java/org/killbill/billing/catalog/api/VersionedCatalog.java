@@ -24,6 +24,12 @@ public interface VersionedCatalog {
 
     /**
      *
+     * @return the catalog name
+     */
+    public String getCatalogName();
+
+    /**
+     *
      * @return All the (ordered) catalog versions
      */
     public List<StaticCatalog> getVersions();
@@ -43,11 +49,10 @@ public interface VersionedCatalog {
      *
      *
      * Assuming two StaticCatalog, S1 with a version date of D1, and S2 with a version date of D2:
+     * - Specifying a date D such that  D < D1 will by convention return the first version
      * - Specifying a date D such that  D1 <= D < D2 will return S1
      * - Specifying a date D such that  D2 <= D will return S2
      */
     public StaticCatalog getVersion(Date targetDate);
-
-
 
 }

@@ -75,7 +75,6 @@ public interface StaticCatalog {
      */
     public Plan createOrFindPlan(PlanSpecifier spec, PlanPhasePriceOverridesWithCallContext overrides) throws CatalogApiException;
 
-    // TODO_CATALOG All these exceptions are a result of having our DefaultVersionedCatalog implementation implement both StaticCatalog and Catalog (and are needed for the Catalog case)
     /**
      * @param name the name of the {@Plan}
      * @return the {@code Plan}
@@ -97,14 +96,18 @@ public interface StaticCatalog {
      */
     public PlanPhase findPhase(String name) throws CatalogApiException;
 
-
+    /**
+     *
+     * @return the set of {@code PriceList}
+     * @throws CatalogApiException
+     */
     public PriceListSet getPriceLists() throws CatalogApiException;
 
     /**
      * @param name the name of the {@code PriceList}
      * @return the {@code PriceList}
      */
-    public PriceList findPriceList(String name);
+    public PriceList findPriceList(String name) throws CatalogApiException;
 
     /**
      *
