@@ -1,3 +1,6 @@
+0.53.12
+    Add InvoiceItem#getCatalogEffectiveDate.
+
 0.53.11
     Major catalog cleanup apis.
 
