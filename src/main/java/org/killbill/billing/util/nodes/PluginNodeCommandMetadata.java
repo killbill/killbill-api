@@ -1,7 +1,7 @@
 /*
  * Copyright 2010-2013 Ning, Inc.
- * Copyright 2015 Groupon, Inc
- * Copyright 2015 The Billing Project, LLC
+ * Copyright 2015-2019 Groupon, Inc
+ * Copyright 2015-2019 The Billing Project, LLC
  *
  * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
@@ -29,9 +29,14 @@ public class PluginNodeCommandMetadata extends DefaultNodeCommandMetadata implem
     public final static String PLUGIN_NAME = "pluginName";
     public final static String PLUGIN_VERSION = "pluginVersion";
 
-    private final String pluginKey;
-    private final String pluginName;
-    private final String pluginVersion;
+    private String pluginKey;
+    private String pluginName;
+    private String pluginVersion;
+
+    // For Jackson
+    public PluginNodeCommandMetadata() {
+        super();
+    }
 
     @JsonCreator
     public PluginNodeCommandMetadata(@JsonProperty(PLUGIN_KEY) final String pluginKey,
