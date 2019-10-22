@@ -1,7 +1,7 @@
 /*
  * Copyright 2010-2013 Ning, Inc.
- * Copyright 2015 Groupon, Inc
- * Copyright 2015 The Billing Project, LLC
+ * Copyright 2015-2019 Groupon, Inc
+ * Copyright 2015-2019 The Billing Project, LLC
  *
  * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
@@ -25,12 +25,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DefaultNodeCommandMetadata implements NodeCommandMetadata {
 
-    private final List<NodeCommandProperty> properties;
+    private List<NodeCommandProperty> properties;
+
+    // For Jackson
+    public DefaultNodeCommandMetadata() {
+    }
 
     @JsonCreator
     public DefaultNodeCommandMetadata(@JsonProperty("properties") final List<NodeCommandProperty> properties) {
         this.properties = properties;
     }
+
     @Override
     public List<NodeCommandProperty> getProperties() {
         return properties;
