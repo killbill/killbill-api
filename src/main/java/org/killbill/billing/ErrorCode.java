@@ -46,7 +46,7 @@ public enum ErrorCode {
     SUB_CREATE_AO_ALREADY_INCLUDED(1018, "Can't create AddOn %s for BasePlan %s (Already included)"),
     SUB_CREATE_AO_NOT_AVAILABLE(1019, "Can't create AddOn %s for BasePlan %s (Not available)"),
     SUB_CREATE_AO_MAX_PLAN_ALLOWED_BY_BUNDLE(1025, "Can't create AddOn %s, the number of Subscriptions allowed by this Plan and Bundle has reached its limit"),
-    SUB_CREATE_INVALID_ENTITLEMENT_SPECIFIER(1020, "Invalid entitlement specifier"),
+    SUB_CREATE_INVALID_ENTITLEMENT_SPECIFIER(1020, "Invalid entitlement specifier: %s"),
 
     /* Change plan */
     SUB_CHANGE_NON_ACTIVE(1021, "Subscription %s is in state %s: Failed to change plan"),
