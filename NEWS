@@ -1,3 +1,7 @@
+0.53.15
+    Add additional permissions
+    Harmonize InvoiceUserApi#getUnpaidInvoicesByAccountId and InvoiceUserApi#getInvoicesByAccount
+
 0.53.14
     Harmonize InvoiceUserApi#getUnpaidInvoicesByAccountId and InvoiceUserApi#getInvoicesByAccount 
 
