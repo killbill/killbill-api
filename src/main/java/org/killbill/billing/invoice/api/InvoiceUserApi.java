@@ -39,11 +39,14 @@ import org.killbill.billing.util.entity.Pagination;
 
 import static org.killbill.billing.security.Permission.ACCOUNT_CAN_CHARGE;
 import static org.killbill.billing.security.Permission.ACCOUNT_CAN_CREDIT;
+import static org.killbill.billing.security.Permission.INVOICE_CAN_COMMIT;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_CREDIT;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_DELETE_CBA;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_DRY_RUN_INVOICE;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_ITEM_ADJUST;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_TRIGGER_INVOICE;
+import static org.killbill.billing.security.Permission.INVOICE_CAN_VOID;
+import static org.killbill.billing.security.Permission.INVOICE_CAN_WRITE_OFF;
 
 public interface InvoiceUserApi extends KillbillApi {
 
@@ -185,6 +188,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context   call context
      * @throws TagApiException
      */
+    @RequiresPermissions(INVOICE_CAN_WRITE_OFF)
     public void tagInvoiceAsWrittenOff(UUID invoiceId, CallContext context) throws TagApiException, InvoiceApiException;
 
     /**
@@ -194,6 +198,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context   call context
      * @throws TagApiException
      */
+    @RequiresPermissions(INVOICE_CAN_WRITE_OFF)
     public void tagInvoiceAsNotWrittenOff(UUID invoiceId, CallContext context) throws TagApiException, InvoiceApiException;
 
     /**
@@ -330,6 +335,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param accountId account id
      * @param context   the call context
      */
+    @RequiresPermissions(INVOICE_CAN_DELETE_CBA)
     public void consumeExistingCBAOnAccountWithUnpaidInvoices(final UUID accountId, final CallContext context);
 
     /**
@@ -339,6 +345,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context the tenant context
      * @throws InvoiceApiException
      */
+    @RequiresPermissions(INVOICE_CAN_COMMIT)
     public void commitInvoice(UUID invoiceId, CallContext context) throws InvoiceApiException;
 
     /** @param accountId   account id
@@ -357,6 +364,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context the tenant context
      * @throws InvoiceApiException
      */
+    @RequiresPermissions(INVOICE_CAN_DELETE_CBA)
     public void transferChildCreditToParent(UUID childAccountId, CallContext context) throws InvoiceApiException;
 
     /**
@@ -376,6 +384,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context the tenant context
      * @throws InvoiceApiException
      */
+    @RequiresPermissions(INVOICE_CAN_VOID)
     public void voidInvoice(UUID invoiceId, CallContext context) throws InvoiceApiException;
 
     /**
