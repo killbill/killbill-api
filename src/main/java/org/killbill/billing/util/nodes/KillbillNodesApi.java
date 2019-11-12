@@ -20,6 +20,9 @@ package org.killbill.billing.util.nodes;
 
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.osgi.api.PluginInfo;
+import org.killbill.billing.security.RequiresPermissions;
+
+import static org.killbill.billing.security.Permission.ADMIN_CAN_TRIGGER_COMMAND;
 
 public interface KillbillNodesApi extends KillbillApi {
 
@@ -45,6 +48,7 @@ public interface KillbillNodesApi extends KillbillApi {
      * @param nodeCommand the command to be triggered across all killbill nodes
      * @param localNodeOnly the command should only triggered on the node where it applied
      */
+    @RequiresPermissions(ADMIN_CAN_TRIGGER_COMMAND)
     public void triggerNodeCommand(NodeCommand nodeCommand, boolean localNodeOnly);
 
     /**
@@ -53,5 +57,6 @@ public interface KillbillNodesApi extends KillbillApi {
      * @param plugin        the info associated to the changed plugin
      * @param latestPlugins the info associated to all plugins
      */
+    @RequiresPermissions(ADMIN_CAN_TRIGGER_COMMAND)
     public void notifyPluginChanged(PluginInfo plugin, Iterable<PluginInfo> latestPlugins);
 }

@@ -23,7 +23,10 @@ import org.killbill.billing.KillbillApi;
 import org.killbill.billing.account.api.Account;
 import org.killbill.billing.payment.plugin.api.GatewayNotification;
 import org.killbill.billing.payment.plugin.api.HostedPaymentPageFormDescriptor;
+import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
+
+import static org.killbill.billing.security.Permission.PAYMENT_CAN_PROCESS_NOTIFICATION;
 
 public interface PaymentGatewayApi extends KillbillApi {
 
@@ -68,6 +71,7 @@ public interface PaymentGatewayApi extends KillbillApi {
      * @return gateway notification object used to build the response to the gateway
      * @throws PaymentApiException
      */
+    @RequiresPermissions(PAYMENT_CAN_PROCESS_NOTIFICATION)
     public GatewayNotification processNotification(String notification, String pluginName, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 
@@ -86,6 +90,7 @@ public interface PaymentGatewayApi extends KillbillApi {
      * @return gateway notification object used to build the response to the gateway
      * @throws PaymentApiException
      */
+    @RequiresPermissions(PAYMENT_CAN_PROCESS_NOTIFICATION)
     public GatewayNotification processNotificationWithPaymentControl(String notification, String pluginName, Iterable<PluginProperty> properties, PaymentOptions paymentOptions, CallContext context)
             throws PaymentApiException;
 }

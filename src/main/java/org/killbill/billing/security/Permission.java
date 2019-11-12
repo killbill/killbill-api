@@ -58,6 +58,9 @@ public enum Permission {
     INVOICE_CAN_DELETE_CBA("invoice", "delete_cba"),
     INVOICE_CAN_TRIGGER_INVOICE("invoice", "trigger"),
     INVOICE_CAN_DRY_RUN_INVOICE("invoice", "dry_run"),
+    INVOICE_CAN_WRITE_OFF("invoice", "write_off"),
+    INVOICE_CAN_COMMIT("invoice", "commit"),
+    INVOICE_CAN_VOID("invoice", "void"),
 
     /*
      * Overdue
@@ -70,6 +73,8 @@ public enum Permission {
     PAYMENT_CAN_TRIGGER_PAYMENT("payment", "trigger"),
     PAYMENT_CAN_REFUND("payment", "refund"),
     PAYMENT_CAN_CHARGEBACK("payment", "chargeback"),
+    PAYMENT_CAN_TRANSITION("payment", "transition"),
+    PAYMENT_CAN_PROCESS_NOTIFICATION("payment", "notification"),
 
     /**
      * Payment methods
@@ -101,11 +106,12 @@ public enum Permission {
 
     USER_CAN_CREATE("user", "create"),
 
-
     /*
      * Administrator that can update state (to correct data associated to bugs, ...)
      */
-    ADMIN_CAN_FIX_DATA("admin", "update");
+    ADMIN_CAN_FIX_DATA("admin", "update"),
+    ADMIN_CAN_EXPORT("admin", "export"),
+    ADMIN_CAN_TRIGGER_COMMAND("admin", "trigger_command");
 
 
     private final String group;
