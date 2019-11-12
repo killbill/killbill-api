@@ -61,10 +61,11 @@ public interface InvoiceUserApi extends KillbillApi {
      *
      * @param accountId account id
      * @param fromDate  the earliest target day to consider, in the account timezone
+     * @param upToDate  the latest (non included) target day to consider, in the account timezone
      * @param context   the tenant context
      * @return a list of invoices
      */
-    public List<Invoice> getInvoicesByAccount(UUID accountId, LocalDate fromDate, boolean includeVoidedInvoices, TenantContext context);
+    public List<Invoice> getInvoicesByAccount(UUID accountId, LocalDate fromDate, LocalDate upToDate, boolean includeVoidedInvoices, TenantContext context);
 
     /**
      * @param context the user context
@@ -143,11 +144,12 @@ public interface InvoiceUserApi extends KillbillApi {
      * Find unpaid invoices for a given account, up to a given day.
      *
      * @param accountId account id
-     * @param upToDate  the latest target day to consider, in the account timezone
+     * @param fromDate  the earliest target day to consider, in the account timezone
+     * @param upToDate  the latest (non included) target day to consider, in the account timezone
      * @param context   the tenant context
      * @return a collection of invoices
      */
-    public Collection<Invoice> getUnpaidInvoicesByAccountId(UUID accountId, LocalDate upToDate, TenantContext context);
+    public Collection<Invoice> getUnpaidInvoicesByAccountId(UUID accountId, LocalDate fromDate, LocalDate upToDate, TenantContext context);
 
     /**
      * Trigger an invoice for a given account and a given day.
