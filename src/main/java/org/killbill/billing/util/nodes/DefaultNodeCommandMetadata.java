@@ -40,4 +40,12 @@ public class DefaultNodeCommandMetadata implements NodeCommandMetadata {
     public List<NodeCommandProperty> getProperties() {
         return properties;
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("DefaultNodeCommandMetadata{");
+        sb.append("properties=").append(properties);
+        sb.append('}');
+        return sb.toString();
+    }
 }

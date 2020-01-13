@@ -43,4 +43,13 @@ public class NodeCommandProperty {
     public Object getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("NodeCommandProperty{");
+        sb.append("key='").append(key).append('\'');
+        sb.append(", value=").append(value);
+        sb.append('}');
+        return sb.toString();
+    }
 }
