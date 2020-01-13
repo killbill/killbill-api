@@ -1,7 +1,7 @@
 /*
  * Copyright 2010-2013 Ning, Inc.
- * Copyright 2015 Groupon, Inc
- * Copyright 2015 The Billing Project, LLC
+ * Copyright 2015-2020 Groupon, Inc
+ * Copyright 2015-2020 The Billing Project, LLC
  *
  * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
@@ -23,12 +23,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class NodeCommandProperty {
 
-    /**
-     * System keys
-     */
+    private String key;
+    private Object value;
 
-    private final String key;
-    private final Object value;
+    // For Jackson
+    public NodeCommandProperty() { }
 
     @JsonCreator
     public NodeCommandProperty(@JsonProperty("key") final String key,
