@@ -1,3 +1,6 @@
+0.53.16
+    Add no-arg constructor in NodeCommandProperty
+
 0.53.15
     Add additional permissions
     Harmonize InvoiceUserApi#getUnpaidInvoicesByAccountId and InvoiceUserApi#getInvoicesByAccount
