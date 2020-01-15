@@ -1,7 +1,7 @@
 /*
  * Copyright 2010-2014 Ning, Inc.
- * Copyright 2014-2016 Groupon, Inc
- * Copyright 2014-2016 The Billing Project, LLC
+ * Copyright 2014-2020 Groupon, Inc
+ * Copyright 2014-2020 The Billing Project, LLC
  *
  * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
@@ -57,6 +57,7 @@ public interface KillbillNodesApi extends KillbillApi {
      * @param plugin        the info associated to the changed plugin
      * @param latestPlugins the info associated to all plugins
      */
-    @RequiresPermissions(ADMIN_CAN_TRIGGER_COMMAND)
+    // We cannot easily enforce permissions here, as it is called internally by killbill-platform for broadcast events
+    //@RequiresPermissions(ADMIN_CAN_TRIGGER_COMMAND)
     public void notifyPluginChanged(PluginInfo plugin, Iterable<PluginInfo> latestPlugins);
 }
