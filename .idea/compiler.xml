@@ -20,10 +20,13 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="killbill-api" target="1.6" />
+      <module name="killbill-api" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_STRING" value="-Xlint:unchecked " />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="killbill-api" options="" />
+    </option>
   </component>
 </project>

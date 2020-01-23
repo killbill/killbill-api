@@ -59,5 +59,6 @@ public interface OverdueApi extends KillbillApi {
      * @param callContext            the context
      * @throws OverdueApiException
      */
+    @RequiresPermissions(OVERDUE_CAN_UPLOAD)
     public void uploadOverdueConfig(final OverdueConfig overdueConfig, final CallContext callContext) throws OverdueApiException;
 }

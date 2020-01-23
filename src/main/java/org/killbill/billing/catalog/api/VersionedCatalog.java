@@ -1,6 +1,6 @@
 /*
- * Copyright 2014-2018 Groupon, Inc
- * Copyright 2014-2018 The Billing Project, LLC
+ * Copyright 2014-2019 Groupon, Inc
+ * Copyright 2014-2019 The Billing Project, LLC
  *
  * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
@@ -17,10 +17,42 @@
 
 package org.killbill.billing.catalog.api;
 
+import java.util.Date;
 import java.util.List;
 
-// Static catalog API methods must operate on the latest ("current") version
-public interface VersionedCatalog<CatalogType> extends StaticCatalog, Catalog {
+public interface VersionedCatalog {
 
-    public List<CatalogType> getVersions();
+    /**
+     *
+     * @return the catalog name
+     */
+    public String getCatalogName();
+
+    /**
+     *
+     * @return All the (ordered) catalog versions
+     */
+    public List<StaticCatalog> getVersions();
+
+    /**
+     * The latest catalog version is the one used by the system when creating
+     *  or change the {@code Plan} associated with a subscription.
+     *
+     * @return the current (latest) catalog version.
+     */
+    public StaticCatalog getCurrentVersion();
+
+    /**
+     *
+     * @param targetDate the date used to find the catalog version
+     * @return the catalog version matching this date
+     *
+     *
+     * Assuming two StaticCatalog, S1 with a version date of D1, and S2 with a version date of D2:
+     * - Specifying a date D such that  D < D1 will by convention return the first version
+     * - Specifying a date D such that  D1 <= D < D2 will return S1
+     * - Specifying a date D such that  D2 <= D will return S2
+     */
+    public StaticCatalog getVersion(Date targetDate);
+
 }

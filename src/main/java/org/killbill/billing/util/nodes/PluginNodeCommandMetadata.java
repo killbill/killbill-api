@@ -1,7 +1,7 @@
 /*
  * Copyright 2010-2013 Ning, Inc.
- * Copyright 2015 Groupon, Inc
- * Copyright 2015 The Billing Project, LLC
+ * Copyright 2015-2019 Groupon, Inc
+ * Copyright 2015-2019 The Billing Project, LLC
  *
  * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
@@ -25,13 +25,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PluginNodeCommandMetadata extends DefaultNodeCommandMetadata implements NodeCommandMetadata {
 
-    public final static String PLUGIN_KEY = "pluginKey";
-    public final static String PLUGIN_NAME = "pluginName";
-    public final static String PLUGIN_VERSION = "pluginVersion";
+    public static final String PLUGIN_KEY = "pluginKey";
+    public static final String PLUGIN_NAME = "pluginName";
+    public static final String PLUGIN_VERSION = "pluginVersion";
 
-    private final String pluginKey;
-    private final String pluginName;
-    private final String pluginVersion;
+    private String pluginKey;
+    private String pluginName;
+    private String pluginVersion;
+
+    // For Jackson
+    public PluginNodeCommandMetadata() {
+        super();
+    }
 
     @JsonCreator
     public PluginNodeCommandMetadata(@JsonProperty(PLUGIN_KEY) final String pluginKey,
@@ -56,4 +61,14 @@ public class PluginNodeCommandMetadata extends DefaultNodeCommandMetadata implem
         return pluginVersion;
     }
 
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("PluginNodeCommandMetadata{");
+        sb.append("pluginKey='").append(pluginKey).append('\'');
+        sb.append(", pluginName='").append(pluginName).append('\'');
+        sb.append(", pluginVersion='").append(pluginVersion).append('\'');
+        sb.append(", properties=").append(getProperties());
+        sb.append('}');
+        return sb.toString();
+    }
 }

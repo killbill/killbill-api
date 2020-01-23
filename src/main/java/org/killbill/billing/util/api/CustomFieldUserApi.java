@@ -46,11 +46,36 @@ public interface CustomFieldUserApi extends KillbillApi {
     public Pagination<CustomField> searchCustomFields(String searchKey, Long offset, Long limit, TenantContext context);
 
     /**
-     * @param context the user context
-     * @param offset  the offset of the first result
-     * @param limit   the maximum number of results to retrieve
-     * @return the list of custom fields for that tenant
+     *
+     * @param fieldName   the field name to search for
+     * @param fieldValue  the field value to search for
+     * @param objectType  the object type to search for
+     * @param offset      the offset of the first result
+     * @param limit       the maximum number of results to retrieve
+     * @param context     the user context
+     * @return the list of custom fields matching this search for that tenant
      */
+    public Pagination<CustomField> searchCustomFields(final String fieldName, final String fieldValue, final ObjectType objectType, final Long offset, final Long limit, final TenantContext context);
+
+    /**
+     *
+     * @param fieldName   the field name to search for
+     * @param objectType  the object type to search for
+     * @param offset      the offset of the first result
+     * @param limit       the maximum number of results to retrieve
+     * @param context     the user context
+     * @return the list of custom fields matching this search for that tenant
+     */
+    public Pagination<CustomField> searchCustomFields(final String fieldName, final ObjectType objectType, final Long offset, final Long limit, final TenantContext context);
+
+
+
+    /**
+         * @param context the user context
+         * @param offset  the offset of the first result
+         * @param limit   the maximum number of results to retrieve
+         * @return the list of custom fields for that tenant
+         */
     public Pagination<CustomField> getCustomFields(Long offset, Long limit, TenantContext context);
 
     /**

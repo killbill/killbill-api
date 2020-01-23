@@ -33,12 +33,12 @@ public interface CatalogUserApi extends KillbillApi {
     /**
      * Retrieves the multi versioned catalog.
      *
-     * @param catalogName        the name of the catalog
-     * @param catalogDateVersion optional date filter to retrieve a specific version
-     * @param context            the user context that specifies the tenant information
+     * @param catalogName the name of the catalog
+     * @param context     the user context that specifies the tenant information
      * @return the {@code Catalog}
      */
-    VersionedCatalog<? extends StaticCatalog> getCatalog(String catalogName, DateTime catalogDateVersion, TenantContext context) throws CatalogApiException;
+    VersionedCatalog getCatalog(String catalogName, TenantContext context) throws CatalogApiException;
+
 
     /**
      * Retrieves the current catalog

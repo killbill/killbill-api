@@ -1,7 +1,8 @@
 /*
- * Copyright 2010-2013 Ning, Inc.
+ * Copyright 2014-2019 Groupon, Inc
+ * Copyright 2014-2019 The Billing Project, LLC
  *
- * Ning licenses this file to you under the Apache License, version 2.0
+ * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
  * License.  You may obtain a copy of the License at:
  *
@@ -14,19 +15,21 @@
  * under the License.
  */
 
-package org.killbill.billing.catalog.api;
+package org.killbill.billing.usage.api;
 
-import java.util.List;
+import java.util.UUID;
 
-public interface PriceListSet {
+import org.joda.time.LocalDate;
 
-    public static final String DEFAULT_PRICELIST_NAME = "DEFAULT";
+public interface RawUsageRecord {
 
-    public StaticCatalog getCatalog();
+    UUID getSubscriptionId();
 
-    /**
-     * @return all the price {@code PriceList}
-     */
-    public List<PriceList> getAllPriceLists();
+    LocalDate getDate();
 
+    String getUnitType();
+
+    Long getAmount();
+
+    String getTrackingId();
 }

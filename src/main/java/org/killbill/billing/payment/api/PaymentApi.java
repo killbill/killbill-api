@@ -35,6 +35,7 @@ import org.killbill.billing.util.entity.Pagination;
 
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_CHARGEBACK;
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_REFUND;
+import static org.killbill.billing.security.Permission.PAYMENT_CAN_TRANSITION;
 import static org.killbill.billing.security.Permission.PAYMENT_CAN_TRIGGER_PAYMENT;
 import static org.killbill.billing.security.Permission.PAYMENT_METHOD_CAN_CREATE;
 import static org.killbill.billing.security.Permission.PAYMENT_METHOD_CAN_DELETE;
@@ -397,6 +398,7 @@ public interface PaymentApi extends KillbillApi {
      * @return the payment
      * @throws PaymentApiException
      */
+    @RequiresPermissions(PAYMENT_CAN_TRANSITION)
     public Payment notifyPendingTransactionOfStateChanged(Account account, UUID paymentTransactionId, boolean isSuccess, CallContext context) throws PaymentApiException;
 
 
@@ -412,6 +414,7 @@ public interface PaymentApi extends KillbillApi {
      * @return the payment
      * @throws PaymentApiException
      */
+    @RequiresPermissions(PAYMENT_CAN_TRANSITION)
     public Payment notifyPendingTransactionOfStateChangedWithPaymentControl(Account account, UUID paymentTransactionId, boolean isSuccess, PaymentOptions paymentOptions, CallContext context) throws PaymentApiException;
 
     /**
@@ -660,7 +663,6 @@ public interface PaymentApi extends KillbillApi {
      * @throws PaymentApiException
      */
     @RequiresPermissions(PAYMENT_METHOD_CAN_DELETE)
-
     public void deletePaymentMethod(Account account, UUID paymentMethodId, boolean deleteDefaultPaymentMethodWithAutoPayOff, boolean forceDefaultPaymentMethodDeletion, Iterable<PluginProperty> properties, CallContext context)
             throws PaymentApiException;
 

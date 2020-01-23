@@ -1,3 +1,59 @@
+0.53.17
+    Remove permission on notifyPluginChanged
+    Update killbill-oss-parent to 0.143.44
+
+0.53.16
+    Add no-arg constructor in NodeCommandProperty
+
+0.53.15
+    Add additional permissions
+    Harmonize InvoiceUserApi#getUnpaidInvoicesByAccountId and InvoiceUserApi#getInvoicesByAccount
+
+0.53.14
+    Harmonize InvoiceUserApi#getUnpaidInvoicesByAccountId and InvoiceUserApi#getInvoicesByAccount 
+
+0.53.13
+    ErrorCode: add error message to SUB_CREATE_INVALID_ENTITLEMENT_SPECIFIER
+
+0.53.12
+    Add InvoiceItem#getCatalogEffectiveDate.
+
+0.53.11
+    Major catalog cleanup apis.
+
+0.53.10
+    Add Invoice#addTrackingIds
+
+0.53.9
+    Add ability to return trackingIds from invoice
+
+0.53.8
+     Add Subscription#getSubscriptionForExternalKey
+
+0.53.7
+    Fix mistake in credit api
+
+0.53.6
+    Make credit api similar to external charges
+
+0.53.5
+    Make SecurityApi#getCurrentUserPermissions return Set<String>
+
+0.53.4
+    Add Catalog#getNextPlanVersion api 
+
+0.53.3
+    Remove unused parameter for Catalog#planChange
+
+0.53.2
+    Add new custom field search apis
+
+0.53.1
+    Add new apis to query audit logs with history
+
+0.53.0
+    Initial release against 0.21 kb branch
+
 0.52.0
     Update pom.xml to 0.52.x
 

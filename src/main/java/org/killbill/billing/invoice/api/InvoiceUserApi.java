@@ -30,18 +30,23 @@ import org.killbill.billing.account.api.AccountApiException;
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.payment.api.PluginProperty;
 import org.killbill.billing.security.RequiresPermissions;
+import org.killbill.billing.util.api.AuditLevel;
 import org.killbill.billing.util.api.TagApiException;
+import org.killbill.billing.util.audit.AuditLogWithHistory;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 import org.killbill.billing.util.entity.Pagination;
 
 import static org.killbill.billing.security.Permission.ACCOUNT_CAN_CHARGE;
 import static org.killbill.billing.security.Permission.ACCOUNT_CAN_CREDIT;
+import static org.killbill.billing.security.Permission.INVOICE_CAN_COMMIT;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_CREDIT;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_DELETE_CBA;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_DRY_RUN_INVOICE;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_ITEM_ADJUST;
 import static org.killbill.billing.security.Permission.INVOICE_CAN_TRIGGER_INVOICE;
+import static org.killbill.billing.security.Permission.INVOICE_CAN_VOID;
+import static org.killbill.billing.security.Permission.INVOICE_CAN_WRITE_OFF;
 
 public interface InvoiceUserApi extends KillbillApi {
 
@@ -58,11 +63,12 @@ public interface InvoiceUserApi extends KillbillApi {
      * Find invoices from a given day, for a given account.
      *
      * @param accountId account id
-     * @param fromDate  the earliest target day to consider, in the account timezone
+     * @param fromDate  the earliest included target day to consider, in the account timezone
+     * @param upToDate  the latest included target day to consider, in the account timezone
      * @param context   the tenant context
      * @return a list of invoices
      */
-    public List<Invoice> getInvoicesByAccount(UUID accountId, LocalDate fromDate, boolean includeVoidedInvoices, TenantContext context);
+    public List<Invoice> getInvoicesByAccount(UUID accountId, LocalDate fromDate, LocalDate upToDate, boolean includeVoidedInvoices, TenantContext context);
 
     /**
      * @param context the user context
@@ -141,11 +147,12 @@ public interface InvoiceUserApi extends KillbillApi {
      * Find unpaid invoices for a given account, up to a given day.
      *
      * @param accountId account id
-     * @param upToDate  the latest target day to consider, in the account timezone
+     * @param fromDate  the earliest included target day to consider, in the account timezone
+     * @param upToDate  the latest included target day to consider, in the account timezone
      * @param context   the tenant context
      * @return a collection of invoices
      */
-    public Collection<Invoice> getUnpaidInvoicesByAccountId(UUID accountId, LocalDate upToDate, TenantContext context);
+    public Collection<Invoice> getUnpaidInvoicesByAccountId(UUID accountId, LocalDate fromDate, LocalDate upToDate, TenantContext context);
 
     /**
      * Trigger an invoice for a given account and a given day.
@@ -181,6 +188,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context   call context
      * @throws TagApiException
      */
+    @RequiresPermissions(INVOICE_CAN_WRITE_OFF)
     public void tagInvoiceAsWrittenOff(UUID invoiceId, CallContext context) throws TagApiException, InvoiceApiException;
 
     /**
@@ -190,6 +198,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context   call context
      * @throws TagApiException
      */
+    @RequiresPermissions(INVOICE_CAN_WRITE_OFF)
     public void tagInvoiceAsNotWrittenOff(UUID invoiceId, CallContext context) throws TagApiException, InvoiceApiException;
 
     /**
@@ -246,39 +255,17 @@ public interface InvoiceUserApi extends KillbillApi {
      * Add a credit to an account.
      *
      * @param accountId     account id
-     * @param amount        the credit amount
      * @param effectiveDate the day to grant the credit, in the account timezone
-     * @param currency      the credit currency
+     * @param creditItems   the list of credits to add
      * @param autoCommit    the flag to indicate if the invoice is set to COMMITTED or DRAFT and events are sent
      * @param context       the call context
-     * @param description   the item description
-     * @param itemDetails   the item details
      * @param properties    the plugin specific properties
-     * @return the credit invoice item
+     * @return the credit invoice items
      * @throws InvoiceApiException
      */
     @RequiresPermissions(ACCOUNT_CAN_CREDIT)
-    public InvoiceItem insertCredit(UUID accountId, BigDecimal amount, LocalDate effectiveDate, Currency currency,
-                                    boolean autoCommit, String description, String itemDetails, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
+    public List<InvoiceItem> insertCredits(UUID accountId, LocalDate effectiveDate, Iterable<InvoiceItem> creditItems, boolean autoCommit, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
 
-    /**
-     * Add a credit to an invoice. This can be used to adjust invoices.
-     *
-     * @param accountId     account id
-     * @param invoiceId     invoice id
-     * @param amount        the credit amount
-     * @param effectiveDate the day to grant the credit, in the account timezone
-     * @param currency      the credit currency
-     * @param description   the item description
-     * @param itemDetails   the item details
-     * @param properties    the plugin specific properties
-     * @param context       the call context
-     * @return the credit invoice item
-     * @throws InvoiceApiException
-     */
-    @RequiresPermissions(INVOICE_CAN_CREDIT)
-    public InvoiceItem insertCreditForInvoice(UUID accountId, UUID invoiceId, BigDecimal amount, LocalDate effectiveDate,
-                                              Currency currency, String description, String itemDetails, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
 
     /**
      * Adjust fully a given invoice item.
@@ -348,6 +335,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param accountId account id
      * @param context   the call context
      */
+    @RequiresPermissions(INVOICE_CAN_DELETE_CBA)
     public void consumeExistingCBAOnAccountWithUnpaidInvoices(final UUID accountId, final CallContext context);
 
     /**
@@ -357,6 +345,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context the tenant context
      * @throws InvoiceApiException
      */
+    @RequiresPermissions(INVOICE_CAN_COMMIT)
     public void commitInvoice(UUID invoiceId, CallContext context) throws InvoiceApiException;
 
     /** @param accountId   account id
@@ -375,6 +364,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context the tenant context
      * @throws InvoiceApiException
      */
+    @RequiresPermissions(INVOICE_CAN_DELETE_CBA)
     public void transferChildCreditToParent(UUID childAccountId, CallContext context) throws InvoiceApiException;
 
     /**
@@ -394,5 +384,37 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context the tenant context
      * @throws InvoiceApiException
      */
+    @RequiresPermissions(INVOICE_CAN_VOID)
     public void voidInvoice(UUID invoiceId, CallContext context) throws InvoiceApiException;
+
+    /**
+     * Get all the audit entries with history for a given invoice.
+     *
+     * @param invoiceId         the invoice id
+     * @param auditLevel        audit level (verbosity)
+     * @param context           the tenant context
+     * @return all audit entries with history for an invoice
+     */
+    List<AuditLogWithHistory> getInvoiceAuditLogsWithHistoryForId(UUID invoiceId, AuditLevel auditLevel, TenantContext context);
+
+    /**
+     * Get all the audit entries with history for a given invoice item.
+     *
+     * @param invoiceItemId      the invoice item id
+     * @param auditLevel        audit level (verbosity)
+     * @param context           the tenant context
+     * @return all audit entries with history for an invoice item
+     */
+    List<AuditLogWithHistory> getInvoiceItemAuditLogsWithHistoryForId(UUID invoiceItemId, AuditLevel auditLevel, TenantContext context);
+
+    /**
+     * Get all the audit entries with history for a given invoice payment.
+     *
+     * @param invoicePaymentId   the invoice payment id
+     * @param auditLevel        audit level (verbosity)
+     * @param context           the tenant context
+     * @return all audit entries with history for an invoice payment
+     */
+    List<AuditLogWithHistory> getInvoicePaymentAuditLogsWithHistoryForId(UUID invoicePaymentId, AuditLevel auditLevel, TenantContext context);
+
 }

@@ -37,6 +37,12 @@ public interface EntitlementSpecifier {
     Integer getBillCycleDay();
 
     /**
+     *
+     * @return the entitlement externalKey
+     */
+    String getExternalKey();
+
+    /**
      * @return the price override definition for the plan
      */
     List<PlanPhasePriceOverride> getOverrides();

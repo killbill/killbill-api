@@ -19,6 +19,7 @@ package org.killbill.billing.invoice.api;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.killbill.billing.catalog.api.Currency;
 import org.killbill.billing.util.entity.Entity;
@@ -81,6 +82,8 @@ public interface InvoiceItem extends Entity {
     Integer getQuantity();
 
     String getItemDetails();
+
+    DateTime getCatalogEffectiveDate();
 
     /**
      * Items match if they correspond to the same subscription for the same catalog plan and same start / end dates

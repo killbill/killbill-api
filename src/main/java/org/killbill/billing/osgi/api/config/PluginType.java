@@ -26,5 +26,6 @@ public enum PluginType {
     PAYMENT_CONTROL,
     CATALOG,
     ENTITLEMENT,
+    USAGE,
     __UNKNOWN__
 }

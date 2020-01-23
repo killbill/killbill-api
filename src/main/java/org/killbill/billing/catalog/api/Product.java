@@ -23,6 +23,8 @@ import java.util.Collection;
  */
 public interface Product extends CatalogEntity {
 
+    public StaticCatalog getCatalog();
+
     /**
      * @return an array of other {@code Product} that can be purchased with that one
      */

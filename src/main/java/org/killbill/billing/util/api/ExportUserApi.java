@@ -20,12 +20,17 @@ import java.io.OutputStream;
 import java.util.UUID;
 
 import org.killbill.billing.KillbillApi;
+import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
+
+import static org.killbill.billing.security.Permission.ADMIN_CAN_EXPORT;
 
 // Although it's a read-only call, we want to know who triggered the export - hence the call context here
 public interface ExportUserApi extends KillbillApi {
 
+    @RequiresPermissions(ADMIN_CAN_EXPORT)
     public void exportDataForAccount(UUID accountId, DatabaseExportOutputStream out, CallContext context);
 
+    @RequiresPermissions(ADMIN_CAN_EXPORT)
     public void exportDataAsCSVForAccount(UUID accountId, OutputStream out, CallContext context);
 }
