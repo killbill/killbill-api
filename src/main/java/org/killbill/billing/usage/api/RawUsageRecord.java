@@ -17,6 +17,7 @@
 
 package org.killbill.billing.usage.api;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import org.joda.time.LocalDate;
@@ -29,7 +30,7 @@ public interface RawUsageRecord {
 
     String getUnitType();
 
-    Long getAmount();
+    BigDecimal getAmount();
 
     String getTrackingId();
 }
