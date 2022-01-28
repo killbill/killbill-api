@@ -18,15 +18,17 @@
 
 package org.killbill.billing.usage.api;
 
+import java.math.BigDecimal;
+
 import org.joda.time.LocalDate;
 
 public class UsageRecord {
 
     private final LocalDate recordDate;
 
-    private final Long amount;
+    private final BigDecimal amount;
 
-    public UsageRecord(final LocalDate recordDate, final Long amount) {
+    public UsageRecord(final LocalDate recordDate, final BigDecimal amount) {
         this.recordDate = recordDate;
         this.amount = amount;
     }
@@ -35,7 +37,7 @@ public class UsageRecord {
         return recordDate;
     }
 
-    public Long getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 }
