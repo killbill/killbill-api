@@ -16,13 +16,15 @@
 
 package org.killbill.billing.catalog.api;
 
+import java.math.BigDecimal;
+
 public interface Limit {
 
     public Unit getUnit();
 
-    public Double getMax();
+    public BigDecimal getMax();
 
-    public Double getMin();
+    public BigDecimal getMin();
 
     public boolean compliesWith(double value);
 
