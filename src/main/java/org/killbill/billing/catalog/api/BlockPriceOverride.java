@@ -30,7 +30,7 @@ public interface BlockPriceOverride {
     /**
      * @return the size of the block
      */
-    public Double getSize();
+    public BigDecimal getSize();
 
     /**
      * @return the price for that currency
