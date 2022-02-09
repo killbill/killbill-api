@@ -16,6 +16,8 @@
 
 package org.killbill.billing.catalog.api;
 
+import java.math.BigDecimal;
+
 /**
  * The interface {@code PlanPhase} is used to express the various phases available on a given {@code Plan}
  *
@@ -53,6 +55,6 @@ public interface PlanPhase extends CatalogEntity {
     /**
      * @return compliance boolean
      */
-    public boolean compliesWithLimits(String unit, double value);
+    public boolean compliesWithLimits(String unit, BigDecimal value);
 
 }

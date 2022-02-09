@@ -16,6 +16,7 @@
 
 package org.killbill.billing.catalog.api;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 /**
@@ -53,6 +54,6 @@ public interface Product extends CatalogEntity {
     /**
      * @return whether the given unit-value pair meets the limits of the product
      */
-    public boolean compliesWithLimits(String unit, double value);
+    public boolean compliesWithLimits(String unit, BigDecimal value);
 
 }

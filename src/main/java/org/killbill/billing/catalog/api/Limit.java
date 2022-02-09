@@ -26,6 +26,6 @@ public interface Limit {
 
     public BigDecimal getMin();
 
-    public boolean compliesWith(double value);
+    public boolean compliesWith(BigDecimal value);
 
 }
