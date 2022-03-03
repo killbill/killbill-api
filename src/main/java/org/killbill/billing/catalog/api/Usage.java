@@ -16,6 +16,8 @@
 
 package org.killbill.billing.catalog.api;
 
+import java.math.BigDecimal;
+
 public interface Usage extends CatalogEntity {
 
 
@@ -45,7 +47,7 @@ public interface Usage extends CatalogEntity {
     /**
      * @return compliance boolean
      */
-    public boolean compliesWithLimits(String unit, double value);
+    public boolean compliesWithLimits(String unit, BigDecimal value);
 
     /**
      * @return the {@code Limit} associated with that usage section
