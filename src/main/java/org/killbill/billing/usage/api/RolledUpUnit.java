@@ -18,9 +18,11 @@
 
 package org.killbill.billing.usage.api;
 
+import java.math.BigDecimal;
+
 public interface RolledUpUnit {
 
     public String getUnitType();
 
-    public Long getAmount();
+    public BigDecimal getAmount();
 }

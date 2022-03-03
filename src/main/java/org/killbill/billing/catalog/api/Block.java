@@ -16,6 +16,8 @@
 
 package org.killbill.billing.catalog.api;
 
+import java.math.BigDecimal;
+
 public interface Block {
 
     /**
@@ -31,7 +33,7 @@ public interface Block {
     /**
      * @return the size of the block
      */
-    public Double getSize();
+    public BigDecimal getSize();
 
     /**
      * @return the recurring {@code InternationalPrice} for that {@code Block} section.
@@ -42,5 +44,5 @@ public interface Block {
      * @return the minimum number of {@code Unit} credits after which TopUp kicks in.
      * @throws CatalogApiException if the {#code Block} is not of type {@code BlockType.TOP_UP}
      */
-    public Double getMinTopUpCredit() throws CatalogApiException;
+    public BigDecimal getMinTopUpCredit() throws CatalogApiException;
 }
