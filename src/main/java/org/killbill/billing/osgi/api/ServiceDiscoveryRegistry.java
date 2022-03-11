@@ -19,7 +19,7 @@
 
 package org.killbill.billing.osgi.api;
 
-public interface ServiceRegistry {
+public interface ServiceDiscoveryRegistry {
 
     void register();
 
