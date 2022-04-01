@@ -21,6 +21,7 @@ import java.util.UUID;
 
 import org.joda.time.LocalDate;
 import org.killbill.billing.KillbillApi;
+import org.killbill.billing.payment.api.PluginProperty;
 import org.killbill.billing.security.RequiresPermissions;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
@@ -46,17 +47,19 @@ public interface UsageUserApi extends KillbillApi {
      * @param unitType       unit type for this usage
      * @param startDate      start date of the usage period (with respect to the account timezone)
      * @param endDate        end date of the usage period (with respect to the account timezone)
+     * @param properties     plugin specific properties
      * @param context        tenant context
      * @return usage data (rolled-up)
      */
-    public RolledUpUsage getUsageForSubscription(UUID subscriptionId, String unitType, LocalDate startDate, LocalDate endDate, TenantContext context);
+    public RolledUpUsage getUsageForSubscription(UUID subscriptionId, String unitType, LocalDate startDate, LocalDate endDate, Iterable<PluginProperty> properties, TenantContext context);
 
     /**
      * Get usage information for a given subscription.
      *
      * @param subscriptionId subscription id
+     * @param properties     plugin specific properties
      * @param context        tenant context
      * @return usage data (rolled-up)
      */
-    public List<RolledUpUsage> getAllUsageForSubscription(UUID subscriptionId, List<LocalDate> transitionDates, TenantContext context);
+    public List<RolledUpUsage> getAllUsageForSubscription(UUID subscriptionId, List<LocalDate> transitionDates, Iterable<PluginProperty> properties, TenantContext context);
 }
