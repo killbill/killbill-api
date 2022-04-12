@@ -19,6 +19,7 @@ package org.killbill.billing.entitlement.api;
 import java.util.List;
 import java.util.UUID;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.killbill.billing.catalog.api.BillingActionPolicy;
 import org.killbill.billing.catalog.api.Plan;
@@ -142,12 +143,12 @@ public interface Entitlement extends Entity {
     /**
      * @return the start date of the entitlement
      */
-    public LocalDate getEffectiveStartDate();
+    public DateTime getEffectiveStartDate();
 
     /**
      * @return the end date of the entitlement, that is the date at which it got cancelled.
      */
-    public LocalDate getEffectiveEndDate();
+    public DateTime getEffectiveEndDate();
 
     /**
      * @return the last <code>Product</code> prior to cancellation

@@ -18,7 +18,7 @@ package org.killbill.billing.entitlement.api;
 
 import java.util.UUID;
 
-import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 import org.killbill.billing.catalog.api.BillingPeriod;
 import org.killbill.billing.catalog.api.Plan;
 import org.killbill.billing.catalog.api.PlanPhase;
@@ -40,7 +40,7 @@ public interface SubscriptionEvent {
     /**
      * @return the date at which the transition took place
      */
-    public LocalDate getEffectiveDate();
+    public DateTime getEffectiveDate();
 
     /**
      * @return the type of transition
