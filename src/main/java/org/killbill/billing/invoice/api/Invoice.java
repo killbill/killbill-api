@@ -171,4 +171,10 @@ public interface Invoice extends Entity {
      * @return the parent invoiceId or null
      */
     UUID getParentInvoiceId();
+
+    /**
+     *
+     * @return the invoiceId by default or a unique ID for the N invoices that were generated as a result of an invoice run.
+     */
+    UUID getGroupId();
 }

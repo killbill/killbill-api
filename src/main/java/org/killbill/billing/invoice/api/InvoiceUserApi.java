@@ -71,6 +71,15 @@ public interface InvoiceUserApi extends KillbillApi {
     public List<Invoice> getInvoicesByAccount(UUID accountId, LocalDate fromDate, LocalDate upToDate, boolean includeVoidedInvoices, TenantContext context);
 
     /**
+     *
+     * @param groupId the group id
+     * @param context the tenant context
+     * @return
+     */
+    public List<Invoice> getInvoicesByGroup(UUID groupId, TenantContext context);
+
+
+    /**
      * @param context the user context
      * @param offset  the offset of the first result
      * @param limit   the maximum number of results to retrieve
@@ -164,7 +173,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_TRIGGER_INVOICE)
-    public Invoice triggerInvoiceGeneration(UUID accountId, LocalDate targetDate, CallContext context) throws InvoiceApiException;
+    public Collection<Invoice> triggerInvoiceGeneration(UUID accountId, LocalDate targetDate, CallContext context) throws InvoiceApiException;
 
 
     /**
@@ -178,7 +187,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_DRY_RUN_INVOICE)
-    public Invoice triggerDryRunInvoiceGeneration(UUID accountId, LocalDate targetDate, DryRunArguments dryRunArguments, CallContext context) throws InvoiceApiException;
+    public Collection<Invoice> triggerDryRunInvoiceGeneration(UUID accountId, LocalDate targetDate, DryRunArguments dryRunArguments, CallContext context) throws InvoiceApiException;
 
 
     /**
