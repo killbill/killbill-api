@@ -72,11 +72,12 @@ public interface InvoiceUserApi extends KillbillApi {
 
     /**
      *
+     * @param accountId account id
      * @param groupId the group id
      * @param context the tenant context
      * @return
      */
-    public List<Invoice> getInvoicesByGroup(UUID groupId, TenantContext context);
+    public List<Invoice> getInvoicesByGroup(UUID accountId, UUID groupId, TenantContext context);
 
 
     /**
@@ -173,7 +174,10 @@ public interface InvoiceUserApi extends KillbillApi {
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_TRIGGER_INVOICE)
-    public Collection<Invoice> triggerInvoiceGeneration(UUID accountId, LocalDate targetDate, CallContext context) throws InvoiceApiException;
+    public Invoice triggerInvoiceGeneration(UUID accountId, LocalDate targetDate, CallContext context) throws InvoiceApiException;
+
+    @RequiresPermissions(INVOICE_CAN_TRIGGER_INVOICE)
+    public Iterable<Invoice> triggerInvoiceGroupGeneration(UUID accountId, LocalDate targetDate, CallContext context) throws InvoiceApiException;
 
 
     /**
@@ -187,7 +191,9 @@ public interface InvoiceUserApi extends KillbillApi {
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_DRY_RUN_INVOICE)
-    public Collection<Invoice> triggerDryRunInvoiceGeneration(UUID accountId, LocalDate targetDate, DryRunArguments dryRunArguments, CallContext context) throws InvoiceApiException;
+    public Invoice triggerDryRunInvoiceGeneration(UUID accountId, LocalDate targetDate, DryRunArguments dryRunArguments, CallContext context) throws InvoiceApiException;
+
+    public Iterable<Invoice> triggerDryRunInvoiceGroupGeneration(UUID accountId, LocalDate targetDate, DryRunArguments dryRunArguments, CallContext context) throws InvoiceApiException;
 
 
     /**
