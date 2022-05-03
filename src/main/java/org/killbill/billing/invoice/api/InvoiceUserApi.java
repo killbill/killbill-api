@@ -193,8 +193,6 @@ public interface InvoiceUserApi extends KillbillApi {
     @RequiresPermissions(INVOICE_CAN_DRY_RUN_INVOICE)
     public Invoice triggerDryRunInvoiceGeneration(UUID accountId, LocalDate targetDate, DryRunArguments dryRunArguments, CallContext context) throws InvoiceApiException;
 
-    public Iterable<Invoice> triggerDryRunInvoiceGroupGeneration(UUID accountId, LocalDate targetDate, DryRunArguments dryRunArguments, CallContext context) throws InvoiceApiException;
-
 
     /**
      * Mark an invoice as written off.
