@@ -71,6 +71,16 @@ public interface InvoiceUserApi extends KillbillApi {
     public List<Invoice> getInvoicesByAccount(UUID accountId, LocalDate fromDate, LocalDate upToDate, boolean includeVoidedInvoices, TenantContext context);
 
     /**
+     *
+     * @param accountId account id
+     * @param groupId the group id
+     * @param context the tenant context
+     * @return
+     */
+    public List<Invoice> getInvoicesByGroup(UUID accountId, UUID groupId, TenantContext context);
+
+
+    /**
      * @param context the user context
      * @param offset  the offset of the first result
      * @param limit   the maximum number of results to retrieve
@@ -165,6 +175,21 @@ public interface InvoiceUserApi extends KillbillApi {
      */
     @RequiresPermissions(INVOICE_CAN_TRIGGER_INVOICE)
     public Invoice triggerInvoiceGeneration(UUID accountId, LocalDate targetDate, CallContext context) throws InvoiceApiException;
+
+    /**
+     * Trigger an invoice for a given account and a given day.
+     *
+     * If there is an active plugin implementing the InvoicePluginApi#getInvoiceGrouping it will be invoked,
+     * and as a result we may end up with N invoices.
+     *
+     * @param accountId       account id
+     * @param targetDate      the target day, in the account timezone
+     * @param context         the call context
+     * @return the invoice generated
+     * @throws InvoiceApiException
+     */
+    @RequiresPermissions(INVOICE_CAN_TRIGGER_INVOICE)
+    public Iterable<Invoice> triggerInvoiceGroupGeneration(UUID accountId, LocalDate targetDate, CallContext context) throws InvoiceApiException;
 
 
     /**
