@@ -210,10 +210,10 @@ public interface Entitlement extends Entity {
      * <p/>
      * <p/>
      *
-     * @param entitlementEffectiveDate                the datetime at which the entitlement should be cancelled
-     * @param billingEffectiveDate the datetime at which billing should be cancelled
-     * @param properties                   plugin specific properties
-     * @param context                      the context
+     * @param entitlementEffectiveDate    the datetime at which the entitlement should be cancelled
+     * @param billingEffectiveDate        the datetime at which billing should be cancelled
+     * @param properties                  plugin specific properties
+     * @param context                     the context
      * @return the new <code>Entitlement</code> after the cancellation was performed
      * @throws EntitlementApiException if cancellation failed
      *                                 <p>
