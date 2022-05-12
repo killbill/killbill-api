@@ -203,6 +203,28 @@ public interface Entitlement extends Entity {
     public Entitlement cancelEntitlementWithDate(final LocalDate effectiveDate, final boolean overrideBillingEffectiveDate, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
+    
+    /**
+     * Cancels the <code>Entitlement</code> with the specified entitlementEffectiveDate and billingEffectiveDate
+     * After this operation, the existing object becomes stale.
+     * <p/>
+     * <p/>
+     *
+     * @param entitlementEffectiveDate    the datetime at which the entitlement should be cancelled
+     * @param billingEffectiveDate        the datetime at which billing should be cancelled
+     * @param properties                  plugin specific properties
+     * @param context                     the context
+     * @return the new <code>Entitlement</code> after the cancellation was performed
+     * @throws EntitlementApiException if cancellation failed
+     *                                 <p>
+     *                                 The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
+     */    
+    
+    @RequiresPermissions(ENTITLEMENT_CAN_CANCEL)
+    public Entitlement cancelEntitlementWithDate(final DateTime entitlementEffectiveDate, final DateTime billingEffectiveDate, final Iterable<PluginProperty> properties, final CallContext context)
+            throws EntitlementApiException;      
+    
+    
     /**
      * Cancel the <code>Entitlement</code> with a policy.
      * After this operation, the existing object becomes stale.
