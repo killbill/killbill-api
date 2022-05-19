@@ -326,6 +326,23 @@ public interface Entitlement extends Entity {
     @RequiresPermissions(ENTITLEMENT_CAN_CHANGE_PLAN)
     public Entitlement changePlanWithDate(final EntitlementSpecifier spec, final LocalDate effectiveDate, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
+    
+    /**
+     * Change <code>Entitlement</code> plan at the specified date.
+     * After this operation, the existing object becomes stale.
+     * <p/>
+     *
+     * @param spec          the product specification for the change
+     * @param effectiveDate the effective datetime at which the entitlement and billing should be changed
+     * @param properties    plugin specific properties
+     * @param context       the context
+     * @return the new <code>Entitlement</code> after the change was performed
+     * @throws EntitlementApiException if change failed
+     */
+    @RequiresPermissions(ENTITLEMENT_CAN_CHANGE_PLAN)
+    public Entitlement changePlanWithDate(final EntitlementSpecifier spec, final DateTime effectiveDate, final Iterable<PluginProperty> properties, final CallContext context)
+            throws EntitlementApiException;
+    
 
     /**
      * Change <code>Entitlement</code> plan at the specified date and overrides the billing policy.
