@@ -340,7 +340,7 @@ public interface Entitlement extends Entity {
      * @throws EntitlementApiException if change failed
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CHANGE_PLAN)
-    public Entitlement changePlanWithDate(final EntitlementSpecifier spec, final DateTime effectiveDate, final Iterable<PluginProperty> properties, final CallContext context)
+    public Entitlement changePlanWithDateTime(final EntitlementSpecifier spec, final DateTime effectiveDate, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
     
 
