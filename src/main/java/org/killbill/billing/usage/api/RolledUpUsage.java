@@ -19,15 +19,16 @@ package org.killbill.billing.usage.api;
 import java.util.List;
 import java.util.UUID;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 public interface RolledUpUsage {
 
     UUID getSubscriptionId();
 
-    LocalDate getStart();
+    DateTime getStart();
 
-    LocalDate getEnd();
+    DateTime getEnd();
 
     List<RolledUpUnit> getRolledUpUnits();
 }

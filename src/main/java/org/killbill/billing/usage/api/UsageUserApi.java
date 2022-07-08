@@ -19,6 +19,7 @@ package org.killbill.billing.usage.api;
 import java.util.List;
 import java.util.UUID;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.payment.api.PluginProperty;
@@ -51,7 +52,7 @@ public interface UsageUserApi extends KillbillApi {
      * @param context        tenant context
      * @return usage data (rolled-up)
      */
-    public RolledUpUsage getUsageForSubscription(UUID subscriptionId, String unitType, LocalDate startDate, LocalDate endDate, Iterable<PluginProperty> properties, TenantContext context);
+    public RolledUpUsage getUsageForSubscription(UUID subscriptionId, String unitType, DateTime startDate, DateTime endDate, Iterable<PluginProperty> properties, TenantContext context);
 
     /**
      * Get usage information for a given subscription.
@@ -61,5 +62,5 @@ public interface UsageUserApi extends KillbillApi {
      * @param context        tenant context
      * @return usage data (rolled-up)
      */
-    public List<RolledUpUsage> getAllUsageForSubscription(UUID subscriptionId, List<LocalDate> transitionDates, Iterable<PluginProperty> properties, TenantContext context);
+    public List<RolledUpUsage> getAllUsageForSubscription(UUID subscriptionId, List<DateTime> transitionDates, Iterable<PluginProperty> properties, TenantContext context);
 }
