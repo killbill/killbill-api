@@ -20,20 +20,21 @@ package org.killbill.billing.usage.api;
 
 import java.math.BigDecimal;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 public class UsageRecord {
 
-    private final LocalDate recordDate;
+    private final DateTime recordDate;
 
     private final BigDecimal amount;
 
-    public UsageRecord(final LocalDate recordDate, final BigDecimal amount) {
+    public UsageRecord(final DateTime recordDate, final BigDecimal amount) {
         this.recordDate = recordDate;
         this.amount = amount;
     }
 
-    public LocalDate getDate() {
+    public DateTime getDate() {
         return recordDate;
     }
 

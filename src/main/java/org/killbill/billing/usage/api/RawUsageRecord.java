@@ -20,13 +20,13 @@ package org.killbill.billing.usage.api;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 
 public interface RawUsageRecord {
 
     UUID getSubscriptionId();
 
-    LocalDate getDate();
+    DateTime getDate();
 
     String getUnitType();
 
