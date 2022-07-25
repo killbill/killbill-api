@@ -1,7 +1,10 @@
 /*
- * Copyright 2010-2013 Ning, Inc.
+ * Copyright 2010-2014 Ning, Inc.
+ * Copyright 2014-2020 Groupon, Inc
+ * Copyright 2020-2022 Equinix, Inc
+ * Copyright 2014-2022 The Billing Project, LLC
  *
- * Ning licenses this file to you under the Apache License, version 2.0
+ * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
  * License.  You may obtain a copy of the License at:
  *
@@ -39,7 +42,6 @@ public interface CatalogUserApi extends KillbillApi {
      */
     VersionedCatalog getCatalog(String catalogName, TenantContext context) throws CatalogApiException;
 
-
     /**
      * Retrieves the current catalog
      *
@@ -56,6 +58,15 @@ public interface CatalogUserApi extends KillbillApi {
      */
     @RequiresPermissions(CATALOG_CAN_UPLOAD)
     void uploadCatalog(String catalogXML, CallContext context) throws CatalogApiException;
+
+    /**
+     * Validates a catalog
+     *
+     * @param catalogXML the catalog XML
+     * @param context    the user context
+     * @throws CatalogApiException if the catalog is invalid
+     */
+    void validateCatalog(String catalogXML, CallContext context) throws CatalogApiException;
 
     /**
      * Creates a per-tenant default template catalog
