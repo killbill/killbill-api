@@ -142,7 +142,7 @@ public interface EntitlementApi extends KillbillApi {
      * @return the entitlement
      * @throws EntitlementApiException if the entitlement does not exist
      */
-    public Entitlement getEntitlementForId(UUID id, TenantContext context) throws EntitlementApiException;
+    public Entitlement getEntitlementForId(UUID id, boolean includeDeletedSubscriptionEvents, TenantContext context) throws EntitlementApiException;
 
     /**
      * Retrieves all the <code>Entitlement</code> attached to the base entitlement.
