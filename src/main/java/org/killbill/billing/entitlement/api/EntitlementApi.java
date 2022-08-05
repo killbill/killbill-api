@@ -138,11 +138,12 @@ public interface EntitlementApi extends KillbillApi {
      * Retrieves an <code>Entitlement</code> using its id.
      *
      * @param id      the id of the entitlement
+     * @param includeDeletedEvents flag that specifies whether deleted events should be returned
      * @param context the context
      * @return the entitlement
      * @throws EntitlementApiException if the entitlement does not exist
      */
-    public Entitlement getEntitlementForId(UUID id, boolean includeDeletedSubscriptionEvents, TenantContext context) throws EntitlementApiException;
+    public Entitlement getEntitlementForId(UUID id, boolean includeDeletedEvents, TenantContext context) throws EntitlementApiException;
 
     /**
      * Retrieves all the <code>Entitlement</code> attached to the base entitlement.
