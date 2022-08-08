@@ -50,11 +50,12 @@ public interface SubscriptionApi extends KillbillApi {
      * Retrieves a <code>Subscription</code> for the entitlement id
      *
      * @param entitlementId the id of the entitlement associated with the subscription
+     * @param includeDeletedEvents flag that specifies whether deleted events should be returned
      * @param context       the context
      * @return the subscription
      * @throws SubscriptionApiException if it odes not exist
      */
-    Subscription getSubscriptionForEntitlementId(UUID entitlementId, TenantContext context) throws SubscriptionApiException;
+    Subscription getSubscriptionForEntitlementId(UUID entitlementId, boolean includeDeletedEvents, TenantContext context) throws SubscriptionApiException;
 
     /**
      *  Retrieves a <code>Subscription</code> for a given external key
