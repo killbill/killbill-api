@@ -61,11 +61,12 @@ public interface SubscriptionApi extends KillbillApi {
      *  Retrieves a <code>Subscription</code> for a given external key
      *
      * @param externalKey the external key for the subscription
+     * @param includeDeletedEvents flag that specifies whether deleted events should be returned
      * @param context
      * @return
      * @throws SubscriptionApiException
      */
-    Subscription getSubscriptionForExternalKey(String externalKey, TenantContext context) throws SubscriptionApiException;
+    Subscription getSubscriptionForExternalKey(String externalKey, boolean includeDeletedEvents, TenantContext context) throws SubscriptionApiException;
 
     /**
      * Retrieves all the <code>Subscription</code> attached to the base entitlement.
