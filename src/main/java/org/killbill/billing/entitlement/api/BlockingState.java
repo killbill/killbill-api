@@ -46,4 +46,6 @@ public interface BlockingState extends Entity, Comparable<BlockingState> {
     public String toString();
 
     public String getService();
+    
+    public boolean isActive();
 }
