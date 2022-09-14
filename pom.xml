@@ -37,6 +37,10 @@
         <system>Github</system>
         <url>https://github.com/killbill/killbill-api/issues</url>
     </issueManagement>
+    <properties>
+        <check.fail-spotbugs>true</check.fail-spotbugs>
+        <check.spotbugs-exclude-filter-file>spotbugs-exclude.xml</check.spotbugs-exclude-filter-file>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
