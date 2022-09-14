@@ -32,7 +32,7 @@ public class SubscriptionUsageRecord {
     public SubscriptionUsageRecord(final UUID subscriptionId, final String trackingId, final List<UnitUsageRecord> unitUsageRecord) {
         this.subscriptionId = subscriptionId;
         this.trackingId = trackingId;
-        this.unitUsageRecord = unitUsageRecord;
+        this.unitUsageRecord = List.copyOf(unitUsageRecord);
     }
 
     public UUID getSubscriptionId() {
@@ -44,6 +44,6 @@ public class SubscriptionUsageRecord {
     }
 
     public List<UnitUsageRecord> getUnitUsageRecord() {
-        return unitUsageRecord;
+        return List.copyOf(unitUsageRecord);
     }
 }

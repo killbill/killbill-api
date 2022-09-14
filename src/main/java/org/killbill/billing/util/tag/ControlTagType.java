@@ -67,7 +67,7 @@ public enum ControlTagType {
     }
 
     public List<ObjectType> getApplicableObjectTypes() {
-        return applicableObjectTypes;
+        return List.copyOf(applicableObjectTypes);
     }
 
     public static ControlTagType getTypeFromId(final UUID targetId) {

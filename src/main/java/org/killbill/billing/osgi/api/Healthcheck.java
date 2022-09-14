@@ -32,7 +32,7 @@ public interface Healthcheck {
         private final Map details;
 
         public HealthStatus(final boolean healthy, final Map details) {
-            this.details = details;
+            this.details = Map.copyOf(details);
             this.healthy = healthy;
         }
 
@@ -53,7 +53,7 @@ public interface Healthcheck {
         }
 
         public Map getDetails() {
-            return details;
+            return Map.copyOf(details);
         }
     }
 }

@@ -17,18 +17,17 @@
 
 package org.killbill.billing.util.queue;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.joda.time.Period;
 
 public class QueueRetryException extends RuntimeException {
 
-    public static final List<Period> DEFAULT_RETRY_SCHEDULE = Arrays.asList(Period.minutes(5),
-                                                                            Period.minutes(15),
-                                                                            Period.hours(1),
-                                                                            Period.hours(6),
-                                                                            Period.hours(24));
+    public static final List<Period> DEFAULT_RETRY_SCHEDULE = List.of(Period.minutes(5),
+                                                                      Period.minutes(15),
+                                                                      Period.hours(1),
+                                                                      Period.hours(6),
+                                                                      Period.hours(24));
 
     private final List<Period> retrySchedule;
 
@@ -50,7 +49,7 @@ public class QueueRetryException extends RuntimeException {
     }
 
     public List<Period> getRetrySchedule() {
-        return retrySchedule;
+        return List.copyOf(retrySchedule);
     }
 
     @Override

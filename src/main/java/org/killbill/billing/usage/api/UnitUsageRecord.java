@@ -28,7 +28,7 @@ public class UnitUsageRecord {
 
     public UnitUsageRecord(final String unitType, final List<UsageRecord> usageRecord) {
         this.unitType = unitType;
-        this.usageRecord = usageRecord;
+        this.usageRecord = List.copyOf(usageRecord);
     }
 
     public String getUnitType() {
@@ -36,6 +36,6 @@ public class UnitUsageRecord {
     }
 
     public List<UsageRecord> getDailyAmount() {
-        return usageRecord;
+        return List.copyOf(usageRecord);
     }
 }
