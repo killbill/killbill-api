@@ -29,4 +29,14 @@
         <Field type="org.joda.time.Period" />
         <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
     </Match>
+    <Match>
+        <Class name="org.killbill.billing.BillingExceptionBase" />
+        <Method name="&lt;init&gt;" params="java.lang.Throwable,int,java.lang.String" />
+        <Bug pattern="EI_EXPOSE_REP2" />
+    </Match>
+    <Match>
+        <Class name="org.killbill.billing.BillingExceptionBase" />
+        <Method name="getCause" />
+        <Bug pattern="EI_EXPOSE_REP" />
+    </Match>
 </FindBugsFilter>

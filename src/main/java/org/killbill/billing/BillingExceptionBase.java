@@ -25,7 +25,7 @@ public class BillingExceptionBase extends Exception {
     private final String formattedMsg;
 
     public BillingExceptionBase(final Throwable cause, final int code, final String msg) {
-        this.cause = new Throwable(cause);
+        this.cause = cause;
         this.code = code;
         this.formattedMsg = msg;
     }
@@ -49,7 +49,7 @@ public class BillingExceptionBase extends Exception {
 
     @Override
     public Throwable getCause() {
-        return new Throwable(cause);
+        return cause;
     }
 
     public int getCode() {
