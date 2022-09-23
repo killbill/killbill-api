@@ -21,7 +21,6 @@ package org.killbill.billing.usage.api;
 import java.math.BigDecimal;
 
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 
 public class UsageRecord {
 

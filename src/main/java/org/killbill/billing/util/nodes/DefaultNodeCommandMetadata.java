@@ -33,12 +33,12 @@ public class DefaultNodeCommandMetadata implements NodeCommandMetadata {
 
     @JsonCreator
     public DefaultNodeCommandMetadata(@JsonProperty("properties") final List<NodeCommandProperty> properties) {
-        this.properties = properties;
+        this.properties = List.copyOf(properties);
     }
 
     @Override
     public List<NodeCommandProperty> getProperties() {
-        return properties;
+        return List.copyOf(properties);
     }
 
     @Override

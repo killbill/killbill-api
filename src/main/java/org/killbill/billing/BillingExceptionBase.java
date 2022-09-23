@@ -25,23 +25,17 @@ public class BillingExceptionBase extends Exception {
     private final String formattedMsg;
 
     public BillingExceptionBase(final Throwable cause, final int code, final String msg) {
-        this.formattedMsg = msg;
-        this.code = code;
         this.cause = cause;
+        this.code = code;
+        this.formattedMsg = msg;
     }
 
     public BillingExceptionBase(final BillingExceptionBase cause) {
-        this.formattedMsg = cause.getMessage();
-        this.code = cause.getCode();
-        this.cause = cause;
+        this(cause, cause.getCode(), cause.getMessage());
     }
 
     public BillingExceptionBase(/* @Nullable */ final Throwable cause, final ErrorCode code, final Object... args) {
-        final String tmp;
-        tmp = String.format(code.getFormat(), args);
-        this.formattedMsg = tmp;
-        this.code = code.getCode();
-        this.cause = cause;
+        this(cause, code.getCode(), String.format(code.getFormat(), args));
     }
 
     public BillingExceptionBase(final ErrorCode code, final Object... args) {
