@@ -54,10 +54,13 @@ public interface InvoiceUserApi extends KillbillApi {
      * Get all invoices for a given account.
      *
      * @param accountId account id
+     * @param includesMigrated flag that indicates if migrated invoices should be returned
+     * @param includeVoidedInvoices flag that indicates if voided invoices should be returned
+     * @param withInvoiceItems flag that indicates if invoice items should be returned
      * @param context   the tenant context
      * @return all invoices
      */
-    public List<Invoice> getInvoicesByAccount(UUID accountId, boolean includesMigrated, boolean includeVoidedInvoices, TenantContext context);
+    public List<Invoice> getInvoicesByAccount(UUID accountId, boolean includesMigrated, boolean includeVoidedInvoices, boolean withInvoiceItems, TenantContext context);
 
     /**
      * Find invoices from a given day, for a given account.
@@ -65,10 +68,11 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param accountId account id
      * @param fromDate  the earliest included target day to consider, in the account timezone
      * @param upToDate  the latest included target day to consider, in the account timezone
+     * @param withInvoiceItems flag that indicates if invoice items should be returned
      * @param context   the tenant context
      * @return a list of invoices
      */
-    public List<Invoice> getInvoicesByAccount(UUID accountId, LocalDate fromDate, LocalDate upToDate, boolean includeVoidedInvoices, TenantContext context);
+    public List<Invoice> getInvoicesByAccount(UUID accountId, LocalDate fromDate, LocalDate upToDate, boolean includeVoidedInvoices, boolean withInvoiceItems, TenantContext context);
 
     /**
      *
