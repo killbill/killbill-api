@@ -69,7 +69,7 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param context the tenant context
      * @return paginated invoices
      */
-    public Pagination<Invoice> getInvoicesByAccountWithPagination(UUID accountId, Long offset, Long limit, TenantContext context);
+    public Pagination<Invoice> getInvoicesByAccount(UUID accountId, Long offset, Long limit, TenantContext context);
 
     /**
      * Find invoices from a given day, for a given account.
