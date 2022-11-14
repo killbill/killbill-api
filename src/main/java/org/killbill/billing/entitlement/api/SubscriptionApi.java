@@ -136,6 +136,16 @@ public interface SubscriptionApi extends KillbillApi {
      * @return the list of <code>SubscriptionBundle</code> for that tenant
      */
     public Pagination<SubscriptionBundle> getSubscriptionBundles(Long offset, Long limit, TenantContext context);
+    
+    
+    /**
+     * @param accountId the account id
+     * @param offset the offset of the first result
+     * @param limit the maximum number of results to retrieve
+     * @param context the context
+     * @return
+     */
+    public Pagination<SubscriptionBundle> getSubscriptionBundlesForAccountId(UUID accountId, Long offset, Long limit, TenantContext context);
 
     /**
      * Find all <code>SubscriptionBundle</code> having their id, account id or external key matching the search key
