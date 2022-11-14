@@ -17,6 +17,7 @@
 package org.killbill.billing.entitlement.api;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.joda.time.LocalDate;
@@ -190,6 +191,7 @@ public interface EntitlementApi extends KillbillApi {
      * @param destAccountId      the unique id for the account on which the bundle will be transferred to
      * @param bundleExternalKey  the bundle external key for the bundle
      * @param effectiveDate      the date at which this transfer should occur
+     * @param subExtKeys         an optional map to set subscription external keys
      * @param properties         plugin specific properties
      * @param context            the user context
      * @return the id of the newly created bundle for the destination account
@@ -197,7 +199,7 @@ public interface EntitlementApi extends KillbillApi {
      */
     @RequiresPermissions(ENTITLEMENT_CAN_TRANSFER)
     public UUID transferEntitlements(final UUID sourceAccountId, final UUID destAccountId, final String bundleExternalKey, final LocalDate effectiveDate,
-                                     Iterable<PluginProperty> properties, final CallContext context)
+                                     final Map<UUID, String> subExtKeys, Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -213,6 +215,7 @@ public interface EntitlementApi extends KillbillApi {
      * @param destAccountId     the unique id for the account on which the bundle will be transferred to
      * @param bundleExternalKey the bundle external Key for the bundle
      * @param effectiveDate     the date at which this transfer should occur
+     * @param subExtKeys         an optional map to set subscription external keys
      * @param billingPolicy     the override billing policy
      * @param properties        plugin specific properties
      * @param context           the user context
@@ -221,7 +224,7 @@ public interface EntitlementApi extends KillbillApi {
      */
     @RequiresPermissions(ENTITLEMENT_CAN_TRANSFER)
     public UUID transferEntitlementsOverrideBillingPolicy(final UUID sourceAccountId, final UUID destAccountId, final String bundleExternalKey, final LocalDate effectiveDate,
-                                                          final BillingActionPolicy billingPolicy, Iterable<PluginProperty> properties, final CallContext context)
+                                                          final Map<UUID, String> subExtKeys, final BillingActionPolicy billingPolicy, Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
 }
