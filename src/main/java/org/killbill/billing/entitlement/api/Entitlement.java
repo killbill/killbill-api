@@ -185,6 +185,12 @@ public interface Entitlement extends Entity {
     public Integer getBillCycleDayLocal();
 
     /**
+     *
+     * @return the quantity or number of subscription that should be billed for.
+     */
+    public Integer getQuantity();
+
+    /**
      * Cancels the <code>Entitlement</code> at the specified date.
      * After this operation, the existing object becomes stale.
      * <p/>
@@ -371,5 +377,14 @@ public interface Entitlement extends Entity {
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
     public void updateBCD(final int bcd, final LocalDate effectiveFromDate, final CallContext context) throws EntitlementApiException;
+
+    /**
+     * @param quantity          the quantity or equivalent number of subscriptions that should be billed
+     * @param effectiveFromDate date after which that BCD change becomes active
+     * @param context           the context
+     * @throws EntitlementApiException
+     */
+    @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
+    public void updateQuantity(final int quantity, final LocalDate effectiveFromDate, final CallContext context) throws EntitlementApiException;
 
 }
