@@ -380,7 +380,7 @@ public interface Entitlement extends Entity {
 
     /**
      * @param quantity          the quantity or equivalent number of subscriptions that should be billed
-     * @param effectiveFromDate date after which that BCD change becomes active
+     * @param effectiveFromDate date after which that quantity change becomes active
      * @param context           the context
      * @throws EntitlementApiException
      */
