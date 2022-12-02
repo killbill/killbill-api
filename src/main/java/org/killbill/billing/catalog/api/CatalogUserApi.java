@@ -64,9 +64,9 @@ public interface CatalogUserApi extends KillbillApi {
      *
      * @param catalogXML the catalog XML
      * @param context    the user context
-     * @throws CatalogApiException if the catalog is invalid
+     * @return the {@code CatalogValidation}
      */
-    void validateCatalog(String catalogXML, CallContext context) throws CatalogApiException;
+    CatalogValidation validateCatalog(String catalogXML, CallContext context);
 
     /**
      * Creates a per-tenant default template catalog
