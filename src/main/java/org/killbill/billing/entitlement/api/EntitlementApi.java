@@ -192,6 +192,7 @@ public interface EntitlementApi extends KillbillApi {
      * @param bundleExternalKey  the bundle external key for the bundle
      * @param effectiveDate      the date at which this transfer should occur
      * @param subExtKeys         an optional map to set subscription external keys
+     * @param bcdTransfer        a policy to determine how to transfer per-subscription BCD values
      * @param properties         plugin specific properties
      * @param context            the user context
      * @return the id of the newly created bundle for the destination account
@@ -199,7 +200,7 @@ public interface EntitlementApi extends KillbillApi {
      */
     @RequiresPermissions(ENTITLEMENT_CAN_TRANSFER)
     public UUID transferEntitlements(final UUID sourceAccountId, final UUID destAccountId, final String bundleExternalKey, final LocalDate effectiveDate,
-                                     final Map<UUID, String> subExtKeys, Iterable<PluginProperty> properties, final CallContext context)
+                                     final Map<UUID, String> subExtKeys, final BcdTransfer bcdTransfer, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -216,6 +217,7 @@ public interface EntitlementApi extends KillbillApi {
      * @param bundleExternalKey the bundle external Key for the bundle
      * @param effectiveDate     the date at which this transfer should occur
      * @param subExtKeys         an optional map to set subscription external keys
+     * @param bcdTransfer        a policy to determine how to transfer per-subscription BCD values
      * @param billingPolicy     the override billing policy
      * @param properties        plugin specific properties
      * @param context           the user context
@@ -224,7 +226,7 @@ public interface EntitlementApi extends KillbillApi {
      */
     @RequiresPermissions(ENTITLEMENT_CAN_TRANSFER)
     public UUID transferEntitlementsOverrideBillingPolicy(final UUID sourceAccountId, final UUID destAccountId, final String bundleExternalKey, final LocalDate effectiveDate,
-                                                          final Map<UUID, String> subExtKeys, final BillingActionPolicy billingPolicy, Iterable<PluginProperty> properties, final CallContext context)
+                                                          final Map<UUID, String> subExtKeys, final BillingActionPolicy billingPolicy, final BcdTransfer bcdTransfer,  Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
 }
