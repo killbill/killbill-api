@@ -150,6 +150,8 @@ public enum ErrorCode {
 
     CAT_INVALID_FOR_TENANT(2080, "Invalid catalog for tenant : %s"),
     CAT_INVALID_INVALID_PRICE_OVERRIDE(2081, "Cannot override price for plan %s : %s"),
+    CAT_NAME_DIFFERENT_FROM_EXISTING_CATALOG_NAME(2082, "Catalog name %s is different from existing catalog name %s"),
+    CAT_INVALID_CATALOG_XML(2083, "Invalid Catalog XML"),
 
     CAT_INVALID_DEFAULT(2999, "Invalid default catalog : %s"),
 
