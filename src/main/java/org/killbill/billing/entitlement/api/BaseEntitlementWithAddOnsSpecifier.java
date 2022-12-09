@@ -18,7 +18,7 @@ package org.killbill.billing.entitlement.api;
 
 import java.util.UUID;
 
-import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 
 public interface BaseEntitlementWithAddOnsSpecifier {
 
@@ -40,12 +40,12 @@ public interface BaseEntitlementWithAddOnsSpecifier {
     /**
      * @return the effective date of the entitlement
      */
-    LocalDate getEntitlementEffectiveDate();
+    DateTime getEntitlementEffectiveDate();
 
     /**
      * @return the billing effective date
      */
-    LocalDate getBillingEffectiveDate();
+    DateTime getBillingEffectiveDate();
 
     /**
      * @return whether the entitlement is migrated

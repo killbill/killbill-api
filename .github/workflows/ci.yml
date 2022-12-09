@@ -1,0 +1,12 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  ci:
+    uses: killbill/gh-actions-shared/.github/workflows/ci.yml@main
+    with:
+      failure-upload-path: 'target/*' 

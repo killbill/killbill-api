@@ -20,6 +20,7 @@ package org.killbill.billing.entitlement.api;
 
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 /**
@@ -34,12 +35,12 @@ public interface Subscription extends Entitlement {
     /**
      * @return the date at which the billing started for that subscription
      */
-    public LocalDate getBillingStartDate();
+    public DateTime getBillingStartDate();
 
     /**
      * @return the date at which the billing stopped for that subscription
      */
-    public LocalDate getBillingEndDate();
+    public DateTime getBillingEndDate();
 
     /**
      * @return the date up to which that <code>Subscription got invoiced</code>

@@ -17,6 +17,7 @@
 package org.killbill.billing.entitlement.api;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.joda.time.LocalDate;
@@ -138,11 +139,12 @@ public interface EntitlementApi extends KillbillApi {
      * Retrieves an <code>Entitlement</code> using its id.
      *
      * @param id      the id of the entitlement
+     * @param includeDeletedEvents flag that specifies whether deleted events should be returned
      * @param context the context
      * @return the entitlement
      * @throws EntitlementApiException if the entitlement does not exist
      */
-    public Entitlement getEntitlementForId(UUID id, TenantContext context) throws EntitlementApiException;
+    public Entitlement getEntitlementForId(UUID id, boolean includeDeletedEvents, TenantContext context) throws EntitlementApiException;
 
     /**
      * Retrieves all the <code>Entitlement</code> attached to the base entitlement.
@@ -189,6 +191,8 @@ public interface EntitlementApi extends KillbillApi {
      * @param destAccountId      the unique id for the account on which the bundle will be transferred to
      * @param bundleExternalKey  the bundle external key for the bundle
      * @param effectiveDate      the date at which this transfer should occur
+     * @param subExtKeys         an optional map to set subscription external keys
+     * @param bcdTransfer        a policy to determine how to transfer per-subscription BCD values
      * @param properties         plugin specific properties
      * @param context            the user context
      * @return the id of the newly created bundle for the destination account
@@ -196,7 +200,7 @@ public interface EntitlementApi extends KillbillApi {
      */
     @RequiresPermissions(ENTITLEMENT_CAN_TRANSFER)
     public UUID transferEntitlements(final UUID sourceAccountId, final UUID destAccountId, final String bundleExternalKey, final LocalDate effectiveDate,
-                                     Iterable<PluginProperty> properties, final CallContext context)
+                                     final Map<UUID, String> subExtKeys, final BcdTransfer bcdTransfer, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
     /**
@@ -212,6 +216,8 @@ public interface EntitlementApi extends KillbillApi {
      * @param destAccountId     the unique id for the account on which the bundle will be transferred to
      * @param bundleExternalKey the bundle external Key for the bundle
      * @param effectiveDate     the date at which this transfer should occur
+     * @param subExtKeys         an optional map to set subscription external keys
+     * @param bcdTransfer        a policy to determine how to transfer per-subscription BCD values
      * @param billingPolicy     the override billing policy
      * @param properties        plugin specific properties
      * @param context           the user context
@@ -220,7 +226,7 @@ public interface EntitlementApi extends KillbillApi {
      */
     @RequiresPermissions(ENTITLEMENT_CAN_TRANSFER)
     public UUID transferEntitlementsOverrideBillingPolicy(final UUID sourceAccountId, final UUID destAccountId, final String bundleExternalKey, final LocalDate effectiveDate,
-                                                          final BillingActionPolicy billingPolicy, Iterable<PluginProperty> properties, final CallContext context)
+                                                          final Map<UUID, String> subExtKeys, final BillingActionPolicy billingPolicy, final BcdTransfer bcdTransfer,  Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
 }

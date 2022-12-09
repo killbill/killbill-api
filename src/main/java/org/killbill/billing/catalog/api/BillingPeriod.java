@@ -29,6 +29,7 @@ public enum BillingPeriod {
     WEEKLY(Period.weeks(1)),
     BIWEEKLY(Period.weeks(2)),
     THIRTY_DAYS(Period.days(30)),
+    THIRTY_ONE_DAYS(Period.days(31)),
     SIXTY_DAYS(Period.days(60)),
     NINETY_DAYS(Period.days(90)),
     MONTHLY(Period.months(1)),
@@ -37,7 +38,9 @@ public enum BillingPeriod {
     TRIANNUAL(Period.months(4)),
     BIANNUAL(Period.months(6)),
     ANNUAL(Period.years(1)),
+    SESQUIENNIAL(Period.months(18)),
     BIENNIAL(Period.years(2)),
+    TRIENNIAL(Period.years(3)),
     NO_BILLING_PERIOD(Period.ZERO);
 
     private final Period period;

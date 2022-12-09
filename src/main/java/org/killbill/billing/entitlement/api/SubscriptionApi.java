@@ -19,6 +19,7 @@ package org.killbill.billing.entitlement.api;
 import java.util.List;
 import java.util.UUID;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.killbill.billing.KillbillApi;
 import org.killbill.billing.OrderingType;
@@ -49,21 +50,23 @@ public interface SubscriptionApi extends KillbillApi {
      * Retrieves a <code>Subscription</code> for the entitlement id
      *
      * @param entitlementId the id of the entitlement associated with the subscription
+     * @param includeDeletedEvents flag that specifies whether deleted events should be returned
      * @param context       the context
      * @return the subscription
      * @throws SubscriptionApiException if it odes not exist
      */
-    Subscription getSubscriptionForEntitlementId(UUID entitlementId, TenantContext context) throws SubscriptionApiException;
+    Subscription getSubscriptionForEntitlementId(UUID entitlementId, boolean includeDeletedEvents, TenantContext context) throws SubscriptionApiException;
 
     /**
      *  Retrieves a <code>Subscription</code> for a given external key
      *
      * @param externalKey the external key for the subscription
+     * @param includeDeletedEvents flag that specifies whether deleted events should be returned
      * @param context
      * @return
      * @throws SubscriptionApiException
      */
-    Subscription getSubscriptionForExternalKey(String externalKey, TenantContext context) throws SubscriptionApiException;
+    Subscription getSubscriptionForExternalKey(String externalKey, boolean includeDeletedEvents, TenantContext context) throws SubscriptionApiException;
 
     /**
      * Retrieves all the <code>Subscription</code> attached to the base entitlement.
@@ -125,6 +128,16 @@ public interface SubscriptionApi extends KillbillApi {
      * @throws SubscriptionApiException if the account does not exist
      */
     public List<SubscriptionBundle> getSubscriptionBundlesForAccountId(UUID accountId, TenantContext context) throws SubscriptionApiException;
+    
+    /**
+     * @param accountId the account id
+     * @param offset the offset of the first result
+     * @param limit the maximum number of results to retrieve
+     * @param context the context
+     * @return the list of <code>SubscriptionBundle</code> for that account
+     * @throws SubscriptionApiException if the account does not exist
+     */
+    public Pagination<SubscriptionBundle> getSubscriptionBundlesForAccountId(UUID accountId, Long offset, Long limit, TenantContext context) throws SubscriptionApiException;    
 
     /**
      * @param context the user context
@@ -159,6 +172,21 @@ public interface SubscriptionApi extends KillbillApi {
     @RequiresPermissions(ENTITLEMENT_CAN_PAUSE_RESUME)
     public void addBlockingState(BlockingState blockingState, LocalDate effectiveDate, Iterable<PluginProperty> properties, CallContext context)
             throws EntitlementApiException;
+    
+    /**
+     * Add a <code>BlockingState</code>
+     * <p/>
+     * The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
+     *
+     * @param blockingState the blockingState to be added
+     * @param effectiveDate the datetime at which the operation should be effective, if null this is interpreted to be immediate
+     * @param properties    plugin specific properties
+     * @param context       the context
+     * @throws EntitlementApiException if the entitlement was not in <tt>ACTIVE</tt> state
+     */
+    @RequiresPermissions(ENTITLEMENT_CAN_PAUSE_RESUME)
+    public void addBlockingState(BlockingState blockingState, DateTime effectiveDate, Iterable<PluginProperty> properties, CallContext context)
+            throws EntitlementApiException;    
 
     /**
      *

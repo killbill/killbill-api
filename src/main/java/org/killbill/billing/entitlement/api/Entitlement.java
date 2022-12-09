@@ -19,6 +19,7 @@ package org.killbill.billing.entitlement.api;
 import java.util.List;
 import java.util.UUID;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.killbill.billing.catalog.api.BillingActionPolicy;
 import org.killbill.billing.catalog.api.Plan;
@@ -142,12 +143,12 @@ public interface Entitlement extends Entity {
     /**
      * @return the start date of the entitlement
      */
-    public LocalDate getEffectiveStartDate();
+    public DateTime getEffectiveStartDate();
 
     /**
      * @return the end date of the entitlement, that is the date at which it got cancelled.
      */
-    public LocalDate getEffectiveEndDate();
+    public DateTime getEffectiveEndDate();
 
     /**
      * @return the last <code>Product</code> prior to cancellation
@@ -184,6 +185,12 @@ public interface Entitlement extends Entity {
     public Integer getBillCycleDayLocal();
 
     /**
+     *
+     * @return the quantity or number of subscription that should be billed for.
+     */
+    public Integer getQuantity();
+
+    /**
      * Cancels the <code>Entitlement</code> at the specified date.
      * After this operation, the existing object becomes stale.
      * <p/>
@@ -202,6 +209,28 @@ public interface Entitlement extends Entity {
     public Entitlement cancelEntitlementWithDate(final LocalDate effectiveDate, final boolean overrideBillingEffectiveDate, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
 
+    
+    /**
+     * Cancels the <code>Entitlement</code> with the specified entitlementEffectiveDate and billingEffectiveDate
+     * After this operation, the existing object becomes stale.
+     * <p/>
+     * <p/>
+     *
+     * @param entitlementEffectiveDate    the datetime at which the entitlement should be cancelled
+     * @param billingEffectiveDate        the datetime at which billing should be cancelled
+     * @param properties                  plugin specific properties
+     * @param context                     the context
+     * @return the new <code>Entitlement</code> after the cancellation was performed
+     * @throws EntitlementApiException if cancellation failed
+     *                                 <p>
+     *                                 The date is interpreted by the system to be in the timezone specified at the <code>Account</code>
+     */    
+    
+    @RequiresPermissions(ENTITLEMENT_CAN_CANCEL)
+    public Entitlement cancelEntitlementWithDate(final DateTime entitlementEffectiveDate, final DateTime billingEffectiveDate, final Iterable<PluginProperty> properties, final CallContext context)
+            throws EntitlementApiException;      
+    
+    
     /**
      * Cancel the <code>Entitlement</code> with a policy.
      * After this operation, the existing object becomes stale.
@@ -303,6 +332,23 @@ public interface Entitlement extends Entity {
     @RequiresPermissions(ENTITLEMENT_CAN_CHANGE_PLAN)
     public Entitlement changePlanWithDate(final EntitlementSpecifier spec, final LocalDate effectiveDate, final Iterable<PluginProperty> properties, final CallContext context)
             throws EntitlementApiException;
+    
+    /**
+     * Change <code>Entitlement</code> plan at the specified date.
+     * After this operation, the existing object becomes stale.
+     * <p/>
+     *
+     * @param spec          the product specification for the change
+     * @param effectiveDate the effective datetime at which the entitlement and billing should be changed
+     * @param properties    plugin specific properties
+     * @param context       the context
+     * @return the new <code>Entitlement</code> after the change was performed
+     * @throws EntitlementApiException if change failed
+     */
+    @RequiresPermissions(ENTITLEMENT_CAN_CHANGE_PLAN)
+    public Entitlement changePlanWithDate(final EntitlementSpecifier spec, final DateTime effectiveDate, final Iterable<PluginProperty> properties, final CallContext context)
+            throws EntitlementApiException;
+    
 
     /**
      * Change <code>Entitlement</code> plan at the specified date and overrides the billing policy.
@@ -331,5 +377,14 @@ public interface Entitlement extends Entity {
      */
     @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
     public void updateBCD(final int bcd, final LocalDate effectiveFromDate, final CallContext context) throws EntitlementApiException;
+
+    /**
+     * @param quantity          the quantity or equivalent number of subscriptions that should be billed
+     * @param effectiveFromDate date after which that quantity change becomes active
+     * @param context           the context
+     * @throws EntitlementApiException
+     */
+    @RequiresPermissions(ENTITLEMENT_CAN_CREATE)
+    public void updateQuantity(final int quantity, final LocalDate effectiveFromDate, final CallContext context) throws EntitlementApiException;
 
 }

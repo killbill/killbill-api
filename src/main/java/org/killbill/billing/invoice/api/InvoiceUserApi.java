@@ -54,10 +54,22 @@ public interface InvoiceUserApi extends KillbillApi {
      * Get all invoices for a given account.
      *
      * @param accountId account id
+     * @param includesMigrated flag that indicates if migrated invoices should be returned
+     * @param includeVoidedInvoices flag that indicates if voided invoices should be returned
+     * @param includeInvoiceComponents flag that indicates if invoice components (items, payments, etc.) should be returned
      * @param context   the tenant context
      * @return all invoices
      */
-    public List<Invoice> getInvoicesByAccount(UUID accountId, boolean includesMigrated, boolean includeVoidedInvoices, TenantContext context);
+    public List<Invoice> getInvoicesByAccount(UUID accountId, boolean includesMigrated, boolean includeVoidedInvoices, boolean includeInvoiceComponents, TenantContext context);
+    
+    /**
+     * @param accountId account id
+     * @param offset the offset of the first result
+     * @param limit the maximum number of results to retrieve
+     * @param context the tenant context
+     * @return paginated invoices
+     */
+    public Pagination<Invoice> getInvoicesByAccount(UUID accountId, Long offset, Long limit, TenantContext context);
 
     /**
      * Find invoices from a given day, for a given account.
@@ -65,10 +77,21 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param accountId account id
      * @param fromDate  the earliest included target day to consider, in the account timezone
      * @param upToDate  the latest included target day to consider, in the account timezone
+     * @param includeInvoiceComponents flag that indicates if invoice components (items, payments, etc.) should be returned
      * @param context   the tenant context
      * @return a list of invoices
      */
-    public List<Invoice> getInvoicesByAccount(UUID accountId, LocalDate fromDate, LocalDate upToDate, boolean includeVoidedInvoices, TenantContext context);
+    public List<Invoice> getInvoicesByAccount(UUID accountId, LocalDate fromDate, LocalDate upToDate, boolean includeVoidedInvoices, boolean includeInvoiceComponents, TenantContext context);
+
+    /**
+     *
+     * @param accountId account id
+     * @param groupId the group id
+     * @param context the tenant context
+     * @return
+     */
+    public List<Invoice> getInvoicesByGroup(UUID accountId, UUID groupId, TenantContext context);
+
 
     /**
      * @param context the user context
@@ -159,12 +182,29 @@ public interface InvoiceUserApi extends KillbillApi {
      *
      * @param accountId       account id
      * @param targetDate      the target day, in the account timezone
+     * @param properties      plugin specific properties
      * @param context         the call context
      * @return the invoice generated
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_TRIGGER_INVOICE)
-    public Invoice triggerInvoiceGeneration(UUID accountId, LocalDate targetDate, CallContext context) throws InvoiceApiException;
+    public Invoice triggerInvoiceGeneration(UUID accountId, LocalDate targetDate, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
+
+    /**
+     * Trigger an invoice for a given account and a given day.
+     *
+     * If there is an active plugin implementing the InvoicePluginApi#getInvoiceGrouping it will be invoked,
+     * and as a result we may end up with N invoices.
+     *
+     * @param accountId       account id
+     * @param targetDate      the target day, in the account timezone
+     * @param properties      plugin specific properties
+     * @param context         the call context
+     * @return the invoice generated
+     * @throws InvoiceApiException
+     */
+    @RequiresPermissions(INVOICE_CAN_TRIGGER_INVOICE)
+    public Iterable<Invoice> triggerInvoiceGroupGeneration(UUID accountId, LocalDate targetDate, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
 
 
     /**
@@ -173,12 +213,13 @@ public interface InvoiceUserApi extends KillbillApi {
      * @param accountId       account id
      * @param targetDate      the target day, in the account timezone
      * @param dryRunArguments dry run arguments
+     * @param properties      plugin specific properties
      * @param context         the call context
      * @return the invoice generated
      * @throws InvoiceApiException
      */
     @RequiresPermissions(INVOICE_CAN_DRY_RUN_INVOICE)
-    public Invoice triggerDryRunInvoiceGeneration(UUID accountId, LocalDate targetDate, DryRunArguments dryRunArguments, CallContext context) throws InvoiceApiException;
+    public Invoice triggerDryRunInvoiceGeneration(UUID accountId, LocalDate targetDate, DryRunArguments dryRunArguments, Iterable<PluginProperty> properties, CallContext context) throws InvoiceApiException;
 
 
     /**

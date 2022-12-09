@@ -19,12 +19,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>killbill-oss-parent</artifactId>
         <groupId>org.kill-bill.billing</groupId>
-        <version>0.143.44</version>
+        <artifactId>killbill-oss-parent</artifactId>
+        <version>0.145.3-23bd67c-SNAPSHOT</version>
     </parent>
     <artifactId>killbill-api</artifactId>
-    <version>0.53.18-SNAPSHOT</version>
+    <version>0.54.0-SNAPSHOT</version>
     <name>Kill Bill apis</name>
     <description>Kill Bill apis</description>
     <url>http://github.com/killbill/killbill-api</url>
@@ -37,10 +37,18 @@
         <system>Github</system>
         <url>https://github.com/killbill/killbill-api/issues</url>
     </issueManagement>
+    <properties>
+        <check.fail-spotbugs>true</check.fail-spotbugs>
+        <check.spotbugs-exclude-filter-file>spotbugs-exclude.xml</check.spotbugs-exclude-filter-file>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
         </dependency>
         <dependency>
             <groupId>joda-time</groupId>

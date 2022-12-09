@@ -38,6 +38,12 @@ public interface EntitlementSpecifier {
 
     /**
      *
+     * @return the number of subscriptions that should really be invoiced (FIXED and RECURRING)
+     */
+    Integer getQuantity();
+
+    /**
+     *
      * @return the entitlement externalKey
      */
     String getExternalKey();

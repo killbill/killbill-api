@@ -1,7 +1,8 @@
 /*
- * Copyright 2010-2013 Ning, Inc.
+ * Copyright 2020-2022 Equinix, Inc
+ * Copyright 2014-2022 The Billing Project, LLC
  *
- * Ning licenses this file to you under the Apache License, version 2.0
+ * The Billing Project licenses this file to you under the Apache License, version 2.0
  * (the "License"); you may not use this file except in compliance with the
  * License.  You may obtain a copy of the License at:
  *
@@ -14,21 +15,10 @@
  * under the License.
  */
 
-package org.killbill.billing.usage.api;
+package org.killbill.billing.invoice.api;
 
-import java.util.List;
-import java.util.UUID;
-
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-
-public interface RolledUpUsage {
-
-    UUID getSubscriptionId();
-
-    DateTime getStart();
-
-    DateTime getEnd();
-
-    List<RolledUpUnit> getRolledUpUnits();
+public enum InvoicePaymentStatus {
+    INIT,
+    PENDING,
+    SUCCESS,
 }

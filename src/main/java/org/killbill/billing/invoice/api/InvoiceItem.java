@@ -79,7 +79,7 @@ public interface InvoiceItem extends Entity {
 
     UUID getLinkedItemId();
 
-    Integer getQuantity();
+    BigDecimal getQuantity();
 
     String getItemDetails();
 
