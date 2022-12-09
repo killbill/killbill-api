@@ -54,6 +54,7 @@ public enum ErrorCode {
     SUB_CHANGE_INVALID(1023, "Invalid change plan for subscription %s"),
     SUB_CHANGE_DRY_RUN_NOT_BP(1024, "Change DryRun API is only available for BP"),
     SUB_CHANGE_AO_MAX_PLAN_ALLOWED_BY_BUNDLE(1025, "Can't change Plan to AddOn %s, the number of Subscriptions allowed by this Plan and Bundle has reached its limit"),
+    SUB_CHANGE_FUTURE_EXPIRED(1026, "Subscription %s will expire prior the requested date: Failed to change plan"),
 
     /* Cancellation */
     SUB_CANCEL_BAD_STATE(1031, "Subscription %s is in state %s: Failed to cancel"),
@@ -190,6 +191,7 @@ public enum ErrorCode {
     TAG_DOES_NOT_EXIST(3950, "The tag does not exist (name: %s)"),
     TAG_CANNOT_BE_REMOVED(3951, "The tag %s cannot be removed because %s"),
     TAG_ALREADY_EXISTS(3952, "The tag %s already exists"),
+    TAG_IS_SYSTEM(3953, "Cannot add the system tag %s (reserved to Kill Bill internal system)"),
 
     /*
     *
@@ -223,6 +225,10 @@ public enum ErrorCode {
     CHILD_ACCOUNT_MISSING_CREDIT(4027, "Child account %s does not have credit"),
     CAN_NOT_VOID_INVOICE_THAT_IS_PAID(4028, "Invoice %s can not be voided. Invoice is paid or partially paid."),
     INVOICE_PLUGIN_API_ABORTED(4029, "Invoice plugin aborted call: %s"),
+    INVOICE_CBA_DELETED(4030, "Failed to delete system generated credit: item=%s"),
+    INVOICE_VOID_UPDATED(4031, "Cannot modify a Voided invoice: id=%s"),
+    CAN_NOT_VOID_INVOICE_THAT_IS_REPAIRED(4032, "Invoice %s can not be voided. Another invoice contains credit (repair) items linked to it"),
+    CAN_NOT_VOID_INVOICE_THAT_GENERATED_USED_CREDIT(4033, "Invoice %s can not be voided. Existing credit generated on this invoice has been used already."),
 
     /*
      *
@@ -281,6 +287,7 @@ public enum ErrorCode {
     PAYMENT_METHOD_DIFFERENT_ACCOUNT_ID(7033, "Payment method %s has a different account id"),
     PAYMENT_DIFFERENT_ACCOUNT_ID(7034, "Payment %s has a different account id"),
     PAYMENT_TRANSACTION_DIFFERENT_ACCOUNT_ID(7035, "Payment transaction %s has a different account id"),
+    PAYMENT_STATE_MACHINE_FAILURE(7036, "Failed to load payment state machine configuration"),
 
     PAYMENT_PLUGIN_TIMEOUT(7100, "Plugin timeout for account %s: %s"),
     PAYMENT_PLUGIN_GET_PAYMENT_INFO(7102, "Failed to retrieve payment plugin info for payment %s: %s"),
