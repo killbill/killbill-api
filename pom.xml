@@ -24,14 +24,14 @@
         <version>0.146.0</version>
     </parent>
     <artifactId>killbill-api</artifactId>
-    <version>0.54.0</version>
+    <version>0.54.1-SNAPSHOT</version>
     <name>Kill Bill apis</name>
     <description>Kill Bill apis</description>
     <url>http://github.com/killbill/killbill-api</url>
     <scm>
         <connection>scm:git:git://github.com/killbill/killbill-api.git</connection>
         <developerConnection>scm:git:git@github.com:killbill/killbill-api.git</developerConnection>
-        <tag>killbill-api-0.54.0</tag>
+        <tag>HEAD</tag>
         <url>http://github.com/killbill/killbill-api/tree/master</url>
     </scm>
     <issueManagement>
