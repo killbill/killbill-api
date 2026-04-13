@@ -7,4 +7,4 @@ on:
 
 jobs:
   analyze:
-    uses: killbill/gh-actions-shared/.github/workflows/codeql-analysis.yml@java2x
+    uses: killbill/gh-actions-shared/.github/workflows/codeql-analysis.yml@java21

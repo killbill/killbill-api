@@ -7,6 +7,6 @@ on:
 
 jobs:
   ci:
-    uses: killbill/gh-actions-shared/.github/workflows/ci.yml@java2x
+    uses: killbill/gh-actions-shared/.github/workflows/ci.yml@java21
     with:
       failure-upload-path: 'target/*' 
