@@ -21,10 +21,10 @@
     <parent>
         <groupId>org.kill-bill.billing</groupId>
         <artifactId>killbill-oss-parent</artifactId>
-        <version>0.146.0</version>
+        <version>0.147.2</version>
     </parent>
     <artifactId>killbill-api</artifactId>
-    <version>0.54.1-SNAPSHOT</version>
+    <version>0.55.0-SNAPSHOT</version>
     <name>Kill Bill apis</name>
     <description>Kill Bill apis</description>
     <url>http://github.com/killbill/killbill-api</url>
