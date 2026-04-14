@@ -42,6 +42,14 @@
         <check.fail-spotbugs>true</check.fail-spotbugs>
         <check.spotbugs-exclude-filter-file>spotbugs-exclude.xml</check.spotbugs-exclude-filter-file>
     </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>jakarta.activation</groupId>
+                <artifactId>jakarta.activation-api</artifactId>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
