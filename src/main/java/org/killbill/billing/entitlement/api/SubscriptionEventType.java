@@ -35,6 +35,8 @@ public enum SubscriptionEventType {
     PHASE(ObjectType.SUBSCRIPTION_EVENT),
     /* User generated change plan */
     CHANGE(ObjectType.SUBSCRIPTION_EVENT),
+    /* Subscription, e.g. in fixed term. */
+    EXPIRED(ObjectType.SUBSCRIPTION_EVENT),
     /* Billing cycle day update for a specific subscription */
     BCD_UPDATE(ObjectType.SUBSCRIPTION_EVENT),
     /* Quantity update for a specific subscription */
