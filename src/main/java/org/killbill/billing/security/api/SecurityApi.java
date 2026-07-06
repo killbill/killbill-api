@@ -19,6 +19,7 @@
 package org.killbill.billing.security.api;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.killbill.billing.KillbillApi;
@@ -29,7 +30,6 @@ import org.killbill.billing.security.SecurityApiException;
 import org.killbill.billing.util.callcontext.CallContext;
 import org.killbill.billing.util.callcontext.TenantContext;
 
-import static org.killbill.billing.security.Permission.TENANT_CAN_CREATE;
 import static org.killbill.billing.security.Permission.USER_CAN_CREATE;
 
 public interface SecurityApi extends KillbillApi {
@@ -150,4 +150,10 @@ public interface SecurityApi extends KillbillApi {
      */
     public List<String> getRoleDefinition(final String role, final TenantContext tenantContext);
 
+    /**
+     * retrieves the list of available roles and permissions
+     * @param tenantContext the tenant
+     * @return
+     */
+    public Map<String, List<String>> getAvailableRoles(final TenantContext tenantContext);
 }
