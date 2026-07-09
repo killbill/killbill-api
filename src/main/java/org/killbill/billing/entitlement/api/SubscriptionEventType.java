@@ -35,6 +35,10 @@ public enum SubscriptionEventType {
     PHASE(ObjectType.SUBSCRIPTION_EVENT),
     /* User generated change plan */
     CHANGE(ObjectType.SUBSCRIPTION_EVENT),
+    /* Billing cycle day update for a specific subscription */
+    BCD_UPDATE(ObjectType.SUBSCRIPTION_EVENT),
+    /* Quantity update for a specific subscription */
+    QUANTITY_UPDATE(ObjectType.SUBSCRIPTION_EVENT),
     /* User generated cancel */
     STOP_ENTITLEMENT(ObjectType.BLOCKING_STATES),
     STOP_BILLING(ObjectType.SUBSCRIPTION_EVENT),
