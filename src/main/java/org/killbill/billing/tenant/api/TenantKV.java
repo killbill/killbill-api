@@ -55,7 +55,10 @@ public interface TenantKV extends Entity {
         LOGO_INFO(true),
         INVOICE_TEMPLATE_COMPANY_INFO(true),
         INVOICE_TEMPLATE_BRAND_INFO(true),
-        INVOICE_TEMPLATE_LOGO_INFO(true);
+        INVOICE_TEMPLATE_LOGO_INFO(true),
+        EMAIL_TEMPLATE_COMPANY_INFO(true),
+        EMAIL_TEMPLATE_BRAND_INFO(true),
+        EMAIL_TEMPLATE_LOGO_INFO(true);
 
         private final boolean singleValue;
 
