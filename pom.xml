@@ -24,14 +24,14 @@
         <version>0.147.23</version>
     </parent>
     <artifactId>killbill-api</artifactId>
-    <version>0.55.1</version>
+    <version>0.55.2-SNAPSHOT</version>
     <name>Kill Bill apis</name>
     <description>Kill Bill apis</description>
     <url>http://github.com/killbill/killbill-api</url>
     <scm>
         <connection>scm:git:git://github.com/killbill/killbill-api.git</connection>
         <developerConnection>scm:git:git@github.com:killbill/killbill-api.git</developerConnection>
-        <tag>killbill-api-0.55.1</tag>
+        <tag>HEAD</tag>
         <url>http://github.com/killbill/killbill-api/tree/master</url>
     </scm>
     <issueManagement>
@@ -46,6 +46,19 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-annotations</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
