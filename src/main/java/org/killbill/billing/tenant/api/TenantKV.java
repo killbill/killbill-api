@@ -48,8 +48,6 @@ public interface TenantKV extends Entity {
         PLUGIN_CONFIG_(true),
         // Plugin payment state machine
         PLUGIN_PAYMENT_STATE_MACHINE_(true),
-
-        INVOICE_TEMPLATE_WITH_BRANDING(true),
         COMPANY_INFO(true),
         BRAND_INFO(true),
         LOGO_INFO(true),
@@ -58,7 +56,10 @@ public interface TenantKV extends Entity {
         INVOICE_TEMPLATE_LOGO_INFO(true),
         EMAIL_TEMPLATE_COMPANY_INFO(true),
         EMAIL_TEMPLATE_BRAND_INFO(true),
-        EMAIL_TEMPLATE_LOGO_INFO(true);
+        EMAIL_TEMPLATE_LOGO_INFO(true),
+        QUOTE_TEMPLATE_COMPANY_INFO(true),
+        QUOTE_TEMPLATE_BRAND_INFO(true),
+        QUOTE_TEMPLATE_LOGO_INFO(true);
 
         private final boolean singleValue;
 
