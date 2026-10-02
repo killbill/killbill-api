@@ -33,11 +33,11 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 public class BrandingLoader {
 
     private static final Map<String, String> DEFAULT_PROPERTIES = Map.of(
-            "companyName", "companyName",
-            "companyAddress", "companyAddr",
-            "companyCityProvincePostalCode", "companyCityProvincePostalCode",
-            "companyCountry", "companyCountry",
-            "companyUrl", "companyUrl",
+            "companyName", "Killbill, Inc.",
+            "companyAddress", "P.O. Box 1234",
+            "companyCityProvincePostalCode", "Springfield",
+            "companyCountry", "USA",
+            "companyUrl", "https://killbill.io",
             "textColor", "#555555",
             "tableBorderColor", "#d4bdd6",
             "tableHeadingBgColor", "#f0f0f0",
